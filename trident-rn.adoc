@@ -1,0 +1,305 @@
+---
+sidebar: sidebar 
+permalink: trident-rn.html 
+keywords: 'what"s new, new features, enhancements, known issues, resolved issues, troubleshooting' 
+summary: NetApp verbessert seine Produkte und Services kontinuierlich. Im Folgenden finden Sie einige der neuesten Funktionen, Verbesserungen und Bugfixes in der neuesten Version von Astra Trident. 
+---
+= Versionshinweise
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Versionshinweise liefern Informationen zu den neuen Funktionen, Verbesserungen und Bugfixes in der aktuellen Version von Astra Trident.
+
+
+WARNING: Der `tridentctl` Binary for Linux, die in der ZIP-Datei des Installationsprogramms bereitgestellt wird, ist die getestete und unterstützte Version. Beachten Sie, dass der `macos` Binärdateien sind im enthalten `/extras` Ein Teil der ZIP-Datei wird nicht getestet oder unterstützt.
+
+
+
+== Was ist neu in 22.10
+
+*Vor dem Upgrade auf Astra Trident 22.10 müssen Sie die folgenden wichtigen Informationen lesen.*
+
+[WARNING]
+.<starke>kritische Informationen über Astra Trident 22.10</strong>
+====
+* Kubernetes 1.25 wird jetzt in Trident unterstützt. Vor dem Upgrade auf Kubernetes 1.25 müssen Sie den Astra Trident auf 22.10 aktualisieren.
+* Astra Trident setzt die Verwendung von Multipathing-Konfiguration in SAN-Umgebungen jetzt strikt um – mit dem empfohlenen Mehrwert von `find_multipaths: no` In Multipath.conf Datei.
++
+Verwendung einer Konfiguration ohne Multipathing oder Verwendung von `find_multipaths: yes` Oder `find_multipaths: smart` Der Wert in der Multipath.conf-Datei führt zu Mount-Fehlern. Trident empfiehlt die Verwendung von `find_multipaths: no` Seit der Version 21.07.
+
+
+
+====
+
+
+=== Korrekturen
+
+* Problem wurde speziell mit dem ONTAP Back-End behoben, das mit erstellt wurde `credentials` Feld nicht online während 22.07.0 Upgrade (link:https://github.com/NetApp/trident/issues/759["Ausgabe #759"^]).
+* **Docker:** hat ein Problem behoben, das dazu führt, dass das Docker Volume Plugin in einigen Umgebungen nicht startet (link:https://github.com/NetApp/trident/issues/548["Ausgabe #548"^] Und link:https://github.com/NetApp/trident/issues/760["Ausgabe #760"^]).
+* Festes SLM-Problem speziell für ONTAP-SAN-Back-Ends, das sicherstellt, dass nur eine Teilmenge von Daten-LIFs, die zu den Berichterstellungs-Nodes gehören, veröffentlicht wird.
+* Es wurde ein Performance-Problem behoben, bei dem unnötige Scans für iSCSI-LUNs beim Anschließen eines Volumes aufgetreten sind.
+* Granulare Wiederholungen innerhalb des Astra Trident iSCSI-Workflows entfernt, um schnell zu scheitern und externe Wiederholungsintervalle zu reduzieren.
+* Das Problem wurde behoben, bei dem beim Spülen eines iSCSI-Geräts ein Fehler zurückgegeben wurde, als das entsprechende Multipath-Gerät bereits gespült wurde.
+
+
+
+
+=== Vorgestellt Werden
+
+* Kubernetes:
++
+** Zusätzliche Unterstützung für Kubernetes 1.25 Vor dem Upgrade auf Kubernetes 1.25 müssen Sie den Astra Trident auf 22.10 aktualisieren.
+** Hinzufügung eines separaten ServiceAccount, ClusterRole und ClusterBinding für die Trident Deployment und DemonSet, um zukünftige Berechtigungsverbesserungen zu ermöglichen.
+** Zusätzlicher Support für link:https://docs.netapp.com/us-en/trident/trident-use/volume-share.html["Namespace-übergreifende Volume-Freigabe"].
+
+
+* Trident Ist Alles `ontap-*` Storage-Treiber arbeiten jetzt mit der ONTAP REST API.
+* Neuer Operator yaml hinzugefügt (`bundle_post_1_25.yaml`) Ohne A `PodSecurityPolicy` Die Kubernetes 1.25 unterstützen.
+* Hinzugefügt link:https://docs.netapp.com/us-en/trident/trident-reco/security-reco.html#enable-per-volume-host-side-encryption-using-linux-unified-key-setup-luks["Unterstützung für LUKS-verschlüsselte Volumes"] Für `ontap-san` Und `ontap-san-economy` Storage-Treiber:
+* Unterstützung für Windows Server 2019-Knoten hinzugefügt.
+* Hinzugefügt link:https://docs.netapp.com/us-en/trident/trident-use/anf.html["Unterstützung für SMB Volumes auf Windows Nodes"] Durch die `azure-netapp-files` Storage-Treiber:
+* Die automatische MetroCluster-Umschalterkennung für ONTAP-Treiber ist jetzt allgemein verfügbar.
+
+
+
+
+=== Abschreibungen
+
+* **Kubernetes:** Aktualisiert unterstützt mindestens Kubernetes auf 1.20.
+* Astra Data Store (ADS)-Treiber entfernt.
+* Unterstützung für wurde entfernt `yes` Und `smart` Optionen für `find_multipaths` Wenn Sie Multipathing für Worker-Node für iSCSI konfigurieren.
+
+
+
+
+== Änderungen in 22.07
+
+
+
+=== Korrekturen
+
+**Kubernetes**
+
+* Problem wurde behoben, um boolesche Werte und Zahlenwerte für die Node-Auswahl bei der Konfiguration von Trident mit Helm oder dem Trident Operator zu behandeln. (link:https://github.com/NetApp/trident/issues/700["GitHub Ausgabe #700"^])
+* Problem beim Umgang mit Fehlern aus dem nicht-CHAP-Pfad behoben, sodass kubelet erneut versuchen wird, wenn er fehlschlägt. link:https://github.com/NetApp/trident/issues/736["GitHub Ausgabe #736"^])
+
+
+
+
+=== Vorgestellt Werden
+
+* Übergang von k8s.gcr.io zu Registry.k8s.io als Standard-Registry für CSI-Bilder
+* ONTAP-SAN Volumes werden jetzt Initiatorgruppen pro Node verwenden und LUNs nur Initiatorgruppen zuordnen, während diese Nodes aktiv veröffentlicht werden, um unsere Sicherheit zu verbessern. Vorhandene Volumes werden opportun auf das neue igroup-Schema umgeschaltet, wenn Trident feststellt, dass der Einsatz sicher ist, ohne dass aktive Workloads beeinträchtigt werden.
+* Enthält eine ResourceQuota mit Trident-Installationen, um sicherzustellen, dass Trident DemonSet geplant ist, wenn die PriorityClass-Nutzung standardmäßig beschränkt ist.
+* Unterstützung für Netzwerkfunktionen wurde dem ANF-Treiber hinzugefügt. (link:https://github.com/NetApp/trident/issues/717["GitHub Ausgabe #717"^])
+* Technische Vorschau Automatische MetroCluster-Umschalterkennung zu ONTAP-Treibern hinzugefügt. (link:https://github.com/NetApp/trident/issues/228["GitHub Ausgabe #228"^])
+
+
+
+
+=== Abschreibungen
+
+* **Kubernetes:** Aktualisiert unterstützt mindestens Kubernetes auf 1.19.
+* Back-End-Konfiguration ermöglicht nicht mehr mehrere Authentifizierungstypen in einer einzigen Konfiguration.
+
+
+
+
+=== Umzüge
+
+* Der AWS CVS-Treiber (veraltet seit 22.04) wurde entfernt.
+* Kubernetes
++
+** Keine unnötige SYS_ADMIN-Funktion von Node-Pods entfernt.
+** Verringert die Nodevorbereitung auf einfache Host-Info und aktive Serviceerkennung, um eine Bestätigung für den bestmöglichen Aufwand zu machen, dass NFS/iSCSI-Dienste auf Worker-Knoten verfügbar sind.
+
+
+
+
+
+
+=== Dokumentation
+
+Eine neue link:https://docs.netapp.com/us-en/trident/trident-reference/pod-security.html["Pod-Sicherheitsstandards"] (PSS) der Abschnitt enthält Details über Berechtigungen, die von Astra Trident bei der Installation aktiviert wurden.
+
+
+
+== Änderungen in 22.04
+
+NetApp verbessert seine Produkte und Services kontinuierlich. Im Folgenden finden Sie einige der neuesten Funktionen von Astra Trident: Frühere Versionen finden Sie unter https://docs.netapp.com/us-en/trident/earlier-versions.html["Frühere Versionen der Dokumentation"].
+
+
+IMPORTANT: Wenn Sie ein Upgrade von früheren Trident Versionen durchführen und Azure NetApp Files verwenden, finden Sie das ``location`` Der Parameter config ist jetzt ein Pflichtfeld, singleton.
+
+
+
+=== Korrekturen
+
+* Verbessertes Analysieren von iSCSI-Initiatornamen. (link:https://github.com/NetApp/trident/issues/681["GitHub Ausgabe #681"^])
+* Das Problem wurde behoben, bei dem CSI-Speicherklassenparameter nicht zulässig waren. (link:https://github.com/NetApp/trident/issues/598["GitHub Ausgabe #598"^])
+* Doppelte Schlüsseldeklaration im Trident CRD behoben. (link:https://github.com/NetApp/trident/issues/671["GitHub Ausgabe #671"^])
+* Fehlerhafte CSI-Snapshot-Protokolle wurden korrigiert. (link:https://github.com/NetApp/trident/issues/629["GitHub Ausgabe #629"^]))
+* Problem beim Aufheben der Veröffentlichung von Volumes auf gelöschten Nodes behoben. (link:https://github.com/NetApp/trident/issues/691["GitHub Ausgabe #691"^])
+* Zusätzliche Bearbeitung von Inkonsistenzen im Dateisystem auf Blockgeräten. (link:https://github.com/NetApp/trident/issues/656["GitHub Ausgabe #656"^])
+* Problem beim Ziehen von Bildern mit automatischer Unterstützung beim Einstellen des behoben `imageRegistry` Markierung während der Installation. (link:https://github.com/NetApp/trident/issues/715["GitHub Ausgabe #715"^])
+* Das Problem wurde behoben, bei dem der ANF-Treiber ein Volume mit mehreren Exportregeln nicht klonen konnte.
+
+
+
+
+=== Vorgestellt Werden
+
+* Eingehende Verbindungen zu den sicheren Endpunkten von Trident erfordern jetzt mindestens TLS 1.3. (link:https://github.com/NetApp/trident/issues/698["GitHub Ausgabe #698"^])
+* Trident fügt jetzt HSTS-Header zu den Antworten von seinen sicheren Endpunkten hinzu.
+* Trident versucht nun, die Azure NetApp Files unix Berechtigungsfunktion automatisch zu aktivieren.
+* *Kubernetes*: Trident Demonset wird jetzt in der Klasse mit System-Node-kritischer Priorität ausgeführt. (link:https://github.com/NetApp/trident/issues/694["GitHub Ausgabe #694"^])
+
+
+
+
+=== Umzüge
+
+E-Series-Treiber (deaktiviert seit 20.07) wurde entfernt.
+
+
+
+== Änderungen in 22.01.1
+
+
+
+=== Korrekturen
+
+* Problem beim Aufheben der Veröffentlichung von Volumes auf gelöschten Nodes behoben. (link:https://github.com/NetApp/trident/issues/691["GitHub Ausgabe #691"])
+* Fester Panik beim Zugriff auf Nil-Felder für den aggregierten Speicherplatz in den ONTAP API Antworten.
+
+
+
+
+== Änderungen in 22.01.0
+
+
+
+=== Korrekturen
+
+* *Kubernetes:* Erhöhung der Neuzulassung der Knotenregistrierung für große Cluster.
+* Das Problem wurde behoben, bei dem der Azure-netapp-Files Treiber von mehreren Ressourcen mit demselben Namen verwirrt werden konnte.
+* ONTAP SAN IPv6 Daten-LIFs funktionieren jetzt, wenn sie mit Klammern angegeben sind.
+* Das Problem wurde behoben, bei dem der Import eines bereits importierten Volumes das EOF zurückgibt, sodass PVC in den ausstehenden Zustand zurückbleibt. (link:https://github.com/NetApp/trident/issues/489["GitHub Ausgabe #489"])
+* Problem behoben, wenn Astra Trident die Performance verlangsamt, wenn > 32 Snapshots auf einem SolidFire Volume erstellt werden.
+* SHA-1 wurde durch SHA-256 bei der Erstellung eines SSL-Zertifikats ersetzt.
+* ANF-Treiber wurde behoben, um doppelte Ressourcennamen zu ermöglichen und Operationen auf einen einzelnen Speicherort zu beschränken.
+* ANF-Treiber wurde behoben, um doppelte Ressourcennamen zu ermöglichen und Operationen auf einen einzelnen Speicherort zu beschränken.
+
+
+
+
+=== Vorgestellt Werden
+
+* Verbesserungen von Kubernetes:
++
+** Zusätzliche Unterstützung für Kubernetes 1.23
+** Fügen Sie bei der Installation über Trident Operator oder Helm Planungsoptionen für Trident Pods hinzu. (link:https://github.com/NetApp/trident/issues/651["GitHub Ausgabe #651"^])
+
+
+* Erlauben Sie regionenübergreifende Volumes im GCP-Treiber. (link:https://github.com/NetApp/trident/issues/633["GitHub Ausgabe #633"^])
+* Unterstützung für die Option „unixPermissions“ für ANF-Volumes hinzugefügt. (link:https://github.com/NetApp/trident/issues/666["GitHub Ausgabe #666"^])
+
+
+
+
+=== Abschreibungen
+
+Die Trident REST-Schnittstelle kann nur unter 127.0.0.1 oder [: 1] Adressen zuhören und bedient werden
+
+
+
+== Änderungen in 21.10.1
+
+
+WARNING: In der Version v21.10.0 kann der Trident Controller in den CrashLoopBackOff-Status versetzt werden, wenn ein Node entfernt und dann wieder zum Kubernetes Cluster hinzugefügt wird. Dieses Problem wurde in der Version 21,10,1 behoben (GitHub Ausgabe 669).
+
+
+
+=== Korrekturen
+
+* Beim Import eines Volumes auf ein GCP CVS Backend wurde eine potenzielle Race-Bedingung behoben, die zu einem Import führt.
+* Es wurde ein Problem behoben, durch das der Trident Controller in den CrashLoopBackOff-Status versetzt werden kann, wenn ein Node entfernt und dann wieder zum Kubernetes Cluster hinzugefügt wird (GitHub Ausgabe 669).
+* Das Problem wurde behoben, bei dem SVMs nicht mehr erkannt wurden, wenn kein SVM-Name angegeben wurde (GitHub Problem 612).
+
+
+
+
+== Änderungen in 21.10.0
+
+
+
+=== Korrekturen
+
+* Es wurde ein Problem behoben, bei dem Klone von XFS-Volumes nicht auf demselben Node wie das Quell-Volume gemountet werden konnten (GitHub Ausgabe 514).
+* Das Problem wurde behoben, bei dem Astra Trident einen fatalen Fehler beim Herunterfahren protokolliert hat (GitHub Ausgabe 597).
+* Kubernetes-bezogene Fixes:
++
+** Der verwendete Speicherplatz eines Volume wird als Mindestrückstellunggröße bei der Erstellung von Snapshots mit zurückgegeben `ontap-nas` Und `ontap-nas-flexgroup` Treiber (GitHub Ausgabe 645).
+** Problem behoben wo `Failed to expand filesystem` Fehler wurde nach der Volume-Größe protokolliert (GitHub-Problem 560).
+** Problem behoben, in dem ein POD feststecken konnte `Terminating` State (GitHub Ausgabe 572).
+** Den Fall an der Stelle behoben, an der ein `ontap-san-economy` FlexVol könnte voll von Snapshot-LUNs sein (GitHub Ausgabe 533).
+** Problem mit dem benutzerdefinierten YAML-Installationsprogramm mit einem anderen Bild wurde behoben (GitHub Ausgabe 613).
+** Berechnung der Snapshot-Größe wurde korrigiert (GitHub Ausgabe 611).
+** Das Problem wurde behoben, bei dem alle Astra Trident Installationsprogramme schlicht Kubernetes als OpenShift identifizieren konnten (GitHub Ausgabe 639).
+** Der Trident-Operator hat den Abgleich behoben, wenn der Kubernetes-API-Server nicht erreichbar ist (GitHub Ausgabe 599).
+
+
+
+
+
+
+=== Vorgestellt Werden
+
+* Zusätzlicher Support für `unixPermissions` Option für GCP-CVS Performance Volumes:
+* Zusätzliche Unterstützung für für für Skalierung optimierte CVS Volumes in GCP im Bereich von 600 gib bis 1 tib.
+* Verbesserungen im Zusammenhang mit Kubernetes:
++
+** Zusätzliche Unterstützung für Kubernetes 1.22
+** Trident Operator und Helm Chart wurde für die Verwendung mit Kubernetes 1.22 aktiviert (GitHub Ausgabe 628).
+** Bedienerbild zu hinzugefügt `tridentctl` Image-Befehl (GitHub Ausgabe 570).
+
+
+
+
+
+
+=== Experimentelle Verbesserungen
+
+* Zusätzliche Unterstützung für Volume-Replikation im `ontap-san` Treiber.
+* Zusätzliche *Tech Preview* REST-Unterstützung für die `ontap-nas-flexgroup`, `ontap-san`, und `ontap-nas-economy` Treiber.
+
+
+
+
+== Bekannte Probleme
+
+Bekannte Probleme erkennen Probleme, die eine erfolgreiche Verwendung des Produkts verhindern könnten.
+
+* Astra Trident erzwingt jetzt ein Leereinschub `fsType` (`fsType=""`) Für Volumen, die nicht die haben `fsType` Festgelegt in ihrer StorageClass. Bei der Arbeit mit Kubernetes 1.17 oder höher unterstützt Trident das Ausgeben eines Leerzeichen `fsType` Für NFS-Volumes. Für iSCSI-Volumes müssen Sie die festlegen `fsType` Auf Ihrer StorageClass bei der Durchsetzung eines `fsGroup` Verwenden eines Sicherheitskontexts.
+* Wenn Sie ein Backend über mehrere Astra Trident Instanzen hinweg verwenden, sollte jede Back-End-Konfigurationsdatei ein anderes haben `storagePrefix` Für ONTAP-Back-Ends verwenden Sie einen anderen Wert `TenantName` Für SolidFire Back-Ends. Astra Trident kann Volumes nicht erkennen, die andere Instanzen von Astra Trident erstellt haben. Es ist erfolgreich, ein vorhandenes Volume auf ONTAP- oder SolidFire-Back-Ends zu erstellen, da Astra Trident die Volume-Erstellung als einen idempotenten Vorgang behandelt. Wenn `storagePrefix` Oder `TenantName` Unterscheiden sich nicht, es können Namenskonflikte bei Volumes bestehen, die auf demselben Backend erstellt wurden.
+* Bei der Installation von Astra Trident (mit `tridentctl` Oder dem Trident Operator) und mit `tridentctl` Für das Management von Astra Trident sollten Sie die sicherstellen `KUBECONFIG` Umgebungsvariable wird festgelegt. Dies ist erforderlich, um für den Kubernetes-Cluster anzugeben `tridentctl` Sollten gegenarbeiten. Bei der Arbeit mit mehreren Kubernetes-Umgebungen sollten Sie sicherstellen, dass die `KUBECONFIG` Die Datei wird genau stammt.
+* Um Online-Speicherplatzrückgewinnung für iSCSI PVS durchzuführen, muss das zugrunde liegende Betriebssystem auf dem Worker-Node möglicherweise Mount-Optionen an das Volume übergeben werden. Dies gilt für RHEL/RedHat CoreOS Instanzen, die die benötigen `discard` https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Mount-Option"^]; Stellen Sie sicher, dass die MountOption von der Karte in Ihrem enthalten ist[`StorageClass`^] unterstützt das Online-Blockabwerfen.
+* Wenn für den Kubernetes Cluster mehr als eine Instanz von Astra Trident zur Verfügung steht, kann Astra Trident nicht mit anderen Instanzen kommunizieren und kann nicht andere Volumes ermitteln, die sie erstellt haben. Dies führt zu einem unerwarteten und falschen Verhalten, wenn mehrere Instanzen innerhalb eines Clusters ausgeführt werden. Astra Trident sollte nur eine Instanz pro Kubernetes Cluster geben.
+* Bei Astra Trident-basiert `StorageClass` Die Objekte werden aus Kubernetes gelöscht, während Astra Trident offline ist, entfernt Astra Trident nicht die entsprechenden Storage-Klassen aus seiner Datenbank, wenn sie wieder online kommt. Sie sollten diese Speicherklassen mit löschen `tridentctl` Oder DIE REST API.
+* Wenn ein Benutzer ein von Astra Trident bereitgestelltes PV löscht, bevor das entsprechende PVC gelöscht wird, löscht Astra Trident nicht automatisch das Back-Volume. Sie sollten die Lautstärke über entfernen `tridentctl` Oder DIE REST API.
+* ONTAP kann nicht gleichzeitig mehr als ein FlexGroup gleichzeitig bereitstellen, es sei denn, der Satz der Aggregate ist auf jede Bereitstellungsanforderung beschränkt.
+* Bei der Verwendung von Astra Trident über IPv6 sollten Sie angeben `managementLIF` Und `dataLIF` In der Back-End-Definition in eckigen Klammern. Beispiel: ``[fd20:8b1e:b258:2000:f816:3eff:feec:0]``.
+* Wenn Sie das verwenden `solidfire-san` Treiber mit OpenShift 4.5, stellen Sie sicher, dass die zugrunde liegenden Worker-Knoten MD5 als CHAP-Authentifizierungsalgorithmus verwenden.
+
+
+
+
+== Weitere Informationen
+
+* https://github.com/NetApp/trident["Astra Trident GitHub"^]
+* https://netapp.io/persistent-storage-provisioner-for-kubernetes/["Astra Trident Blogs"^]
+

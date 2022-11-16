@@ -1,0 +1,70 @@
+---
+sidebar: sidebar 
+permalink: trident-use/backend_ops_kubectl.html 
+keywords: backends, storage system, anf, cvs for aws, cvs for gcp, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, kubectl, create backends, delete backends, update backends, view backends 
+summary: 'Erfahren Sie, wie Sie mit Backend-Management-Operationen durchführen `kubectl`.' 
+---
+= Führen Sie das Back-End-Management mit kubectl durch
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Erfahren Sie, wie Sie mit Backend-Management-Operationen durchführen `kubectl`.
+
+
+
+== Löschen Sie ein Back-End
+
+Durch Löschen von A `TridentBackendConfig`, Sie weisen Astra Trident an, Back-Ends zu löschen/zu behalten (basierend auf `deletionPolicy`). Um ein Backend zu löschen, stellen Sie sicher, dass `deletionPolicy` Ist auf Löschen festgelegt. Um nur die zu löschen `TridentBackendConfig`, Stellen Sie das sicher `deletionPolicy` Auf beibehalten eingestellt. Dadurch wird sichergestellt, dass das Backend weiterhin vorhanden ist und mit verwaltet werden kann `tridentctl`.
+
+Führen Sie den folgenden Befehl aus:
+
+[listing]
+----
+kubectl delete tbc <tbc-name> -n trident
+----
+Astra Trident löscht nicht die Kubernetes Secrets, die von verwendet wurden `TridentBackendConfig`. Der Kubernetes-Benutzer ist für die Bereinigung von Geheimnissen verantwortlich. Beim Löschen von Geheimnissen ist Vorsicht zu nehmen. Sie sollten Geheimnisse nur löschen, wenn sie nicht von den Back-Ends verwendet werden.
+
+
+
+== Zeigen Sie die vorhandenen Back-Ends an
+
+Führen Sie den folgenden Befehl aus:
+
+[listing]
+----
+kubectl get tbc -n trident
+----
+Sie können auch ausführen `tridentctl get backend -n trident` Oder `tridentctl get backend -o yaml -n trident` Um eine Liste aller vorhandenen Back-Ends zu erhalten. Diese Liste umfasst auch Back-Ends, die mit erstellt wurden `tridentctl`.
+
+
+
+== Aktualisieren Sie ein Backend
+
+Es gibt mehrere Gründe für die Aktualisierung eines Backend:
+
+* Die Anmeldeinformationen für das Speichersystem wurden geändert. Um Anmeldedaten zu aktualisieren, wird das in verwendete Kubernetes Secret verwendet `TridentBackendConfig` Objekt muss aktualisiert werden. Astra Trident aktualisiert automatisch das Backend mit den neuesten Zugangsdaten. Führen Sie den folgenden Befehl aus, um den Kubernetes Secret zu aktualisieren:
+
+
+[listing]
+----
+kubectl apply -f <updated-secret-file.yaml> -n trident
+----
+* Parameter (wie der Name der verwendeten ONTAP-SVM) müssen aktualisiert werden. In diesem Fall `TridentBackendConfig` Objekte können direkt über Kubernetes aktualisiert werden.
+
+
+[listing]
+----
+kubectl apply -f <updated-backend-file.yaml>
+----
+Alternativ können Sie Änderungen an der vorhandenen vornehmen `TridentBackendConfig` CR durch Ausführen des folgenden Befehls:
+
+[listing]
+----
+kubectl edit tbc <tbc-name> -n trident
+----
+Wenn ein Backend-Update fehlschlägt, bleibt das Backend in seiner letzten bekannten Konfiguration erhalten. Sie können die Protokolle anzeigen, um die Ursache durch Ausführen zu bestimmen `kubectl get tbc <tbc-name> -o yaml -n trident` Oder `kubectl describe tbc <tbc-name> -n trident`.
+
+Nachdem Sie das Problem mit der Konfigurationsdatei erkannt und behoben haben, können Sie den Befehl Update erneut ausführen.

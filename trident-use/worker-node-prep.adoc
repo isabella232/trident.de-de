@@ -1,0 +1,161 @@
+---
+sidebar: sidebar 
+permalink: trident-use/worker-node-prep.html 
+keywords: storage class, manage storage class, storage classes, kubernetes storage classes, worker node, nfs, iscsi, kubernetes clusters 
+summary: Alle Worker-Nodes im Kubernetes Cluster müssen in der Lage sein, die Volumes, die Sie für Ihre Pods bereitgestellt haben, zu mounten. Wenn Sie den ontap-nas, den ontap-nas-Economy-, ontap-nas-Flexgroup-Treiber für ein Ihrer Back-Ends verwenden, benötigen die Worker-Nodes die NFS-Tools. Anderenfalls sind iSCSI-Tools erforderlich. 
+---
+= Bereiten Sie den Knoten „Worker“ vor
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Alle Worker-Nodes im Kubernetes Cluster müssen in der Lage sein, die Volumes, die Sie für Ihre Pods bereitgestellt haben, zu mounten. Wenn Sie das verwenden `ontap-nas`, `ontap-nas-economy`, Oder `ontap-nas-flexgroup` Ein Treiber für eines Ihrer Back-Ends werden für Ihre Mitarbeiter-Nodes die NFS-Tools benötigt. Anderenfalls sind iSCSI-Tools erforderlich.
+
+Aktuelle Versionen von RedHat CoreOS haben standardmäßig sowohl NFS als auch iSCSI installiert.
+
+
+WARNING: Nach der Installation der NFS- oder iSCSI-Tools sollten Sie die Worker-Nodes immer neu booten, oder das Anbinden von Volumes an Container kann fehlschlagen.
+
+
+
+== Ermittlung des Node-Service
+
+Ab 22.07 versucht Astra Trident automatisch zu erkennen, ob der Node in der Lage ist, iSCSI- oder NFS-Dienste auszuführen. Astra Trident erstellt Ereignisse für den Node zur Identifizierung der erkannten Services. Sie können diese Ereignisse mit dem Befehl überprüfen:
+
+[listing]
+----
+kubectl get event -A --field-selector involvedObject.name=<Kubernetes node name>
+----
+Trident identifiziert außerdem für jeden Node auf der Trident Node CR aktivierte Services. Um die ermittelten Dienste anzuzeigen, verwenden Sie den Befehl:
+
+[listing]
+----
+tridentctl get node -o wide -n <Trident namespace>
+----
+
+NOTE: Die Ermittlung des Node-Service erkennt erkannte Services, gewährleistet jedoch nicht, dass Services ordnungsgemäß konfiguriert wurden. Umgekehrt kann das Fehlen eines entdeckten Service nicht garantieren, dass die Volume-Bereitstellung fehlschlägt.
+
+
+
+== NFS Volumes
+
+[cols="3*"]
+|===
+| Protokoll | Betriebssystem | Befehle 
+
+
+| NFS  a| 
+RHEL/CentOS 7
+ a| 
+`sudo yum install -y nfs-utils`
+
+
+
+| NFS  a| 
+Ubuntu
+ a| 
+`sudo apt-get install -y nfs-common`
+
+|===
+
+NOTE: Sie sollten sicherstellen, dass der NFS-Dienst während des Startvorgangs gestartet wird.
+
+
+
+== ISCSI-Volumes
+
+Bei der Verwendung von iSCSI Volumes sollten folgende Punkte berücksichtigt werden:
+
+* Jeder Node im Kubernetes-Cluster muss über einen eindeutigen IQN verfügen. *Dies ist eine notwendige Voraussetzung*.
+* Bei Verwendung von RHCOS Version 4.5 oder höher oder einer anderen RHEL-kompatiblen Linux-Distribution mit dem `solidfire-san` Treiber: Stellen Sie sicher, dass der CHAP-Authentifizierungsalgorithmus auf MD5 in gesetzt ist `/etc/iscsi/iscsid.conf`.
++
+[listing]
+----
+sudo sed -i 's/^\(node.session.auth.chap_algs\).*/\1 = MD5/' /etc/iscsi/iscsid.conf
+----
+* Wenn Sie Worker-Nodes verwenden, die RHEL/RedHat CoreOS mit iSCSI PVS ausführen, stellen Sie sicher, dass die angegeben werden `discard` MountOption in StorageClass für die Inline-Speicherplatzrückgewinnung. Siehe https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Die Dokumentation von redhat"^].
+
+
+[cols="3*"]
+|===
+| Protokoll | Betriebssystem | Befehle 
+
+
+| ISCSI  a| 
+RHEL/CentOS
+ a| 
+. Installieren Sie die folgenden Systempakete:
++
+`sudo yum install -y lsscsi iscsi-initiator-utils sg3_utils device-mapper-multipath`
+
+. Überprüfen Sie, ob die Version von iscsi-Initiator-utils 6.2.0.874-2.el7 oder höher ist:
++
+`rpm -q iscsi-initiator-utils`
+
+. Scannen auf manuell einstellen:
++
+`sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf`
+
+. Multipathing aktivieren:
++
+`sudo mpathconf --enable --with_multipathd y --find_multipaths n`
+
++
+
+NOTE: Unbedingt `etc/multipath.conf` Enthält `find_multipaths no` Unter `defaults`.
+
+. Stellen Sie das sicher `iscsid` Und `multipathd` Laufen:
++
+`sudo systemctl enable --now iscsid multipathd`
+
+. Aktivieren und starten `iscsi`:
++
+`sudo systemctl enable --now iscsi`
+
+
+
+
+
+| ISCSI  a| 
+Ubuntu
+ a| 
+. Installieren Sie die folgenden Systempakete:
++
+`sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools`
+
+. Stellen Sie sicher, dass Open-iscsi-Version 2.0.874-5ubuntu2.10 oder höher (für bionic) oder 2.0.874-7.1ubuntu6.1 oder höher (für Brennweite) ist:
++
+`dpkg -l open-iscsi`
+
+. Scannen auf manuell einstellen:
++
+`sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf`
+
+. Multipathing aktivieren:
++
+`sudo tee /etc/multipath.conf <<-'EOF'
+defaults {
+    user_friendly_names yes
+    find_multipaths no
+}
+EOF
+sudo systemctl enable --now multipath-tools.service
+sudo service multipath-tools restart`
+
++
+
+NOTE: Unbedingt `etc/multipath.conf` Enthält `find_multipaths no` Unter `defaults`.
+
+. Stellen Sie das sicher `open-iscsi` Und `multipath-tools` Sind aktiviert und läuft:
++
+`sudo systemctl status multipath-tools`
+`sudo systemctl enable --now open-iscsi.service`
+`sudo systemctl status open-iscsi`
+
+
+
+|===
+
+NOTE: Für Ubuntu 18.04, müssen Sie Ziel-Ports mit erkennen `iscsiadm` Vor dem Start `open-iscsi` Damit der iSCSI-Daemon gestartet werden kann. Alternativ können Sie den ändern `iscsi` Dienst zu starten `iscsid` Automatisch

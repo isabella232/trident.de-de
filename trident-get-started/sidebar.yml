@@ -1,0 +1,22 @@
+---
+section: trident-get-started
+title: Los geht's
+entries:
+- title: Probieren Sie es aus
+  url: "/trident-get-started/quickstart.html"
+- title: Anforderungen
+  url: "/trident-get-started/requirements.html"
+- title: Implementierungsübersicht
+  url: "/trident-get-started/kubernetes-deploy.html"
+- title: Implementierung mit Trident Operator
+  url: "/trident-get-started/kubernetes-deploy-operator.html"
+  entries:
+  - title: Anpassung der Trident Operator-Implementierung
+    url: "/trident-get-started/kubernetes-customize-deploy.html"
+- title: Implementierung mit tridentctl
+  url: "/trident-get-started/kubernetes-deploy-tridentctl.html"
+  entries:
+  - title: Tridentctl-Implementierung anpassen
+    url: "/trident-get-started/kubernetes-customize-deploy-tridentctl.html"
+- title: Was kommt als Nächstes?
+  url: "/trident-get-started/kubernetes-postdeployment.html"

@@ -1,0 +1,97 @@
+---
+sidebar: sidebar 
+permalink: trident-use/anf-prep.html 
+keywords: trident backend, azure netapp files, smb volumes, smb, windows, active directory, csi proxy 
+summary: Bevor Sie Ihr ANF-Backend konfigurieren können, müssen Sie sicherstellen, dass die folgenden Anforderungen erfüllt sind. 
+---
+= Konfiguration eines Azure NetApp Files-Backends wird vorbereitet
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Bevor Sie Ihr ANF-Backend konfigurieren können, müssen Sie sicherstellen, dass die folgenden Anforderungen erfüllt sind.
+
+Wenn Sie Azure NetApp Files zum ersten Mal oder an einem neuen Standort verwenden, ist eine Erstkonfiguration erforderlich.
+
+* Informationen zur Einrichtung von Azure NetApp Files und zur Erstellung eines NFS-Volumes finden Sie unter https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-quickstart-set-up-account-create-volumes["Azure: Azure NetApp Files einrichten und ein NFS Volume erstellen"^].
+* Informationen zur Konfiguration von Azure NetApp Files und zum Hinzufügen eines SMB-Volumes finden Sie unter: https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-create-volumes-smb["Azure: Erstellen Sie ein SMB Volume für Azure NetApp Files"^].
+
+
+
+
+== Anforderungen
+
+Um ein zu konfigurieren und zu verwenden https://azure.microsoft.com/en-us/services/netapp/["Azure NetApp Dateien"^] Back-End, Sie benötigen Folgendes:
+
+* `subscriptionID` Über ein Azure Abonnement mit aktiviertem Azure NetApp Files.
+* `tenantID`, `clientID`, und `clientSecret` Von einem link:https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal["App-Registrierung"^] In Azure Active Directory mit ausreichenden Berechtigungen für den Azure NetApp Files-Service. Die App-Registrierung sollte Folgendes verwenden:
++
+** Der Eigentümer oder die Rolle des Mitarbeiters link:https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles["Vordefiniert von Azure"^]
+** A link:https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal["Benutzerdefinierte Beitragsrolle"] Auf Abonnementebene (`assignableScopes`) Mit den folgenden Berechtigungen, die auf nur das beschränkt sind, was Astra Trident erfordert. Nach dem Erstellen der benutzerdefinierten Rolle link:https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal["Weisen Sie die Rolle über das Azure-Portal zu"^].
++
+[source, JSON]
+----
+{
+    "id": "/subscriptions/<subscription-id>/providers/Microsoft.Authorization/roleDefinitions/<role-definition-id>",
+    "properties": {
+        "roleName": "custom-role-with-limited-perms",
+        "description": "custom role providing limited permissions",
+        "assignableScopes": [
+            "/subscriptions/<subscription-id>"
+        ],
+        "permissions": [
+            {
+                "actions": [
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/read",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/write",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/read",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/write",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/delete",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots/read",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots/write",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots/delete",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/read",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/write",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/delete",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/GetMetadata/action",
+                    "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/MountTargets/read",
+                    "Microsoft.Network/virtualNetworks/read",
+                    "Microsoft.Network/virtualNetworks/subnets/read",
+                    "Microsoft.Features/featureProviders/subscriptionFeatureRegistrations/read",
+                    "Microsoft.Features/featureProviders/subscriptionFeatureRegistrations/write",
+                    "Microsoft.Features/featureProviders/subscriptionFeatureRegistrations/delete",
+                    "Microsoft.Features/features/read",
+                    "Microsoft.Features/operations/read",
+                    "Microsoft.Features/providers/features/read",
+                    "Microsoft.Features/providers/features/register/action",
+                    "Microsoft.Features/providers/features/unregister/action",
+                    "Microsoft.Features/subscriptionFeatureRegistrations/read"
+                ],
+                "notActions": [],
+                "dataActions": [],
+                "notDataActions": []
+            }
+        ]
+    }
+}
+----
+
+
+* Im Azure `location` Das enthält mindestens eine link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-delegate-subnet["Delegiertes Subnetz"^]. Ab Trident 22.01 finden Sie das `location` Parameter ist ein erforderliches Feld auf der obersten Ebene der Backend-Konfigurationsdatei. In virtuellen Pools angegebene Standortwerte werden ignoriert.
+
+
+
+
+== Zusätzliche Anforderungen für SMB Volumes
+
+* Kubernetes-Cluster mit einem Linux-Controller-Knoten und mindestens einem Windows-Worker-Node, auf dem Windows Server 2019 ausgeführt wird. Astra Trident unterstützt SMB Volumes, die nur auf Windows Nodes laufenden Pods gemountet werden.
+* Mindestens ein Astra Trident-Geheimnis, der Ihre Active Directory-Anmeldedaten enthält, damit ANF sich bei Active Directory authentifizieren kann. Um Geheimnis zu erzeugen `smbcreds`:
++
+[listing]
+----
+kubectl create secret generic smbcreds --from-literal username=user --from-literal password='pw'
+----
+* Ein CSI-Proxy, der als Windows-Dienst konfiguriert ist. Zum Konfigurieren von A `csi-proxy`Weitere Informationen finden Sie unter link:https://github.com/kubernetes-csi/csi-proxy["GitHub: CSI-Proxy"^] Oder link:https://github.com/Azure/aks-engine/blob/master/docs/topics/csi-proxy-windows.md["GitHub: CSI Proxy für Windows"^] Für Kubernetes-Knoten, die auf Windows ausgeführt werden.
+

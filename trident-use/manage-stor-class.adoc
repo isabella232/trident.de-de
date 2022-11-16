@@ -1,0 +1,118 @@
+---
+sidebar: sidebar 
+permalink: trident-use/manage-stor-class.html 
+keywords: storage class, manage storage class, storage classes, kubernetes storage classes 
+summary: Sie können eine Speicherklasse erstellen, eine Speicherklasse löschen und vorhandene Speicherklassen anzeigen. 
+---
+= Management von Storage-Klassen
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Suchen Sie Informationen zum Erstellen einer Speicherklasse, Löschen einer Speicherklasse und Anzeigen vorhandener Speicherklassen.
+
+
+
+== Entwurf einer Storage-Klasse
+
+Siehe link:../trident-reference/objects.html["Hier"^] Finden Sie weitere Informationen darüber, welche Storage-Klassen es gibt und wie Sie sie konfigurieren.
+
+
+
+== Erstellen Sie eine Speicherklasse
+
+Führen Sie den folgenden Befehl aus, wenn Sie eine Speicherklassendatei haben:
+
+[listing]
+----
+kubectl create -f <storage-class-file>
+----
+`<storage-class-file>` Sollte durch den Dateinamen der Speicherklasse ersetzt werden.
+
+
+
+== Löschen Sie eine Speicherklasse
+
+Führen Sie den folgenden Befehl aus, um eine Storage-Klasse aus Kubernetes zu löschen:
+
+[listing]
+----
+kubectl delete storageclass <storage-class>
+----
+`<storage-class>` Sollten durch Ihre Storage-Klasse ersetzt werden.
+
+Alle persistenten Volumes, die durch diese Storage-Klasse erstellt wurden, werden unverändert beibehalten und Astra Trident wird sie weiterhin managen.
+
+
+NOTE: Astra Trident setzt ein Leereinschub um `fsType` Für die von ihm erstellten Volumes. Bei iSCSI-Back-Ends wird die Durchsetzung empfohlen `parameters.fsType` In der StorageClass. Sie sollten esixting StorageClasses löschen und mit neu erstellen `parameters.fsType` Angegeben.
+
+
+
+== Sehen Sie sich die vorhandenen Speicherklassen an
+
+* Um vorhandene Kubernetes-Storage-Klassen anzuzeigen, führen Sie den folgenden Befehl aus:
+
+
+[listing]
+----
+kubectl get storageclass
+----
+* Um die Details der Kubernetes-Storage-Klasse anzuzeigen, führen Sie den folgenden Befehl aus:
+
+
+[listing]
+----
+kubectl get storageclass <storage-class> -o json
+----
+* Führen Sie den folgenden Befehl aus, um die synchronisierten Storage-Klassen von Astra Trident anzuzeigen:
+
+
+[listing]
+----
+tridentctl get storageclass
+----
+* Um die synchronisierten Storage-Klassendetails von Astra Trident anzuzeigen, führen Sie den folgenden Befehl aus:
+
+
+[listing]
+----
+tridentctl get storageclass <storage-class> -o json
+----
+
+
+== Legen Sie eine Standardspeicherklasse fest
+
+Mit Kubernetes 1.6 können Sie eine Standard-Storage-Klasse festlegen. Dies ist die Storage-Klasse, die zur Bereitstellung eines Persistent Volume verwendet wird, wenn ein Benutzer in einer Persistent Volume Claim (PVC) nicht eine Angabe vorgibt.
+
+* Definieren Sie eine Standard-Storage-Klasse, indem Sie die Anmerkung festlegen `storageclass.kubernetes.io/is-default-class` In der Definition der Storage-Klassen wie den „true“. Gemäß der Spezifikation wird jeder andere Wert oder jede Abwesenheit der Anmerkung als falsch interpretiert.
+* Sie können eine vorhandene Storage-Klasse als Standard-Storage-Klasse konfigurieren, indem Sie den folgenden Befehl verwenden:
+
+
+[listing]
+----
+kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+----
+* In ähnlicher Weise können Sie die standardmäßige Storage-Klassenbeschriftung mithilfe des folgenden Befehls entfernen:
+
+
+[listing]
+----
+kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+----
+Es gibt auch Beispiele im Trident Installationspaket, die diese Annotation enthält.
+
+
+NOTE: Sie sollten immer nur eine Standard-Storage-Klasse in Ihrem Cluster verwenden. Kubernetes verhindert technisch nicht, dass Sie mehr als eine haben, aber es verhält sich so, als ob es überhaupt keine Standard-Storage-Klasse gibt.
+
+
+
+== Das Backend für eine Storage-Klasse ermitteln
+
+Dies ist ein Beispiel für die Art von Fragen, die Sie mit der JSON beantworten können `tridentctl` Ausgänge für Astra Trident Backend-Objekte. Dazu wird der verwendet `jq` Dienstprogramm, das Sie möglicherweise zuerst installieren müssen.
+
+[listing]
+----
+tridentctl get storageclass -o json | jq  '[.items[] | {storageClass: .Config.name, backends: [.storage]|unique}]'
+----

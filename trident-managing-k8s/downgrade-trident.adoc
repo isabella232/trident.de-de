@@ -1,0 +1,173 @@
+---
+sidebar: sidebar 
+permalink: trident-managing-k8s/downgrade-trident.html 
+keywords: downgrade, astra trident, methods, operator, tridentctl, helm 
+summary: Erfahren Sie mehr über die Schritte beim Downgrade auf eine frühere Version von Astra Trident. 
+---
+= Downgrade Astra Trident
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Erfahren Sie mehr über die Schritte beim Downgrade auf eine frühere Version von Astra Trident.
+
+
+
+== Wenn sie heruntergestuft werden müssen
+
+Sie können aus verschiedenen Gründen ein Downgrade in Betracht ziehen, beispielsweise aus folgenden Gründen:
+
+* Verfügbarkeitsplanung
+* Sofortige Behebung von Fehlern, die als Folge eines Upgrades beobachtet wurden
+* Abhängigkeitsprobleme, nicht erfolgreiche und unvollständige Upgrades
+
+
+Beim Wechsel zu einer Astra Trident-Version mit CRDs sollten Sie ein Downgrade in Betracht ziehen. Astra Trident verwendet CRDs zur Statuswahrung. Daher verfügen alle erstellten Storage-Einheiten (Back-Ends, Storage-Klassen, PV und Volume Snapshots) über zugehörige CRD-Objekte anstatt in die geschriebene Daten `trident` PV (verwendet von der früheren installierten Version von Astra Trident). Neu erstellte PVS, Back-Ends und Storage-Klassen werden als CRD-Objekte verwaltet.
+
+Nur eine Downgrade für eine Version von Astra Trident versuchen, die mit CRDs (19.07 und höher) ausgeführt wird. Dadurch wird sichergestellt, dass die im aktuellen Astra Trident Release ausgeführten Vorgänge nach dem Downgrade sichtbar sind.
+
+
+
+== Wenn Sie nicht herunterstufen
+
+Sie sollten kein Downgrade auf eine Version von Trident durchführen, die verwendet wird `etcd` Zustand beibehalten (19.04 und früher). Alle Operationen, die mit der aktuellen Astra Trident Version ausgeführt werden, werden nach der Herabstufung nicht berücksichtigt. Neu erstellte PVS können nicht verwendet werden, wenn Sie zurück auf eine frühere Version wechseln. Änderungen an Objekten wie Back-Ends, PVS, Storage-Klassen und Volume Snapshots (erstellt/aktualisiert/gelöscht) sind für Astra Trident nicht sichtbar, wenn sie zurück auf eine frühere Version verschoben werden. Wenn Sie zu einer früheren Version zurückkehren, wird der Zugriff auf PVS, die bereits mit der älteren Version erstellt wurden, nicht unterbrochen, es sei denn, sie wurden aktualisiert.
+
+
+
+== Downgrade bei der Installation von Astra Trident mit dem Operator
+
+Bei Installationen, die mit dem Trident Operator abgeschlossen wurden, ist das Downgrade-Verfahren anders und erfordert nicht die Verwendung von `tridentctl`.
+
+Bei Installationen, die mit dem Trident-Operator durchgeführt wurden, kann Astra Trident auf eine der folgenden Werte heruntergestuft werden:
+
+* Eine Version, die mithilfe des Namespace-Scoped-Operators installiert wird (20.07 - 20.10).
+* Eine Version, die mit dem Cluster-Scoped Operator (21.01 und höher) installiert wird.
+
+
+
+
+=== Downgrade auf einen Operator mit Cluster-Umfang
+
+Führen Sie zum Downgrade von Astra Trident auf eine Version mit dem Operator Cluster-Scoped die unten aufgeführten Schritte aus.
+
+.Schritte
+. link:uninstall-trident.html["Deinstallieren Sie Astra Trident"^]. **Die CRDs dürfen nicht gelöscht werden, es sei denn, Sie möchten eine vorhandene Installation vollständig entfernen.**
+. Löschen Sie den Operator Cluster-Scoped. Dazu benötigen Sie das Manifest, das für die Bereitstellung des Operators verwendet wird. Sie können es vom beziehen https://github.com/NetApp/trident/blob/stable/v21.07/deploy/bundle.yaml["Trident GitHub Repo"^]. Vergewissern Sie sich, dass Sie in den erforderlichen Zweig wechseln.
+. Fahren Sie mit der Installation der gewünschten Version von Astra Trident fort. Befolgen Sie die Dokumentation für das gewünschte Release.
+
+
+
+
+=== Downgrade auf Operator mit Namespace-Scoped
+
+In diesem Abschnitt werden die Schritte für die Herabstufung auf eine Astra Trident-Version zusammengefasst, die im Bereich 20.07 bis 20.10 liegt, die über den Operator Namespace-Scoped installiert werden.
+
+.Schritte
+. link:uninstall-trident.html["Deinstallieren Sie Astra Trident"^]. **Die CRDs dürfen nicht gelöscht werden, es sei denn, Sie möchten eine vorhandene Installation vollständig entfernen.** stellen Sie sicher, dass die `tridentorchestrator` Wird gelöscht.
++
+[listing]
+----
+#Check to see if there are any tridentorchestrators present
+kubectl get torc
+NAME        AGE
+trident     20h
+
+#Looks like there is a tridentorchestrator that needs deleting
+kubectl delete torc trident
+tridentorchestrator.trident.netapp.io "trident" deleted
+----
+. Löschen Sie den Operator Cluster-Scoped. Dazu benötigen Sie das Manifest, das für die Bereitstellung des Operators verwendet wird. Sie können es hier von der erhalten https://github.com/NetApp/trident/blob/stable/v21.07/deploy/bundle.yaml["Trident GitHub Repo"^]. Vergewissern Sie sich, dass Sie in den erforderlichen Zweig wechseln.
+. Löschen Sie die `tridentorchestrator` CRD.-
++
+[listing]
+----
+#Check to see if ``tridentorchestrators.trident.netapp.io`` CRD is present and delete it.
+
+kubectl get crd tridentorchestrators.trident.netapp.io
+
+NAME                                     CREATED AT
+tridentorchestrators.trident.netapp.io   2021-01-21T21:11:37Z
+
+kubectl delete crd tridentorchestrators.trident.netapp.io
+
+customresourcedefinition.apiextensions.k8s.io "tridentorchestrators.trident.netapp.io" deleted
+----
++
+Astra Trident wurde deinstalliert.
+
+. Setzen Sie den Downgrade fort, indem Sie die gewünschte Version installieren. Befolgen Sie die Dokumentation für das gewünschte Release.
+
+
+
+
+=== Downgrade mit Helm
+
+Verwenden Sie zum Downgrade den `helm rollback` Befehl. Das folgende Beispiel zeigt:
+
+[listing]
+----
+helm rollback trident [revision #]
+----
+
+
+== Downgrade bei Installation von Astra Trident mit tridentctl
+
+Falls Sie Astra Trident mit installiert haben `tridentctl`, Der Downgrade-Prozess umfasst die folgenden Schritte. In dieser Folge werden Sie durch die Herabstufung von Astra Trident 21.07 auf 20.07 geleitet.
+
+
+NOTE: Bevor Sie mit dem Downgrade beginnen, sollten Sie einen Schnappschuss Ihres Kubernetes-Clusters machen `etcd`. So können Sie den aktuellen Status der CRDs von Astra Trident sichern.
+
+.Schritte
+. Stellen Sie sicher, dass Trident mit installiert wird `tridentctl`. Wenn Sie sich nicht sicher sind, wie Astra Trident installiert ist, führen Sie diesen einfachen Test aus:
++
+.. Listen Sie die im Trident Namespace vorhandenen Pods auf.
+.. Ermitteln Sie die Version des Astra Trident in Ihrem Cluster. Sie können entweder verwenden `tridentctl` Oder werfen Sie einen Blick auf das Image, das in den Trident Pods verwendet wird.
+.. Wenn Sie * nicht sehen* a `tridentOrchestrator`, (Oder) a `tridentprovisioner`, (Oder) ein POD mit dem Namen `trident-operator-xxxxxxxxxx-xxxxx`, Astra Trident *ist installiert* mit `tridentctl`.
+
+
+. Deinstallieren Sie Astra Trident mit den vorhandenen `tridentctl` Binär: In diesem Fall werden Sie mit dem 21.07 Binary deinstallieren.
++
+[listing]
+----
+tridentctl version -n trident
++----------------+----------------+
+| SERVER VERSION | CLIENT VERSION |
++----------------+----------------+
+| 21.07.0        | 21.07.0        |
++----------------+----------------+
+
+tridentctl uninstall -n trident
+INFO Deleted Trident deployment.
+INFO Deleted Trident daemonset.
+INFO Deleted Trident service.
+INFO Deleted Trident secret.
+INFO Deleted cluster role binding.
+INFO Deleted cluster role.
+INFO Deleted service account.
+INFO Deleted pod security policy.                  podSecurityPolicy=tridentpods
+INFO The uninstaller did not delete Trident's namespace in case it is going to be reused.
+INFO Trident uninstallation succeeded.
+----
+. Nachdem diese abgeschlossen ist, holen Sie sich die Trident-Binärdatei für die gewünschte Version (in diesem Beispiel, 20.07), und installieren Sie Astra Trident. Sie können benutzerdefinierte YAML für ein generieren link:../trident-get-started/kubernetes-customize-deploy-tridentctl.html["Benutzerdefinierte Installation"^] Wenn nötig.
++
+[listing]
+----
+cd 20.07/trident-installer/
+./tridentctl install -n trident-ns
+INFO Created installer service account.            serviceaccount=trident-installer
+INFO Created installer cluster role.               clusterrole=trident-installer
+INFO Created installer cluster role binding.       clusterrolebinding=trident-installer
+INFO Created installer configmap.                  configmap=trident-installer
+...
+...
+INFO Deleted installer cluster role binding.
+INFO Deleted installer cluster role.
+INFO Deleted installer service account.
+----
++
+Der Downgrade-Vorgang ist abgeschlossen.
+
+

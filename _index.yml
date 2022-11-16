@@ -1,0 +1,66 @@
+---
+indexpage:
+  lead: Astra Trident ist ein Open-Source-Tool zur Storage-bereitstellung und -Orchestrierung
+    mit Unterstützung von NetApp. Die Software ermöglicht die Erstellung von Storage
+    Volumes für Container-Applikationen, die von Docker und Kubernetes gemanagt werden.
+    **Lesen Sie die Versionshinweise für wichtige Informationen zum Upgrade auf Astra
+    Trident 22.10.**
+  tiles:
+  - title: Wichtige Informationen für Version 22.10
+    links:
+    - title: Versionshinweise
+      url: trident-rn.html
+  - title: Los geht's
+    links:
+    - title: Erfahren Sie mehr über Astra Trident
+      url: "/trident-concepts/intro.html"
+    - title: Versionshinweise
+      url: trident-rn.html
+    - title: Anforderungen
+      url: "/trident-get-started/requirements.html"
+    - title: Probieren Sie es aus
+      url: "/trident-get-started/quickstart.html"
+    - title: Häufig gestellte Fragen
+      url: "/faq.html"
+  - title: Implementieren Sie Astra Trident
+    links:
+    - title: Implementierung mit dem Trident Operator
+      url: "/trident-get-started/kubernetes-deploy-operator.html"
+    - title: Implementierung mit tridentctl
+      url: "/trident-get-started/kubernetes-deploy-tridentctl.html"
+    - title: Implementieren Sie Astra Trident für Docker
+      url: "/trident-docker/deploy-docker.html"
+  - title: Upgrade Astra Trident
+    links:
+    - title: Upgrade mit Trident Operator
+      url: "/trident-managing-k8s/upgrade-operator.html"
+    - title: Upgrade mit tridentctl
+      url: "/trident-managing-k8s/upgrade-tridentctl.html"
+  - title: Nutzen Sie Astra Trident
+    links:
+    - title: Bereiten Sie den Knoten „Worker“ vor
+      url: "/trident-use/worker-node-prep.html"
+    - title: Back-Ends konfigurieren
+      url: "/trident-use/backends.html"
+    - title: Management von Storage-Klassen
+      url: "/trident-use/manage-stor-class.html"
+    - title: Durchführung von Volume-Vorgängen
+      url: "/trident-use/vol-operations.html"
+    - title: Überwachen Sie Astra Trident
+      url: "/trident-use/monitor-trident.html"
+  - title: Demos Tutorials
+    links:
+    - title: Astra Trident-Videos
+      url: https://tv.netapp.com/detail/video/5995831475001/using-trident-with-kubernetes
+  - title: Blogs Community
+    links:
+    - title: Astra-Blogs
+      url: https://cloud.netapp.com/blog/topic/astra
+    - title: Astra Trident Blogs
+      url: https://netapp.io/persistent-storage-provisioner-for-kubernetes/
+    - title: Kubernetes Hub
+      url: https://cloud.netapp.com/kubernetes-hub
+    - title: NetApp.io
+      url: https://netapp.io/
+    - title: Abschnur
+      url: https://discord.gg/NetApp

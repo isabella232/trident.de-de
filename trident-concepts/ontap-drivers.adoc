@@ -1,0 +1,107 @@
+---
+sidebar: sidebar 
+permalink: trident-concepts/ontap-drivers.html 
+keywords: trident backend, AFF, FAS, ONTAP Select, Cloud, Amazon FSx for NetApp ONTAP, drivers, ONTAP drivers 
+summary: Erfahren Sie, wie Sie mit Ihrer Trident Installation ein Element Backend erstellen und verwenden. 
+---
+= ONTAP-Treiber
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Astra Trident bietet fünf einzigartige ONTAP-Storage-Treiber für die Kommunikation mit ONTAP Clustern. Erfahren Sie mehr darüber, wie jeder Treiber die Erstellung von Volumes und Zugriffssteuerung sowie seine Funktionen übernimmt.
+
+
+
+== Erfahren Sie mehr über die ONTAP Storage-Treiber
+
+[cols="5"]
+|===
+| Treiber | Protokoll | VolumeModus | Unterstützte Zugriffsmodi | Unterstützte Filesysteme 
+
+
+| `ontap-nas`  a| 
+NFS
+ a| 
+Dateisystem
+ a| 
+RWO, ROX, RWX
+ a| 
+„“, nfs
+
+
+
+| `ontap-nas-economy`  a| 
+NFS
+ a| 
+Dateisystem
+ a| 
+RWO, ROX, RWX
+ a| 
+„“, nfs
+
+
+
+| `ontap-nas-flexgroup`  a| 
+NFS
+ a| 
+Dateisystem
+ a| 
+RWO, ROX, RWX
+ a| 
+„“, nfs
+
+
+
+| `ontap-san`  a| 
+ISCSI
+ a| 
+Block-Storage
+ a| 
+RWO, ROX, RWX
+ a| 
+Kein Filesystem, rohes Block-Gerät
+
+
+
+| `ontap-san`  a| 
+ISCSI
+ a| 
+Dateisystem
+ a| 
+RWO, ROX
+
+RWX ist im Volume-Modus des Dateisystems nicht verfügbar.
+ a| 
+`xfs`, `ext3`, `ext4`
+
+
+
+| `ontap-san-economy`  a| 
+ISCSI
+ a| 
+Block-Storage
+ a| 
+RWO, ROX, RWX
+ a| 
+Kein Filesystem, rohes Block-Gerät
+
+
+
+| `ontap-san-economy`  a| 
+ISCSI
+ a| 
+Dateisystem
+ a| 
+RWO, ROX
+
+RWX ist im Volume-Modus des Dateisystems nicht verfügbar.
+ a| 
+`xfs`, `ext3`, `ext4`
+
+|===
+
+NOTE: ONTAP-Back-Ends können mit Anmeldeinformationen für eine Sicherheitsrolle (Benutzername/Passwort) oder mit dem privaten Schlüssel und dem Zertifikat, das auf dem ONTAP-Cluster installiert ist, authentifiziert werden. Sie können vorhandene Back-Ends aktualisieren, um mit von einem Authentifizierungsmodus in den anderen zu verschieben `tridentctl update backend`.

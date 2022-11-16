@@ -1,0 +1,102 @@
+---
+sidebar: sidebar 
+permalink: trident-docker/upgrade-uninstall-docker.html 
+keywords: uninstall, astra trident, trident for docker, docker, upgrade trident for docker 
+summary: 'Astra Trident ist ohne Auswirkungen auf die verwendeten Volumes sicher auf Docker aktualisieren zu können. Während des Upgrade-Prozesses gibt es eine kurze Zeit, wo `docker volume` Befehle, die an das Plugin gerichtet werden, werden nicht erfolgreich sein, und Anwendungen werden nicht in der Lage sein, Volumes zu mounten, bis das Plugin wieder ausgeführt wird. Unter den meisten Umständen dauert das nur wenige Sekunden.' 
+---
+= Astra Trident upgraden oder deinstallieren
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Astra Trident ist ohne Auswirkungen auf die verwendeten Volumes sicher auf Docker aktualisieren zu können. Während des Upgrade-Prozesses gibt es eine kurze Zeit, wo `docker volume` Befehle, die an das Plugin gerichtet werden, werden nicht erfolgreich sein, und Anwendungen werden nicht in der Lage sein, Volumes zu mounten, bis das Plugin wieder ausgeführt wird. Unter den meisten Umständen dauert das nur wenige Sekunden.
+
+
+
+== Upgrade
+
+Führen Sie die nachstehenden Schritte zum Upgrade von Astra Trident für Docker durch.
+
+.Schritte
+. Liste der vorhandenen Volumes:
++
+[listing]
+----
+docker volume ls
+DRIVER              VOLUME NAME
+netapp:latest       my_volume
+----
+. Deaktivieren Sie das Plugin:
++
+[listing]
+----
+docker plugin disable -f netapp:latest
+docker plugin ls
+ID                  NAME                DESCRIPTION                          ENABLED
+7067f39a5df5        netapp:latest       nDVP - NetApp Docker Volume Plugin   false
+----
+. Upgrade des Plug-ins:
++
+[listing]
+----
+docker plugin upgrade --skip-remote-check --grant-all-permissions netapp:latest netapp/trident-plugin:21.07
+----
++
+
+NOTE: Die Version 18.01 von Astra Trident ersetzt die nDVP. Sie sollten ein Upgrade direkt von durchführen `netapp/ndvp-plugin` Bild an den `netapp/trident-plugin` Bild:
+
+. Plug-in aktivieren:
++
+[listing]
+----
+docker plugin enable netapp:latest
+----
+. Vergewissern Sie sich, dass das Plug-in aktiviert ist:
++
+[listing]
+----
+docker plugin ls
+ID                  NAME                DESCRIPTION                             ENABLED
+7067f39a5df5        netapp:latest       Trident - NetApp Docker Volume Plugin   true
+----
+. Vergewissern Sie sich, dass die Volumes sichtbar sind:
++
+[listing]
+----
+docker volume ls
+DRIVER              VOLUME NAME
+netapp:latest       my_volume
+----
++
+
+IMPORTANT: Wenn Sie ein Upgrade von einer alten Version von Astra Trident (vor 20.10) auf Astra Trident 20.10 oder höher durchführen, tritt möglicherweise ein Fehler auf. Weitere Informationen finden Sie unter link:known-issues-docker.html["Bekannte Probleme"^]. Wenn der Fehler auftritt, sollten Sie zuerst das Plugin deaktivieren, dann das Plugin entfernen und dann die erforderliche Astra Trident Version installieren, indem Sie einen zusätzlichen Konfigurationsparameter übergeben: `docker plugin install netapp/trident-plugin:20.10 --alias netapp --grant-all-permissions config=config.json`
+
+
+
+
+
+== Deinstallieren
+
+Führen Sie die folgenden Schritte aus, um Astra Trident für Docker zu deinstallieren.
+
+.Schritte
+. Entfernen Sie alle Volumes, die das Plugin erstellt.
+. Deaktivieren Sie das Plugin:
++
+[listing]
+----
+docker plugin disable netapp:latest
+docker plugin ls
+ID                  NAME                DESCRIPTION                          ENABLED
+7067f39a5df5        netapp:latest       nDVP - NetApp Docker Volume Plugin   false
+----
+. Entfernen Sie das Plugin:
++
+[listing]
+----
+docker plugin rm netapp:latest
+----
+

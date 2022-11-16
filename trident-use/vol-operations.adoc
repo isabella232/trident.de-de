@@ -1,0 +1,20 @@
+---
+sidebar: sidebar 
+permalink: trident-use/vol-operations.html 
+keywords: snapshots, volumes, csi topology, storage classes, pv, pvc, persistent volumes, persistent volume claims, backends, expand volumes, import volumes 
+summary: Astra Trident bietet verschiedene Funktionen zum Management Ihrer Volumes. Erfahren Sie mehr über die Funktionen, die Astra Trident für Volumes bietet. 
+---
+= Durchführung von Volume-Vorgängen
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Erfahren Sie mehr über die Funktionen von Astra Trident zum Management Ihrer Volumes.
+
+* link:csi-topology.html["Verwenden Sie die CSI-Topologie"^]
+* link:vol-snapshots.html["Arbeiten Sie mit Snapshots"^]
+* link:vol-expansion.html["Erweitern Sie Volumes"^]
+* link:vol-import.html["Volumes importieren"^]
+

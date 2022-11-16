@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: trident-use/ontap-san.html 
+keywords: trident backend, ontap san, ontap-san, ontap-san-economy, fsx 
+summary: Erfahren Sie mehr über die Konfiguration eines ONTAP-Backends mit ONTAP-SAN-Treibern. 
+---
+= Konfigurieren Sie ein Backend mit ONTAP-SAN-Treibern
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Erfahren Sie mehr über die Konfiguration eines ONTAP Backend mit ONTAP- und Cloud Volumes ONTAP-SAN-Treibern.
+
+* link:ontap-san-prep.html["Vorbereitung"^]
+* link:ontap-san-examples.html["Konfiguration und Beispiele"^]
+
+
+
+
+== Benutzerberechtigungen
+
+Astra Trident erwartet, dass er entweder als ONTAP- oder SVM-Administrator ausgeführt wird, in der Regel mit dem `admin` Cluster-Benutzer oder ein `vsadmin` SVM-Benutzer oder ein Benutzer mit einem anderen Namen und derselben Rolle. Astra Trident erwartet, dass bei Amazon FSX für Implementierungen von NetApp ONTAP, über das Cluster entweder als ONTAP- oder SVM-Administrator ausgeführt wird `fsxadmin` Benutzer oder A `vsadmin` SVM-Benutzer oder ein Benutzer mit einem anderen Namen und derselben Rolle. Der `fsxadmin` Der Benutzer ist ein eingeschränkter Ersatz für den Cluster-Admin-Benutzer.
+
+
+NOTE: Wenn Sie den verwenden `limitAggregateUsage` Parameter, Berechtigungen für Cluster-Admin sind erforderlich. Bei der Verwendung von Amazon FSX für NetApp ONTAP mit Astra Trident, das `limitAggregateUsage` Der Parameter funktioniert nicht mit dem `vsadmin` Und `fsxadmin` Benutzerkonten. Der Konfigurationsvorgang schlägt fehl, wenn Sie diesen Parameter angeben.
+
+Obwohl es möglich ist, eine restriktivere Rolle innerhalb ONTAP, dass ein Trident-Treiber verwenden kann, wir nicht empfehlen es. Bei den meisten neuen Versionen von Trident sind zusätzliche APIs erforderlich, die berücksichtigt werden müssten, was Upgrades schwierig und fehleranfällig macht.

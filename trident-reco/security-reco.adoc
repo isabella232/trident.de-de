@@ -1,0 +1,154 @@
+---
+sidebar: sidebar 
+permalink: trident-reco/security-reco.html 
+keywords: security, chap, trident, namespace, nve, nae, encryption, volume encryption, aggregate encryption, luks, linux unified key setup, encryption 
+summary: Stellen Sie mit den hier aufgeführten Empfehlungen sicher, dass Ihre Astra Trident Installation sicher ist. 
+---
+= Sicherheit
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Stellen Sie mit den hier aufgeführten Empfehlungen sicher, dass Ihre Astra Trident Installation sicher ist.
+
+
+
+== Führen Sie Astra Trident in einem eigenen Namespace aus
+
+Es ist wichtig, dass Applikationen, Applikationsadministratoren, Benutzer und Managementapplikationen auf die Objektdefinitionen von Astra Trident oder die Pods zugreifen können, um zuverlässigen Storage sicherzustellen und potenzielle schädliche Aktivitäten zu blockieren.
+
+Zur Trennung der anderen Applikationen und Benutzer von Astra Trident muss immer Astra Trident in einem eigenen Kubernetes Namespace installiert werden (`trident`). Wenn Astra Trident in einem eigenen Namespace bereitgestellt wird, wird sichergestellt, dass nur die Administratoren von Kubernetes auf den Astra Trident Pod und die Artefakte (z. B. Backend und CHAP-Schlüssel, falls zutreffend) zugreifen können, die in den namenweisen CRD-Objekten gespeichert sind. Sie sollten sicherstellen, dass nur Administratoren Zugriff auf den Astra Trident Namespace und damit auf das haben `tridentctl` Applikation.
+
+
+
+== Verwenden Sie CHAP-Authentifizierung mit ONTAP SAN Back-Ends
+
+Astra Trident unterstützt die CHAP-basierte Authentifizierung für ONTAP-SAN-Workloads (mithilfe von `ontap-san` Und `ontap-san-economy` Treiber). NetApp empfiehlt die Verwendung von bidirektionalem CHAP mit Astra Trident zur Authentifizierung zwischen einem Host und dem Storage-Backend.
+
+Bei ONTAP-Back-Ends, die die SAN-Storage-Treiber verwenden, kann Astra Trident bidirektionales CHAP einrichten und CHAP-Benutzernamen und -Schlüssel über managen `tridentctl`. Siehe link:../trident-use/ontap-san-prep.html["Hier"] Um zu erfahren, wie Astra Trident CHAP auf ONTAP Back-Ends konfiguriert.
+
+
+NOTE: CHAP-Unterstützung für ONTAP-Back-Ends ist mit Trident 20.04 und höher verfügbar.
+
+
+
+== Verwenden Sie CHAP-Authentifizierung mit NetApp HCI und SolidFire Back-Ends
+
+NetApp empfiehlt die Implementierung von bidirektionalem CHAP, um die Authentifizierung zwischen einem Host und den NetApp HCI und SolidFire Back-Ends zu gewährleisten. Astra Trident verwendet ein geheimes Objekt mit zwei CHAP-Passwörtern pro Mandant. Wenn Trident als CSI-bereitstellung installiert wird, verwaltet es die CHAP-Geheimnisse und speichert sie in einem `tridentvolume` CR-Objekt für das jeweilige PV. Beim Erstellen eines PV verwendet CSI Astra Trident die CHAP-Schlüssel, um eine iSCSI-Sitzung zu initiieren und über CHAP mit dem NetApp HCI- und SolidFire-System zu kommunizieren.
+
+
+NOTE: Die von CSI Trident erstellten Volumes werden keiner Volume Access Group zugeordnet.
+
+Im nicht-CSI-Frontend wird die Anbindung von Volumes als Geräte auf den Worker-Nodes durch Kubernetes übernommen. Nach der Volume-Erstellung ruft Astra Trident die API zum NetApp HCI/SolidFire System auf, um die Geheimnisse zu rufen, falls das Geheimnis für diesen Mandanten nicht bereits vorhanden ist. Astra Trident leitet die Geheimnisse an Kubernetes weiter. Das Kubelet, das sich auf jedem Node befindet, greift über die Kubernetes API auf die Geheimnisse zu und verwendet sie zum Ausführen/Aktivieren von CHAP zwischen jedem Node, der auf das Volume zugreift, und dem NetApp HCI/SolidFire System, in dem sich die Volumes befinden.
+
+
+
+== Nutzen Sie Astra Trident mit NVE und NAE
+
+NetApp ONTAP bietet Verschlüsselung ruhender Daten zum Schutz sensibler Daten, wenn eine Festplatte gestohlen, zurückgegeben oder einer neuen Verwendung zugewiesen wird. Weitere Informationen finden Sie unter link:https://docs.netapp.com/us-en/ontap/encryption-at-rest/configure-netapp-volume-encryption-concept.html["NetApp Volume Encryption Übersicht konfigurieren"^].
+
+* Wenn NAE auf dem Backend aktiviert ist, wird jedes im Astra Trident bereitgestellte Volume NAE-aktiviert.
+* Wenn NAE im Backend nicht aktiviert ist, wird jedes in Astra Trident bereitgestellte Volume mit NVE aktiviert, es sei denn, Sie setzen das NVE-Verschlüsselungsflag auf `false` Bei der Back-End-Konfiguration:
+
+
+[NOTE]
+====
+Volumes, die in Astra Trident auf einem NAE-fähigen Back-End erstellt werden, müssen NVE oder NAE-verschlüsselt sein.
+
+* Sie können das NVE-Verschlüsselungsflag auf einstellen `true` In der Trident-Back-End-Konfiguration können Sie die NAE-Verschlüsselung außer Kraft setzen und für jedes Volume einen bestimmten Verschlüsselungsschlüssel verwenden.
+* Setzen des NVE-Verschlüsselungsfahne auf `false` Auf einem NAE-fähigen Back-End wird ein NAE-fähiges Volume erstellt. Sie können die NAE-Verschlüsselung nicht deaktivieren, indem Sie das NVE-Verschlüsselungsfahne auf setzen `false`.
+
+
+====
+* Sie können in Astra Trident manuell ein NVE-Volume erstellen, indem Sie explizit das NVE-Verschlüsselungsflag auf festlegen `true`.
+
+
+Weitere Informationen zu Back-End-Konfigurationsoptionen finden Sie unter:
+
+* link:../trident-use/ontap-san-examples.html["ONTAP SAN-Konfigurationsoptionen"]
+* link:../trident-use/ontap-nas-examples.html["NAS-Konfigurationsoptionen von ONTAP"]
+
+
+
+
+== Aktivierung der Verschlüsselung auf Host-Seite pro Volume unter Verwendung von Linux Unified Key Setup (LUKS)
+
+Sie können Linux Unified Key Setup (LUKS) aktivieren, um ONTAP SAN und ONTAP SAN ECONOMY Volumes auf Astra Trident zu verschlüsseln. In Astra Trident verwenden LUKS-verschlüsselte Volumen den aes-xts-plain64 Zypher und den Modus, wie von empfohlen link:https://csrc.nist.gov/publications/detail/sp/800-38e/final["NIST"^].
+
+Weitere Informationen zu den Back-End-Konfigurationsoptionen für ONTAP SAN finden Sie unter link:../trident-use/ontap-san-examples.html["ONTAP SAN-Konfigurationsoptionen"]
+
+.Bevor Sie beginnen
+* Worker Nodes müssen cryptsetup 2.1 oder höher installiert sein. Weitere Informationen finden Sie unter link:https://gitlab.com/cryptsetup/cryptsetup["Gitlab: Cryptsetup"^].
+* Aus Performance-Gründen wird empfohlen, dass Arbeiterknoten Advanced Encryption Standard New Instructions (AES-NI) unterstützen. Führen Sie den folgenden Befehl aus, um die Unterstützung von AES-NI zu überprüfen:
++
+[listing]
+----
+grep "aes" /proc/cpuinfo
+----
++
+Wenn nichts zurückgegeben wird, unterstützt Ihr Prozessor nicht AES-NI. Weitere Informationen zu AES-NI finden Sie unter: link:https://www.intel.com/content/www/us/en/developer/articles/technical/advanced-encryption-standard-instructions-aes-ni.html["Intel: Advanced Encryption Standard Instructions (AES-NI)"^].
+
+
+
+.Schritte
+. Definieren Sie LUKS-Verschlüsselungsattribute in der Backend-Konfiguration.
++
+[listing]
+----
+"storage": [
+    {
+        "labels":{"luks": "true"},
+        "zone":"us_east_1a",
+        "defaults": {
+            "luksEncryption": "true"
+        }
+    },
+    {
+        "labels":{"luks": "false"},
+        "zone":"us_east_1a",
+        "defaults": {
+            "luksEncryption": "false"
+        }
+    },
+]
+----
+. Nutzung `parameters.selector` So definieren Sie die Speicherpools mit LUKS-Verschlüsselung. Beispiel:
++
+[listing]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: luks
+provisioner: netapp.io/trident
+parameters:
+  selector: "luks=true"
+  csi.storage.k8s.io/node-stage-secret-name: luks-${pvc.name}
+  csi.storage.k8s.io/node-stage-secret-namespace: ${pvc.namespace}
+----
+. Erstellen Sie ein Geheimnis, das die LUKS-Passphrase enthält. Beispiel:
++
+[listing]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  name: luks-pvc1
+stringData:
+  luks-passphrase-name: B
+  luks-passphrase: secretB
+  previous-luks-passphrase-name: A
+  previous-luks-passphrase: secretA
+----
+
+
+
+
+=== Einschränkungen
+
+* LUKS verschlüsselte Volumes können nicht von der ONTAP Deduplizierung und Komprimierung profitieren.
+* DIE Drehung DER LUKS-Passphrase wird derzeit nicht unterstützt. Um Passphrases zu ändern, kopieren Sie die Daten manuell von einem PVC zum anderen.
+

@@ -1,0 +1,265 @@
+---
+sidebar: sidebar 
+permalink: trident-docker/deploy-docker.html 
+keywords: deploy, astra trident, trident for docker, docker 
+summary: Astra Trident for Docker bietet eine direkte Integration in das Docker Ecosystem für die Storage-Plattformen von NetApp. Die Plattform unterstützt auch das Provisioning und Management von Storage-Ressourcen – von der Storage-Plattform bis hin zu Docker Hosts – mit einem Framework für zukünftige zusätzliche Plattformen. 
+---
+= Implementieren Sie Astra Trident
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Astra Trident for Docker bietet eine direkte Integration in das Docker Ecosystem für die Storage-Plattformen von NetApp. Die Plattform unterstützt auch das Provisioning und Management von Storage-Ressourcen – von der Storage-Plattform bis hin zu Docker Hosts – mit einem Framework für zukünftige zusätzliche Plattformen.
+
+Mehrere Instanzen von Astra Trident können gleichzeitig auf demselben Host ausgeführt werden. Dies ermöglicht simultane Verbindungen zu mehreren Storage-Systemen und Storage-Typen und kann den für die Docker Volumes verwendeten Storage angepasst werden.
+
+Siehe link:prereqs-docker.html["Voraussetzungen für die Bereitstellung"]. Wenn Sie die Voraussetzungen erfüllt haben, können Sie Astra Trident implementieren.
+
+
+
+== Docker Managed Plug-in-Methode (Version 1.13/17.03 und höher)
+
+.Bevor Sie beginnen
+
+NOTE: Wenn Sie Astra Trident vor Docker 1.13/17.03 in der herkömmlichen Daemon-Methode verwendet haben, stellen Sie sicher, dass Sie den Astra Trident-Prozess beenden und Ihren Docker-Daemon neu starten, bevor Sie die Managed Plug-in-Methode verwenden.
+
+. Beenden Sie alle laufenden Instanzen:
++
+[listing]
+----
+pkill /usr/local/bin/netappdvp
+pkill /usr/local/bin/trident
+----
+. Docker Neu Starten.
++
+[listing]
+----
+systemctl restart docker
+----
+. Vergewissern Sie sich, dass Docker Engine 17.03 (neu 1.13) oder höher installiert ist.
++
+[listing]
+----
+docker --version
+----
++
+Wenn Ihre Version veraltet ist, https://docs.docker.com/engine/install/["Installieren oder aktualisieren Sie Ihre Installation"^].
+
+
+
+.Schritte
+. Erstellen Sie eine Konfigurationsdatei und geben Sie die Optionen wie folgt an:
++
+**  `config`: Der Standarddateiname ist `config.json`, Sie können jedoch einen beliebigen Namen verwenden, den Sie wählen, indem Sie die angeben `config` Option mit dem Dateinamen. Die Konfigurationsdatei muss im enthalten sein `/etc/netappdvp` Verzeichnis auf dem Hostsystem.
+** `log-level`: Geben Sie die Protokollierungsebene an (`debug`, `info`, `warn`, `error`, `fatal`). Die Standardeinstellung lautet `info`.
+** `debug`: Geben Sie an, ob Debug-Protokollierung aktiviert ist. Die Standardeinstellung lautet false. Überschreibt die Protokollebene, wenn wahr.
++
+... Speicherort für die Konfigurationsdatei erstellen:
++
+[listing]
+----
+sudo mkdir -p /etc/netappdvp
+----
+... Konfigurationsdatei erstellen:
++
+[listing]
+----
+cat << EOF > /etc/netappdvp/config.json
+{
+    "version": 1,
+    "storageDriverName": "ontap-nas",
+    "managementLIF": "10.0.0.1",
+    "dataLIF": "10.0.0.2",
+    "svm": "svm_nfs",
+    "username": "vsadmin",
+    "password": "secret",
+    "aggregate": "aggr1"
+}
+EOF
+----
+
+
+
+
+. Starten Sie Astra Trident mit dem Managed Plug-in-System. Austausch `<version>` Mit der Plugin-Version (xxx.xx.x) verwenden Sie.
++
+[listing]
+----
+docker plugin install --grant-all-permissions --alias netapp netapp/trident-plugin:<version> config=myConfigFile.json
+----
+. Beginnen Sie mit Astra Trident, um Storage aus dem konfigurierten System zu nutzen.
++
+.. Erstellen Sie ein Volume mit dem Namen „FirstVolume“:
++
+[listing]
+----
+docker volume create -d netapp --name firstVolume
+----
+.. Erstellen Sie ein Standardvolume beim Starten des Containers:
++
+[listing]
+----
+docker run --rm -it --volume-driver netapp --volume secondVolume:/my_vol alpine ash
+----
+.. Entfernen Sie den Datenträger „FirstVolume“:
++
+[listing]
+----
+docker volume rm firstVolume
+----
+
+
+
+
+
+
+== Herkömmliche Methode (Version 1.12 oder früher)
+
+.Bevor Sie beginnen
+. Stellen Sie sicher, dass Sie Docker Version 1.10 oder höher haben.
++
+[listing]
+----
+docker --version
+----
++
+Wenn Ihre Version veraltet ist, aktualisieren Sie Ihre Installation.
+
++
+[listing]
+----
+curl -fsSL https://get.docker.com/ | sh
+----
++
+Oder https://docs.docker.com/engine/install/["Befolgen Sie die Anweisungen für Ihre Distribution"^].
+
+. Stellen Sie sicher, dass NFS und/oder iSCSI für Ihr System konfiguriert ist.
+
+
+.Schritte
+. NetApp Docker Volume Plug-in installieren und konfigurieren:
++
+.. Laden Sie die Anwendung herunter und entpacken Sie sie:
++
+[listing]
+----
+wget https://github.com/NetApp/trident/releases/download/v22.10.0/trident-installer-22.10.0.tar.gz
+tar zxf trident-installer-22.10.0.tar.gz
+----
+.. Verschieben Sie zu einer Position im bin-Pfad:
++
+[listing]
+----
+sudo mv trident-installer/extras/bin/trident /usr/local/bin/
+sudo chown root:root /usr/local/bin/trident
+sudo chmod 755 /usr/local/bin/trident
+----
+.. Speicherort für die Konfigurationsdatei erstellen:
++
+[listing]
+----
+sudo mkdir -p /etc/netappdvp
+----
+.. Konfigurationsdatei erstellen:
++
+[listing]
+----
+cat << EOF > /etc/netappdvp/ontap-nas.json
+{
+    "version": 1,
+    "storageDriverName": "ontap-nas",
+    "managementLIF": "10.0.0.1",
+    "dataLIF": "10.0.0.2",
+    "svm": "svm_nfs",
+    "username": "vsadmin",
+    "password": "secret",
+    "aggregate": "aggr1"
+}
+EOF
+----
+
+
+. Nachdem Sie die Binärdatei bzw. die Konfigurationsdateien erstellt haben, starten Sie den Trident-Daemon mit der gewünschten Konfigurationsdatei.
++
+[listing]
+----
+sudo trident --config=/etc/netappdvp/ontap-nas.json
+----
++
+
+NOTE: Sofern nicht angegeben, ist der Standardname für den Volume-Treiber „netapp“.
+
++
+Nachdem der Daemon gestartet wurde, können Sie Volumes mithilfe der Docker CLI-Schnittstelle erstellen und verwalten
+
+. Volume erstellen:
++
+[listing]
+----
+docker volume create -d netapp --name trident_1
+----
+. Bereitstellung eines Docker Volumes beim Starten eines Containers:
++
+[listing]
+----
+docker run --rm -it --volume-driver netapp --volume trident_2:/my_vol alpine ash
+----
+. Entfernen eines Docker Volumes:
++
+[listing]
+----
+docker volume rm trident_1
+docker volume rm trident_2
+----
+
+
+
+
+== Starten Sie Astra Trident beim Systemstart
+
+Eine Beispieldatei für systembasierte Systeme finden Sie unter `contrib/trident.service.example` Im Git Repo. Gehen Sie wie folgt vor, um die Datei mit CentOS 7/RHEL zu verwenden:
+
+. Kopieren Sie die Datei an den richtigen Speicherort.
++
+Sie sollten eindeutige Namen für die Einheitendateien verwenden, wenn mehr als eine Instanz ausgeführt wird.
+
++
+[listing]
+----
+cp contrib/trident.service.example /usr/lib/systemd/system/trident.service
+----
+. Bearbeiten Sie die Datei, ändern Sie die Beschreibung (Zeile 2) entsprechend dem Treibernamen und dem Konfigurationspfad (Zeile 9), um Ihre Umgebung zu berücksichtigen.
+. Systemd neu laden, damit sie Änderungen aufnehmen kann:
++
+[listing]
+----
+systemctl daemon-reload
+----
+. Aktivieren Sie den Service.
++
+Dieser Name variiert je nach Namen der Datei in `/usr/lib/systemd/system` Verzeichnis.
+
++
+[listing]
+----
+systemctl enable trident
+----
+. Starten Sie den Service.
++
+[listing]
+----
+systemctl start trident
+----
+. Den -Status anzeigen.
++
+[listing]
+----
+systemctl status trident
+----
+
+
+
+NOTE: Wenn Sie die Einheitendatei ändern, führen Sie den aus `systemctl daemon-reload` Befehl, damit sie die Änderungen kennt.

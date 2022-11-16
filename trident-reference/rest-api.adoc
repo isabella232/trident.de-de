@@ -1,0 +1,58 @@
+---
+sidebar: sidebar 
+permalink: trident-reference/rest-api.html 
+keywords: rest api, get, post, json, object, backends 
+summary: Sie können den REST-Endpunkt direkt verwenden, wenn Sie mit der REST-API von Astra Trident interagieren möchten. 
+---
+= Astra Trident REST-API
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Während link:tridentctl.html["Tridentctl-Befehle und -Optionen"] Die einfachste Möglichkeit, mit der Astra Trident REST-API zu interagieren, können Sie den REST-Endpunkt direkt verwenden, wenn Sie es bevorzugen.
+
+
+
+== Wann die REST-API verwendet werden soll
+
+REST-API ist nützlich für erweiterte Installationen, in denen Astra Trident als eigenständige Binärdatei in Implementierungen ohne Kubernetes genutzt wird.
+
+Für höhere Sicherheit bietet der Astra Trident an `REST API` Ist standardmäßig auf localhost beschränkt, wenn in einem Pod ausgeführt wird. Um dieses Verhalten zu ändern, müssen Sie Astra Trident's einstellen `-address` Argument in seiner Pod-Konfiguration.
+
+
+
+== REST-API wird verwendet
+
+Die API funktioniert wie folgt:
+
+
+
+=== GET
+
+* `GET <trident-address>/trident/v1/<object-type>`: Listet alle Objekte dieses Typs auf.
+* `GET <trident-address>/trident/v1/<object-type>/<object-name>`: Erhält die Details des genannten Objekts.
+
+
+
+
+=== POST
+
+`POST <trident-address>/trident/v1/<object-type>`: Erzeugt ein Objekt des angegebenen Typs.
+
+* Eine JSON-Konfiguration für das zu erstellenden Objekt erforderlich. Informationen zu den einzelnen Objekttypen finden Sie unter Link:tridentctl.html[`tridentctl` Befehle und Optionen].
+* Falls das Objekt bereits vorhanden ist, variiert das Verhalten: Back-Ends aktualisiert das vorhandene Objekt, während alle anderen Objekttypen den Vorgang nicht ausführen.
+
+
+
+
+=== Löschen
+
+`DELETE <trident-address>/trident/v1/<object-type>/<object-name>`: Löscht die benannte Ressource.
+
+
+NOTE: Es existieren weiterhin Volumes, die mit Back-Ends oder Storage-Klassen verbunden sind. Diese müssen separat gelöscht werden. Weitere Informationen finden Sie unter Link:tridentctl.html[`tridentctl` Befehle und Optionen].
+
+Für Beispiele, wie diese APIs aufgerufen werden, geben Sie das Debug (`-d`) Flagge. Weitere Informationen finden Sie unter Link:tridentctl.html[`tridentctl` Befehle und Optionen].

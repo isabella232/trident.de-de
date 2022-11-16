@@ -1,0 +1,23 @@
+---
+section: trident-docker
+title: Astra Trident für Docker
+entries:
+- title: Voraussetzungen für die Bereitstellung
+  url: "/trident-docker/prereqs-docker.html"
+- title: Implementieren Sie Astra Trident
+  url: "/trident-docker/deploy-docker.html"
+- title: Aktualisieren oder deinstallieren Sie Trident
+  url: "/trident-docker/upgrade-uninstall-docker.html"
+- title: Arbeiten mit Volumes
+  url: "/trident-docker/volumes-docker.html"
+  entries:
+  - title: Treiberspezifische Volume-Optionen
+    url: "/trident-docker/volume-driver-options.html"
+- title: Sammelt Protokolle
+  url: "/trident-docker/collect-logs-docker.html"
+- title: Management mehrerer Astra Trident Instanzen
+  url: "/trident-docker/multiple-instances-docker.html"
+- title: Optionen für die Storage-Konfiguration
+  url: "/trident-docker/stor-config.html"
+- title: Bekannte Probleme
+  url: "/trident-docker/known-issues-docker.html"
