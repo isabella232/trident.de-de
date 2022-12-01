@@ -38,7 +38,12 @@ Verwendung einer Konfiguration ohne Multipathing oder Verwendung von `find_multi
 Es gibt zwei Möglichkeiten zur Implementierung des Trident Operators:
 
 * Verwendung von Trident link:https://artifacthub.io/packages/helm/netapp-trident/trident-operator["Steuerruderdiagramm"^]: Das Helm Chart implementiert den Trident-Operator und installiert Trident in einem Schritt.
-* Manuell: Trident bietet ein link:https://github.com/NetApp/trident/blob/master/deploy/bundle.yaml["Bundle.yaml"^] Datei, mit der der Operator installiert und zugehörige Objekte erstellt werden können.
+* Manuell: Trident stellt eine Datei zur Verfügung, mit der der Operator installiert und zugehörige Objekte erstellt werden können.
++
+** Verwenden Sie für Cluster mit Kubernetes 1.24 oder älter link:https://github.com/NetApp/trident/tree/stable/v22.10/deploy/bundle_pre_1_25.yaml["Bundle_pre_1_25.yaml"^].
+** Verwenden Sie für Cluster mit Kubernetes 1.25 oder höher link:https://github.com/NetApp/trident/tree/stable/v22.10/deploy/bundle_post_1_25.yaml["Bundle_Post_1_25.yaml"^].
+
+
 
 
 

@@ -148,6 +148,7 @@ NOTE: Bei allen Volumes, die auf einem ANF-Backend erstellt wurden, kopiert Astr
 == Beispielkonfigurationen
 
 .Beispiel 1: Minimale Konfiguration
+[%collapsible%open]
 ====
 Dies ist die absolute minimale Backend-Konfiguration. Mit dieser Konfiguration erkennt Astra Trident alle Ihre NetApp Konten, Kapazitäts-Pools und Subnetze, die an ANF am konfigurierten Speicherort delegiert wurden, und setzt zufällig neue Volumes auf einen dieser Pools und Subnetze. Weil `nasType` Wird weggelassen, das `nfs` Standard gilt und das Backend wird für NFS-Volumes bereitgestellt.
 
@@ -167,6 +168,7 @@ Diese Konfiguration eignet sich ideal, wenn Sie gerade mit ANF beginnen und die 
 ----
 ====
 .Beispiel 2: Spezifische Service Level-Konfiguration mit Kapazitätspool-Filtern
+[%collapsible%open]
 ====
 Bei dieser Back-End-Konfiguration werden Volumes in Azure platziert `eastus` Standort in einem `Ultra` Kapazitäts-Pool: Astra Trident erkennt automatisch alle an ANF delegierten Subnetze und legt ein neues Volume zufällig auf einen davon ab.
 
@@ -189,6 +191,7 @@ Bei dieser Back-End-Konfiguration werden Volumes in Azure platziert `eastus` Sta
 ----
 ====
 .Beispiel 3: Erweiterte Konfiguration
+[%collapsible%open]
 ====
 Diese Back-End-Konfiguration reduziert den Umfang der Volume-Platzierung auf ein einzelnes Subnetz und ändert auch einige Standardwerte für die Volume-Bereitstellung.
 
@@ -222,6 +225,7 @@ Diese Back-End-Konfiguration reduziert den Umfang der Volume-Platzierung auf ein
 ----
 ====
 .Beispiel 4: Konfiguration des virtuellen Speicherpools
+[%collapsible%open]
 ====
 Diese Back-End-Konfiguration definiert mehrere Storage-Pools in einer einzelnen Datei. Dies ist nützlich, wenn Sie über mehrere Kapazitäts-Pools verfügen, die unterschiedliche Service-Level unterstützen, und Sie Storage-Klassen in Kubernetes erstellen möchten, die diese unterstützen.
 
@@ -318,6 +322,7 @@ allowVolumeExpansion: true
 Wird Verwendet `nasType`, `node-stage-secret-name`, und  `node-stage-secret-namespace`, Sie können ein SMB-Volume angeben und die erforderlichen Active Directory-Anmeldeinformationen angeben.
 
 .Beispiel 1: Grundlegende Konfiguration im Standard-Namespace
+[%collapsible%open]
 ====
 [listing]
 ----
@@ -335,6 +340,7 @@ parameters:
 ----
 ====
 .Beispiel 2: Unterschiedliche Geheimnisse pro Namespace verwenden
+[%collapsible%open]
 ====
 [listing]
 ----
@@ -351,6 +357,7 @@ parameters:
 ----
 ====
 .Beispiel 3: Verschiedene Geheimnisse pro Volumen
+[%collapsible%open]
 ====
 [listing]
 ----

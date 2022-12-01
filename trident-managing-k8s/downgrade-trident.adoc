@@ -54,8 +54,8 @@ Bei Installationen, die mit dem Trident-Operator durchgeführt wurden, kann Astr
 Führen Sie zum Downgrade von Astra Trident auf eine Version mit dem Operator Cluster-Scoped die unten aufgeführten Schritte aus.
 
 .Schritte
-. link:uninstall-trident.html["Deinstallieren Sie Astra Trident"^]. **Die CRDs dürfen nicht gelöscht werden, es sei denn, Sie möchten eine vorhandene Installation vollständig entfernen.**
-. Löschen Sie den Operator Cluster-Scoped. Dazu benötigen Sie das Manifest, das für die Bereitstellung des Operators verwendet wird. Sie können es vom beziehen https://github.com/NetApp/trident/blob/stable/v21.07/deploy/bundle.yaml["Trident GitHub Repo"^]. Vergewissern Sie sich, dass Sie in den erforderlichen Zweig wechseln.
+. link:uninstall-trident.html["Deinstallieren Sie Astra Trident"^]. **Löschen Sie die CRDs nicht, es sei denn, Sie möchten eine vorhandene Installation vollständig entfernen.**
+. Der Trident-Operator kann mithilfe des Operator-Manifests gelöscht werden, das mit Ihrer Trident-Version verknüpft ist. Beispiel: `\https://github.com/NetApp/trident/tree/stable/_vXX.XX_/deploy/_bundle.yaml_` Wo `_vXX.XX_` Ist die Versionsnummer (zum Beispiel `v22.10`) Und `_bundle.yaml_` Ist der Name der Paket-YAML-Datei.
 . Fahren Sie mit der Installation der gewünschten Version von Astra Trident fort. Befolgen Sie die Dokumentation für das gewünschte Release.
 
 
@@ -79,7 +79,7 @@ trident     20h
 kubectl delete torc trident
 tridentorchestrator.trident.netapp.io "trident" deleted
 ----
-. Löschen Sie den Operator Cluster-Scoped. Dazu benötigen Sie das Manifest, das für die Bereitstellung des Operators verwendet wird. Sie können es hier von der erhalten https://github.com/NetApp/trident/blob/stable/v21.07/deploy/bundle.yaml["Trident GitHub Repo"^]. Vergewissern Sie sich, dass Sie in den erforderlichen Zweig wechseln.
+. Der Trident-Operator kann mithilfe des Operator-Manifests gelöscht werden, das mit Ihrer Trident-Version verknüpft ist. Beispiel: `\https://github.com/NetApp/trident/tree/stable/_vXX.XX_/deploy/_bundle.yaml_` Wo `_vXX.XX_` Ist die Versionsnummer (zum Beispiel `v22.10`) Und `_bundle.yaml_` Ist der Name der Paket-YAML-Datei.
 . Löschen Sie die `tridentorchestrator` CRD.-
 +
 [listing]

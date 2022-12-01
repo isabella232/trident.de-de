@@ -31,25 +31,37 @@ WARNING: Wenn Sie das Upgrade von Trident mithilfe des Betreibers für OpenShift
 
 == Upgrade einer Cluster-Scoped Operator-Installation
 
-Für ein Upgrade von *Trident 21.01 und höher*, hier sind die Schritte zu folgen.
+Führen Sie die folgenden Schritte aus, um ein Upgrade von *Trident 21.01 und höher* durchzuführen.
 
 .Schritte
 . Löschen Sie den Trident-Operator, der zur Installation der aktuellen Astra Trident-Instanz verwendet wurde. Wenn Sie beispielsweise ein Upgrade von 21.01 durchführen, führen Sie den folgenden Befehl aus:
 +
 [listing]
 ----
-kubectl delete -f 22.01/trident-installer/deploy/bundle.yaml -n trident
+kubectl delete -f 22.01/trident-installer/deploy/BUNDLE.YAML -n trident
 ----
-. (Optional) Wenn Sie die Installationsparameter ändern möchten, bearbeiten Sie das `TridentOrchestrator` Objekt, das Sie beim Installieren von Trident erstellt haben. Dies kann Änderungen umfassen, z. B. das Ändern des benutzerdefinierten Trident Images, die private Image-Registrierung zum Ziehen von Container-Images, das Aktivieren von Debug-Protokollen oder die Angabe von Pull-Secrets für Images.
-. Installieren Sie Astra Trident mit dem `bundle.yaml` Datei, die den Trident-Operator für die neue Version eingerichtet hat. Führen Sie den folgenden Befehl aus:
+. Optional können Sie den bearbeiten `TridentOrchestrator` Objekt, das Sie beim Installieren von Trident erstellt haben, um die Installationsparameter zu ändern. Dies kann Änderungen umfassen, z. B. das Ändern des benutzerdefinierten Trident-Images, die private Image-Registrierung zum Übertragen von Container-Images, das Aktivieren von Debug-Protokollen oder die Angabe von Pull-Secrets für Bilder.
+. Installieren Sie Astra Trident mit der richtigen Paket-YAML-Datei für Ihre Umgebung und Astra Trident-Version von `\https://github.com/NetApp/trident/tree/stable/_vXX.XX_/deploy/_BUNDLE.YAML_` Wo `_vXX.XX_` Ist die Versionsnummer (zum Beispiel `v22.10`) Und `_BUNDLE.YAML_` Ist der Name der Paket-YAML-Datei.
++
+[NOTE]
+====
+** Verwenden Sie für Cluster mit Kubernetes 1.24 oder älter link:https://github.com/NetApp/trident/tree/stable/v22.10/deploy/bundle_pre_1_25.yaml["Bundle_pre_1_25.yaml"^].
+** Verwenden Sie für Cluster mit Kubernetes 1.25 oder höher link:https://github.com/NetApp/trident/tree/stable/v22.10/deploy/bundle_post_1_25.yaml["Bundle_Post_1_25.yaml"^].
+
+
+====
++
+Wenn Sie beispielsweise Astra Trident 22.10 für Kubernetes 1.25 installieren, führen Sie den folgenden Befehl aus:
+
 +
 [listing]
 ----
-kubectl create -f 22.10.0/trident-installer/deploy/bundle.yaml -n trident
+kubectl create -f 22.10.0/trident-installer/deploy/bundle_post_1_25.yaml -n trident
 ----
-
-
++
 In diesem Schritt identifiziert der Trident-Operator eine bestehende Astra Trident-Installation und aktualisiert sie auf die gleiche Version wie der Operator.
+
+
 
 
 
@@ -83,7 +95,7 @@ tar -xf trident-installer-22.10.0.tar.gz
 cd trident-installer
 kubectl create -f deploy/crds/trident.netapp.io_tridentorchestrators_crd_post1.16.yaml
 ----
-. Löschen Sie den Operator Namespace-Scoped mithilfe des Manifests. Um diesen Schritt abzuschließen, benötigen Sie die `bundle.yaml` Datei, die für die Bereitstellung des Operatoren für Namespace-Scoped verwendet wird. Sie erhalten können `bundle.yaml` Von https://github.com/NetApp/trident/blob/stable/v20.10/deploy/bundle.yaml["Trident Repository"^]. Stellen Sie sicher, dass Sie den entsprechenden Zweig verwenden.
+. Löschen Sie den Operator Namespace-Scoped mithilfe des Manifests. Um diesen Schritt abzuschließen, benötigen Sie die Paket-YAML-Datei, die zum Bereitstellen des Namespace-Scoped-Operators von verwendet wird `\https://github.com/NetApp/trident/tree/stable/_vXX.XX_/deploy/_BUNDLE.YAML_` Wo `_vXX.XX_` Ist die Versionsnummer (zum Beispiel `v22.10`) Und `_BUNDLE.YAML_` Ist der Name der Paket-YAML-Datei.
 +
 
 NOTE: Sie sollten die erforderlichen Änderungen an den Trident Installationsparametern vornehmen (z. B. Ändern der Werte für `tridentImage`, `autosupportImage`, Ein privates Image Repository von und das `imagePullSecrets`) Nach dem Löschen des Operator Namespace-scoped und vor der Installation des Operators Cluster-scoped. Eine vollständige Liste der Parameter, die aktualisiert werden können, finden Sie im link:https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-customize-deploy.html#configuration-options["Konfigurationsoptionen"].
@@ -96,7 +108,7 @@ pwd
 /root/20.10.1/trident-installer
 
 #Delete the namespace-scoped operator
-kubectl delete -f deploy/bundle.yaml
+kubectl delete -f deploy/<BUNDLE.YAML>
 serviceaccount "trident-operator" deleted
 clusterrole.rbac.authorization.k8s.io "trident-operator" deleted
 clusterrolebinding.rbac.authorization.k8s.io "trident-operator" deleted
@@ -149,7 +161,7 @@ pwd
 /root/22.10.0/trident-installer
 
 #Install the cluster-scoped operator in the **same namespace**
-kubectl create -f deploy/bundle.yaml
+kubectl create -f deploy/<BUNDLE.YAML>
 serviceaccount/trident-operator created
 clusterrole.rbac.authorization.k8s.io/trident-operator created
 clusterrolebinding.rbac.authorization.k8s.io/trident-operator created
@@ -244,7 +256,7 @@ kubectl create -f deploy/crds/trident.netapp.io_tridentorchestrators_crd_post1.1
 [listing]
 ----
 #Install the cluster-scoped operator in the **same namespace**
-kubectl create -f deploy/bundle.yaml
+kubectl create -f deploy/<BUNDLE.YAML>
 serviceaccount/trident-operator created
 clusterrole.rbac.authorization.k8s.io/trident-operator created
 clusterrolebinding.rbac.authorization.k8s.io/trident-operator created

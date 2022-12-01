@@ -100,6 +100,7 @@ NOTE: Weitere Informationen zum Formatieren von Pod-Parametern finden Sie unter 
 Sie können die oben genannten Attribute beim Definieren verwenden `TridentOrchestrator` Um die Installation anzupassen.
 
 .Beispiel 1: Grundlegende benutzerdefinierte Konfiguration
+[%collapsible%open]
 ====
 Dies ist ein Beispiel für eine benutzerdefinierte Grundkonfiguration.
 
@@ -118,6 +119,7 @@ spec:
 ----
 ====
 .Beispiel 2: Implementierung mit Node-Auswahl
+[%collapsible%open]
 ====
 Dieses Beispiel veranschaulicht die Implementierung von Trident mit Node-Selektoren:
 
@@ -137,6 +139,7 @@ spec:
 ----
 ====
 .Beispiel 3: Bereitstellung auf Windows Worker-Nodes
+[%collapsible%open]
 ====
 Dieses Beispiel zeigt die Bereitstellung auf einem Windows Worker-Knoten.
 
