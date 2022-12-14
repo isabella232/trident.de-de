@@ -22,6 +22,7 @@ Sie können ein iSCSI Persistent Volume (PV) mithilfe der CSI-provisionierung er
 
 NOTE: Die Erweiterung des iSCSI-Volumes wird von unterstützt `ontap-san`, `ontap-san-economy`, `solidfire-san` Treiber und erfordert Kubernetes 1.16 und höher.
 
+.Überblick
 Die Erweiterung eines iSCSI-PV umfasst die folgenden Schritte:
 
 * Bearbeiten der StorageClass-Definition zum Festlegen des `allowVolumeExpansion` Feld an `true`.

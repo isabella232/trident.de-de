@@ -30,7 +30,7 @@ Die API funktioniert wie folgt:
 
 
 
-=== GET
+=== `GET`
 
 * `GET <trident-address>/trident/v1/<object-type>`: Listet alle Objekte dieses Typs auf.
 * `GET <trident-address>/trident/v1/<object-type>/<object-name>`: Erhält die Details des genannten Objekts.
@@ -38,7 +38,7 @@ Die API funktioniert wie folgt:
 
 
 
-=== POST
+=== `POST`
 
 `POST <trident-address>/trident/v1/<object-type>`: Erzeugt ein Objekt des angegebenen Typs.
 
@@ -48,7 +48,7 @@ Die API funktioniert wie folgt:
 
 
 
-=== Löschen
+=== `DELETE`
 
 `DELETE <trident-address>/trident/v1/<object-type>/<object-name>`: Löscht die benannte Ressource.
 

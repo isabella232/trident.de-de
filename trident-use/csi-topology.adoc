@@ -25,6 +25,7 @@ Kubernetes bietet zwei unterschiedliche Modi für die Volume-Bindung:
 
 NOTE: Der `WaitForFirstConsumer` Für den Bindungsmodus sind keine Topologiebeschriftungen erforderlich. Diese kann unabhängig von der CSI Topology Funktion verwendet werden.
 
+.Was Sie benötigen
 Für die Verwendung von CSI Topology benötigen Sie Folgendes:
 
 * Einen Kubernetes-Cluster mit einem link:requirements.html["Unterstützte Kubernetes-Version"]
@@ -250,7 +251,7 @@ pvc-san   Bound    pvc-ecb1e1a0-840c-463b-8b65-b3d033e2e62b   300Mi      RWO    
 ----
 
 
-== Back-Ends auf supportedTopologies aktualisieren
+== Aktualisieren Sie Back-Ends, um einzuschließen `supportedTopologies`
 
 Vorhandene Back-Ends können mit einer Liste von aktualisiert werden `supportedTopologies` Wird verwendet `tridentctl backend update`. Dies wirkt sich nicht auf Volumes aus, die bereits bereitgestellt wurden und nur für nachfolgende VES verwendet werden.
 

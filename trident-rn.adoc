@@ -19,7 +19,7 @@ WARNING: Der `tridentctl` Binary for Linux, die in der ZIP-Datei des Installatio
 
 
 
-== Was ist neu in 22.10
+== Neuerungen in 22.10
 
 *Vor dem Upgrade auf Astra Trident 22.10 müssen Sie die folgenden wichtigen Informationen lesen.*
 

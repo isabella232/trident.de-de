@@ -234,7 +234,7 @@ NOTE: Wenn Sie Amazon FSX auf NetApp ONTAP mit Trident verwenden, empfiehlt es s
 
 
 
-=== ontap-nas-Treiber mit zertifikatbasierter Authentifizierung
+=== `ontap-nas` Treiber mit zertifikatbasierter Authentifizierung
 
 Dies ist ein minimales Beispiel für die Back-End-Konfiguration. `clientCertificate`, `clientPrivateKey`, und `trustedCACertificate` (Optional, wenn Sie eine vertrauenswürdige CA verwenden) werden ausgefüllt `backend.json` Und nehmen Sie die base64-kodierten Werte des Clientzertifikats, des privaten Schlüssels und des vertrauenswürdigen CA-Zertifikats.
 
@@ -255,7 +255,7 @@ Dies ist ein minimales Beispiel für die Back-End-Konfiguration. `clientCertific
 ----
 
 
-=== ontap-nas-Treiber mit automatischer Exportrichtlinie
+=== `ontap-nas` Treiber mit automatischer Exportrichtlinie
 
 In diesem Beispiel erfahren Sie, wie Sie Astra Trident anweisen können, dynamische Exportrichtlinien zu verwenden, um die Exportrichtlinie automatisch zu erstellen und zu verwalten. Das funktioniert auch für das `ontap-nas-economy` Und `ontap-nas-flexgroup` Treiber.
 
@@ -277,7 +277,7 @@ In diesem Beispiel erfahren Sie, wie Sie Astra Trident anweisen können, dynamis
 ----
 
 
-=== ontap-nas-Flexgroup-Treiber
+=== `ontap-nas-flexgroup` Treiber
 
 [listing]
 ----
@@ -294,7 +294,7 @@ In diesem Beispiel erfahren Sie, wie Sie Astra Trident anweisen können, dynamis
 ----
 
 
-=== ontap-nas-Treiber mit IPv6
+=== `ontap-nas` Treiber mit IPv6
 
 [listing]
 ----
@@ -311,7 +311,7 @@ In diesem Beispiel erfahren Sie, wie Sie Astra Trident anweisen können, dynamis
 ----
 
 
-=== ontap-nas-Treiber
+=== `ontap-nas-economy` Treiber
 
 [listing]
 ----
@@ -335,7 +335,7 @@ In diesem Beispiel legt ein Teil des Speicherpools seine eigenen fest `spaceRese
 
 
 
-=== ontap-nas-Treiber
+=== `ontap-nas` Treiber
 
 [listing]
 ----
@@ -400,7 +400,7 @@ In diesem Beispiel legt ein Teil des Speicherpools seine eigenen fest `spaceRese
 ----
 
 
-=== ontap-nas-Flexgroup-Treiber
+=== `ontap-nas-flexgroup` Treiber
 
 [listing]
 ----
@@ -461,7 +461,7 @@ In diesem Beispiel legt ein Teil des Speicherpools seine eigenen fest `spaceRese
 ----
 
 
-=== ontap-nas-Treiber
+=== `ontap-nas-economy` Treiber
 
 [listing]
 ----

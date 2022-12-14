@@ -193,7 +193,7 @@ Wenn Sie diese Befehle ausführen, können Sie die Zugriffsrechte der Kubernetes
 
 
 
-=== Deaktivieren Sie showmount für die Applikations-SVM
+=== Deaktivieren `showmount` Für die Applikations-SVM
 
 Der `showmount` Mit dieser Funktion kann ein NFS-Client die SVM für eine Liste verfügbarer NFS-Exporte abfragen. Ein im Kubernetes-Cluster implementierter Pod kann die Ausgabe `showmount -e` Befehl mit der Daten-LIF und erhält eine Liste der verfügbaren Mounts, einschließlich derer, auf die es keinen Zugriff hat. Obwohl dies für sich kein Sicherheitskompromiss ist, stellt es keine unnötigen Informationen bereit, die einem nicht autorisierten Benutzer die Verbindung zu einem NFS-Export ermöglichen.
 

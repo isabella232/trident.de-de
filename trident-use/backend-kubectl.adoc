@@ -15,7 +15,7 @@ Ein Backend definiert die Beziehung zwischen Astra Trident und einem Storage-Sys
 
 
 
-== TridentBackendConfig
+== `TridentBackendConfig`
 
 `TridentBackendConfig` (`tbc`, `tbconfig`, `tbackendconfig`) Ist ein Front-End, Namensvetter CRD, mit dem Sie Astra Trident Back-Ends mit verwalten können `kubectl`. Kubernetes- und Storage-Administratoren können Back-Ends jetzt direkt über die Kubernetes-CLI erstellen und managen, ohne dass ein dediziertes Dienstprogramm für die Befehlszeilenschnittstelle erforderlich ist (`tridentctl`).
 
@@ -186,7 +186,7 @@ Auf das in diesem Schritt erstellte Geheimnis wird im verwiesen `spec.credential
 
 
 
-== Schritt 2: Erstellen Sie die tridentBackendConfig CR
+== Schritt 2: Erstellen Sie die `TridentBackendConfig` CR
 
 Sie sind jetzt bereit, Ihre zu erstellen `TridentBackendConfig` CR. In diesem Beispiel wird ein Backend verwendet, das den verwendet `ontap-san` Treiber wird mithilfe des erstellt `TridentBackendConfig` Unten gezeigte Objekte:
 
@@ -212,7 +212,7 @@ spec:
 ----
 
 
-== Schritt 3: Überprüfen Sie den Status des TridentBackendConfig CR
+== Schritt 3: Überprüfen Sie den Status des `TridentBackendConfig` CR
 
 Nun, da Sie die erstellt haben `TridentBackendConfig` CR, Sie können den Status überprüfen. Das folgende Beispiel zeigt:
 

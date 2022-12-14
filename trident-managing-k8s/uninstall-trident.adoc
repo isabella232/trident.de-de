@@ -60,7 +60,7 @@ WARNING: Sie sollten nur erwägen, die CRDs zu löschen, wenn Sie eine vollstän
 
 
 
-== Deinstallieren Sie mit tridentctl
+== Deinstallieren Sie mit `tridentctl`
 
 Führen Sie die aus `uninstall` Befehl in `tridentctl` Wie folgt entfernt alle mit Astra Trident verbundenen Ressourcen außer den CRDs und verwandten Objekten, so dass es einfach ist, das Installationsprogramm erneut auszuführen, um auf eine neuere Version zu aktualisieren.
 

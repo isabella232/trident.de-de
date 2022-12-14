@@ -60,7 +60,7 @@ Nein Es gibt keine Änderungen hinsichtlich der Benutzerfreundlichkeit und Funkt
 
 
 
-=== Was sind die unterstützten Versionen von etcd?
+=== Welche Versionen werden von unterstützt `etcd`?
 
 Astra Trident muss nicht mehr ein `etcd`. Er verwendet CRDs, um den Status beizubehalten.
 

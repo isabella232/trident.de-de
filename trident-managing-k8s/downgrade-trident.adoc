@@ -113,7 +113,7 @@ helm rollback trident [revision #]
 ----
 
 
-== Downgrade bei Installation von Astra Trident mit tridentctl
+== Downgrade bei Installation von Astra Trident mit `tridentctl`
 
 Falls Sie Astra Trident mit installiert haben `tridentctl`, Der Downgrade-Prozess umfasst die folgenden Schritte. In dieser Folge werden Sie durch die Herabstufung von Astra Trident 21.07 auf 20.07 geleitet.
 

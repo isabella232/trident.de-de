@@ -35,15 +35,19 @@ image::cross-namespace-sharing.png[Ein Konzeptdiagramm der Cross Namespace Shari
 
 Sie können in nur wenigen Schritten NFS-Volume Sharing einrichten.
 
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Eins"] Konfigurieren Sie die PVC-Quelle für die gemeinsame Nutzung des Volumes
 [role="quick-margin-para"]
 Der Eigentümer des Quell-Namespace erteilt die Berechtigung, auf die Daten im Quell-PVC zuzugreifen.
 
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Zwei"] Berechtigung zum Erstellen eines CR im Ziel-Namespace gewähren
 [role="quick-margin-para"]
 Der Clusteradministrator erteilt dem Eigentümer des Ziel-Namespace die Berechtigung, das TridentVolumeReference CR zu erstellen.
 
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Drittens"] Erstellen Sie im Ziel-Namespace tridentVolumeReference
 [role="quick-margin-para"]
 Der Eigentümer des Ziel-Namespace erstellt das TridentVolumeReference CR, um sich auf das Quell-PVC zu beziehen.
 
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Vier"] Erstellen Sie das untergeordnete PVC im Ziel-Namespace
 [role="quick-margin-para"]
 Der Eigentümer des Ziel-Namespace erstellt das untergeordnete PVC, um die Datenquelle aus dem Quell-PVC zu verwenden.
 
@@ -124,6 +128,7 @@ NOTE: Die Größe der Ziel-PVC muss kleiner oder gleich der Quelle PVC sein.
 
 
 
+.Ergebnisse
 Astra Trident liest den `shareFromPVC` Anmerkung auf dem Ziel-PVC und erstellt das Ziel-PV als untergeordnetes Volumen ohne eigene Speicherressource, die auf das Quell-PV verweist und die PV-Quellressource teilt. Die Ziel-PVC und das PV erscheinen wie normal gebunden.
 
 
@@ -134,7 +139,7 @@ Sie können ein Volume löschen, das über mehrere Namespaces hinweg gemeinsam g
 
 
 
-== Mit tridentctl get können Sie untergeordnete Volumes abfragen
+== Nutzung `tridentctl get` Zum Abfragen von untergeordneten Volumes
 
 Verwenden der[`tridentctl` Das Dienstprogramm kann ausgeführt werden `get` Befehl zum Abrufen untergeordneter Volumes. Weitere Informationen finden Sie unter Link:../Trident-Referenz/tridentctl.html[`tridentctl` Befehle und Optionen].
 

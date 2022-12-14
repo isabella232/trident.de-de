@@ -147,7 +147,7 @@ Um das Problem zu beheben, sollten Sie die bearbeiten `TridentOrchestrator` CR. 
 
 
 
-== Fehlerbehebung bei einer nicht erfolgreichen Trident-Implementierung mit tridentctl
+== Fehlerbehebung bei einer nicht erfolgreichen Trident-Implementierung mit `tridentctl`
 
 Um herauszufinden, was schief gelaufen ist, können Sie den Installer mit dem erneut ausführen ``-d`` Argument, das den Debug-Modus aktiviert und Ihnen hilft zu verstehen, was das Problem ist:
 

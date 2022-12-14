@@ -95,7 +95,7 @@ Weitere Informationen zur Authentifizierung finden Sie unter folgenden Links:
 
 == Astra Trident auf EKS mit Amazon FSX für NetApp ONTAP implementieren und konfigurieren
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Ein vorhandener Amazon EKS-Cluster oder selbst verwalteter Kubernetes-Cluster mit `kubectl` Installiert.
 * Ein vorhandenes Amazon FSX für NetApp ONTAP Filesystem und Storage Virtual Machine (SVM), die über die Worker-Nodes Ihres Clusters erreichbar ist.
 * Worker-Nodes, die vorbereitet sind link:worker-node-prep.html["NFS und/oder iSCSI"].

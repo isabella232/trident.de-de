@@ -240,7 +240,7 @@ NOTE: Wenn Sie Amazon FSX auf NetApp ONTAP mit Astra Trident verwenden, empfiehl
 
 
 
-=== ontap-san-Treiber mit zertifikatbasierter Authentifizierung
+=== `ontap-san` Treiber mit zertifikatbasierter Authentifizierung
 
 Dies ist ein minimales Beispiel für die Back-End-Konfiguration. `clientCertificate`, `clientPrivateKey`, und `trustedCACertificate` (Optional, wenn Sie eine vertrauenswürdige CA verwenden) werden ausgefüllt `backend.json` Und nehmen Sie die base64-kodierten Werte des Clientzertifikats, des privaten Schlüssels und des vertrauenswürdigen CA-Zertifikats.
 
@@ -266,7 +266,7 @@ Dies ist ein minimales Beispiel für die Back-End-Konfiguration. `clientCertific
 ----
 
 
-=== ontap-san-Treiber mit bidirektionalem CHAP
+=== `ontap-san` Treiber mit bidirektionalem CHAP
 
 Dies ist ein minimales Beispiel für die Back-End-Konfiguration. Mit dieser Grundkonfiguration wird ein erstellt `ontap-san` Back-End mit `useCHAP` Auf einstellen `true`.
 
@@ -291,7 +291,7 @@ Dies ist ein minimales Beispiel für die Back-End-Konfiguration. Mit dieser Grun
 ----
 
 
-=== ontap-san-Treiber
+=== `ontap-san-economy` Treiber
 
 [listing]
 ----

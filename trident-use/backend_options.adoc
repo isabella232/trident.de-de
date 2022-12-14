@@ -19,7 +19,7 @@ Erfahren Sie in Astra Trident, wie Back-Ends auf verschiedene Art und Weise gema
 
 
 
-== Managen Sie tridentctl Back-Ends mit TridentBackendConfig
+== Managen `tridentctl` Back-Ends mit `TridentBackendConfig`
 
 In diesem Abschnitt werden die Schritte aufgeführt, die für das Management von Back-Ends erforderlich sind, die mit erstellt wurden `tridentctl` Erstellen Sie direkt über die Kubernetes Schnittstelle `TridentBackendConfig` Objekte:
 
@@ -120,7 +120,7 @@ secret/backend-tbc-ontap-san-secret created
 ----
 
 
-=== Schritt 2: Erstellen Sie einen tridentBackendConfig CR
+=== Schritt 2: Erstellen Sie ein `TridentBackendConfig` CR
 
 Im nächsten Schritt wird ein erstellt `TridentBackendConfig` CR, das automatisch an die bereits vorhandene bindet `ontap-nas-backend` (Wie in diesem Beispiel). Stellen Sie sicher, dass folgende Anforderungen erfüllt sind:
 
@@ -177,7 +177,7 @@ tridentbackendconfig.trident.netapp.io/tbc-ontap-nas-backend created
 ----
 
 
-=== Schritt 3: Überprüfen Sie den Status des TridentBackendConfig CR
+=== Schritt 3: Überprüfen Sie den Status des `TridentBackendConfig` CR
 
 Nach dem `TridentBackendConfig` Wurde erstellt, seine Phase muss sein `Bound`. Sie sollte außerdem den gleichen Backend-Namen und die gleiche UUID wie das vorhandene Backend widerspiegeln.
 
@@ -199,7 +199,7 @@ Das Backend wird nun vollständig mit dem verwaltet `tbc-ontap-nas-backend` `Tri
 
 
 
-== Managen Sie tridentBackendConfig-Back-Ends mit tridentctl
+== Managen `TridentBackendConfig` Back-Ends mit `tridentctl`
 
  `tridentctl` Kann zur Auflistung von Back-Ends verwendet werden, die mit erstellt wurden `TridentBackendConfig`. Darüber hinaus können Administratoren solche Back-Ends mithilfe von auch vollständig managen `tridentctl` Durch Löschen `TridentBackendConfig` Mit Sicherheit `spec.deletionPolicy` Ist auf festgelegt `retain`.
 
@@ -226,7 +226,7 @@ Von der Ausgabe, ist es gesehen, dass `TridentBackendConfig` Wurde erfolgreich e
 
 
 
-=== Schritt 1: Bestätigen Sie, dass die deletionPolicy auf beibehalten eingestellt ist
+=== Schritt 1: Bestätigen `deletionPolicy` Ist auf festgelegt `retain`
 
 Lassen Sie uns den Wert von betrachten `deletionPolicy`. Dies muss eingestellt werden `retain`. Dadurch wird sichergestellt, dass, wenn ein `TridentBackendConfig` CR wird gelöscht, die Backend-Definition ist weiterhin vorhanden und kann mit verwaltet werden `tridentctl`.
 
@@ -250,7 +250,7 @@ NOTE: Fahren Sie nur mit dem nächsten Schritt fort `deletionPolicy` Ist auf fes
 
 
 
-=== Schritt 2: Löschen Sie die tridentBackendConfig CR
+=== Schritt 2: Löschen Sie den `TridentBackendConfig` CR
 
 Der letzte Schritt besteht darin, den zu löschen `TridentBackendConfig` CR. Nach Bestätigung des `deletionPolicy` Ist auf festgelegt `retain`, Sie können mit der Löschung fortfahren:
 

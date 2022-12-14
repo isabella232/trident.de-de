@@ -16,6 +16,7 @@ Ab Version 20.01 von Astra Trident können Sie auf der Kubernetes-Ebene Snapshot
 
 NOTE: Diese Funktion ist über Kubernetes 1.17 (Beta) erhältlich und wird ab 1.20 verfügbar sein. Informationen zu den Änderungen, die beim Wechsel von der Beta zu GA erforderlich sind, finden Sie unter https://kubernetes.io/blog/2020/12/10/kubernetes-1.20-volume-snapshot-moves-to-ga/["Der Release Blog"^]. Mit der Graduierung zu GA, die `v1` Die API-Version wird eingeführt und ist abwärtskompatibel mit `v1beta1` Snapshots:
 
+.Was Sie benötigen
 Zum Erstellen von Volume-Snapshots müssen ein externer Snapshot-Controller und CRDs (Custom Resource Definitions) erstellt werden. In dieser Verantwortung liegt der verwendete Kubernetes Orchestrator (z. B. Kubeadm, GKE, OpenShift).
 
 
@@ -93,7 +94,7 @@ Das unten aufgeführte Beispiel erläutert die Konstrukte, die für die Arbeit m
 
 
 
-== Schritt: Richten Sie eine VolumeSnapshotClass ein
+== Schritt 1: Richten Sie ein `VolumeSnapshotClass`
 
 Richten Sie vor dem Erstellen eines Volume-Snapshots einen Link:./Trident-Referenz/objects.html ein[`VolumeSnapshotClass`^].
 

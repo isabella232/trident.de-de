@@ -121,7 +121,7 @@ Der `resourceGroups`, `netappAccounts`, und `capacityPools` Werte sind Filter, d
 
 === Volume-Provisionierung
 
-Sie können die standardmäßige Volume-Bereitstellung steuern, indem Sie die folgenden Optionen in einem speziellen Abschnitt der Konfigurationsdatei angeben. Siehe  configurations Entsprechende Details.
+Sie können die standardmäßige Volume-Bereitstellung steuern, indem Sie die folgenden Optionen in einem speziellen Abschnitt der Konfigurationsdatei angeben. Siehe <<Beispielkonfigurationen>> Entsprechende Details.
 
 [cols=",,"]
 |===
@@ -282,7 +282,7 @@ Im Folgenden `StorageClass` Definitionen beziehen sich auf die oben genannten Sp
 
 
 
-=== Beispieldefinitionen mit dem Feld parameter.selector
+=== Beispieldefinitionen mit `parameter.selector` Feld
 
 Wird Verwendet `parameter.selector` Sie können für jedes angeben `StorageClass` Der virtuelle Pool, der zum Hosten eines Volumes genutzt wird. Im Volume werden die Aspekte definiert, die im ausgewählten Pool definiert sind.
 

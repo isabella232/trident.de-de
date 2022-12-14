@@ -62,7 +62,7 @@ CAUTION: Die Trident REST-Schnittstelle kann nur für die Wiedergabe unter 127.0
 
 
 
-== Erstellen
+== `create`
 
 Sie können den ausführen `create` Befehl zum Hinzufügen einer Ressource zum Astra Trident.
 
@@ -76,7 +76,7 @@ Verfügbare Option:
 
 
 
-== Löschen
+== `delete`
 
 Sie können die ausführen `delete` Befehl, um eine oder mehrere Ressourcen aus Astra Trident zu entfernen.
 
@@ -95,7 +95,7 @@ Verfügbare Optionen:
 
 
 
-== Get
+== `get`
 
 Sie können die ausführen `get` Befehl: Sie erhalten eine oder mehrere Ressourcen von Astra Trident.
 
@@ -116,7 +116,7 @@ Verfügbare Optionen:
 
 
 
-== Bilder
+== `images`
 
 Sie können die ausführen `images` Flagge, um eine Tabelle der Container-Bilder zu drucken, die Astra Trident benötigt.
 
@@ -130,7 +130,7 @@ Flaggen: * ``-h, --help`: Help for images.
 
 
 
-== Importvolumen
+== `import volume`
 
 Sie können die ausführen `import volume` Befehl zum Importieren eines vorhandenen Volumes zu Astra Trident
 
@@ -151,7 +151,7 @@ Markierungen:
 
 
 
-== Installieren
+== `install`
 
 Sie können die ausführen `install` Flags für die Installation von Astra Trident.
 
@@ -184,7 +184,7 @@ Markierungen:
 
 
 
-== Protokolle
+== `logs`
 
 Sie können die ausführen `logs` Flags zum Drucken der Protokolle von Astra Trident.
 
@@ -205,7 +205,7 @@ Markierungen:
 
 
 
-== Senden
+== `send`
 
 Sie können die ausführen `send` Befehl zum Senden einer Ressource vom Astra Trident.
 
@@ -219,7 +219,7 @@ Verfügbare Option:
 
 
 
-== Deinstallieren
+== `uninstall`
 
 Sie können die ausführen `uninstall` Flags zum Deinstallieren von Astra Trident.
 
@@ -232,7 +232,7 @@ Flaggen: * `-h, --help`: Hilfe zur Deinstallation. * `--silent`: Deaktivieren de
 
 
 
-== Aktualisierung
+== `update`
 
 Sie können die ausführen `update` Befehle zum Ändern einer Ressource in Astra Trident.
 
@@ -246,7 +246,7 @@ Verfügbare Optionen:
 
 
 
-== Upgrade
+== `upgrade`
 
 Sie können die ausführen `upgrade` Befehle für das Upgrade einer Ressource in Astra Trident.
 
@@ -260,7 +260,7 @@ Verfügbare Option:
 
 
 
-== Version
+== `version`
 
 Sie können die ausführen `version` Flags zum Drucken der Version von `tridentctl` Und den Running Trident Service.
 
