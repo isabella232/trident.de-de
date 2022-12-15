@@ -15,7 +15,7 @@ summary: Prüfen Sie zunächst die unterstützten Frontend-, Back-Ends- und Host
 Prüfen Sie zunächst die unterstützten Frontend-, Back-Ends- und Host-Konfigurationen.
 
 
-NOTE: Weitere Informationen zu den Ports, die Astra Trident verwendet, finden Sie unter link:../trident-reference/trident-ports.html["Hier"].
+NOTE: Weitere Informationen zu den Ports, die Astra Trident verwendet, finden Sie unter link:../trident-reference/ports.html["Hier"].
 
 
 
