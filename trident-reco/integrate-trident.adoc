@@ -18,15 +18,17 @@ Zur Integration von Astra Trident erfordern die folgenden Design- und Architektu
 
 == Auswahl und Implementierung der Treiber
 
+Wählen Sie einen Back-End-Treiber für Ihr Speichersystem aus und implementieren Sie ihn.
 
 
-=== Wählen Sie einen Back-End-Treiber für ONTAP
 
-Für ONTAP-Systeme stehen vier verschiedene Backend-Treiber zur Verfügung. Diese Treiber unterscheiden sich durch das verwendete Protokoll und die Art und Weise der Volumes im Storage-System. Daher sollten Sie sorgfältig prüfen, welcher Treiber eingesetzt werden soll.
+=== Back-End-Treiber für ONTAP
+
+Die Back-End-Treiber für ONTAP unterscheiden sich durch das verwendete Protokoll und die Art und Weise, wie die Volumes im Storage-System bereitgestellt werden. Daher sollten Sie bei der Entscheidung, welchen Treiber eingesetzt werden soll, sorgfältig überlegen.
 
 Auf einer höheren Ebene, wenn Ihre Applikation Komponenten hat, die gemeinsamen Storage benötigen (mehrere Pods, die auf dasselbe PVC zugreifen), sind NAS-basierte Treiber die erste Wahl, während die blockbasierten iSCSI-Treiber die Anforderungen von nicht gemeinsam genutztem Storage erfüllen. Wählen Sie das Protokoll basierend auf den Anforderungen der Applikation und der Komfort-Ebene der Storage- und Infrastrukturteams. Generell besteht für die meisten Applikationen kein Unterschied zwischen ihnen. Oftmals basiert die Entscheidung darauf, ob gemeinsam genutzter Storage (wo mehr als ein POD den gleichzeitigen Zugriff benötigen) benötigt wird.
 
-Die folgenden fünf Treiber für ONTAP-Back-Ends sind aufgeführt:
+Die verfügbaren Back-End-Treiber für ONTAP sind:
 
 * `ontap-nas`: Jedes bereitgestellte PV ist ein volles ONTAP FlexVolum.
 * `ontap-nas-economy`: Jedes bereitgestellte PV ist ein qtree, mit einer konfigurierbaren Anzahl von qtrees pro FlexVolume (Standard ist 200).
@@ -76,19 +78,19 @@ NOTE: Der `solidfire-san` Der Treiber ist auch in der Lage, PVCs zu klonen.
 
 
 
-=== Wählen Sie einen Back-End-Treiber für Cloud Volumes ONTAP
+=== Back-End-Treiber für Cloud Volumes ONTAP
 
 Cloud Volumes ONTAP bietet Datenkontrolle und Storage-Funktionen der Enterprise-Klasse für verschiedene Anwendungsfälle, einschließlich Dateifreigaben und Storage-Funktionen auf Blockebene für NAS- und SAN-Protokolle (NFS, SMB/CIFS und iSCSI). Die kompatiblen Treiber für Cloud Volume ONTAP sind `ontap-nas`, `ontap-nas-economy`, `ontap-san` Und `ontap-san-economy`. Diese gelten für Cloud Volume ONTAP für Azure, Cloud Volume ONTAP für GCP.
 
 
 
-=== Wählen Sie einen Backend-Treiber für Amazon FSX for ONTAP
+=== Back-End-Treiber für Amazon FSX for ONTAP
 
 Amazon FSX für ONTAP ermöglicht es Kunden, bereits bekannte NetApp Funktionen, Performance und Administration zu nutzen und gleichzeitig die Einfachheit, Agilität, Sicherheit und Skalierbarkeit beim Speichern von Daten in AWS zu nutzen. FSX für ONTAP unterstützt viele ONTAP Dateisystemfunktionen und Administrations-APIs. Die kompatiblen Treiber für Cloud Volume ONTAP sind `ontap-nas`, `ontap-nas-economy`, `ontap-nas-flexgroup`, `ontap-san` Und `ontap-san-economy`.
 
 
 
-=== Wählen Sie einen Back-End-Treiber für NetApp HCI/SolidFire
+=== Back-End-Treiber für NetApp HCI/SolidFire
 
 Der `solidfire-san` Der mit den NetApp HCI/SolidFire Plattformen verwendete Treiber unterstützt den Administrator bei der Konfiguration eines Element-Backend für Trident anhand der QoS-Limits. Falls Sie Ihr Backend so entwerfen möchten, dass die spezifischen QoS-Limits für die Volumes gesetzt werden, die durch Trident bereitgestellt werden, verwenden Sie das `type` Parameter in der Backend-Datei. Der Administrator kann auch die Volume-Größe beschränken, die mithilfe von auf dem Storage erstellt werden könnte `limitVolumeSize` Parameter. Momentan werden Element Storage-Funktionen wie die Größenanpassung von Volumes und die Volume-Replizierung von nicht vom unterstützt `solidfire-san` Treiber. Diese Vorgänge sollten manuell über die Web-UI von Element Software durchgeführt werden.
 
@@ -104,7 +106,7 @@ Fußnote: Yesfootnote:1[]: Nicht verwaltet durch Astra Trident Jafootnote:2[]: W
 
 
 
-=== Wählen Sie einen Back-End-Treiber für Azure NetApp Files
+=== Back-End-Treiber für Azure NetApp Files
 
 Astra Trident verwendet den `azure-netapp-files` Treiber für die Verwaltung des link:https://azure.microsoft.com/en-us/services/netapp/["Azure NetApp Dateien"^] Service:
 
@@ -122,7 +124,7 @@ Fußnote: Yesfootnote:1[]: Nicht verwaltet durch Astra Trident
 
 
 
-=== Wählen Sie einen Back-End-Treiber für Cloud Volumes Service mit GCP
+=== Cloud Volumes Service mit GCP-Backend-Treibern
 
 Astra Trident verwendet den `gcp-cvs` Der mit dem Cloud Volumes Service auf dem GCP-Backend verknüpft wird. Zur Konfiguration des GCP-Backend auf Trident ist angegeben erforderlich `projectNumber`, `apiRegion`, und `apiKey` In der Backend-Datei. Die Projektnummer kann im GCP Webportal gefunden werden. Der API-Schlüssel muss jedoch aus der privaten Schlüssel-Datei der Service-Konten stammen, die Sie beim Einrichten eines API-Zugriffs für Cloud Volumes auf GCP erstellt haben. Astra Trident kann CVS Volumes in einem von zwei erstellen link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-types["Servicetypen"^]:
 
@@ -131,9 +133,6 @@ Astra Trident verwendet den `gcp-cvs` Der mit dem Cloud Volumes Service auf dem 
 
 
 Die minimale Volume-Größe von CVS und CVS-Performance beträgt 100 gib.
-
-
-CAUTION: Bei der Bereitstellung von Back-Ends mithilfe des standardmäßigen CVS-Servicetyps [`storageClass=software`], Benutzer * müssen Zugriff auf die Sub-1tib-Volume-Funktion auf GCP für die betreffenden Projektnummern und Projekt-IDs erhalten. Dies ist für Trident zur Bereitstellung von Sub-1-tib-Volumes erforderlich. Andernfalls schlägt die Volumenkreationen * bei VES mit <600 gib fehl. Nutzung link:https://docs.google.com/forms/d/e/1FAIpQLSc7_euiPtlV8bhsKWvwBl3gm9KUL4kOhD7lnbHC3LlQ7m02Dw/viewform["Dieses Formular"^] Um Zugriff auf Sub-1-tib-Volumes zu erhalten.
 
 [cols="20,10,10,10,10,10,10"]
 |===
@@ -155,7 +154,7 @@ Individuelle Storage-Klassen müssen konfiguriert und angewendet werden, um ein 
 
 
 
-=== Storage Class-Design für spezifische Backend-Auslastung
+=== Spezifische Back-End-Auslastung
 
 Die Filterung kann innerhalb eines bestimmten Storage-Klassenobjekts verwendet werden, um festzulegen, welcher Storage-Pool bzw. welche Pools für die jeweilige Storage-Klasse verwendet werden sollen. In der Storage-Klasse können drei Filtersätze eingestellt werden: `storagePools`, `additionalStoragePools`, Und/oder `excludeStoragePools`.
 
@@ -165,19 +164,19 @@ Der `excludeStoragePools` Parameter wird verwendet, um den aufgelisteten Pool-Sa
 
 
 
-=== Storage-Klassen-Design zur Emulation von QoS-Richtlinien
+=== QoS-Richtlinien emulieren
 
 Wenn Sie Storage-Klassen zur Emulation der Quality of Service-Richtlinien entwerfen möchten, erstellen Sie mit dem eine Storage Class `media` Attribut als `hdd` Oder `ssd`. Auf der Grundlage von `media` Attribut, das in der Storage-Klasse erwähnt wird, wählt Trident das entsprechende Back-End aus, das bedient `hdd` Oder `ssd` Aggregate passen das Medienattribut an und leiten die Bereitstellung der Volumes an das spezifische Aggregat weiter. Deshalb können wir eine Storageklasse PREMIUM schaffen, die hätte `media` Attribut festgelegt als `ssd` Was als PREMIUM-QoS-Richtlinie klassifiziert werden kann. Wir können einen weiteren STANDARD der Storage-Klasse erstellen, bei dem das Medienattribut auf `hdd gesetzt wäre. Dieser Standard könnte die QoS-Richtlinie SEIN. Darüber hinaus könnten wir das Attribut ``IOPS' in der Storage-Klasse verwenden, um die Bereitstellung zu einer Element Appliance umzuleiten, die als QoS-Richtlinie definiert werden kann.
 
 
 
-=== Storage-Class-Design zur Verwendung von Backend auf Basis bestimmter Funktionen
+=== Nutzung von Backend basierend auf bestimmten Funktionen
 
 Storage-Klassen ermöglichen die direkte Volume-Bereitstellung an einem bestimmten Back-End, bei dem Funktionen wie Thin Provisioning und Thick Provisioning, Snapshots, Klone und Verschlüsselung aktiviert sind. Um festzulegen, welchen Speicher verwendet werden soll, erstellen Sie Speicherklassen, die das entsprechende Back-End mit aktivierter Funktion angeben.
 
 
 
-=== Storage-Class-Design für virtuelle Storage Pools
+=== Virtuelle Storage-Pools
 
 Virtual Storage Pools sind für alle Astra Trident Back-Ends verfügbar. Sie können virtuelle Storage-Pools für jedes Backend mit jedem Treiber von Astra Trident definieren.
 
@@ -194,13 +193,13 @@ NOTE: Bei der Definition von virtuellen Speicherpools wird empfohlen, nicht zu v
 
 
 
-=== Virtual Storage Pools zur Emulation verschiedener Service-Level/QoS entwerfen
+=== Emulation verschiedener Service-Level/QoS
 
 Es ist möglich, virtuelle Speicherpools für die Emulation von Serviceklassen zu entwerfen. Untersuchen wir mit der Implementierung des virtuellen Pools für den Cloud Volume Service für Azure NetApp Files, wie wir verschiedene Serviceklassen einrichten können. Konfigurieren Sie das ANF-Backend mit mehreren Etiketten, die unterschiedliche Leistungsstufen darstellen. Einstellen `servicelevel` Dem entsprechenden Leistungslevel hinzuzufügen und unter jeder Beschriftung weitere erforderliche Aspekte hinzuzufügen. Erstellen Sie nun verschiedene Kubernetes Storage-Klassen, die verschiedenen virtuellen Storage-Pools zugeordnet werden würden. Verwenden der `parameters.selector` Feld, jede StorageClass ruft auf, welche virtuellen Pools zum Hosten eines Volumes verwendet werden dürfen.
 
 
 
-=== Virtuelle Pools für die Zuweisung spezifischer Aspekte entwerfen
+=== Zuweisen eines spezifischen Satzes von Aspekten
 
 Mehrere Virtual Storage Pools mit bestimmten Aspekten können über ein einzelnes Storage-Back-End entwickelt werden. Konfigurieren Sie dazu das Backend mit mehreren Beschriftungen und legen Sie die erforderlichen Aspekte unter jedem Etikett fest. Erstellen Sie jetzt mit dem verschiedene Kubernetes-Storage-Klassen `parameters.selector` Feld, das verschiedenen virtuellen Speicherpools zugeordnet werden würde. Die Volumes, die im Backend bereitgestellt werden, werden im ausgewählten virtuellen Storage-Pool über die Aspekte definiert.
 

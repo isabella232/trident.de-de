@@ -11,18 +11,15 @@ summary: Erfahren Sie, wie Sie Cloud Volumes Service für Google Cloud mit den a
 :imagesdir: ../media/
 
 
+[role="lead"]
 Erfahren Sie, wie Sie NetApp Cloud Volumes Service (CVS) für die Google Cloud Platform (GCP) als Backend für Ihre Astra Trident Installation mit den angegebenen Beispielkonfigurationen konfigurieren.
+
+
+
+== Erfahren Sie mehr über Astra Trident Support für CVS für GCP
 
 Astra Trident unterstützt Volumes mit dem standardmäßigen CVS-Servicetyp auf https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-types["GCP"^]. Astra Trident unterstützt CVS Volumes mit weniger als 100 gib nicht, unabhängig vom vom vom vom vom CVS-Servicetyp zulässigen Minimum. Daher erstellt Trident automatisch ein Volume mit 100 gib, wenn das angeforderte Volume kleiner als die Mindestgröße ist.
 
-[NOTE]
-====
-* NetApp empfiehlt Kunden die Nutzung von weniger als 1 tib Volumes außerhalb der Produktionsumgebung.
-* Bei der Bereitstellung von Back-Ends mithilfe des standardmäßigen CVS-Servicetyps `storageClass=software`, Für den Zugriff auf die Sub-1-tib-Volume-Funktion auf GCP für die entsprechende Projektnummer und Projekt-ID anmelden. Dies ist für Trident zur Bereitstellung von Sub-1-tib-Volumes erforderlich. Wenn nicht, schlägt die Volumenerzeugung *bei VES unter 600 gib fehl.
-* link:https://docs.google.com/forms/d/e/1FAIpQLSc7_euiPtlV8bhsKWvwBl3gm9KUL4kOhD7lnbHC3LlQ7m02Dw/viewform["Melden Sie sich für den Zugriff auf Sub-1-tib-Volumes an."]
-
-
-====
 .Was Sie benötigen
 Um den zu konfigurieren und zu verwenden https://cloud.netapp.com/cloud-volumes-service-for-gcp?utm_source=NetAppTrident_ReadTheDocs&utm_campaign=Trident["Cloud Volumes Service für Google Cloud"^] Back-End, Sie benötigen Folgendes:
 
