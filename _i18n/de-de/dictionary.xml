@@ -1262,7 +1262,6 @@
   <block id="443432948b68bb63d707ce7ecc4a021a" category="cell">CSI-Topologie</block>
   <block id="af7c8216a3289efe1a298a19c00b8b8c" category="section-title">Getestete Host-Betriebssysteme</block>
   <block id="57b3e1695eb7d16642702fbce3837b86" category="paragraph">Standardmäßig wird Astra Trident in einem Container ausgeführt und läuft daher auf jedem Linux-Mitarbeiter. Diese Mitarbeiter müssen jedoch in der Lage sein, die Volumes, die Astra Trident bietet, je nach den von Ihnen verwendeten Back-Ends mit dem standardmäßigen NFS-Client oder iSCSI-Initiator zu mounten.</block>
-  <block id="814a65adc75608da31ab5685f9b1c1ce" category="paragraph">Astra Trident unterstützt zwar nicht offiziell bestimmte Betriebssysteme, aber die folgenden Linux-Distributionen funktionieren:</block>
   <block id="597a56086e1f9d7ca5e8f55c40a0153a" category="list-text">Versionen von redhat CoreOS (RHCOS) werden von OpenShift Container Platform unterstützt</block>
   <block id="98a2ec14e38e4acf26c70e52b70bf5f8" category="list-text">RHEL oder CentOS 7</block>
   <block id="6ebf7ae9dffc55cf86792ea266344b3a" category="list-text">Ubuntu 18.04 oder höher (neueste 22.04)</block>
@@ -3455,4 +3454,6 @@
   <block id="35aa4a2a819e526c2e930e487df8d423" category="list-text"><block ref="35aa4a2a819e526c2e930e487df8d423" category="inline-link-macro-rx"></block></block>
   <block id="19476662cd814e0aa085eca121de89b8" category="inline-link-macro">VolumeSnapshotKlasse</block>
   <block id="d63cadc96caf4b05f8fa532b08e889da" category="list-text"><block ref="d63cadc96caf4b05f8fa532b08e889da" category="inline-link-macro-rx"></block></block>
+  <block id="2f82d12ae3ce8f940e10b062c5134f3d" category="paragraph">Astra Trident unterstützt zwar nicht offiziell bestimmte Betriebssysteme, aber die folgenden sind bekannt:</block>
+  <block id="31f8757839909e87266f2b53482c86ef" category="list-text">Windows Server 2019</block>
 </blocks>

@@ -147,14 +147,15 @@ Nein
 
 == Getestete Host-Betriebssysteme
 
-Standardmäßig wird Astra Trident in einem Container ausgeführt und läuft daher auf jedem Linux-Mitarbeiter. Diese Mitarbeiter müssen jedoch in der Lage sein, die Volumes, die Astra Trident bietet, je nach den von Ihnen verwendeten Back-Ends mit dem standardmäßigen NFS-Client oder iSCSI-Initiator zu mounten.
-
-Astra Trident unterstützt zwar nicht offiziell bestimmte Betriebssysteme, aber die folgenden Linux-Distributionen funktionieren:
+Astra Trident unterstützt zwar nicht offiziell bestimmte Betriebssysteme, aber die folgenden sind bekannt:
 
 * Versionen von redhat CoreOS (RHCOS) werden von OpenShift Container Platform unterstützt
 * RHEL oder CentOS 7
 * Ubuntu 18.04 oder höher (neueste 22.04)
+* Windows Server 2019
 
+
+Standardmäßig wird Astra Trident in einem Container ausgeführt und läuft daher auf jedem Linux-Mitarbeiter. Diese Mitarbeiter müssen jedoch in der Lage sein, die Volumes, die Astra Trident bietet, je nach den von Ihnen verwendeten Back-Ends mit dem standardmäßigen NFS-Client oder iSCSI-Initiator zu mounten.
 
 Der `tridentctl` Utility läuft auch auf jeder dieser Linux-Distributionen.
 
