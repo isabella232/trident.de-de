@@ -1613,20 +1613,15 @@
   <block id="2a778cf7220cdde142651975e1bcd90f" category="paragraph">Jeder außerhalb der Liste der virtuellen Pools angegebene Aspekt ist global für das Backend und gilt für alle virtuellen Pools, während jeder virtuelle Pool einen oder mehrere Aspekte einzeln angeben kann (alle Backend-globalen Aspekte außer Kraft setzen).</block>
   <block id="6aefc2a02fa1ec1f6ac8e9dbd5104efe" category="admonition">Versuchen Sie bei der Definition von virtuellen Speicherpools nicht, die Reihenfolge vorhandener virtueller Pools in einer Backend-Definition neu anzuordnen. Es wird auch empfohlen, Attribute für einen vorhandenen virtuellen Pool nicht zu bearbeiten/zu ändern und stattdessen einen neuen virtuellen Pool zu definieren.</block>
   <block id="5a53576f0ba98311e845ad0243bed6b7" category="paragraph">Die meisten Aspekte werden Backend-spezifisch angegeben. Entscheidend ist, dass die Aspect-Werte nicht außerhalb des Back-End-Treibers angezeigt werden und nicht für die Abstimmung in verfügbar sind<block ref="f652904c3bfb48fb25a0a75f485f0ff6" prefix=" " category="inline-code"></block>. Stattdessen definiert der Administrator eine oder mehrere Labels für jeden virtuellen Pool. Jedes Etikett ist ein Schlüssel:Wert-Paar, und Etiketten können häufig über eindeutige Back-Ends hinweg verwendet werden. Wie Aspekte können auch Labels pro Pool oder global zum Backend angegeben werden. Im Gegensatz zu Aspekten, die vordefinierte Namen und Werte haben, hat der Administrator volle Entscheidungsbefugnis, Beschriftungsschlüssel und -Werte nach Bedarf zu definieren.</block>
-  <block id="a4d6bfb65b6541e04772c0d5180e726e" category="paragraph">A<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block> Identifiziert den virtuellen Pool, der verwendet werden soll, indem auf die Beschriftungen in einem Auswahlparameter Bezug gesetzt wird. Virtuelle Pool-Selektoren unterstützen sechs Operatoren:</block>
   <block id="e1b3ec89ead7f83a9245ed5c9cacfdbf" category="cell">Operator</block>
   <block id="499badcb6f450c7f46c51d873eb84286" category="cell"><block ref="43ec3e5dee6e706af7766fffea512721" prefix="" category="inline-code"></block></block>
   <block id="354653142ec321459dfd6d71444e992e" category="cell">Performance=Premium</block>
-  <block id="d2c49c25d96d87e40bc641b9d5302b36" category="cell">Der Wert für die Bezeichnung eines Pools muss übereinstimmen</block>
   <block id="5a5292b0a0d0379f0f1b12801b09b266" category="cell"><block ref="de0219f9333d57ea89a9ba235df098ba" prefix="" category="inline-code"></block></block>
   <block id="eccde6822783bd75209c9b6a2d357f6c" category="cell">Performance!=extrem</block>
-  <block id="2944853a5f146abd2671adbecd5c25a3" category="cell">Der Wert für die Bezeichnung eines Pools darf nicht übereinstimmen</block>
   <block id="ae2bef277194f73d24a36a78009aac1e" category="cell"><block ref="13b5bfe96f3e2fe411c9f66f4a582adf" prefix="" category="inline-code"></block></block>
   <block id="f8cf8c23afb5459dbf7c24b685caf85b" category="cell">Lage in (Osten, Westen)</block>
-  <block id="26aac934d614b1b3e5db46d8fc664ec6" category="cell">Der Wert für die Bezeichnung eines Pools muss im Wertungssatz enthalten sein</block>
   <block id="1a031eecbce49366e550273b9321b909" category="cell"><block ref="935f754ecc68ca688f61c154c404ed06" prefix="" category="inline-code"></block></block>
   <block id="b5585f3f9b45f391fee5dd15e6516450" category="cell">Performance-Dose (Silber, Bronze)</block>
-  <block id="499fec8ad2646f2de982559111e26a4c" category="cell">Der Wert für die Bezeichnung eines Pools darf nicht b sein</block>
   <block id="ae8e28c37a725c4bb4a74663ac8615ea" category="summary">Erfahren Sie mehr darüber, wie Astra Trident Volume-Zugriffsgruppen verwendet.</block>
   <block id="b4621305109716b02eed0cf25fabab13" category="doc">Volume-Zugriffsgruppen</block>
   <block id="33911b1eec54b4b5a7fbc504e6569989" category="inline-link">Volume-Zugriffsgruppen</block>
@@ -3456,4 +3451,16 @@
   <block id="d63cadc96caf4b05f8fa532b08e889da" category="list-text"><block ref="d63cadc96caf4b05f8fa532b08e889da" category="inline-link-macro-rx"></block></block>
   <block id="2f82d12ae3ce8f940e10b062c5134f3d" category="paragraph">Astra Trident unterstützt zwar nicht offiziell bestimmte Betriebssysteme, aber die folgenden sind bekannt:</block>
   <block id="31f8757839909e87266f2b53482c86ef" category="list-text">Windows Server 2019</block>
+  <block id="758ef9050bcb89a046f8b79d56db9490" category="paragraph">A<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block> Identifiziert den virtuellen Pool, der verwendet werden soll, indem auf die Beschriftungen in einem Auswahlparameter Bezug gesetzt wird. Virtuelle Pool-Selektoren unterstützen folgende Operatoren:</block>
+  <block id="3b64653c97a388d828849314b6a1b383" category="cell">Der Wert für die Bezeichnung eines Pools muss:</block>
+  <block id="6da89265a9a8b0b28eb4946bb2ec0c6d" category="cell">Übereinstimmung</block>
+  <block id="ecf92052d55345fee4602d9eb8c22063" category="cell">Keine Übereinstimmung</block>
+  <block id="c6c1caf73b0f83d807abe5a717014ab7" category="cell">Werden Sie im Satz von Werten</block>
+  <block id="8daf6b016f4033d59900c23f162c0f73" category="cell">Nicht im Wertungsset sein</block>
+  <block id="c6bfba38b789fec8271d1d1496a9ee59" category="cell"><block ref="42538adbdb6240b2b083a000a615d5bd" prefix="" category="inline-code"></block></block>
+  <block id="152f5dc0f7ac734f8e8ee17d4a482462" category="cell">Darstellt</block>
+  <block id="7b532e697a35209f3df3956577cc3d9c" category="cell">Mit einem beliebigen Wert existieren</block>
+  <block id="eb0254f1d0a82e646c239d4d2e2f83ac" category="cell"><block ref="f65e5ff2a1bb1af969dccabe7dcd5cdd" prefix="" category="inline-code"></block></block>
+  <block id="67a3b723b2d9024808eb2c6e686d00a0" category="cell">!Schutz</block>
+  <block id="1fde97909b90bb329db2062f7744bd45" category="cell">Nicht vorhanden</block>
 </blocks>

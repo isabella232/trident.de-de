@@ -29,21 +29,27 @@ NOTE: Versuchen Sie bei der Definition von virtuellen Speicherpools nicht, die R
 
 Die meisten Aspekte werden Backend-spezifisch angegeben. Entscheidend ist, dass die Aspect-Werte nicht außerhalb des Back-End-Treibers angezeigt werden und nicht für die Abstimmung in verfügbar sind `StorageClasses`. Stattdessen definiert der Administrator eine oder mehrere Labels für jeden virtuellen Pool. Jedes Etikett ist ein Schlüssel:Wert-Paar, und Etiketten können häufig über eindeutige Back-Ends hinweg verwendet werden. Wie Aspekte können auch Labels pro Pool oder global zum Backend angegeben werden. Im Gegensatz zu Aspekten, die vordefinierte Namen und Werte haben, hat der Administrator volle Entscheidungsbefugnis, Beschriftungsschlüssel und -Werte nach Bedarf zu definieren.
 
-A `StorageClass` Identifiziert den virtuellen Pool, der verwendet werden soll, indem auf die Beschriftungen in einem Auswahlparameter Bezug gesetzt wird. Virtuelle Pool-Selektoren unterstützen sechs Operatoren:
+A `StorageClass` Identifiziert den virtuellen Pool, der verwendet werden soll, indem auf die Beschriftungen in einem Auswahlparameter Bezug gesetzt wird. Virtuelle Pool-Selektoren unterstützen folgende Operatoren:
 
 [cols="14%,34%,52%"]
 |===
-| Operator | Beispiel | Beschreibung 
+| Operator | Beispiel | Der Wert für die Bezeichnung eines Pools muss: 
 
 
-| `=` | Performance=Premium | Der Wert für die Bezeichnung eines Pools muss übereinstimmen 
+| `=` | Performance=Premium | Übereinstimmung 
 
 
-| `!=` | Performance!=extrem | Der Wert für die Bezeichnung eines Pools darf nicht übereinstimmen 
+| `!=` | Performance!=extrem | Keine Übereinstimmung 
 
 
-| `in` | Lage in (Osten, Westen) | Der Wert für die Bezeichnung eines Pools muss im Wertungssatz enthalten sein 
+| `in` | Lage in (Osten, Westen) | Werden Sie im Satz von Werten 
 
 
-| `notin` | Performance-Dose (Silber, Bronze) | Der Wert für die Bezeichnung eines Pools darf nicht b sein 
+| `notin` | Performance-Dose (Silber, Bronze) | Nicht im Wertungsset sein 
+
+
+| `<key>` | Darstellt | Mit einem beliebigen Wert existieren 
+
+
+| `!<key>` | !Schutz | Nicht vorhanden 
 |===
