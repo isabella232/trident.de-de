@@ -47,7 +47,7 @@ Zusätzlich zur Standardspezifikation können Benutzer mit Trident die folgenden
 | Anmerkung | Volume-Option | Unterstützte Treiber 
 
 
-| trident.netapp.io/fileSystem | Dateisystem | ontap-san, solidfire-san, Eseries-iscsi, ontap-san-Economy 
+| trident.netapp.io/fileSystem | Dateisystem | ontap-san, solidfire-san, ontap-san-Economy 
 
 
 | trident.netapp.io/cloneFromPVC | KlonSourceVolume | ontap-nas, ontap-san, solidfire-san, Azure-netapp-Dateien, gcp-cvs, ontap-san-Ökonomie 
@@ -170,11 +170,11 @@ Diese Parameter bestimmen, welche in Trident gemanagten Storage Pools zur Bereit
 | Medien^1^ | Zeichenfolge | hdd, Hybrid, ssd | Pool enthält Medien dieser Art. Beides bedeutet Hybrid | Medientyp angegeben | ontap-nas, ontap-nas-Economy, ontap-nas-Flexgroup, ontap-san, solidfire-san 
 
 
-| Bereitstellungstyp | Zeichenfolge | Dünn, dick | Pool unterstützt diese Bereitstellungsmethode | Bereitstellungsmethode angegeben | Thick: All ONTAP und Eseries-iscsi; Thin Provisioning für ONTAP und solidfire-san 
+| Bereitstellungstyp | Zeichenfolge | Dünn, dick | Pool unterstützt diese Bereitstellungsmethode | Bereitstellungsmethode angegeben | Thick: All ONTAP; Thin: Alle ONTAP und solidfire-san 
 
 
 | BackendType | Zeichenfolge  a| 
-ontap-nas, ontap-nas-Economy, ontap-nas-Flexgroup, ontap-san, solidfire-san, eseries-iscsi, gcp-cvs, Azure-netapp-Dateien, ontap-san-Economy
+ontap-nas, ontap-nas-Economy, ontap-nas-Flexgroup, ontap-san, solidfire-san, gcp-cvs, Azure-netapp-Files, ontap-san-Wirtschaftlichkeit
 | Pool gehört zu dieser Art von Backend | Back-End angegeben | Alle Treiber 
 
 
@@ -216,7 +216,7 @@ Diese Attribute haben keine Auswirkung auf die Auswahl von Storage-Pools/Back-En
 | Attribut | Typ | Werte | Beschreibung | Wichtige Faktoren | Kubernetes-Version 
 
 
-| Fstype | Zeichenfolge | Ext4, ext3, xfs usw. | Der Filesystem-Typ für Block-Volumes | solidfire-san, ontap-nas, ontap-nas-Economy, ontap-nas-Flexgroup, ontap-san, ontap-san-Economy, Eseries-iscsi | Alle 
+| Fstype | Zeichenfolge | Ext4, ext3, xfs usw. | Der Filesystem-Typ für Block-Volumes | solidfire-san, ontap-nas, ontap-nas-Economy, ontap-nas-Flexgroup, ontap-san, ontap-san-Ökonomie | Alle 
 
 
 | VolumeErweiterung | boolesch | Richtig, falsch | Aktivieren oder deaktivieren Sie die Unterstützung für das Vergrößern der PVC-Größe | ontap-nas, ontap-nas-Ökonomie, ontap-nas-Flexgroup, ontap-san, ontap-san-Ökonomie, solidfire-san, gcp-cvs, Azure-netapp-Files | 1.11 und höher 
