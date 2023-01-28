@@ -13,9 +13,12 @@ summary: Erfahren Sie mehr über die Konfiguration eines ONTAP-Backend mit ONTAP
 
 Erfahren Sie mehr über die Konfiguration eines ONTAP-Backend mit ONTAP- und Cloud Volumes ONTAP-NAS-Treibern.
 
-* link:ontap-nas-prep.html["Vorbereitung"^]
-* link:ontap-nas-examples.html["Konfiguration und Beispiele"^]
+* link:ontap-nas-prep.html["Vorbereitung"]
+* link:ontap-nas-examples.html["Konfiguration und Beispiele"]
 
+
+
+WARNING: Kunden müssen die verwenden `ontap-nas` Treiber für Produktions-Workloads, die Datensicherung, Disaster Recovery und Mobilität benötigen Astra Control bietet nahtlosen Schutz, Disaster Recovery und Mobilität für Volumes, die mit der erstellt werden `ontap-nas` Treiber. Der `ontap-nas-economy` Der Treiber sollte nur in begrenzten Anwendungsfällen verwendet werden, in denen die zu erwartende Volume-Auslastung wahrscheinlich weit über den von ONTAP unterstützten Systemen liegt und keine erwarteten Anforderungen an Datensicherung, Disaster Recovery oder Mobilität (Verschieben von Volumes zwischen den Kubernetes Clustern) bestehen.
 
 
 

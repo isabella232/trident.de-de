@@ -2776,8 +2776,6 @@
   <block id="24ca391029d6df294c5d5b8f1fe5b4eb" category="summary">Erfahren Sie mehr über die Konfiguration eines ONTAP-Backend mit ONTAP-NAS-Treibern.</block>
   <block id="8f145066de3f0e0a9d2e9cc5bf6f09f5" category="doc">Konfigurieren Sie ein ONTAP-NAS-Back-End</block>
   <block id="4d80e2460d711b841338dfbeea2ca8c1" category="paragraph">Erfahren Sie mehr über die Konfiguration eines ONTAP-Backend mit ONTAP- und Cloud Volumes ONTAP-NAS-Treibern.</block>
-  <block id="df3afb1ce4cf5592326d7f536313cbc9" category="list-text"><block ref="df3afb1ce4cf5592326d7f536313cbc9" category="inline-link-macro-rx"></block></block>
-  <block id="6a60ddae29750feed1e12421a92ea824" category="list-text"><block ref="6a60ddae29750feed1e12421a92ea824" category="inline-link-macro-rx"></block></block>
   <block id="bc960ce53bb0d62c44b5a3f212c279d3" category="summary">Sie können eine Speicherklasse erstellen, eine Speicherklasse löschen und vorhandene Speicherklassen anzeigen.</block>
   <block id="e8b9c3a9859a62e9a58431c3b61f75d5" category="doc">Management von Storage-Klassen</block>
   <block id="5802c976ee5f858f76699af5294812e6" category="paragraph">Suchen Sie Informationen zum Erstellen einer Speicherklasse, Löschen einer Speicherklasse und Anzeigen vorhandener Speicherklassen.</block>
@@ -3463,4 +3461,7 @@
   <block id="054b5072368dea4f8748909c16c7de98" category="cell">Thick: All ONTAP; Thin: Alle ONTAP und solidfire-san</block>
   <block id="dbdc06f8742b98dcacdf7fdb1af111ea" category="paragraph">ontap-nas, ontap-nas-Economy, ontap-nas-Flexgroup, ontap-san, solidfire-san, gcp-cvs, Azure-netapp-Files, ontap-san-Wirtschaftlichkeit</block>
   <block id="f888aa18c19e41f8c1263fa99ca8b94c" category="cell">solidfire-san, ontap-nas, ontap-nas-Economy, ontap-nas-Flexgroup, ontap-san, ontap-san-Ökonomie</block>
+  <block id="a64f78ea5d42780118e8f5c7f6cfdcbb" category="list-text"><block ref="a64f78ea5d42780118e8f5c7f6cfdcbb" category="inline-link-macro-rx"></block></block>
+  <block id="65a38da8aec2b99cf44dbf919fbd6991" category="list-text"><block ref="65a38da8aec2b99cf44dbf919fbd6991" category="inline-link-macro-rx"></block></block>
+  <block id="5e91194ed6174e8f5eb09a2fffc13dad" category="admonition">Kunden müssen die verwenden<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> Treiber für Produktions-Workloads, die Datensicherung, Disaster Recovery und Mobilität benötigen Astra Control bietet nahtlosen Schutz, Disaster Recovery und Mobilität für Volumes, die mit der erstellt werden<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> Treiber. Der<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> Der Treiber sollte nur in begrenzten Anwendungsfällen verwendet werden, in denen die zu erwartende Volume-Auslastung wahrscheinlich weit über den von ONTAP unterstützten Systemen liegt und keine erwarteten Anforderungen an Datensicherung, Disaster Recovery oder Mobilität (Verschieben von Volumes zwischen den Kubernetes Clustern) bestehen.</block>
 </blocks>
