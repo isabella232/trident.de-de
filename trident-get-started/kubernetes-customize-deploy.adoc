@@ -4,7 +4,7 @@ permalink: trident-get-started/kubernetes-customize-deploy.html
 keywords: deploy, trident, methods, operator, tridentctl, helm, attributes, customize, tridentorchestrator, smb, windows 
 summary: 'Der Trident-Operator ermöglicht es Ihnen, die Art und Weise, wie Astra Trident installiert wird, mithilfe der Attribute im anzupassen `TridentOrchestrator` Spez.' 
 ---
-= Anpassung der Trident Operator-Implementierung
+= Anpassen der Trident Operator-Installation
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -51,7 +51,7 @@ Diese Tabelle enthält Einzelheiten `TridentOrchestrator` Attribute:
 | `enableNodePrep` | Automatische Verwaltung der Abhängigkeiten von Workers Node (*BETA*) | Falsch 
 
 
-| `autosupportImage` | Das Container-Image für AutoSupport Telemetrie | „netapp/Trident-Autosupport:22.10.0“ 
+| `autosupportImage` | Das Container-Image für AutoSupport Telemetrie | „netapp/Trident-Autosupport:23.01.0“ 
 
 
 | `autosupportProxy` | Die Adresse/der Port eines Proxys zum Senden von AutoSupport Telemetrie | "http://proxy.example.com:8888"[] 
@@ -77,6 +77,12 @@ Diese Tabelle enthält Einzelheiten `TridentOrchestrator` Attribute:
 
 
 | `imagePullSecrets` | Secrets, um Bilder aus einer internen Registrierung zu ziehen |  
+
+
+| `imagePullPolicy` | Legt die BildPull-Richtlinie für den Trident-Operator fest. Gültige Werte sind:
+`Always` Um immer das Bild zu ziehen.
+`IfNotPresent` Nur wenn das Image nicht auf dem Node vorhanden ist, soll das Image kopiert werden.
+`Never` Nie das Bild ziehen. | `IfNotPresent` 
 
 
 | `controllerPluginNodeSelector` | Zusätzliche Node-Selektoren für Pods mit dem Trident Controller CSI Plugin Entspricht dem gleichen Format wie pod.spec.nodeSelector. | Kein Standard; optional 
@@ -145,7 +151,7 @@ Dieses Beispiel zeigt die Bereitstellung auf einem Windows Worker-Knoten.
 
 [listing]
 ----
-$ cat deploy/crds/tridentorchestrator_cr.yaml
+cat deploy/crds/tridentorchestrator_cr.yaml
 apiVersion: trident.netapp.io/v1
 kind: TridentOrchestrator
 metadata:

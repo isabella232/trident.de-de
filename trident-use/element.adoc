@@ -16,7 +16,7 @@ Erfahren Sie, wie Sie mit Ihrer Astra Trident Installation ein Element Backend e
 .Was Sie benötigen
 * Ein unterstütztes Storage-System, auf dem die Element Software ausgeführt wird.
 * Anmeldedaten für einen NetApp HCI/SolidFire Cluster-Administrator oder einen Mandantenbenutzer, der Volumes managen kann
-* Alle Kubernetes-Worker-Nodes sollten die entsprechenden iSCSI-Tools installiert haben. Siehe link:../trident-use/worker-node-prep.html["Informationen zur Vorbereitung auf den Worker-Node"^].
+* Alle Kubernetes-Worker-Nodes sollten die entsprechenden iSCSI-Tools installiert haben. Siehe link:../trident-use/worker-node-prep.html["Informationen zur Vorbereitung auf den Worker-Node"].
 
 
 .Was Sie wissen müssen
@@ -135,9 +135,6 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 WARNING: Verwenden Sie es nicht `debugTraceFlags` Es sei denn, Sie beheben Fehler und benötigen einen detaillierten Log Dump.
 
 
-NOTE: Astra Trident kopiert bei allen erstellten Volumes alle auf einem Storage-Pool vorhandenen Beschriftungen in die zugrunde liegende Storage-LUN zum Zeitpunkt der Bereitstellung. Storage-Administratoren können Labels pro Storage-Pool definieren und alle Volumes gruppieren, die in einem Storage-Pool erstellt wurden. Dies bietet eine praktische Möglichkeit, Volumes anhand einer Reihe anpassbarer Etiketten, die in der Backend-Konfiguration bereitgestellt werden, zu unterscheiden.
-
-
 
 == Beispiel 1: Back-End-Konfiguration für `solidfire-san` Treiber mit drei Lautstärketypen
 
@@ -160,11 +157,13 @@ Dieses Beispiel zeigt eine Backend-Datei mit CHAP-Authentifizierung und Modellie
 ----
 
 
-== Beispiel 2: Back-End- und Storage-Class-Konfiguration für `solidfire-san` Treiber mit virtuellen Speicherpools
+== Beispiel 2: Back-End- und Storage-Class-Konfiguration für `solidfire-san` Treiber mit virtuellen Pools
 
-Dieses Beispiel zeigt die mit virtuellen Speicherpools und StorageClasses konfigurierte Back-End-Definitionsdatei.
+Dieses Beispiel zeigt die mit virtuellen Pools zusammen mit StorageClasses konfigurierte Back-End-Definitionsdatei.
 
-In der unten gezeigten Beispiel-Backend-Definitionsdatei werden für alle Speicherpools spezifische Standardwerte festgelegt, die die definieren `type` Bei Silver. Die virtuellen Speicherpools werden im definiert `storage` Abschnitt. In diesem Beispiel legt ein Teil des Speicherpools seinen eigenen Typ fest, und einige Pools überschreiben die oben festgelegten Standardwerte.
+Astra Trident kopiert beim Provisioning die auf einem Storage-Pool vorhandenen Labels auf die Back-End-Storage-LUN. Storage-Administratoren können Labels je virtuellen Pool definieren und Volumes nach Label gruppieren.
+
+In der unten gezeigten Beispiel-Backend-Definitionsdatei werden für alle Speicherpools spezifische Standardwerte festgelegt, die die definieren `type` Bei Silver. Die virtuellen Pools werden im definiert `storage` Abschnitt. In diesem Beispiel legt ein Teil des Speicherpools seinen eigenen Typ fest, und einige Pools überschreiben die oben festgelegten Standardwerte.
 
 [listing]
 ----
@@ -206,9 +205,9 @@ In der unten gezeigten Beispiel-Backend-Definitionsdatei werden für alle Speich
     ]
 }
 ----
-Die folgenden StorageClass-Definitionen beziehen sich auf die oben genannten virtuellen Speicherpools. Verwenden der `parameters.selector` Feld gibt in jeder StorageClass an, welche virtuellen Pools zum Hosten eines Volumes verwendet werden können. Auf dem Volume werden die Aspekte im ausgewählten virtuellen Pool definiert.
+Die folgenden StorageClass-Definitionen beziehen sich auf die oben genannten virtuellen Pools. Verwenden der `parameters.selector` Feld gibt in jeder StorageClass an, welche virtuellen Pools zum Hosten eines Volumes verwendet werden können. Auf dem Volume werden die Aspekte im ausgewählten virtuellen Pool definiert.
 
-Die erste StorageClass (`solidfire-gold-four`) Wird dem ersten virtuellen Speicherpool zugeordnet. Dies ist der einzige Pool, der Gold Performance mit einem bietet `Volume Type QoS` Von Gold. Die letzte StorageClass (`solidfire-silver`) Bezeichnet jeden Speicherpool, der eine silberne Leistung bietet. Astra Trident entscheidet, welcher virtuelle Storage Pool ausgewählt wird und ob die Storage-Anforderungen erfüllt werden.
+Die erste StorageClass (`solidfire-gold-four`) Wird dem ersten virtuellen Pool zugeordnet. Dies ist der einzige Pool, der Gold Performance mit einem bietet `Volume Type QoS` Von Gold. Die letzte StorageClass (`solidfire-silver`) Bezeichnet jeden Speicherpool, der eine silberne Leistung bietet. Astra Trident entscheidet, welcher virtuelle Pool ausgewählt wird und stellt sicher, dass die Storage-Anforderungen erfüllt werden.
 
 [listing]
 ----

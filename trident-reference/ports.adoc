@@ -12,7 +12,11 @@ summary: Erfahren Sie mehr über die Anschlüsse, über die Astra Trident kommun
 
 
 [role="lead"]
-Erfahren Sie mehr über die Anschlüsse, über die Astra Trident kommuniziert.
+Erfahren Sie mehr über die Kommunikationsports von Astra Trident.
+
+
+
+== Astra Trident-Ports
 
 Astra Trident kommuniziert über folgende Ports:
 
@@ -33,4 +37,4 @@ Astra Trident kommuniziert über folgende Ports:
 | 17546 | Anschluss für Liveness/Readiness-Sonde, der von Trident Demonset-Pods verwendet wird 
 |===
 
-NOTE: Der Anschluss der Liveness/Readiness-Sonde kann während der Installationszeit mit dem geändert werden `--probe-port` Flagge. Es ist wichtig, sicherzustellen, dass dieser Port nicht von einem anderen Prozess auf den Worker-Knoten verwendet wird.
+NOTE: Der Anschluss der Liveness/Readiness-Sonde kann während der Installation mit dem geändert werden `--probe-port` Flagge. Es ist wichtig, sicherzustellen, dass dieser Port nicht von einem anderen Prozess auf den Worker-Knoten verwendet wird.

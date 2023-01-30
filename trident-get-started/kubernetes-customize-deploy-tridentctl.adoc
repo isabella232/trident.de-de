@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/kubernetes-customize-deploy-tridentctl.html 
-keywords: deploy, astra trident, methods, operator, tridentctl, helm, attributes, customize, tridentorchestrator 
+keywords: deploy, astra trident, methods, operator, tridentctl, helm, attributes, customize 
 summary: Mit dem Astra Trident Installer können Sie die Implementierung anpassen. 
 ---
-= Tridentctl-Implementierung anpassen
+= Die tridentctl-Installation anpassen
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,7 +12,7 @@ summary: Mit dem Astra Trident Installer können Sie die Implementierung anpasse
 
 
 [role="lead"]
-Mit dem Astra Trident Installer können Sie die Implementierung anpassen.
+Mit dem Astra Trident Installer können Sie die Installation anpassen.
 
 
 

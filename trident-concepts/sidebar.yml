@@ -10,7 +10,7 @@ entries:
   url: "/trident-concepts/provisioning.html"
 - title: Volume Snapshots
   url: "/trident-concepts/snapshots.html"
-- title: Virtuelle Storage-Pools
+- title: Virtuelle Pools
   url: "/trident-concepts/virtual-storage-pool.html"
 - title: Volume-Zugriffsgruppen
   url: "/trident-concepts/vol-access-groups.html"

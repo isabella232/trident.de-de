@@ -210,7 +210,11 @@ Es gibt eine Reihe von Faktoren, die bewertet werden müssen, wenn Sie herunters
 
 === Muss ich Management- und Daten-LIFs in einer ONTAP-Back-End-Definitionsdatei definieren?
 
-NetApp empfiehlt, beide in der Back-End-Definitionsdatei zu verwenden. Die Management-LIF ist jedoch die einzige Schnittstelle, die erforderlich ist.
+Die Management-LIF ist erforderlich. Logische Datenschnittstelle variiert:
+
+* ONTAP SAN: Nicht für iSCSI angeben. Astra Trident verwendet link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP selektive LUN-Zuordnung"^] Um die iSCI LIFs zu ermitteln, die für die Einrichtung einer Multi-Path-Sitzung erforderlich sind. Wenn eine Warnung erzeugt wird `dataLIF` Ist explizit definiert. Siehe link:trident-use/ontap-san-examples.html["ONTAP SAN-Konfigurationsoptionen und -Beispiele"] Entsprechende Details.
+* ONTAP-NAS: Wir empfehlen, anzugeben `dataLIF`. Falls nicht vorgesehen, ruft Astra Trident Daten-LIFs von der SVM ab. Sie können einen vollständig qualifizierten Domänennamen (FQDN) angeben, der für die NFS-Mount-Vorgänge verwendet werden soll. Damit können Sie ein Round-Robin-DNS zum Load-Balancing über mehrere Daten-LIFs erstellen. Siehe link:trident-use/ontap-nas-examples.html["ONTAP NAS-Konfigurationsoptionen und -Beispiele"] Entsprechende Details
+
 
 
 
@@ -234,7 +238,13 @@ Astra Trident 19.01 und höher unterstützt die Angabe eines Ports in der DataLI
 
 === Können IPv6-Adressen für das Management und die Daten-LIFs verwendet werden?
 
-Ja. Astra Trident 20.01 unterstützt die Definition von IPv6-Adressen für die Parameter ManagementLIF und DatenLIF für ONTAP-Back-Ends. Sie sollten sicherstellen, dass die Adresse der IPv6-Semantik entspricht und dass die managementLIF in eckigen Klammern definiert ist (z. B. ``[ec0d:6504:a9c1:ae67:53d1:4bdf:ab32:e233]``). Sie sollten außerdem sicherstellen, dass Astra Trident mithilfe der installiert ist ``--use-ipv6` Flag für Funktion über IPv6.
+Astra Trident unterstützt die Definition von IPv6-Adressen für:
+
+* `managementLIF` Und `dataLIF` Für ONTAP-NAS-Back-Ends.
+* `managementLIF` Für ONTAP-SAN-Back-Ends. Sie können nicht angeben `dataLIF` Auf einem ONTAP-SAN-Back-End
+
+
+Astra Trident muss über installiert sein ``--use-ipv6` Flag für Funktion über IPv6.
 
 
 
@@ -246,7 +256,7 @@ Ja, es ist möglich, die Backend-Management-LIF mithilfe des zu aktualisieren `t
 
 === Ist es möglich, die Daten-LIF auf dem Backend zu aktualisieren?
 
-Nein, es ist nicht möglich, die Daten-LIF auf dem Backend zu aktualisieren.
+Sie können die Daten-LIF auf aktualisieren `ontap-nas` Und `ontap-nas-economy` Nur.
 
 
 

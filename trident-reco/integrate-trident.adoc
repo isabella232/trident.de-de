@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-reco/integrate-trident.html 
-keywords: kubernetes, clusters, nodes, components, master, compute, fsx, flexgroup, flexvolume, solidfire, hci, virtual storage pool, cvs, gcp, volumes 
+keywords: kubernetes, clusters, nodes, components, master, compute, fsx, flexgroup, flexvolume, solidfire, hci, virtual pool, cvs, gcp, volumes 
 summary: Ein Kubernetes-Cluster besteht typischerweise aus zwei Node-Typen, die jeweils für unterschiedliche Funktionsaspekte zuständig sind. 
 ---
 = Integration Von Astra Trident
@@ -12,7 +12,7 @@ summary: Ein Kubernetes-Cluster besteht typischerweise aus zwei Node-Typen, die 
 
 
 [role="lead"]
-Zur Integration von Astra Trident erfordern die folgenden Design- und Architekturelemente Integration: Treiberauswahl und -Implementierung, Storage-Class-Design, Virtual Storage Pool Design, Persistent Volume Claim (PVC) Einfluss auf die Storage-Bereitstellung, auf den Volume-Betrieb und die OpenShift-Serviceimplementierung mit Astra Trident.
+Zur Integration von Astra Trident erfordern die folgenden Design- und Architekturelemente Integration: Treiberauswahl und -Implementierung, Storage-Class-Design, Virtual Pool Design, Persistent Volume Claim (PVC) Einfluss auf die Storage-Bereitstellung, auf den Volume-Betrieb und die OpenShift-Serviceimplementierung mit Astra Trident.
 
 
 
@@ -124,28 +124,35 @@ Fußnote: Yesfootnote:1[]: Nicht verwaltet durch Astra Trident
 
 
 
-=== Cloud Volumes Service mit GCP-Backend-Treibern
+=== Cloud Volumes Service auf Google Cloud Backend-Treiber
 
-Astra Trident verwendet den `gcp-cvs` Der mit dem Cloud Volumes Service auf dem GCP-Backend verknüpft wird. Zur Konfiguration des GCP-Backend auf Trident ist angegeben erforderlich `projectNumber`, `apiRegion`, und `apiKey` In der Backend-Datei. Die Projektnummer kann im GCP Webportal gefunden werden. Der API-Schlüssel muss jedoch aus der privaten Schlüssel-Datei der Service-Konten stammen, die Sie beim Einrichten eines API-Zugriffs für Cloud Volumes auf GCP erstellt haben. Astra Trident kann CVS Volumes in einem von zwei erstellen link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-types["Servicetypen"^]:
+Astra Trident verwendet den `gcp-cvs` Treiber zur Verbindung mit der Cloud Volumes Service in der Google Cloud.
 
-. *CVS*: Der Basis-CVS-Service-Typ, der eine hohe zonale Verfügbarkeit bei eingeschränkter/moderater Performance bietet.
-. *CVS-Performance*: Performance-optimierter Service-Typ, der sich am besten für Produktions-Workloads mit Performance-Werten eignet. Sie haben die Wahl zwischen drei verschiedenen Service-Leveln [`standard`, `premium`, und `extreme`].
+Der `gcp-cvs` Der Treiber verwendet virtuelle Pools, um das Backend zu abstrahieren und Astra Trident zu ermöglichen, die Volume-Platzierung zu bestimmen. Der Administrator definiert die virtuellen Pools im `backend.json` Dateien: Storage-Klassen verwenden Selektoren, um virtuelle Pools nach Etikett zu identifizieren.
+
+* Wenn virtuelle Pools im Backend definiert werden, versucht Astra Trident, ein Volume in den Google Cloud Storage-Pools zu erstellen, zu denen diese virtuellen Pools begrenzt sind.
+* Wenn virtuelle Pools nicht im Backend definiert sind, wählt Astra Trident aus den verfügbaren Storage-Pools der Region einen Google Cloud Storage-Pool aus.
 
 
-Die minimale Volume-Größe von CVS und CVS-Performance beträgt 100 gib.
+Um das Google Cloud-Backend auf Astra Trident zu konfigurieren, müssen Sie angeben `projectNumber`, `apiRegion`, und `apiKey` In der Backend-Datei. Die Projektnummer finden Sie in der Google Cloud-Konsole. Der API-Schlüssel wird aus der Datei mit dem privaten Schlüssel des Dienstkontos entnommen, die Sie beim Einrichten des API-Zugriffs für Cloud Volumes Service in der Google Cloud erstellt haben.
+
+Weitere Informationen zu Cloud Volumes Service zu Google Cloud-Servicetypen und Service Levels finden Sie unter link:../trident-use/gcp.html["Erfahren Sie mehr über Astra Trident Support für CVS für GCP"].
 
 [cols="20,10,10,10,10,10,10"]
 |===
-| CVS für GCP-Treiber | Snapshots | Klone | Multi-Anschluss | QoS | Erweitern | Replizierung 
+| Cloud Volumes Service für Google Cloud Treiber | Snapshots | Klone | Multi-Anschluss | QoS | Erweitern | Replizierung 
 
 
-| `gcp-cvs` | Ja. | Ja. | Ja. | Ja. | Ja. | Yesfootnote:1[] 
+| `gcp-cvs` | Ja. | Ja. | Ja. | Ja. | Ja. | Nur für den CVS-Performance-Diensttyp verfügbar. 
 |===
-[verse]
-Fußnote: Yesfootnote:1[]: Nicht verwaltet durch Astra Trident
+[NOTE]
+====
+.Hinweise zur Replikation
+* Replizierung wird nicht durch Astra Trident gemanagt.
+* Der Klon wird im selben Speicherpool erstellt wie das Quell-Volume.
 
-Der `gcp-cvs` Treiber verwendet virtuelle Speicherpools. Virtuelle Storage Pools abstrahieren das Back-End und lassen Astra Trident die Volume-Platzierung entscheiden. Der Administrator definiert die virtuellen Speicher-Pools in der Back-End.json-Datei(en). Storage-Klassen identifizieren die virtuellen Storage-Pools mithilfe von Labels.
 
+====
 
 
 == Design der Storage-Klasse
@@ -176,38 +183,38 @@ Storage-Klassen ermöglichen die direkte Volume-Bereitstellung an einem bestimmt
 
 
 
-=== Virtuelle Storage-Pools
+=== Virtuelle Pools
 
-Virtual Storage Pools sind für alle Astra Trident Back-Ends verfügbar. Sie können virtuelle Storage-Pools für jedes Backend mit jedem Treiber von Astra Trident definieren.
+Virtuelle Pools sind für alle Astra Trident Back-Ends verfügbar. Sie können virtuelle Pools für jedes Backend mit jedem Treiber von Astra Trident definieren.
 
-Mit virtuellen Storage-Pools kann ein Administrator eine Abstraktionsebene für Back-Ends erstellen, auf die über Storage-Klassen verwiesen werden kann. So werden Volumes flexibler und effizienter auf Back-Ends platziert. Verschiedene Back-Ends können mit derselben Serviceklasse definiert werden. Darüber hinaus können mehrere Storage Pools auf demselben Backend erstellt werden, jedoch mit unterschiedlichen Eigenschaften. Wenn eine Storage Class mit einem Selector mit den speziellen Beschriftungen konfiguriert ist, wählt Astra Trident ein Backend, das mit allen Auswahletiketten übereinstimmt, um das Volume zu platzieren. Wenn die Storage Class Selector mit mehreren Storage Pools übereinstimmt, wählt Astra Trident einen von ihnen für die Bereitstellung des Volume aus.
-
-
-
-== Virtual Storage Pool Design
-
-Beim Erstellen eines Backend können Sie im Allgemeinen eine Reihe von Parametern angeben. Der Administrator konnte kein weiteres Back-End mit denselben Storage Credentials und anderen Parametern erstellen. Mit der Einführung von Virtual Storage Pools hat sich dieses Problem gelindert. Virtual Storage Pools ist eine Ebene-Abstraktion, die zwischen dem Backend und der Kubernetes Storage Class eingeführt wird. Der Administrator kann Parameter zusammen mit Labels definieren, die über Kubernetes Storage Classes als Selektion auf Backend-unabhängige Weise über Kubernetes Storage Classes referenziert werden können. Virtual Storage Pools können mit Astra Trident für alle unterstützten NetApp Back-Ends definiert werden. Dazu zählen SolidFire/NetApp HCI, ONTAP, Cloud Volumes Service auf GCP und Azure NetApp Files.
+Mit virtuellen Pools kann ein Administrator eine Abstraktionsebene über Back-Ends erstellen, auf die über Storage-Klassen verwiesen werden kann. So werden Volumes auf Back-Ends flexibler und effizienter platziert. Verschiedene Back-Ends können mit derselben Serviceklasse definiert werden. Darüber hinaus können mehrere Storage Pools auf demselben Backend erstellt werden, jedoch mit unterschiedlichen Eigenschaften. Wenn eine Storage Class mit einem Selector mit den speziellen Beschriftungen konfiguriert ist, wählt Astra Trident ein Backend, das mit allen Auswahletiketten übereinstimmt, um das Volume zu platzieren. Wenn die Storage Class Selector mit mehreren Storage Pools übereinstimmt, wählt Astra Trident einen von ihnen für die Bereitstellung des Volume aus.
 
 
-NOTE: Bei der Definition von virtuellen Speicherpools wird empfohlen, nicht zu versuchen, die Reihenfolge vorhandener virtueller Pools in einer Backend-Definition neu anzuordnen. Es wird auch empfohlen, Attribute für einen vorhandenen virtuellen Pool nicht zu bearbeiten/zu ändern und stattdessen einen neuen virtuellen Pool zu definieren.
+
+== Virtual Pool Design
+
+Beim Erstellen eines Backend können Sie im Allgemeinen eine Reihe von Parametern angeben. Der Administrator konnte kein weiteres Back-End mit denselben Storage Credentials und anderen Parametern erstellen. Mit der Einführung von virtuellen Pools wurde dieses Problem behoben. Virtual Pools ist eine Ebene-Abstraktion, die zwischen dem Backend und der Kubernetes Storage Class eingeführt wird. So kann der Administrator Parameter zusammen mit Labels definieren, die über Kubernetes Storage Klassen als Selektion auf Backend-unabhängige Weise referenziert werden können. Virtuelle Pools können mit Astra Trident für alle unterstützten NetApp Back-Ends definiert werden. Dazu zählen SolidFire/NetApp HCI, ONTAP, Cloud Volumes Service auf GCP und Azure NetApp Files.
+
+
+NOTE: Bei der Definition von virtuellen Pools wird empfohlen, nicht zu versuchen, die Reihenfolge vorhandener virtueller Pools in einer Backend-Definition neu anzuordnen. Es wird auch empfohlen, Attribute für einen vorhandenen virtuellen Pool nicht zu bearbeiten/zu ändern und stattdessen einen neuen virtuellen Pool zu definieren.
 
 
 
 === Emulation verschiedener Service-Level/QoS
 
-Es ist möglich, virtuelle Speicherpools für die Emulation von Serviceklassen zu entwerfen. Untersuchen wir mit der Implementierung des virtuellen Pools für den Cloud Volume Service für Azure NetApp Files, wie wir verschiedene Serviceklassen einrichten können. Konfigurieren Sie das ANF-Backend mit mehreren Etiketten, die unterschiedliche Leistungsstufen darstellen. Einstellen `servicelevel` Dem entsprechenden Leistungslevel hinzuzufügen und unter jeder Beschriftung weitere erforderliche Aspekte hinzuzufügen. Erstellen Sie nun verschiedene Kubernetes Storage-Klassen, die verschiedenen virtuellen Storage-Pools zugeordnet werden würden. Verwenden der `parameters.selector` Feld, jede StorageClass ruft auf, welche virtuellen Pools zum Hosten eines Volumes verwendet werden dürfen.
+Es ist möglich, virtuelle Pools zur Emulation von Serviceklassen zu entwerfen. Untersuchen wir mit der Implementierung des virtuellen Pools für den Cloud Volume Service für Azure NetApp Files, wie wir verschiedene Serviceklassen einrichten können. Konfigurieren Sie das ANF-Backend mit mehreren Etiketten, die unterschiedliche Leistungsstufen darstellen. Einstellen `servicelevel` Dem entsprechenden Leistungslevel hinzuzufügen und unter jeder Beschriftung weitere erforderliche Aspekte hinzuzufügen. Erstellen Sie nun verschiedene Kubernetes Storage-Klassen, die verschiedenen virtuellen Pools zugeordnet werden würden. Verwenden der `parameters.selector` Feld, jede StorageClass ruft auf, welche virtuellen Pools zum Hosten eines Volumes verwendet werden dürfen.
 
 
 
 === Zuweisen eines spezifischen Satzes von Aspekten
 
-Mehrere Virtual Storage Pools mit bestimmten Aspekten können über ein einzelnes Storage-Back-End entwickelt werden. Konfigurieren Sie dazu das Backend mit mehreren Beschriftungen und legen Sie die erforderlichen Aspekte unter jedem Etikett fest. Erstellen Sie jetzt mit dem verschiedene Kubernetes-Storage-Klassen `parameters.selector` Feld, das verschiedenen virtuellen Speicherpools zugeordnet werden würde. Die Volumes, die im Backend bereitgestellt werden, werden im ausgewählten virtuellen Storage-Pool über die Aspekte definiert.
+Mehrere virtuelle Pools mit spezifischen Aspekten können über ein einzelnes Storage-Back-End entwickelt werden. Konfigurieren Sie dazu das Backend mit mehreren Beschriftungen und legen Sie die erforderlichen Aspekte unter jedem Etikett fest. Erstellen Sie jetzt mit dem verschiedene Kubernetes-Storage-Klassen `parameters.selector` Feld, das verschiedenen virtuellen Pools zugeordnet werden würde. Die Volumes, die im Backend bereitgestellt werden, werden im ausgewählten virtuellen Pool über die Aspekte definiert.
 
 
 
 === PVC-Merkmale, die die Storage-Bereitstellung beeinflussen
 
-Einige Parameter außerhalb der angeforderten Storage-Klasse können sich auf den Entscheidungsvorgang von Astra Trident bei der Bereitstellung von PVC auswirken.
+Einige Parameter außerhalb der angeforderten Storage-Klasse können sich bei der Erstellung eines PVC auf den Entscheidungsprozess von Astra Trident auswirken.
 
 
 

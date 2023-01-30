@@ -147,8 +147,8 @@ Oder https://docs.docker.com/engine/install/["Befolgen Sie die Anweisungen für 
 +
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v22.10.0/trident-installer-22.10.0.tar.gz
-tar zxf trident-installer-22.10.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v23.01.0/trident-installer-23.01.0.tar.gz
+tar zxf trident-installer-23.01.0.tar.gz
 ----
 .. Verschieben Sie zu einer Position im bin-Pfad:
 +
@@ -221,7 +221,7 @@ docker volume rm trident_2
 
 == Starten Sie Astra Trident beim Systemstart
 
-Eine Beispieldatei für systembasierte Systeme finden Sie unter `contrib/trident.service.example` Im Git Repo. Gehen Sie wie folgt vor, um die Datei mit CentOS 7/RHEL zu verwenden:
+Eine Beispieldatei für systembasierte Systeme finden Sie unter `contrib/trident.service.example` Im Git Repo. Gehen Sie wie folgt vor, um die Datei mit RHEL zu verwenden:
 
 . Kopieren Sie die Datei an den richtigen Speicherort.
 +

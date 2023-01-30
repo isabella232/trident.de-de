@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/worker-node-prep.html 
-keywords: storage class, manage storage class, storage classes, kubernetes storage classes, worker node, nfs, iscsi, kubernetes clusters 
+keywords: storage class, manage storage class, storage classes, kubernetes storage classes, worker node, nfs, iscsi, kubernetes clusters, self-healing, healing 
 summary: Alle Worker-Nodes im Kubernetes Cluster müssen in der Lage sein, die Volumes, die Sie für Ihre Pods bereitgestellt haben, zu mounten. Wenn Sie den ontap-nas, den ontap-nas-Economy-, ontap-nas-Flexgroup-Treiber für ein Ihrer Back-Ends verwenden, benötigen die Worker-Nodes die NFS-Tools. Anderenfalls sind iSCSI-Tools erforderlich. 
 ---
 = Bereiten Sie den Knoten „Worker“ vor
@@ -11,63 +11,111 @@ summary: Alle Worker-Nodes im Kubernetes Cluster müssen in der Lage sein, die V
 :imagesdir: ../media/
 
 
-Alle Worker-Nodes im Kubernetes Cluster müssen in der Lage sein, die Volumes, die Sie für Ihre Pods bereitgestellt haben, zu mounten. Wenn Sie das verwenden `ontap-nas`, `ontap-nas-economy`, Oder `ontap-nas-flexgroup` Ein Treiber für eines Ihrer Back-Ends werden für Ihre Mitarbeiter-Nodes die NFS-Tools benötigt. Anderenfalls sind iSCSI-Tools erforderlich.
+[role="lead"]
+Alle Worker-Nodes im Kubernetes-Cluster müssen in der Lage sein, die Volumes, die Sie für Ihre Pods bereitgestellt haben, zu mounten. Um die Worker-Knoten vorzubereiten, müssen Sie die NFS- oder iSCSI-Tools auf der Grundlage Ihrer Treiberauswahl installieren.
 
-Aktuelle Versionen von RedHat CoreOS haben standardmäßig sowohl NFS als auch iSCSI installiert.
 
 
-WARNING: Nach der Installation der NFS- oder iSCSI-Tools sollten Sie die Worker-Nodes immer neu booten, oder das Anbinden von Volumes an Container kann fehlschlagen.
+== Auswahl der richtigen Werkzeuge
+
+Wenn Sie eine Kombination von Treibern verwenden, sollten Sie NFS- und iSCSI-Tools installieren.
+
+.NFS Tools
+Installieren Sie die NFS Tools, sofern Sie Folgendes verwenden: `ontap-nas`, `ontap-nas-economy`, `ontap-nas-flexgroup`, `azure-netapp-files`, `gcp-cvs`
+
+.ISCSI-Tools
+Installieren Sie die iSCSI-Tools, wenn Sie Folgendes verwenden: `ontap-san`, `ontap-san-economy`, `solidfire-san`
+
+
+NOTE: In aktuellen Versionen von RedHat CoreOS sind standardmäßig NFS und iSCSI installiert.
 
 
 
 == Ermittlung des Node-Service
 
-Ab 22.07 versucht Astra Trident automatisch zu erkennen, ob der Node in der Lage ist, iSCSI- oder NFS-Dienste auszuführen. Astra Trident erstellt Ereignisse für den Node zur Identifizierung der erkannten Services. Sie können diese Ereignisse mit dem Befehl überprüfen:
+Astra Trident versucht automatisch zu erkennen, ob der Node iSCSI- oder NFS-Services ausführen kann.
+
+
+NOTE: Die Ermittlung des Node-Service erkennt erkannte Services, gewährleistet jedoch nicht, dass Services ordnungsgemäß konfiguriert wurden. Umgekehrt kann das Fehlen eines entdeckten Service nicht garantieren, dass die Volume-Bereitstellung fehlschlägt.
+
+.Überprüfen Sie Ereignisse
+Astra Trident erstellt Ereignisse für den Node zur Identifizierung der erkannten Services. Um diese Ereignisse zu überprüfen, führen Sie folgende Schritte aus:
 
 [listing]
 ----
 kubectl get event -A --field-selector involvedObject.name=<Kubernetes node name>
 ----
-Trident identifiziert außerdem für jeden Node auf der Trident Node CR aktivierte Services. Um die ermittelten Dienste anzuzeigen, verwenden Sie den Befehl:
+.Überprüfen Sie erkannte Services
+Astra Trident erkennt aktivierte Services für jeden Knoten auf der Trident Node CR. Um die ermittelten Dienste anzuzeigen, führen Sie folgende Schritte aus:
 
 [listing]
 ----
 tridentctl get node -o wide -n <Trident namespace>
 ----
 
-NOTE: Die Ermittlung des Node-Service erkennt erkannte Services, gewährleistet jedoch nicht, dass Services ordnungsgemäß konfiguriert wurden. Umgekehrt kann das Fehlen eines entdeckten Service nicht garantieren, dass die Volume-Bereitstellung fehlschlägt.
-
-
 
 == NFS Volumes
 
-[cols="3*"]
-|===
-| Protokoll | Betriebssystem | Befehle 
+Installieren Sie die NFS-Tools unter Verwendung der Befehle für Ihr Betriebssystem. Stellen Sie sicher, dass der NFS-Dienst während des Bootens gestartet wird.
 
+[role="tabbed-block"]
+====
+.RHEL 8 ODER HÖHER
+--
+[listing]
+----
+sudo yum install -y nfs-utils
+----
+--
+.Ubuntu
+--
+[listing]
+----
+sudo apt-get install -y nfs-common
+----
+--
+====
 
-| NFS  a| 
-RHEL/CentOS 7
- a| 
-`sudo yum install -y nfs-utils`
-
-
-
-| NFS  a| 
-Ubuntu
- a| 
-`sudo apt-get install -y nfs-common`
-
-|===
-
-NOTE: Sie sollten sicherstellen, dass der NFS-Dienst während des Startvorgangs gestartet wird.
+WARNING: Starten Sie die Worker-Nodes nach der Installation der NFS-Tools neu, um einen Fehler beim Anschließen von Volumes an Container zu vermeiden.
 
 
 
 == ISCSI-Volumes
 
-Bei der Verwendung von iSCSI Volumes sollten folgende Punkte berücksichtigt werden:
+Astra Trident kann automatisch eine iSCSI-Sitzung einrichten, LUNs scannen und Multipath-Geräte erkennen, sie formatieren und auf einem Pod mounten.
 
+
+
+=== ISCSI-Funktionen zur Selbstreparatur
+
+Bei ONTAP Systemen führt Astra Trident alle fünf Minuten iSCSI-Selbstheilung aus und bietet folgende Vorteile:
+
+. * Identifizieren Sie den gewünschten iSCSI-Sitzungsstatus und den aktuellen iSCSI-Sitzungsstatus.
+. *Vergleichen* der gewünschte Zustand mit dem aktuellen Zustand, um notwendige Reparaturen zu identifizieren. Astra Trident ermittelt Reparaturprioritäten und wann Maßnahmen ergriffen werden müssen.
+. *Durchführung von Reparaturen* erforderlich, um den aktuellen iSCSI-Sitzungsstatus auf den gewünschten iSCSI-Sitzungsstatus zurückzusetzen.
+
+
+
+NOTE: Protokolle der Selbstheilungsaktivität befinden sich im `trident-main` Behälter auf dem jeweiligen Demonset Pod. Um Protokolle anzuzeigen, müssen Sie festgelegt haben `debug` Auf „true“ bei der Installation von Astra Trident zu setzen.
+
+Astra Trident iSCSI-Funktionen zur Selbstheilung verhindern:
+
+* Veraltete oder ungesunde iSCSI-Sitzungen, die nach einem Problem mit der Netzwerkverbindung auftreten können Im Falle einer veralteten Sitzung wartet Astra Trident sieben Minuten vor der Anmeldung, um die Verbindung mit einem Portal wiederherzustellen.
++
+
+NOTE: Wenn beispielsweise CHAP-Schlüssel auf dem Speicher-Controller gedreht wurden und die Verbindung zum Netzwerk unterbrochen wird, können die alten (_Inated_) CHAP-Schlüssel bestehen bleiben. Selbstheilung kann dies erkennen und die Sitzung automatisch wiederherstellen, um die aktualisierten CHAP-Schlüssel anzuwenden.
+
+* ISCSI-Sitzungen fehlen
+* LUNs sind nicht vorhanden
+
+
+
+
+=== Installieren Sie die iSCSI-Tools
+
+Installieren Sie die iSCSI-Tools mit den Befehlen für Ihr Betriebssystem.
+
+.Bevor Sie beginnen
 * Jeder Node im Kubernetes-Cluster muss über einen eindeutigen IQN verfügen. *Dies ist eine notwendige Voraussetzung*.
 * Bei Verwendung von RHCOS Version 4.5 oder höher oder einer anderen RHEL-kompatiblen Linux-Distribution mit dem `solidfire-san` Treiber und Element OS 12.5 oder früher: Stellen Sie sicher, dass der CHAP-Authentifizierungsalgorithmus auf MD5 in eingestellt ist `/etc/iscsi/iscsid.conf`. Sichere, FIPS-konforme CHAP-Algorithmen SHA1, SHA-256 und SHA3-256 sind mit Element 12.7 erhältlich.
 +
@@ -75,87 +123,108 @@ Bei der Verwendung von iSCSI Volumes sollten folgende Punkte berücksichtigt wer
 ----
 sudo sed -i 's/^\(node.session.auth.chap_algs\).*/\1 = MD5/' /etc/iscsi/iscsid.conf
 ----
-* Wenn Sie Worker-Nodes verwenden, die RHEL/RedHat CoreOS mit iSCSI PVS ausführen, stellen Sie sicher, dass die angegeben werden `discard` MountOption in StorageClass für die Inline-Speicherplatzrückgewinnung. Siehe https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Die Dokumentation von redhat"^].
+* Geben Sie bei Verwendung von Worker-Nodes, die RHEL/RedHat CoreOS mit iSCSI PVS ausführen, die an `discard` MountOption in StorageClass für die Inline-Speicherplatzrückgewinnung. Siehe https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Die Dokumentation von redhat"^].
 
 
-[cols="3*"]
-|===
-| Protokoll | Betriebssystem | Befehle 
-
-
-| ISCSI  a| 
-RHEL/CentOS
- a| 
+[role="tabbed-block"]
+====
+.RHEL 8 ODER HÖHER
+--
 . Installieren Sie die folgenden Systempakete:
 +
-`sudo yum install -y lsscsi iscsi-initiator-utils sg3_utils device-mapper-multipath`
-
+[listing]
+----
+sudo yum install -y lsscsi iscsi-initiator-utils sg3_utils device-mapper-multipath
+----
 . Überprüfen Sie, ob die Version von iscsi-Initiator-utils 6.2.0.874-2.el7 oder höher ist:
 +
-`rpm -q iscsi-initiator-utils`
-
+[listing]
+----
+rpm -q iscsi-initiator-utils
+----
 . Scannen auf manuell einstellen:
 +
-`sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf`
-
+[listing]
+----
+sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
+----
 . Multipathing aktivieren:
 +
-`sudo mpathconf --enable --with_multipathd y --find_multipaths n`
-
+[listing]
+----
+sudo mpathconf --enable --with_multipathd y --find_multipaths n
+----
 +
 
 NOTE: Unbedingt `etc/multipath.conf` Enthält `find_multipaths no` Unter `defaults`.
 
 . Stellen Sie das sicher `iscsid` Und `multipathd` Laufen:
 +
-`sudo systemctl enable --now iscsid multipathd`
-
+[listing]
+----
+sudo systemctl enable --now iscsid multipathd
+----
 . Aktivieren und starten `iscsi`:
 +
-`sudo systemctl enable --now iscsi`
+[listing]
+----
+sudo systemctl enable --now iscsi
+----
 
 
-
-
-
-| ISCSI  a| 
-Ubuntu
- a| 
+--
+.Ubuntu
+--
 . Installieren Sie die folgenden Systempakete:
 +
-`sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools`
-
+[listing]
+----
+sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
+----
 . Stellen Sie sicher, dass Open-iscsi-Version 2.0.874-5ubuntu2.10 oder höher (für bionic) oder 2.0.874-7.1ubuntu6.1 oder höher (für Brennweite) ist:
 +
-`dpkg -l open-iscsi`
-
+[listing]
+----
+dpkg -l open-iscsi
+----
 . Scannen auf manuell einstellen:
 +
-`sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf`
-
+[listing]
+----
+sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
+----
 . Multipathing aktivieren:
 +
-`sudo tee /etc/multipath.conf <<-'EOF'
+[listing]
+----
+sudo tee /etc/multipath.conf <<-'EOF
 defaults {
     user_friendly_names yes
     find_multipaths no
 }
 EOF
 sudo systemctl enable --now multipath-tools.service
-sudo service multipath-tools restart`
-
+sudo service multipath-tools restart
+----
 +
 
 NOTE: Unbedingt `etc/multipath.conf` Enthält `find_multipaths no` Unter `defaults`.
 
 . Stellen Sie das sicher `open-iscsi` Und `multipath-tools` Sind aktiviert und läuft:
 +
-`sudo systemctl status multipath-tools`
-`sudo systemctl enable --now open-iscsi.service`
-`sudo systemctl status open-iscsi`
-
-
-
-|===
+[listing]
+----
+sudo systemctl status multipath-tools
+sudo systemctl enable --now open-iscsi.service
+sudo systemctl status open-iscsi
+----
++
 
 NOTE: Für Ubuntu 18.04, müssen Sie Ziel-Ports mit erkennen `iscsiadm` Vor dem Start `open-iscsi` Damit der iSCSI-Daemon gestartet werden kann. Alternativ können Sie den ändern `iscsi` Dienst zu starten `iscsid` Automatisch
+
+
+
+--
+====
+
+WARNING: Starten Sie die Worker-Knoten nach der Installation der iSCSI-Tools neu, um Fehler beim Anschließen von Volumes an Container zu vermeiden.

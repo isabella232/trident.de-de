@@ -12,7 +12,7 @@ summary: Nach der Implementierung von Astra Trident können Sie mit der Erstellu
 
 
 [role="lead"]
-Nach der Implementierung von Astra Trident können Sie mit der Erstellung eines Backend, der Erstellung einer Storage-Klasse, der Bereitstellung eines Volumes und dem Mounten des Volumes in einem Pod fortfahren.
+Nach der Installation von Astra Trident können Sie mit dem Erstellen eines Backends fortfahren, eine Storage-Klasse erstellen, ein Volume bereitstellen und das Volume in einem Pod mounten.
 
 
 

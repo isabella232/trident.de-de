@@ -11,7 +11,7 @@ summary: 'Sie können Azure NetApp Files (ANF) als Backend für Astra Trident ko
 :imagesdir: ../media/
 
 
-Sie können Azure NetApp Files (ANF) als Backend für Astra Trident konfigurieren. Sie können NAS- und SMB-Volumes über ein ANF-Backend verbinden.
+Sie können Azure NetApp Files (ANF) als Backend für Astra Trident konfigurieren. Sie können NFS- und SMB-Volumes über ein ANF-Backend anschließen.
 
 * link:anf-prep.html["Vorbereitung"]
 * link:anf-examples.html["Konfigurationsoptionen und Beispiele"]

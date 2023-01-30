@@ -33,16 +33,16 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 | `backendName` | Benutzerdefinierter Name oder das Storage-Backend | Treibername + „_“ + DatenLIF 
 
 
-| `managementLIF` | IP-Adresse eines Clusters oder SVM-Management-LIF für nahtlose MetroCluster-Umschaltung müssen Sie eine SVM-Management-LIF angeben. | „10.0.0.1“, „[2001:1234:abcd::fefe]“ 
+| `managementLIF` | IP-Adresse eines Clusters oder SVM-Management-LIF für nahtlose MetroCluster-Umschaltung müssen Sie eine SVM-Management-LIF angeben. Es kann ein vollständig qualifizierter Domänenname (FQDN) angegeben werden. Kann so eingestellt werden, dass IPv6-Adressen verwendet werden, wenn Astra Trident mit installiert wurde `--use-ipv6` Flagge. IPv6-Adressen müssen in eckigen Klammern definiert werden, z. B. [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]. | „10.0.0.1“, „[2001:1234:abcd::fefe]“ 
 
 
-| `dataLIF` | IP-Adresse des LIF-Protokolls. Verwenden Sie eckige Klammern für IPv6. Kann nicht aktualisiert werden, nachdem Sie sie festgelegt haben | Abgeleitet von der SVM, sofern angegeben 
+| `dataLIF` | IP-Adresse des LIF-Protokolls. Wir empfehlen Ihnen, anzugeben `dataLIF`. Falls nicht vorgesehen, ruft Astra Trident Daten-LIFs von der SVM ab. Sie können einen vollständig qualifizierten Domänennamen (FQDN) angeben, der für die NFS-Mount-Vorgänge verwendet werden soll. Damit können Sie ein Round-Robin-DNS zum Load-Balancing über mehrere Daten-LIFs erstellen. Kann nach der Anfangseinstellung geändert werden. Siehe . Kann so eingestellt werden, dass IPv6-Adressen verwendet werden, wenn Astra Trident mit installiert wurde `--use-ipv6` Flagge. IPv6-Adressen müssen in eckigen Klammern definiert werden, z. B. [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]. | Angegebene Adresse oder abgeleitet von SVM, falls nicht angegeben (nicht empfohlen) 
 
 
-| `autoExportPolicy` | Automatische Erstellung von Exportrichtlinien aktivieren und [Boolean] aktualisieren | Falsch 
+| `autoExportPolicy` | Aktivieren Sie die automatische Erstellung von Exportrichtlinien und aktualisieren Sie [Boolean]. Verwenden der `autoExportPolicy` Und `autoExportCIDRs` Optionen: Astra Trident kann Exportrichtlinien automatisch verwalten. | Falsch 
 
 
-| `autoExportCIDRs` | Liste der CIDRs, um die Kubernetes-Knoten-IPs gegen Wann zu filtern `autoExportPolicy` Ist aktiviert | [„0.0.0.0/0“, „:/0“]` 
+| `autoExportCIDRs` | Liste der CIDRs, um die Kubernetes-Knoten-IPs gegen Wann zu filtern `autoExportPolicy` Ist aktiviert. Verwenden der `autoExportPolicy` Und `autoExportCIDRs` Optionen: Astra Trident kann Exportrichtlinien automatisch verwalten. | [„0.0.0.0/0“, „:/0“]` 
 
 
 | `labels` | Satz willkürlicher JSON-formatierter Etiketten für Volumes | „“ 
@@ -66,9 +66,6 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 | `svm` | Zu verwendende Storage Virtual Machine | Abgeleitet wenn eine SVM `managementLIF` Angegeben ist 
 
 
-| `igroupName` | Der Name der Initiatorgruppe für die zu verwendenden SAN Volumes | „Trident-<Backend-UUID>“ 
-
-
 | `storagePrefix` | Das Präfix wird beim Bereitstellen neuer Volumes in der SVM verwendet. Kann nicht aktualisiert werden, nachdem Sie sie festgelegt haben | „Dreizack“ 
 
 
@@ -78,54 +75,30 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 | `limitVolumeSize` | Bereitstellung fehlgeschlagen, wenn die angeforderte Volume-Größe über diesem Wert liegt. | „“ (nicht standardmäßig durchgesetzt) 
 
 
-| `lunsPerFlexvol` | Die maximale Anzahl an LUNs pro FlexVol muss im Bereich [50, 200] liegen. | „100“ 
+| „“ (nicht standardmäßig durchgesetzt) | `limitVolumeSize` | Bereitstellung fehlgeschlagen, wenn die angeforderte Volume-Größe über diesem Wert liegt. Schränkt auch die maximale Größe der Volumes ein, die es für qtrees und LUNs verwaltet, und auf ein `qtreesPerFlexvol` Mit Option kann die maximale Anzahl von qtrees pro FlexVol angepasst werden. 
 
 
-| `debugTraceFlags` | Fehler-Flags bei der Fehlerbehebung beheben. Beispiel: { „API“:false, „Methode“:true} | Null 
+| „“ (nicht standardmäßig durchgesetzt) | `lunsPerFlexvol` | Die maximale Anzahl an LUNs pro FlexVol muss im Bereich [50, 200] liegen. 
 
 
-| `nfsMountOptions` | Kommagetrennte Liste von NFS-Mount-Optionen | „“ 
+| „100“ | `debugTraceFlags` | Fehler-Flags bei der Fehlerbehebung beheben. Beispiel: { „API“:false, „Methode“:true} Verwenden Sie nicht `debugTraceFlags` Es sei denn, Sie beheben Fehler und benötigen einen detaillierten Log Dump. 
 
 
-| `qtreesPerFlexvol` | Maximale Ques pro FlexVol, muss im Bereich [50, 300] liegen | „200“ 
+| Null | `nfsMountOptions` | Kommagetrennte Liste von NFS-Mount-Optionen. Die Mount-Optionen für Kubernetes-persistente Volumes werden normalerweise in Storage-Klassen angegeben. Wenn jedoch keine Mount-Optionen in einer Storage-Klasse angegeben sind, stellt Astra Trident die Mount-Optionen bereit, die in der Konfigurationsdatei des Storage-Back-End angegeben sind. Wenn in der Storage-Klasse oder der Konfigurationsdatei keine Mount-Optionen angegeben sind, stellt Astra Trident keine Mount-Optionen für ein damit verbundener persistentes Volume fest. 
 
 
-| `useREST` | Boolescher Parameter zur Verwendung von ONTAP REST-APIs. *Tech Preview* wird mit MetroCluster nicht unterstützt. | Falsch 
+| „“ | `qtreesPerFlexvol` | Maximale Ques pro FlexVol, muss im Bereich [50, 300] liegen 
+
+
+| „200“ | `useREST` | Boolescher Parameter zur Verwendung von ONTAP REST-APIs. *Technische Vorschau*
+`useREST` Wird als **Tech-Vorschau bereitgestellt**, das für Testumgebungen und nicht für Produktions-Workloads empfohlen wird. Wenn eingestellt auf `true`, Astra Trident wird ONTAP REST APIs zur Kommunikation mit dem Backend verwenden. Diese Funktion erfordert ONTAP 9.11.1 und höher. Darüber hinaus muss die verwendete ONTAP-Login-Rolle Zugriff auf den haben `ontap` Applikation. Dies wird durch die vordefinierte zufrieden `vsadmin` Und `cluster-admin` Rollen:
+`useREST` Wird mit MetroCluster nicht unterstützt. 
 |===
-[WARNING]
-.<Code>useREST</Code> Überlegungen
-====
-* `useREST` Wird als **Tech-Vorschau bereitgestellt**, das für Testumgebungen und nicht für Produktions-Workloads empfohlen wird. Wenn eingestellt auf `true`, Astra Trident wird ONTAP REST APIs zur Kommunikation mit dem Backend verwenden. Diese Funktion erfordert ONTAP 9.10 und höher. Darüber hinaus muss die verwendete ONTAP-Login-Rolle Zugriff auf den haben `ontap` Applikation. Dies wird durch die vordefinierte zufrieden `vsadmin` Und `cluster-admin` Rollen:
-* `useREST` Wird mit MetroCluster nicht unterstützt.
 
 
-====
-Um mit dem ONTAP-Cluster zu kommunizieren, sollten Sie die Authentifizierungsparameter angeben. Dies kann der Benutzername/das Passwort für ein Sicherheitsanmeldung oder ein installiertes Zertifikat sein.
+=== Back-End-Konfigurationsoptionen für die Bereitstellung von Volumes
 
-
-WARNING: Wenn Sie ein Amazon FSX für das NetApp ONTAP-Backend verwenden, geben Sie das nicht an `limitAggregateUsage` Parameter. Der `fsxadmin` Und `vsadmin` Die von Amazon FSX für NetApp ONTAP bereitgestellten Rollen enthalten nicht die erforderlichen Zugriffsberechtigungen, um die Aggregatnutzung abzurufen und sie über Astra Trident zu begrenzen.
-
-
-WARNING: Verwenden Sie es nicht `debugTraceFlags` Es sei denn, Sie beheben Fehler und benötigen einen detaillierten Log Dump.
-
-
-NOTE: Denken Sie beim Erstellen eines Backend daran, dass das `dataLIF` Und `storagePrefix` Kann nach der Erstellung nicht geändert werden. Um diese Parameter zu aktualisieren, müssen Sie ein neues Backend erstellen.
-
-Für den kann ein vollständig qualifizierter Domänenname (FQDN) angegeben werden `managementLIF` Option. Ein FQDN kann auch für den angegeben werden `dataLIF` Option, in diesem Fall wird der FQDN für die NFS-Mount-Vorgänge verwendet. Auf diese Weise können Sie ein Round Robin-DNS für den Lastausgleich über mehrere Daten-LIFs hinweg erstellen.
-
- `managementLIF` Für alle ONTAP-Treiber können auch IPv6-Adressen eingestellt werden. Installieren Sie unbedingt Astra Trident mit dem `--use-ipv6` Flagge. Es ist darauf zu achten, das zu definieren `managementLIF` IPv6-Adresse innerhalb von eckigen Klammern.
-
-
-WARNING: Stellen Sie beim Verwenden von IPv6-Adressen sicher `managementLIF` Und `dataLIF` (Falls in Ihrer Backend-Definition enthalten) sind innerhalb eckiger Klammern definiert, wie [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]. Wenn `dataLIF` Ist nicht angegeben, holt Astra Trident die IPv6 Daten-LIFs von der SVM ab.
-
-Verwenden der `autoExportPolicy` Und `autoExportCIDRs` Optionen: CSI Trident kann Exportrichtlinien automatisch verwalten. Dies wird für alle ontap-nas-* Treiber unterstützt.
-
-Für das `ontap-nas-economy` Treiber, der `limitVolumeSize` Die Option beschränkt auch die maximale Größe der Volumes, die es für qtrees und LUNs verwaltet, sowie die `qtreesPerFlexvol` Mit Option kann die maximale Anzahl von qtrees pro FlexVol angepasst werden.
-
-Der `nfsMountOptions` Parameter kann verwendet werden, um Mount-Optionen festzulegen. Die Mount-Optionen für persistente Kubernetes-Volumes werden normalerweise in Storage-Klassen angegeben. Wenn jedoch keine Mount-Optionen in einer Storage-Klasse angegeben sind, wird Astra Trident zu den Mount-Optionen zurückkehren, die in der Konfigurationsdatei des Storage-Back-End angegeben sind. Wenn in der Storage-Klasse oder der Konfigurationsdatei keine Mount-Optionen angegeben sind, setzt Astra Trident keine Mount-Optionen für ein damit verbundener persistenter Volume ein.
-
-
-NOTE: Astra Trident setzt Provisioning-Labels im Feld „Kommentare“ aller Volumes, die mit erstellt wurden(`ontap-nas` Und(`ontap-nas-flexgroup`. Basierend auf dem verwendeten Treiber werden die Kommentare auf dem FlexVol festgelegt (`ontap-nas`) Oder FlexGroup (`ontap-nas-flexgroup`). Astra Trident kopiert zum Zeitpunkt der Bereitstellung alle auf einem Storage-Pool vorhandenen Labels auf das Storage-Volume. Storage-Administratoren können Labels pro Storage-Pool definieren und alle Volumes gruppieren, die in einem Storage-Pool erstellt wurden. Dies bietet eine praktische Möglichkeit, Volumes anhand einer Reihe anpassbarer Etiketten, die in der Backend-Konfiguration bereitgestellt werden, zu unterscheiden.
+Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults` Abschnitt der Konfiguration. Ein Beispiel finden Sie unten in den Konfigurationsbeispielen.
 
 
 
@@ -162,25 +135,32 @@ Mit diesen Optionen kann standardmäßig gesteuert werden, wie jedes Volume in e
 | `encryption` | Aktivieren Sie NetApp Volume Encryption (NVE) auf dem neuen Volume, standardmäßig aktiviert `false`. NVE muss im Cluster lizenziert und aktiviert sein, damit diese Option verwendet werden kann. Wenn NAE auf dem Backend aktiviert ist, wird jedes im Astra Trident bereitgestellte Volume NAE aktiviert. Weitere Informationen finden Sie unter: link:../trident-reco/security-reco.html["Astra Trident arbeitet mit NVE und NAE zusammen"]. | „Falsch“ 
 
 
-| `securityStyle` | Sicherheitstyp für neue Volumes | „unix“ 
-
-
 | `tieringPolicy` | Tiering-Richtlinie zur Verwendung von „keiner“ | „Nur Snapshot“ für eine ONTAP 9.5 SVM-DR-Konfiguration 
 
 
-| UnxPermissions | Modus für neue Volumes | „777“ 
+| `unixPermissions` | Modus für neue Volumes | „777“ für NFS Volumes; leer (nicht zutreffend) für SMB Volumes 
 
 
-| Snapshots | Steuert die Sichtbarkeit des `.snapshot` Verzeichnis | „Falsch“ 
+| `snapshotDir` | Steuert die Sichtbarkeit des `.snapshot` Verzeichnis | „Falsch“ 
 
 
-| Exportpolitik | Zu verwendende Exportrichtlinie | „Standard“ 
+| `snapshotDir` | Steuert die Sichtbarkeit des `.snapshot` Verzeichnis | „Falsch“ 
 
 
-| Sicherheitstyp | Sicherheitstyp für neue Volumes | „unix“ 
+| `exportPolicy` | Zu verwendende Exportrichtlinie | „Standard“ 
+
+
+| `exportPolicy` | Zu verwendende Exportrichtlinie | „Standard“ 
+
+
+| `securityStyle` | Sicherheitstyp für neue Volumes | „unix“ für NFS Volumes; „ntfs“ für SMB Volumes 
 |===
 
 NOTE: Die Verwendung von QoS Policy Groups mit Astra Trident erfordert ONTAP 9.8 oder höher. Es wird empfohlen, eine nicht gemeinsam genutzte QoS-Richtliniengruppe zu verwenden und sicherzustellen, dass die Richtliniengruppe auf jede Komponente einzeln angewendet wird. Eine Richtliniengruppe für Shared QoS führt zur Durchsetzung der Obergrenze für den Gesamtdurchsatz aller Workloads.
+
+
+
+==== Beispiele für die Volume-Bereitstellung
 
 Hier ist ein Beispiel mit definierten Standardeinstellungen:
 
@@ -225,17 +205,36 @@ Vorhandene Back-Ends aus vorherigen Installationen stellen Volumes wie oben besc
 
 
 
-== Minimale Konfigurationsbeispiele
+== Beispiele
+
+
+
+=== Minimale Konfigurationsbeispiele
 
 Die folgenden Beispiele zeigen grundlegende Konfigurationen, bei denen die meisten Parameter standardmäßig belassen werden. Dies ist der einfachste Weg, ein Backend zu definieren.
 
 
 NOTE: Wenn Sie Amazon FSX auf NetApp ONTAP mit Trident verwenden, empfiehlt es sich, DNS-Namen für LIFs anstelle von IP-Adressen anzugeben.
 
-
-
-=== `ontap-nas` Treiber mit zertifikatbasierter Authentifizierung
-
+.Standardoptionen auf <code> TAP-nas-economie </code>
+[%collapsible%open]
+====
+[listing]
+----
+{
+    "version": 1,
+    "storageDriverName": "ontap-nas-economy",
+    "managementLIF": "10.0.0.1",
+    "dataLIF": "10.0.0.2",
+    "svm": "svm_nfs",
+    "username": "vsadmin",
+    "password": "secret"
+}
+----
+====
+.Zertifikatbasierte Authentifizierung
+[%collapsible%open]
+====
 Dies ist ein minimales Beispiel für die Back-End-Konfiguration. `clientCertificate`, `clientPrivateKey`, und `trustedCACertificate` (Optional, wenn Sie eine vertrauenswürdige CA verwenden) werden ausgefüllt `backend.json` Und nehmen Sie die base64-kodierten Werte des Clientzertifikats, des privaten Schlüssels und des vertrauenswürdigen CA-Zertifikats.
 
 [listing]
@@ -253,12 +252,13 @@ Dies ist ein minimales Beispiel für die Back-End-Konfiguration. `clientCertific
   "storagePrefix": "myPrefix_"
 }
 ----
+====
+.Automatische Exportrichtlinie
+[%collapsible%open]
+====
+Diese Beispiele zeigen Ihnen, wie Sie Astra Trident anweisen können, dynamische Exportrichtlinien zu verwenden, um die Exportrichtlinie automatisch zu erstellen und zu verwalten. Das funktioniert auch für das `ontap-nas-economy` Und `ontap-nas-flexgroup` Treiber.
 
-
-=== `ontap-nas` Treiber mit automatischer Exportrichtlinie
-
-In diesem Beispiel erfahren Sie, wie Sie Astra Trident anweisen können, dynamische Exportrichtlinien zu verwenden, um die Exportrichtlinie automatisch zu erstellen und zu verwalten. Das funktioniert auch für das `ontap-nas-economy` Und `ontap-nas-flexgroup` Treiber.
-
+.ontap-nas-Treiber
 [listing]
 ----
 {
@@ -275,10 +275,7 @@ In diesem Beispiel erfahren Sie, wie Sie Astra Trident anweisen können, dynamis
     "nfsMountOptions": "nfsvers=4",
 }
 ----
-
-
-=== `ontap-nas-flexgroup` Treiber
-
+.<code> TAP-nas-FlexBIT </code>-Treiber
 [listing]
 ----
 {
@@ -292,9 +289,11 @@ In diesem Beispiel erfahren Sie, wie Sie Astra Trident anweisen können, dynamis
     "password": "secret",
 }
 ----
-
-
-=== `ontap-nas` Treiber mit IPv6
+====
+.Verwenden von IPv6-Adressen
+[%collapsible%open]
+====
+Dieses Beispiel zeigt `managementLIF` Verwenden einer IPv6-Adresse.
 
 [listing]
 ----
@@ -309,6 +308,7 @@ In diesem Beispiel erfahren Sie, wie Sie Astra Trident anweisen können, dynamis
  "password": "netapp123"
 }
 ----
+====
 
 
 === `ontap-nas-economy` Treiber
@@ -327,16 +327,37 @@ In diesem Beispiel erfahren Sie, wie Sie Astra Trident anweisen können, dynamis
 ----
 
 
-== Beispiele für Back-Ends mit virtuellen Storage-Pools
+=== `ontap-nas` Treiber für Amazon FSX für ONTAP mithilfe von SMB Volumes
 
-In der unten gezeigten Beispiel-Back-End-Definitionsdatei werden bestimmte Standardeinstellungen für alle Storage Pools festgelegt, z. B. `spaceReserve` Bei keiner, `spaceAllocation` Bei false, und `encryption` Bei false. Die virtuellen Speicherpools werden im Abschnitt Speicher definiert.
+[listing]
+----
+{
+  "version": 1,
+  "backendName": "SMBBackend",
+  "storageDriverName": "ontap-nas",
+  "managementLIF": "example.mgmt.fqdn.aws.com",
+  “nasType”: “smb”,
+  "dataLIF": "10.0.0.15",
+  "svm": "nfs_svm",
+  "clientCertificate": "ZXR0ZXJwYXB...ICMgJ3BhcGVyc2",
+  "clientPrivateKey": "vciwKIyAgZG...0cnksIGRlc2NyaX",
+  "trustedCACertificate": "zcyBbaG...b3Igb3duIGNsYXNz",
+  "storagePrefix": "myPrefix_"
+}
+----
+
+
+== Beispiele für Back-Ends mit virtuellen Pools
+
+In der unten gezeigten Beispiel-Back-End-Definitionsdatei werden bestimmte Standardeinstellungen für alle Storage Pools festgelegt, z. B. `spaceReserve` Bei keiner, `spaceAllocation` Bei false, und `encryption` Bei false. Die virtuellen Pools werden im Abschnitt Speicher definiert.
+
+Astra Trident setzt Provisioning-Labels im Bereich „Comments“. Kommentare wurden auf FlexVol für gesetzt `ontap-nas` Oder FlexGroup für `ontap-nas-flexgroup`. Astra Trident kopiert alle Labels auf einem virtuellen Pool auf das Storage-Volume während der Bereitstellung. Storage-Administratoren können Labels je virtuellen Pool definieren und Volumes nach Label gruppieren.
 
 In diesem Beispiel legt ein Teil des Speicherpools seine eigenen fest `spaceReserve`, `spaceAllocation`, und `encryption` Werte und einige Pools überschreiben die oben festgelegten Standardwerte.
 
-
-
-=== `ontap-nas` Treiber
-
+.<code> TAP-EIT </code> Treiber
+[%collapsible%open]
+====
 [listing]
 ----
 {
@@ -398,10 +419,10 @@ In diesem Beispiel legt ein Teil des Speicherpools seine eigenen fest `spaceRese
     ]
 }
 ----
-
-
-=== `ontap-nas-flexgroup` Treiber
-
+====
+.<code> TAP-nas-FlexBIT </code>-Treiber
+[%collapsible%open]
+====
 [listing]
 ----
 {
@@ -459,10 +480,10 @@ In diesem Beispiel legt ein Teil des Speicherpools seine eigenen fest `spaceRese
     ]
 }
 ----
-
-
-=== `ontap-nas-economy` Treiber
-
+====
+.<code> TAP-nas-economivor </code>-Treiber
+[%collapsible%open]
+====
 [listing]
 ----
 {
@@ -520,20 +541,34 @@ In diesem Beispiel legt ein Teil des Speicherpools seine eigenen fest `spaceRese
     ]
 }
 ----
+====
+
+
+== Aktualisierung `dataLIF` Nach der Erstkonfiguration
+
+Sie können die Daten-LIF nach der Erstkonfiguration ändern, indem Sie den folgenden Befehl ausführen, um die neue Backend-JSON-Datei mit aktualisierten Daten-LIF bereitzustellen.
+
+[listing]
+----
+tridentctl update backend <backend-name> -f <path-to-backend-json-file-with-updated-dataLIF>
+----
+
+NOTE: Wenn PVCs an einen oder mehrere Pods angeschlossen sind, müssen Sie alle entsprechenden Pods herunterfahren und sie dann wieder zurückbringen, damit die neue logische Daten wirksam werden.
+
 
 
 == Back-Ends StorageClasses zuordnen
 
-Die folgenden StorageClass-Definitionen beziehen sich auf die oben genannten virtuellen Speicherpools. Verwenden der `parameters.selector` Feld gibt in jeder StorageClass an, welche virtuellen Pools zum Hosten eines Volumes verwendet werden können. Auf dem Volume werden die Aspekte im ausgewählten virtuellen Pool definiert.
+Die folgenden StorageClass-Definitionen beziehen sich auf die oben genannten virtuellen Pools. Verwenden der `parameters.selector` Feld gibt in jeder StorageClass an, welche virtuellen Pools zum Hosten eines Volumes verwendet werden können. Auf dem Volume werden die Aspekte im ausgewählten virtuellen Pool definiert.
 
-* Die erste StorageClass (`protection-gold`) Wird dem ersten, zweiten virtuellen Speicherpool in zugeordnet `ontap-nas-flexgroup` Back-End und der erste virtuelle Speicherpool im `ontap-san` Back-End: Dies sind die einzigen Pools, die Schutz auf Goldebene bieten.
-* Die zweite StorageClass (`protection-not-gold`) Wird dem dritten, vierten virtuellen Speicherpool in zugeordnet `ontap-nas-flexgroup` Back-End und der zweite dritte virtuelle Speicherpool in `ontap-san` Back-End: Dies sind die einzigen Pools, die Schutz Level nicht Gold bieten.
-* Die dritte StorageClass (`app-mysqldb`) Wird dem vierten virtuellen Speicherpool in zugeordnet `ontap-nas` Back-End und der dritte virtuelle Storage-Pool in `ontap-san-economy` Back-End: Dies sind die einzigen Pools, die eine Storage-Pool-Konfiguration für die mysqldb-Typ-App bieten.
-* Die vierte StorageClass (`protection-silver-creditpoints-20k`) Wird dem dritten virtuellen Speicher-Pool in zugeordnet `ontap-nas-flexgroup` Back-End und der zweite virtuelle Storage-Pool in `ontap-san` Back-End: Dies sind die einzigen Pools, die Gold-Level-Schutz mit 20000 Kreditpunkten bieten.
-* Die fünfte StorageClass (`creditpoints-5k`) Wird dem zweiten virtuellen Speicherpool in zugeordnet `ontap-nas-economy` Back-End und der dritte virtuelle Storage-Pool in `ontap-san` Back-End: Dies sind die einzigen Poolangebote mit 5000 Kreditpunkten.
+* Die erste StorageClass (`protection-gold`) Wird dem ersten, zweiten virtuellen Pool im zugeordnet `ontap-nas-flexgroup` Back-End und der erste virtuelle Pool im `ontap-san` Back-End: Dies sind die einzigen Pools, die Schutz auf Goldebene bieten.
+* Die zweite StorageClass (`protection-not-gold`) Wird dem dritten, vierten virtuellen Pool in zugeordnet `ontap-nas-flexgroup` Back-End und der zweite, dritte virtuelle Pool in `ontap-san` Back-End: Dies sind die einzigen Pools, die Schutz Level nicht Gold bieten.
+* Die dritte StorageClass (`app-mysqldb`) Wird dem vierten virtuellen Pool in zugeordnet `ontap-nas` Back-End und der dritte virtuelle Pool in `ontap-san-economy` Back-End: Dies sind die einzigen Pools, die eine Storage-Pool-Konfiguration für die mysqldb-Typ-App bieten.
+* Die vierte StorageClass (`protection-silver-creditpoints-20k`) Wird dem dritten virtuellen Pool in zugeordnet `ontap-nas-flexgroup` Back-End und der zweite virtuelle Pool in `ontap-san` Back-End: Dies sind die einzigen Pools, die Gold-Level-Schutz mit 20000 Kreditpunkten bieten.
+* Die fünfte StorageClass (`creditpoints-5k`) Wird dem zweiten virtuellen Pool in zugeordnet `ontap-nas-economy` Back-End und der dritte virtuelle Pool in `ontap-san` Back-End: Dies sind die einzigen Poolangebote mit 5000 Kreditpunkten.
 
 
-Astra Trident entscheidet, welcher virtuelle Storage Pool ausgewählt wird und ob die Storage-Anforderungen erfüllt werden.
+Astra Trident entscheidet, welcher virtuelle Pool ausgewählt wird und stellt sicher, dass die Storage-Anforderungen erfüllt werden.
 
 [listing]
 ----

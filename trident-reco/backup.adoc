@@ -148,7 +148,7 @@ In den folgenden Schritten wird beschrieben, wie ein einzelner Kubernetes-Cluste
 . Kopieren Sie alle erforderlichen Zertifikate zum Kubernetes-Cluster unter `/etc/kubernetes/pki` Und das usw. `member` Dateien unter `/var/lib/etcd`.
 . Erstellen Sie einen Kubernetes-Cluster, indem Sie den ausführen `kubeadm init` Befehl mit dem `--ignore-preflight-errors=DirAvailable--var-lib-etcd` Flagge. Die Hostnamen sollten mit dem Quell-Kubernetes-Cluster übereinstimmen.
 . Führen Sie die aus `kubectl get crd` Befehl zur Überprüfung, ob alle benutzerdefinierten Trident Ressourcen aufgerufen wurden. Trident-Objekte werden abgerufen, um sicherzustellen, dass alle Daten verfügbar sind.
-. Bereinigen Sie die vorherigen Back-Ends und erstellen Sie mit Trident neue Back-Ends. Geben Sie den neuen Management- und Daten-LIF, den neuen SVM-Namen und das Passwort der Ziel-SVM an.
+. Bereinigen Sie die vorherigen Back-Ends und erstellen Sie mit Trident neue Back-Ends. Geben Sie die neue Management-LIF, den neuen SVM-Namen und das Passwort der Ziel-SVM an.
 
 
 

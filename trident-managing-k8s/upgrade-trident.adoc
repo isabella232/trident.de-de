@@ -12,54 +12,42 @@ summary: Astra Trident folgt einem vierteljährlichen Release-Intervall mit vier
 
 
 [role="lead"]
-Astra Trident folgt einem vierteljährlichen Release-Intervall mit vier Hauptversionen pro Kalenderjahr. Jede neue Version baut auf den vorherigen Versionen auf und bietet neue Funktionen, Performance-Verbesserungen sowie Bug Fixes und Verbesserungen. Führen Sie ein Upgrade mindestens einmal pro Jahr durch, um von den neuen Funktionen in Astra Trident zu profitieren.
-
-
-NOTE: Wenn Sie ein Upgrade auf eine Version durchführen, die fünf Versionen voraus ist, müssen Sie ein Upgrade in mehreren Schritten durchführen.
+Astra Trident folgt einem vierteljährlichen Release-Intervall mit vier Hauptversionen pro Kalenderjahr. Jede neue Version baut auf den vorherigen Versionen auf und bietet neue Funktionen, Performance-Verbesserungen sowie Bug Fixes und Verbesserungen. Wir empfehlen Ihnen, ein Upgrade mindestens einmal pro Jahr durchzuführen, um von den neuen Funktionen in Astra Trident zu profitieren.
 
 
 
-== Bestimmen Sie die Version, auf die ein Upgrade durchgeführt werden soll
+== Wählen Sie eine Version aus
 
-* Sie können auf aktualisieren `YY.MM` Freigabe aus dem `YY-1.MM` Versionen und beliebige zwischen Versionen. Sie können beispielsweise ein direktes Upgrade von 19.07 und höher auf 20.07 durchführen (einschließlich Dot-Versionen, wie 19.07.1).
-* Wenn Sie eine frühere Version haben, sollten Sie ein mehrstufiges Upgrade durchführen. Dazu müssen Sie zuerst ein Upgrade auf die aktuellste Version durchführen, die zu Ihrem vier-Release-Fenster passt. Wenn Sie beispielsweise 18.07 ausführen und auf Version 20.07 aktualisieren möchten, führen Sie den Prozess des mehrstufigen Upgrades wie unten angegeben durch:
+Astra Trident Versionen folgen einem datumbasierten `YY.MM` Namensgebungskonvention, wobei „YY“ die letzten beiden Ziffern des Jahres und „MM“ der Monat ist. Dot Releases folgen einem `YY.MM.X` konvention, wo "X" die Patch-Ebene ist. Sie wählen die Version, auf die Sie aktualisieren möchten, basierend auf der Version aus, von der Sie aktualisieren.
+
+* Sie können ein direktes Upgrade auf jede Zielversion durchführen, die sich innerhalb eines Fensters mit vier Versionen Ihrer installierten Version befindet. Sie können beispielsweise direkt von 22.01 auf 23.01 aktualisieren (einschließlich aller Punktversionen, z. B. 22.01.1).
+* Wenn Sie eine frühere Version haben, sollten Sie eine mehrstufige Aktualisierung anhand der Dokumentation der jeweiligen Version durchführen, um spezifische Anweisungen zu erhalten. Dazu müssen Sie zuerst ein Upgrade auf die aktuellste Version durchführen, die zu Ihrem vier-Release-Fenster passt. Wenn Sie z. B. 18.07 ausführen und auf Version 20.07 aktualisieren möchten, befolgen Sie den Prozess zum mehrstufigen Upgrade wie unten angegeben:
 +
-** Erstes Upgrade von 18.07 auf 19.07. Lesen Sie die Dokumentation der jeweiligen Version, um spezifische Anweisungen für die Aktualisierung zu erhalten.
-** Dann aktualisieren Sie von 19.07 auf 20.07.
+.. Erstes Upgrade von 18.07 auf 19.07.
+.. Dann aktualisieren Sie von 19.07 auf 20.07.
 
 
 
 
-
-IMPORTANT: Bei allen Upgrades für Version 19.04 und früher ist die Migration der Metadaten von Astra Trident durch die eigene erfolgen muss `etcd` Zu CRD-Objekten. Stellen Sie sicher, dass Sie die Dokumentation der Version lesen, um zu verstehen, wie das Upgrade funktioniert.
-
-
-WARNING: Beim Upgrade ist es wichtig, dass Sie das Upgrade durchführen `parameter.fsType` In `StorageClasses` Verwendet von Astra Trident. Sie können löschen und neu erstellen `StorageClasses` Ohne Unterbrechung vorhandener Volumes Dies ist eine **Anforderung** für die Durchsetzung https://kubernetes.io/docs/tasks/configure-pod-container/security-context/["Sicherheitskontexte"^] Für SAN-Volumes. Der https://github.com/NetApp/trident/tree/master/trident-installer/sample-input["Probeneingabe"^] Das Verzeichnis enthält Beispiele, z. B.[`storage-class-basic.yaml.templ`^] und[`storage-class-bronze-default.yaml`^]. Weitere Informationen finden Sie unter link:../trident-rn.html["Bekannte Probleme"^].
-
+[WARNING]
+====
+* Für alle Upgrades von Version 19.04 und früher ist die Migration der Astra Trident Metadaten von alleine erforderlich `etcd` Zu CRD-Objekten. Prüfen Sie die Dokumentation der Version, um zu verstehen, wie das Upgrade funktioniert.
+* Beim Upgrade ist es wichtig, dass Sie das Upgrade durchführen `parameter.fsType` In `StorageClasses` Verwendet von Astra Trident. Sie können löschen und neu erstellen `StorageClasses` Ohne Unterbrechung vorhandener Volumes Dies ist eine **Anforderung** für die Durchsetzung https://kubernetes.io/docs/tasks/configure-pod-container/security-context/["Sicherheitskontexte"^] Für SAN-Volumes. Der https://github.com/NetApp/trident/tree/master/trident-installer/sample-input["Probeneingabe"^] Das Verzeichnis enthält Beispiele, z. B.[`storage-class-basic.yaml.templ`^] und[`storage-class-bronze-default.yaml`^]. Weitere Informationen finden Sie unter link:../trident-rn.html["Bekannte Probleme"].
 
 
-== Welchen Upgrade-Pfad sollte ich wählen?
+====
 
-Sie können ein Upgrade auf einen der folgenden Pfade durchführen:
 
-* Verwenden des Betreibers von Trident.
-* Wird Verwendet `tridentctl`.
+== Wählen Sie eine Upgrade-Option aus
+
+Astra Trident bietet zwei Optionen für ein Upgrade. Im Allgemeinen verwenden Sie die gleiche Option, die Sie für die Erstinstallation verwendet haben, wie Sie jedoch können link:../trident-get-started/kubernetes-deploy.html#moving-between-installation-methods["Wechseln Sie zwischen den Installationsmethoden"].
+
+* link:upgrade-operator.html["Upgrade über den Trident-Operator"]
+* 
 
 
 
 WARNING: CSI Volume Snapshots ist jetzt eine GA-Funktion, die ab Kubernetes 1.20 beginnt. Beim Upgrade von Astra Trident müssen alle vorherigen Alpha-Snapshot-CRS und CRDs (Volume Snapshot-Klassen, Volume-Snapshots und Volume Snapshot-Inhalt) entfernt werden, bevor das Upgrade durchgeführt wird. Siehe https://netapp.io/2020/01/30/alpha-to-beta-snapshots/["Diesem Blog"^] Schritte zur Migration von Alpha-Snapshots in die Beta/GA-Spezifikation
-
-Sie können die Aktualisierung mit dem Trident-Operator durchführen, wenn die folgenden Bedingungen erfüllt sind:
-
-* Sie verwenden CSI Trident (19.07 und höher).
-* Sie verfügen über eine CRD-basierte Trident-Version (19.07 und höher).
-* Sie sind **Not**, die eine benutzerdefinierte Installation durchführen (mit benutzerdefinierten YAML).
-
-
-
-WARNING: Verwenden Sie den Operator zum Aktualisieren von Trident nicht, wenn Sie ein verwenden `etcd`-Based Trident Release (19.04 oder früher).
-
-Wenn Sie den Operator nicht verwenden möchten oder eine benutzerdefinierte Installation haben, die vom Bediener nicht unterstützt werden kann, können Sie ein Upgrade mit durchführen `tridentctl`. Dies ist die bevorzugte Methode für Upgrades für Trident Versionen 19.04 und früher.
 
 
 
@@ -74,12 +62,4 @@ In der Version 21.01 von Astra Trident werden dem Betreiber einige wichtige arch
 
 
 * `TridentProvisioner` Wird nun durch ersetzt `TridentOrchestrator` Als benutzerdefinierte Ressource, die für die Installation und das Management von Astra Trident verwendet wird. Darüber hinaus wird dem ein neues Feld vorgestellt `TridentOrchestrator` Spez. Benutzer können angeben, dass der Namespace Trident über den installiert/aktualisiert werden muss `spec.namespace` Feld. Sie können sich ein Beispiel ansehen https://github.com/NetApp/trident/blob/stable/v21.01/deploy/crds/tridentorchestrator_cr.yaml["Hier"^].
-
-
-
-
-== Weitere Informationen
-
-* link:upgrade-operator.html["Upgrade mit dem Trident-Operator"^]
-* 
 

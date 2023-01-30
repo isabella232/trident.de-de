@@ -12,7 +12,7 @@ summary: 'Sie können eine bestehende Astra Trident Installation ganz einfach mi
 
 
 [role="lead"]
-Sie können eine bestehende Astra Trident Installation ganz einfach mithilfe von aufrüsten `tridentctl`.
+Sie können mithilfe von ganz einfach eine bestehende Astra Trident Installation aufrüsten `tridentctl`.
 
 
 

@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/backends.html 
 keywords: backends, storage system, anf, cvs for gcp, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, fsx 
-summary: Ein Backend definiert die Beziehung zwischen Astra Trident und einem Storage-System. Er erzählt Astra Trident, wie man mit diesem Storage-System kommuniziert und wie Astra Trident Volumes darauf bereitstellen sollte. Astra Trident bietet automatisch Storage-Pools aus Back-Ends an, die den von einer Storage-Klasse definierten Anforderungen entsprechen. Erfahren Sie mehr über die Konfiguration des Backend auf der Grundlage des jeweiligen Storage-Systems. 
+summary: Ein Backend definiert die Beziehung zwischen Astra Trident und einem Storage-System. Er erzählt Astra Trident, wie man mit diesem Storage-System kommuniziert und wie Astra Trident Volumes darauf bereitstellen sollte. 
 ---
 = Back-Ends konfigurieren
 :hardbreaks:
@@ -11,7 +11,10 @@ summary: Ein Backend definiert die Beziehung zwischen Astra Trident und einem St
 :imagesdir: ../media/
 
 
-Ein Backend definiert die Beziehung zwischen Astra Trident und einem Storage-System. Er erzählt Astra Trident, wie man mit diesem Storage-System kommuniziert und wie Astra Trident Volumes darauf bereitstellen sollte. Astra Trident bietet automatisch Storage-Pools aus Back-Ends an, die den von einer Storage-Klasse definierten Anforderungen entsprechen. Erfahren Sie mehr über die Konfiguration des Backend auf der Grundlage des jeweiligen Storage-Systems.
+[role="lead"]
+Ein Backend definiert die Beziehung zwischen Astra Trident und einem Storage-System. Er erzählt Astra Trident, wie man mit diesem Storage-System kommuniziert und wie Astra Trident Volumes darauf bereitstellen sollte.
+
+Astra Trident stellt automatisch Storage-Pools aus Back-Ends bereit, die den von einer Storage-Klasse definierten Anforderungen entsprechen. Erfahren Sie, wie Sie das Backend für Ihr Storage-System konfigurieren.
 
 * link:anf.html["Konfigurieren Sie ein Azure NetApp Files-Backend"^]
 * link:gcp.html["Konfigurieren Sie ein Back-End für Cloud Volumes Service für Google Cloud Platform"^]

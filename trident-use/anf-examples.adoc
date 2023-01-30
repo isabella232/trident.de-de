@@ -141,9 +141,6 @@ Sie können die standardmäßige Volume-Bereitstellung steuern, indem Sie die fo
 | `unixPermissions` | die unix-Berechtigungen neuer Volumes (4 Oktal-Ziffern). Für SMB Volumes ignoriert. | „“ (Vorschau-Funktion, erfordert Whitelisting im Abonnement) 
 |===
 
-NOTE: Bei allen Volumes, die auf einem ANF-Backend erstellt wurden, kopiert Astra Trident die in einem Storage-Pool vorhandenen Beschriftungen zum Zeitpunkt der Bereitstellung auf das Storage-Volume. Storage-Administratoren können Labels pro Storage-Pool definieren und alle Volumes gruppieren, die in einem Storage-Pool erstellt wurden. Auf diese Weise können Sie Volumes anhand einer Reihe anpassbarer Etiketten, die in der Backend-Konfiguration bereitgestellt werden, unterscheiden.
-
-
 
 == Beispielkonfigurationen
 
@@ -224,10 +221,10 @@ Diese Back-End-Konfiguration reduziert den Umfang der Volume-Platzierung auf ein
     }
 ----
 ====
-.Beispiel 4: Konfiguration des virtuellen Speicherpools
+.Beispiel 4: Virtuelle Pool-Konfiguration
 [%collapsible%open]
 ====
-Diese Back-End-Konfiguration definiert mehrere Storage-Pools in einer einzelnen Datei. Dies ist nützlich, wenn Sie über mehrere Kapazitäts-Pools verfügen, die unterschiedliche Service-Level unterstützen, und Sie Storage-Klassen in Kubernetes erstellen möchten, die diese unterstützen.
+Diese Back-End-Konfiguration definiert mehrere Storage-Pools in einer einzelnen Datei. Dies ist nützlich, wenn Sie über mehrere Kapazitäts-Pools verfügen, die unterschiedliche Service-Level unterstützen, und Sie Storage-Klassen in Kubernetes erstellen möchten, die diese unterstützen. Virtuelle Pool-Labels wurden verwendet, um die Pools basierend auf zu differenzieren `performance`.
 
 [listing]
 ----

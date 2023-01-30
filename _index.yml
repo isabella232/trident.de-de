@@ -6,7 +6,7 @@ indexpage:
     **Lesen Sie die Versionshinweise für wichtige Informationen zum Upgrade auf Astra
     Trident 22.10.**
   tiles:
-  - title: Wichtige Informationen für Version 22.10
+  - title: Wichtige Informationen für Version 23.01
     links:
     - title: Versionshinweise
       url: trident-rn.html

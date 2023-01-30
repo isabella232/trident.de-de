@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-concepts/virtual-storage-pool.html 
-keywords: virtual storage pools, astra trident, backends 
-summary: Virtuelle Storage-Pools stellen eine Abstraktionsschicht zwischen den Storage-Back-Ends von Astra Trident und den StorageClasses von Kubernetes bereit. Administratoren können für jedes Back-End Aspekte wie Standort, Performance und Schutz definieren, ohne dass StorageClass angeben muss, welches physische Backend-, Backend- oder Backend-Pool das gewünschte Kriterium erfüllt. 
+keywords: virtual pools, astra trident, backends 
+summary: Virtuelle Pools stellen eine Abstraktionsschicht zwischen den Storage-Back-Ends von Astra Trident und den StorageClasses von Kubernetes bereit. Administratoren können für jedes Back-End Aspekte wie Standort, Performance und Schutz definieren, ohne dass StorageClass angeben muss, welches physische Backend-, Backend- oder Backend-Pool das gewünschte Kriterium erfüllt. 
 ---
-= Virtuelle Storage-Pools
+= Virtuelle Pools
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,22 +12,26 @@ summary: Virtuelle Storage-Pools stellen eine Abstraktionsschicht zwischen den S
 
 
 [role="lead"]
-Virtuelle Storage-Pools stellen eine Abstraktionsschicht zwischen den Storage-Back-Ends von Astra Trident und den Kubernetes-Systemen dar. `StorageClasses`. Sie ermöglichen es Administratoren, für jedes Back-End-System Aspekte wie Standort, Performance und Schutz zu definieren, ohne dafür eine `StorageClass` Legen Sie fest, welches physische Backend-, Backend-Pool- oder Backend-Typ für die gewünschten Kriterien verwendet werden soll.
+Virtuelle Pools stellen eine Abstraktionsschicht zwischen Astra Trident Storage-Back-Ends und Kubernetes bereit `StorageClasses`. Sie ermöglichen es Administratoren, für jedes Back-End-System Aspekte wie Standort, Performance und Schutz zu definieren, ohne dafür eine `StorageClass` Legen Sie fest, welches physische Backend-, Backend-Pool- oder Backend-Typ für die gewünschten Kriterien verwendet werden soll.
 
 
 
-== Erfahren Sie mehr über virtuelle Storage-Pools
+== Erfahren Sie mehr über virtuelle Pools
 
-Der Storage-Administrator kann virtuelle Storage-Pools auf einem beliebigen Astra Trident Back-End in einer JSON- oder YAML-Definitionsdatei definieren.
+Der Storage-Administrator kann virtuelle Pools auf einem beliebigen Astra Trident Back-End in einer JSON- oder YAML-Definitionsdatei definieren.
 
-image::virtual_storage_pools.png[Zeigt das Konzeptdiagramm für virtuelle Storage-Pools.]
+image::virtual_storage_pools.png[Zeigt das Konzeptdiagramm für virtuelle Pools.]
 
 Jeder außerhalb der Liste der virtuellen Pools angegebene Aspekt ist global für das Backend und gilt für alle virtuellen Pools, während jeder virtuelle Pool einen oder mehrere Aspekte einzeln angeben kann (alle Backend-globalen Aspekte außer Kraft setzen).
 
+[NOTE]
+====
+* Versuchen Sie beim Definieren virtueller Pools nicht, die Reihenfolge vorhandener virtueller Pools in einer Backend-Definition neu anzuordnen.
+* Wir empfehlen, Attribute für einen vorhandenen virtuellen Pool zu ändern. Sie sollten einen neuen virtuellen Pool definieren, um Änderungen vorzunehmen.
 
-NOTE: Versuchen Sie bei der Definition von virtuellen Speicherpools nicht, die Reihenfolge vorhandener virtueller Pools in einer Backend-Definition neu anzuordnen. Es wird auch empfohlen, Attribute für einen vorhandenen virtuellen Pool nicht zu bearbeiten/zu ändern und stattdessen einen neuen virtuellen Pool zu definieren.
 
-Die meisten Aspekte werden Backend-spezifisch angegeben. Entscheidend ist, dass die Aspect-Werte nicht außerhalb des Back-End-Treibers angezeigt werden und nicht für die Abstimmung in verfügbar sind `StorageClasses`. Stattdessen definiert der Administrator eine oder mehrere Labels für jeden virtuellen Pool. Jedes Etikett ist ein Schlüssel:Wert-Paar, und Etiketten können häufig über eindeutige Back-Ends hinweg verwendet werden. Wie Aspekte können auch Labels pro Pool oder global zum Backend angegeben werden. Im Gegensatz zu Aspekten, die vordefinierte Namen und Werte haben, hat der Administrator volle Entscheidungsbefugnis, Beschriftungsschlüssel und -Werte nach Bedarf zu definieren.
+====
+Die meisten Aspekte werden Backend-spezifisch angegeben. Entscheidend ist, dass die Aspect-Werte nicht außerhalb des Back-End-Treibers angezeigt werden und nicht für die Abstimmung in verfügbar sind `StorageClasses`. Stattdessen definiert der Administrator eine oder mehrere Labels für jeden virtuellen Pool. Jedes Etikett ist ein Schlüssel:Wert-Paar, und Etiketten können häufig über eindeutige Back-Ends hinweg verwendet werden. Wie Aspekte können auch Labels pro Pool oder global zum Backend angegeben werden. Im Gegensatz zu Aspekten, die vordefinierte Namen und Werte haben, hat der Administrator volle Entscheidungsbefugnis, Beschriftungsschlüssel und -Werte nach Bedarf zu definieren. Storage-Administratoren können Labels je virtuellen Pool definieren und Volumes nach Label gruppieren.
 
 A `StorageClass` Identifiziert den virtuellen Pool, der verwendet werden soll, indem auf die Beschriftungen in einem Auswahlparameter Bezug gesetzt wird. Virtuelle Pool-Selektoren unterstützen folgende Operatoren:
 
