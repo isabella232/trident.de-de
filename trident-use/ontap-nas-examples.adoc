@@ -100,12 +100,6 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 
 Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults` Abschnitt der Konfiguration. Ein Beispiel finden Sie unten in den Konfigurationsbeispielen.
 
-
-
-=== Back-End-Konfigurationsoptionen für die Bereitstellung von Volumes
-
-Mit diesen Optionen kann standardmäßig gesteuert werden, wie jedes Volume in einem speziellen Abschnitt der Konfiguration bereitgestellt wird. Ein Beispiel finden Sie unten in den Konfigurationsbeispielen.
-
 [cols="3"]
 |===
 | Parameter | Beschreibung | Standard 
