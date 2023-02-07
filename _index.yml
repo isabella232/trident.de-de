@@ -3,8 +3,6 @@ indexpage:
   lead: Astra Trident ist ein Open-Source-Tool zur Storage-bereitstellung und -Orchestrierung
     mit Unterstützung von NetApp. Die Software ermöglicht die Erstellung von Storage
     Volumes für Container-Applikationen, die von Docker und Kubernetes gemanagt werden.
-    **Lesen Sie die Versionshinweise für wichtige Informationen zum Upgrade auf Astra
-    Trident 22.10.**
   tiles:
   - title: Wichtige Informationen für Version 23.01
     links:

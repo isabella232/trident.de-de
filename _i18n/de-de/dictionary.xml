@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blocks>
-  <block id="271eadf9144a35af6e28eb2db28db36c" category="summary">Astra Trident ist ein Open-Source-Tool zur Storage-bereitstellung und -Orchestrierung mit Unterstützung von NetApp. Die Software ermöglicht die Erstellung von Storage Volumes für Container-Applikationen, die von Docker und Kubernetes gemanagt werden. **Lesen Sie die Versionshinweise für wichtige Informationen zum Upgrade auf Astra Trident 22.10.**</block>
   <block id="75f3d382f074f14c775efb5cf2f23c30" category="summary">Nutzen Sie bei der Implementierung von Astra Trident die hier aufgeführten Empfehlungen.</block>
   <block id="ea355214fd4bc7c57f471bd92918879b" category="doc">Einsatz</block>
   <block id="d89d3b3161292ef0c65342cbe80e883f" category="section-title">Implementieren Sie diesen in einem dedizierten Namespace</block>
@@ -2381,7 +2380,6 @@
   <block id="88dce60232453383ab0d1c3c59cc931d" category="admonition">Verwenden Sie es nicht<block ref="effa2d809c72dcb6cce15a1e0b040e63" prefix=" " category="inline-code"></block> Es sei denn, Sie beheben Fehler und benötigen einen detaillierten Log Dump.</block>
   <block id="73e65f4bf1c67cf81e3531ab80adee7e" category="paragraph">In beiden Fällen können Sie weiterhin auf Volume-Anhänge zugreifen. Zukünftige Volume-Anhänge verwenden die aktualisierte Initiatorgruppe. Dieses Update wird den Zugriff auf Volumes im Backend nicht unterbrechen.</block>
   <block id="193a49bcfb561fea878daa5efe72cad9" category="section-title">Back-End-Konfigurationsoptionen für die Bereitstellung von Volumes</block>
-  <block id="4b162a795c1916b18df8b6a76a8fef49" category="paragraph">Mit diesen Optionen kann standardmäßig gesteuert werden, wie jedes Volume in einem speziellen Abschnitt der Konfiguration bereitgestellt wird. Ein Beispiel finden Sie unten in den Konfigurationsbeispielen.</block>
   <block id="26161d08a960162cd8633d0e23058aed" category="cell">Speicherplatzzuweisung für LUNs</block>
   <block id="3be488c6a2bc52ceb7e8685ca24927d7" category="cell">„Wahr“</block>
   <block id="3bce5b103341500856287f5347e19f28" category="cell">Space Reservation Mode; „none“ (Thin) oder „Volume“ (Thick)</block>
@@ -3567,4 +3565,5 @@
   <block id="58834b137fd6fa7a9ca23468a5c91fd6" category="sidebar">Konfiguration vorbereiten</block>
   <block id="6fc0b7515ecca271c88eae4a685da613" category="sidebar">NetApp HCI oder SolidFire</block>
   <block id="60be48bb4b3314965bf50e88e7ae728c" category="sidebar">Integration von Amazon FSX für ONTAP</block>
+  <block id="ea3d51fb2b16acb7cb260f25bc8965b1" category="sidebar">Astra Trident ist ein Open-Source-Tool zur Storage-bereitstellung und -Orchestrierung mit Unterstützung von NetApp. Die Software ermöglicht die Erstellung von Storage Volumes für Container-Applikationen, die von Docker und Kubernetes gemanagt werden.</block>
 </blocks>
