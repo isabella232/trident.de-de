@@ -1142,7 +1142,6 @@
   <block id="af7c8216a3289efe1a298a19c00b8b8c" category="section-title">Getestete Host-Betriebssysteme</block>
   <block id="57b3e1695eb7d16642702fbce3837b86" category="paragraph">Standardmäßig wird Astra Trident in einem Container ausgeführt und läuft daher auf jedem Linux-Mitarbeiter. Diese Mitarbeiter müssen jedoch in der Lage sein, die Volumes, die Astra Trident bietet, je nach den von Ihnen verwendeten Back-Ends mit dem standardmäßigen NFS-Client oder iSCSI-Initiator zu mounten.</block>
   <block id="597a56086e1f9d7ca5e8f55c40a0153a" category="list-text">Versionen von redhat CoreOS (RHCOS) werden von OpenShift Container Platform unterstützt</block>
-  <block id="6ebf7ae9dffc55cf86792ea266344b3a" category="list-text">Ubuntu 18.04 oder höher (neueste 22.04)</block>
   <block id="11ea58814ce429c3e3254a63f8cde7a4" category="paragraph">Der<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> Utility läuft auch auf jeder dieser Linux-Distributionen.</block>
   <block id="13d80777c8fd43e555c1f5b1b72d7ef0" category="section-title">Host-Konfiguration</block>
   <block id="2139fe384d5ae165545994dff01961d9" category="section-title">Konfiguration des Storage-Systems</block>
@@ -3566,4 +3565,5 @@
   <block id="6fc0b7515ecca271c88eae4a685da613" category="sidebar">NetApp HCI oder SolidFire</block>
   <block id="60be48bb4b3314965bf50e88e7ae728c" category="sidebar">Integration von Amazon FSX für ONTAP</block>
   <block id="ea3d51fb2b16acb7cb260f25bc8965b1" category="sidebar">Astra Trident ist ein Open-Source-Tool zur Storage-bereitstellung und -Orchestrierung mit Unterstützung von NetApp. Die Software ermöglicht die Erstellung von Storage Volumes für Container-Applikationen, die von Docker und Kubernetes gemanagt werden.</block>
+  <block id="784060ce5e49eff75eaca62337b5ff53" category="list-text">Ubuntu 22.04 oder höher</block>
 </blocks>
