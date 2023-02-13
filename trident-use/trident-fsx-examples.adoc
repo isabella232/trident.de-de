@@ -171,7 +171,7 @@ Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults`
 | `unixPermissions` | Modus für neue Volumes. *Leere leer für SMB Volumen.* | „“ 
 
 
-| `securityStyle` | Sicherheitstyp für neue Volumes. | „unix“ für NFS Volumes; „ntfs“ für SMB Volumes 
+| `securityStyle` | Sicherheitstyp für neue Volumes. NFS unterstützt `mixed` Und `unix` Sicherheitsstile. SMB unterstützt `mixed` Und `ntfs` Sicherheitsstile. | NFS-Standard ist `unix`. SMB-Standard ist `ntfs`. 
 |===
 
 

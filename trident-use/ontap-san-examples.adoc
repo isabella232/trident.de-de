@@ -152,7 +152,7 @@ Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults`
 | `luksEncryption` | Aktivieren Sie die LUKS-Verschlüsselung. Siehe link:../trident-reco/security-luks.html["Linux Unified Key Setup (LUKS) verwenden"]. | „“ 
 
 
-| `securityStyle` | Sicherheitstyp für neue Volumes | „unix“ 
+| `securityStyle` | Sicherheitstyp für neue Volumes | `unix` 
 
 
 | `tieringPolicy` | Tiering-Richtlinie zur Verwendung von „keiner“ | „Nur Snapshot“ für eine ONTAP 9.5 SVM-DR-Konfiguration 

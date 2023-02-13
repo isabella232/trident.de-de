@@ -123,13 +123,13 @@ NOTE: Siehe link:https://docs.netapp.com/us-en/ontap/smb-config/create-share-tas
 | Parameter | Beschreibung | Beispiel 
 
 
-| `smbShare` | Name der SMB-Freigabe, die mithilfe der Microsoft Management Console für freigegebene Ordner erstellt wurde. Zum Beispiel „smb-Share“. *Erforderlich für SMB Volumes.* | smb-Share 
+| `smbShare` | Name der SMB-Freigabe, die mithilfe der Microsoft Management Console für freigegebene Ordner erstellt wurde. Zum Beispiel „smb-Share“. *Erforderlich für SMB Volumes.* | `smb-share` 
 
 
-| `nasType` | *Muss auf eingestellt sein `smb`.* Wenn Null, wird standardmäßig auf gesetzt `nfs`. | „smb“ 
+| `nasType` | *Muss auf eingestellt sein `smb`.* Wenn Null, wird standardmäßig auf gesetzt `nfs`. | `smb` 
 
 
-| `securityStyle` | Sicherheitstyp für neue Volumes. *Muss auf „ntfs“ für SMB Volumes gesetzt werden.* | „ntfs“ 
+| `securityStyle` | Sicherheitstyp für neue Volumes. *Muss auf eingestellt sein `ntfs` Oder `mixed` Für SMB Volumes.* | `ntfs` Oder `mixed` Für SMB Volumes 
 
 
 | `unixPermissions` | Modus für neue Volumes. *Muss für SMB Volumes leer gelassen werden.* | „“ 

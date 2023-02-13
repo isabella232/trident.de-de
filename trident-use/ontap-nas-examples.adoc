@@ -141,7 +141,7 @@ Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults`
 | `exportPolicy` | Zu verwendende Exportrichtlinie | „Standard“ 
 
 
-| `securityStyle` | Sicherheitstyp für neue Volumes | „unix“ für NFS Volumes; „ntfs“ für SMB Volumes 
+| `securityStyle` | Sicherheitstyp für neue Volumes. NFS unterstützt `mixed` Und `unix` Sicherheitsstile. SMB unterstützt `mixed` Und `ntfs` Sicherheitsstile. | NFS-Standard ist `unix`. SMB-Standard ist `ntfs`. 
 |===
 
 NOTE: Die Verwendung von QoS Policy Groups mit Astra Trident erfordert ONTAP 9.8 oder höher. Es wird empfohlen, eine nicht gemeinsam genutzte QoS-Richtliniengruppe zu verwenden und sicherzustellen, dass die Richtliniengruppe auf jede Komponente einzeln angewendet wird. Eine Richtliniengruppe für Shared QoS führt zur Durchsetzung der Obergrenze für den Gesamtdurchsatz aller Workloads.

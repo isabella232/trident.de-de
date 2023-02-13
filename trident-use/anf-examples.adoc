@@ -371,7 +371,7 @@ parameters:
 ----
 ====
 
-NOTE: `nasType: "smb"` Filter für Pools, die SMB-Volumes unterstützen `nasType: "nfs"`` Oder `nasType: "null"` Filter für NFS Pools.
+NOTE: `nasType: `smb` Filter für Pools, die SMB-Volumes unterstützen `nasType: `nfs` Oder `nasType: `null` Filter für NFS Pools.
 
 
 

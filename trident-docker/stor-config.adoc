@@ -228,9 +228,11 @@ Standard
 
 
 | `securityStyle`  a| 
-NAS-Option für den Zugriff auf das bereitgestellte NFS-Volume, standardmäßig „unix“
+NAS-Option für Zugriff auf das bereitgestellte NFS-Volume.
+
+NFS unterstützt `mixed` Und `unix` Sicherheitsstile. Die Standardeinstellung lautet `unix`.
  a| 
-Gemischt
+`unix`
 
 
 
