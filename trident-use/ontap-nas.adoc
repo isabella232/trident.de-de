@@ -17,9 +17,17 @@ Erfahren Sie mehr über die Konfiguration eines ONTAP-Backend mit ONTAP- und Clo
 * link:ontap-nas-examples.html["Konfiguration und Beispiele"]
 
 
+[WARNING]
+====
+Astra Control bietet nahtlosen Schutz, Disaster Recovery und Mobilität (Verschieben von Volumes zwischen Kubernetes Clustern) für Volumes, die mit der erstellt wurden `ontap-nas`, `ontap-nas-flexgroup`, und `ontap-san` Treiber. Siehe link:https://docs.netapp.com/us-en/astra-control-center/use/replicate_snapmirror.html#replication-prerequisites["Voraussetzungen für die Astra Control Replikation"^] Entsprechende Details.
 
-WARNING: Kunden müssen die verwenden `ontap-nas` Treiber für Produktions-Workloads, die Datensicherung, Disaster Recovery und Mobilität benötigen Astra Control bietet nahtlosen Schutz, Disaster Recovery und Mobilität für Volumes, die mit der erstellt werden `ontap-nas` Treiber. Der `ontap-nas-economy` Der Treiber sollte nur in begrenzten Anwendungsfällen verwendet werden, in denen die zu erwartende Volume-Auslastung wahrscheinlich weit über den von ONTAP unterstützten Systemen liegt und keine erwarteten Anforderungen an Datensicherung, Disaster Recovery oder Mobilität (Verschieben von Volumes zwischen den Kubernetes Clustern) bestehen.
+* Sie müssen verwenden `ontap-nas` Für produktive Workloads, die Datensicherung, Disaster Recovery und Mobilität erfordern.
+* Nutzung `ontap-san-economy` Nach einer voraussichtlichen Volume-Nutzung ist zu erwarten, dass sie wesentlich höher ist, als das von ONTAP unterstützt wird.
+* Nutzung `ontap-nas-economy` Nur in dem eine zu erwartende Volume-Nutzung größer als die von ONTAP wird, und `ontap-san-economy` Treiber kann nicht verwendet werden.
+* Verwenden Sie ihn nicht `ontap-nas-economy` Wenn Sie die Notwendigkeit von Datensicherung, Disaster Recovery oder Mobilität erwarten.
 
+
+====
 
 
 == Benutzerberechtigungen
