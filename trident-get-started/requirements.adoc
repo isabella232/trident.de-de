@@ -53,6 +53,9 @@ Der Trident-Operator wird durch folgende Versionen unterstützt:
 Astra Trident ist auch mit einer Vielzahl weiterer vollständig gemanagter und selbst verwalteter Kubernetes-Angebote kompatibel, darunter Google Kubernetes Engine (GKE), Amazon Elastic Kubernetes Services (EKS), Azure Kubernetes Service (AKS), Rancher und VMware Tanzu Portfolio.
 
 
+WARNING: Bevor Sie ein Kubernetes Cluster von 1.24 auf 1.25 oder höher aktualisieren, auf die Astra Trident installiert ist, finden Sie unter link:../trident-managing-k8s/upgrade-operator.html#upgrade-a-helm-based-operator-installation["Aktualisieren einer Helm-basierten Bedienerinstallation"].
+
+
 
 == Unterstützte Back-Ends (Storage)
 

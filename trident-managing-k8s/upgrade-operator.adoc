@@ -211,9 +211,12 @@ NOTE: Der `trident-controller` Zudem geben die Pod-Namen die im Jahr 23.01 einge
 
 Führen Sie die folgenden Schritte durch, um eine Helm-basierte Bedienerinstallation zu aktualisieren.
 
+
+WARNING: Wenn Sie ein Kubernetes-Cluster von 1.24 auf 1.25 oder höher aktualisieren, auf das Astra Trident installiert ist, müssen Sie Werte.yaml aktualisieren `excludePodSecurityPolicy` Bis `true` Oder hinzufügen `--set excludePodSecurityPolicy=true` Bis zum `helm upgrade` Befehl bevor Sie ein Upgrade des Clusters durchführen können.
+
 .Schritte
 . Laden Sie die neueste Version von Astra Trident herunter.
-. Verwenden Sie die `helm upgrade` Befehl wo `trident-operator-23.01.0.tgz` Gibt die Version an, auf die Sie ein Upgrade durchführen möchten:
+. Verwenden Sie die `helm upgrade` Befehl wo `trident-operator-23.01.0.tgz` Gibt die Version an, auf die Sie ein Upgrade durchführen möchten.
 +
 [listing]
 ----
