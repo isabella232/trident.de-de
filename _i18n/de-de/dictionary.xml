@@ -3458,7 +3458,6 @@
   <block id="e7a2472a002479764cade728d64dcd9e" category="example-title">Zertifikatbasierte Authentifizierung</block>
   <block id="30cc3e263c594cde4b2a573283348bb1" category="example-title">Automatische Exportrichtlinie</block>
   <block id="41dfe08f09251bf83a4f15ec1a47eebe" category="paragraph">Diese Beispiele zeigen Ihnen, wie Sie Astra Trident anweisen können, dynamische Exportrichtlinien zu verwenden, um die Exportrichtlinie automatisch zu erstellen und zu verwalten. Das funktioniert auch für das<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> Und<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> Treiber.</block>
-  <block id="e3d163236efea4513c9df89a9c1be381" category="listing-title">ontap-nas-Treiber</block>
   <block id="0491780b1bb26f4feb8296034f975c9e" category="listing-title">&lt;code&gt; TAP-nas-FlexBIT &lt;/code&gt;-Treiber</block>
   <block id="85435c5aae5ecdb04ef9ad8f7d48e88a" category="example-title">Verwenden von IPv6-Adressen</block>
   <block id="0275de02c3bba722f4540469d23cc535" category="paragraph">Dieses Beispiel zeigt<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block> Verwenden einer IPv6-Adresse.</block>
@@ -3574,4 +3573,5 @@
   <block id="36b8e64fc53799e09b318940d0d01c3b" category="admonition">Bevor Sie ein Kubernetes Cluster von 1.24 auf 1.25 oder höher aktualisieren, auf die Astra Trident installiert ist, finden Sie unter <block ref="b78a528fa331707807c1d5b493daab09" category="inline-link-macro-rx"></block>.</block>
   <block id="e69dee79b2104ff7c08b095e6212f492" category="list-text">Wenn Sie ein Kubernetes-Cluster von 1.24 auf 1.25 oder höher aktualisieren, auf das Astra Trident installiert ist, müssen Sie Werte.yaml aktualisieren<block ref="94ef2a130a825358ab3002442d6e5145" prefix=" " category="inline-code"></block> Bis<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> Oder hinzufügen<block ref="96d5d0b9a6e3e01b2ae2ed889f75d22e" prefix=" " category="inline-code"></block> Bis zum<block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> Befehl bevor Sie ein Upgrade des Clusters durchführen können.</block>
   <block id="3936420db557853e037e33725ba2e1b4" category="list-text">Verwenden Sie die<block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> Befehl wo<block ref="13eee8d0c5cbca0f1ea5bc4275d5bc8d" prefix=" " category="inline-code"></block> Gibt die Version an, auf die Sie ein Upgrade durchführen möchten.</block>
+  <block id="412b252fa44d1a73e3e7bf22113f99a2" category="listing-title">ontap-nas-Treiber</block>
 </blocks>
