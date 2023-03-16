@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-get-started/kubernetes-deploy-tridentctl.html 
 keywords: deploy, astra trident, methods, tridentctl, windows 
-summary: 'Astra Trident ist über die Implementierung möglich `tridentctl`.' 
+summary: 'Sie können Astra Trident mithilfe von installieren `tridentctl`. Dieser Prozess gilt für Installationen, bei denen die von Astra Trident benötigten Container-Images entweder in einer privaten Registrierung gespeichert werden oder nicht.' 
 ---
 = Installieren Sie mit tridentctl
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 'Astra Trident ist über die Implementierung möglich `tridentctl`.'
 
 
 [role="lead"]
-Sie können Astra Trident mithilfe von installieren `tridentctl`. Dieses Verfahren gilt für Installationen, in denen sich Trident- und CSI-Bilder auf A befinden `docker.io` Und `registry.k8s.io` Oder eine private, gespiegelte Registry. Um Ihre anzupassen `tridentctl` Die Bereitstellung finden Sie unter link:kubernetes-customize-deploy-tridentctl.html["Tridentctl-Implementierung anpassen"].
+Sie können Astra Trident mithilfe von installieren `tridentctl`. Dieser Prozess gilt für Installationen, bei denen die von Astra Trident benötigten Container-Images entweder in einer privaten Registrierung gespeichert werden oder nicht. Um Ihre anzupassen `tridentctl` Die Bereitstellung finden Sie unter link:kubernetes-customize-deploy-tridentctl.html["Tridentctl-Implementierung anpassen"].
 
 
 
@@ -97,14 +97,14 @@ NOTE: Damit Astra Trident auf Windows-Knoten ausgeführt werden kann, fügen Sie
 ./tridentctl install -n trident
 ----
 --
-.Trident- und CSI-Images in einer gespiegelten Registry
+.Bilder in einer Registrierung
 --
 [listing]
 ----
 ./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:23.01 --trident-image <your-registry>/trident:23.01.0
 ----
 --
-.Trident- und CSI-Images in verschiedenen gespiegelten Registern
+.Bilder in verschiedenen Registern
 --
 Sie müssen anhängen `sig-storage` Bis zum `imageRegistry` Um unterschiedliche Registrierungsstandorte zu verwenden.
 
