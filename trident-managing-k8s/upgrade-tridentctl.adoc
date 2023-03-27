@@ -94,7 +94,7 @@ Source:
 +
 Das PV wurde mit Hilfe des erstellt `netapp.io/trident` bereitstellung vom Typ NFS. Um alle neuen Funktionen von Astra Trident zu unterstützen, sollte dieses PV auf den CSI-Typ aufgerüstet werden.
 
-. Führen Sie die aus `tridenctl upgrade volume <name-of-trident-volume>` Befehl zum Upgrade eines alten Astra Trident Volumes auf die CSI-Spezifikation.
+. Führen Sie die aus `tridentctl upgrade volume <name-of-trident-volume>` Befehl zum Upgrade eines alten Astra Trident Volumes auf die CSI-Spezifikation.
 +
 [listing]
 ----

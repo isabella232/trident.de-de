@@ -54,15 +54,15 @@ kubectl delete -f 22.01/trident-installer/deploy/bundle.yaml -n trident
 +
 [listing]
 ----
-kubectl create -f 23.01.0/trident-installer/deploy/bundle_post_1_25.yaml -n trident
+kubectl create -f 23.01.1/trident-installer/deploy/bundle_post_1_25.yaml -n trident
 ----
 +
 [NOTE]
 ====
 Trident stellt eine Paketdatei bereit, mit der der Operator installiert und damit verknüpfte Objekte für die Kubernetes-Version erstellt werden können.
 
-** Verwenden Sie für Cluster mit Kubernetes 1.24 oder älter link:https://github.com/NetApp/trident/tree/stable/v22.10/deploy/bundle_pre_1_25.yaml["Bundle_pre_1_25.yaml"^].
-** Verwenden Sie für Cluster mit Kubernetes 1.25 oder höher link:https://github.com/NetApp/trident/tree/stable/v22.10/deploy/bundle_post_1_25.yaml["Bundle_Post_1_25.yaml"^].
+** Verwenden Sie für Cluster mit Kubernetes 1.24 oder älter link:https://github.com/NetApp/trident/tree/stable/v23.01/deploy/bundle_pre_1_25.yaml["Bundle_pre_1_25.yaml"^].
+** Verwenden Sie für Cluster mit Kubernetes 1.25 oder höher link:https://github.com/NetApp/trident/tree/stable/v23.01/deploy/bundle_post_1_25.yaml["Bundle_Post_1_25.yaml"^].
 
 
 ====
@@ -95,11 +95,11 @@ NOTE: Wenn der Status angezeigt wird `Updating`, Stellen Sie sicher, dass Sie es
 +
 [listing]
 ----
-# Download the release required [23.01.0]
-mkdir 23.01.0
-cd 23.01.0
-wget https://github.com/NetApp/trident/releases/download/v23.01.0/trident-installer-23.01.0.tar.gz
-tar -xf trident-installer-23.01.0.tar.gz
+# Download the release required [23.01.1]
+mkdir 23.01.1
+cd 23.01.1
+wget https://github.com/NetApp/trident/releases/download/v23.01.1/trident-installer-23.01.1.tar.gz
+tar -xf trident-installer-23.01.1.tar.gz
 cd trident-installer
 kubectl create -f deploy/crds/trident.netapp.io_tridentorchestrators_crd_post1.16.yaml
 ----
@@ -155,7 +155,7 @@ kubectl patch tprov <trident-provisioner-name> -n <trident-namespace> --type=mer
 . Installieren Sie den Trident Operator.
 +
 
-NOTE: Durch die Installation des Operators Cluster-Scoped wird die Migration von initiiert `TridentProvisioner` Objekte an `TridentOrchestrator` Objekte, löscht `TridentProvisioner` Objekte und das `tridentprovisioner` CRD, und aktualisiert Astra Trident auf die Version des verwendeten Cluster-Scoped-Betreibers. Im folgenden Beispiel wird Trident auf 23.01.0 aktualisiert.
+NOTE: Durch die Installation des Operators Cluster-Scoped wird die Migration von initiiert `TridentProvisioner` Objekte an `TridentOrchestrator` Objekte, löscht `TridentProvisioner` Objekte und das `tridentprovisioner` CRD, und aktualisiert Astra Trident auf die Version des verwendeten Cluster-Scoped-Betreibers. Im folgenden Beispiel wurde für Trident ein Upgrade auf 23.01.1 durchgeführt.
 
 +
 
@@ -166,7 +166,7 @@ IMPORTANT: Ein Upgrade des Astra Trident mithilfe des Trident Operators führt z
 ----
 #Ensure you are in the correct directory
 pwd
-/root/23.01.0/trident-installer
+/root/23.01.1/trident-installer
 
 #Install the cluster-scoped operator in the **same namespace**
 kubectl create -f deploy/<BUNDLE.YAML>
@@ -197,7 +197,7 @@ kubectl describe torc trident | grep Message -A 3
 Message:                Trident installed
 Namespace:              trident
 Status:                 Installed
-Version:                v23.01.0
+Version:                v23.01.1
 ----
 +
 
@@ -216,11 +216,11 @@ WARNING: Wenn Sie ein Kubernetes-Cluster von 1.24 auf 1.25 oder höher aktualisi
 
 .Schritte
 . Laden Sie die neueste Version von Astra Trident herunter.
-. Verwenden Sie die `helm upgrade` Befehl wo `trident-operator-23.01.0.tgz` Gibt die Version an, auf die Sie ein Upgrade durchführen möchten.
+. Verwenden Sie die `helm upgrade` Befehl wo `trident-operator-23.01.1.tgz` Gibt die Version an, auf die Sie ein Upgrade durchführen möchten.
 +
 [listing]
 ----
-helm upgrade <name> trident-operator-23.01.0.tgz
+helm upgrade <name> trident-operator-23.01.1.tgz
 ----
 +
 [NOTE]
@@ -231,7 +231,7 @@ Um beispielsweise den Standardwert von zu ändern `tridentDebug`, Ausführen des
 
 [listing]
 ----
-helm upgrade <name> trident-operator-23.01.0-custom.tgz --set tridentDebug=true
+helm upgrade <name> trident-operator-23.01.1-custom.tgz --set tridentDebug=true
 ----
 ====
 . Laufen `helm list` Um zu überprüfen, ob sowohl die Karten- als auch die App-Version aktualisiert wurden. Laufen `tridentctl logs` Um alle Debug-Nachrichten zu überprüfen.
@@ -251,11 +251,11 @@ Sie können ein Upgrade auf die neueste Version des Trident-Operators von durchf
 +
 [listing]
 ----
-# Download the release required [23.01.0]
-mkdir 23.01.0
-cd 23.01.0
-wget https://github.com/NetApp/trident/releases/download/v22.01.0/trident-installer-23.01.0.tar.gz
-tar -xf trident-installer-23.01.0.tar.gz
+# Download the release required [23.01.1]
+mkdir 23.01.1
+cd 23.01.1
+wget https://github.com/NetApp/trident/releases/download/v22.01.1/trident-installer-23.01.1.tar.gz
+tar -xf trident-installer-23.01.1.tar.gz
 cd trident-installer
 ----
 . Erstellen Sie die `tridentorchestrator` CRD aus dem Manifest.
@@ -309,7 +309,7 @@ kubectl describe torc trident | grep Message -A 3
 Message:                Trident installed
 Namespace:              trident
 Status:                 Installed
-Version:                v23.01.0
+Version:                v23.01.1
 ----
 
 

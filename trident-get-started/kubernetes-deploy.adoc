@@ -111,9 +111,9 @@ Mit link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/concept-kubernet
 ====
 
 
-=== Wird Verwendet `tridenctl`
+=== Wird Verwendet `tridentctl`
 
-Wenn Sie bereits eine Implementierung haben, die ein Upgrade durchgeführt werden muss oder eine stark angepasste Implementierung benötigen, sollten Sie dies in Betracht ziehen link:kubernetes-deploy-tridentctl.html["Installation mit tridentctl"]. Dies ist die herkömmliche Methode der Implementierung von Astra Trident.
+Wenn Sie bereits eine Implementierung haben, die ein Upgrade durchgeführt werden muss oder eine stark angepasste Implementierung benötigen, sollten Sie dies in Betracht ziehen . Dies ist die herkömmliche Methode der Implementierung von Astra Trident.
 
 Das können Sie  Generierung der Manifeste für Trident Ressourcen: Dies umfasst die Implementierung, das Demonet, das Servicekonto und die Cluster-Rolle, die Astra Trident im Rahmen der Installation erstellt.
 

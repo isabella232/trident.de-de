@@ -19,10 +19,25 @@ WARNING: Der `tridentctl` Binary for Linux, die in der ZIP-Datei des Installatio
 
 
 
-== Neuerungen in 23.01
+== Was ist neu in 23.01.1
 
 
-IMPORTANT: Kubernetes 1.26 wird jetzt in Trident unterstützt. Führen Sie ein Upgrade von Trident durch, bevor Sie ein Upgrade auf Kubernetes durchführen.
+
+=== Korrekturen
+
+* Trident-Operator zur Verwendung von IPv6-localhost für die Installation festgelegt, wenn in Spec angegeben.
+* Die Berechtigungen für die Trident Operator Cluster-Rolle wurden festgelegt, um mit den Bundle-Berechtigungen synchronisiert zu werden link:https://github.com/NetApp/trident/issues/799["Ausgabe #799"^].
+* Korrektur hinzugefügt, um die Ausführung externer Prozesse bis zum Abschluss zu ermöglichen.
+* Problem beim Anhängen von RAW-Block-Volumes auf mehreren Knoten im RWX-Modus behoben.
+* Unterstützung von FlexGroup-Klonen und Volume-Import für SMB-Volumes wurde korrigiert.
+
+
+
+
+== Änderungen in 23.01
+
+
+IMPORTANT: Kubernetes 1.26 wird jetzt in Trident unterstützt. Aktualisieren Sie Astra Trident vor dem Upgrade von Kubernetes.
 
 
 
