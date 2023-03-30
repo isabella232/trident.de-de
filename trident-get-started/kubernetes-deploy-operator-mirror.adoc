@@ -87,7 +87,7 @@ Erstellen Sie die `TridentOrchestrator` Benutzerdefinierte Ressourcendefinition 
 
 [listing]
 ----
-kubectl create -f deploy/crds/trident.netapp.io_tridentorchestrators_crd_<VERSION>.yaml
+kubectl create -f deploy/crds/<VERSION>.yaml
 ----
 
 
