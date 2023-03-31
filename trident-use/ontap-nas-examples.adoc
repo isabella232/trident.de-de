@@ -216,7 +216,7 @@ NOTE: Wenn Sie Amazon FSX auf NetApp ONTAP mit Trident verwenden, empfiehlt es s
     "dataLIF": "10.0.0.2",
     "svm": "svm_nfs",
     "username": "vsadmin",
-    "password": "secret"
+    "password": "password"
 }
 ----
 ====
@@ -259,7 +259,7 @@ Diese Beispiele zeigen Ihnen, wie Sie Astra Trident anweisen können, dynamische
     "autoExportPolicy": true,
     "autoExportCIDRs": ["10.0.0.0/24"],
     "username": "admin",
-    "password": "secret",
+    "password": "password",
     "nfsMountOptions": "nfsvers=4",
 }
 ----
@@ -274,7 +274,7 @@ Diese Beispiele zeigen Ihnen, wie Sie Astra Trident anweisen können, dynamische
     "labels": {"k8scluster": "test-cluster-east-1b", "backend": "test1-ontap-cluster"},
     "svm": "svm_nfs",
     "username": "vsadmin",
-    "password": "secret",
+    "password": "password",
 }
 ----
 ====
@@ -293,7 +293,7 @@ Dieses Beispiel zeigt `managementLIF` Verwenden einer IPv6-Adresse.
  "labels": {"k8scluster": "test-cluster-east-1a", "backend": "test1-ontap-ipv6"},
  "svm": "nas_ipv6_svm",
  "username": "vsadmin",
- "password": "netapp123"
+ "password": "password"
 }
 ----
 ====
@@ -310,7 +310,7 @@ Dieses Beispiel zeigt `managementLIF` Verwenden einer IPv6-Adresse.
     "dataLIF": "10.0.0.2",
     "svm": "svm_nfs",
     "username": "vsadmin",
-    "password": "secret"
+    "password": "password"
 }
 ----
 
@@ -356,7 +356,7 @@ In diesem Beispiel legt ein Teil des Speicherpools seine eigenen fest `spaceRese
     "dataLIF": "10.0.0.2",
     "svm": "svm_nfs",
     "username": "admin",
-    "password": "secret",
+    "password": "password",
     "nfsMountOptions": "nfsvers=4",
 
     "defaults": {
@@ -420,7 +420,7 @@ In diesem Beispiel legt ein Teil des Speicherpools seine eigenen fest `spaceRese
     "dataLIF": "10.0.0.2",
     "svm": "svm_nfs",
     "username": "vsadmin",
-    "password": "secret",
+    "password": "password",
 
     "defaults": {
           "spaceReserve": "none",
@@ -481,7 +481,7 @@ In diesem Beispiel legt ein Teil des Speicherpools seine eigenen fest `spaceRese
     "dataLIF": "10.0.0.2",
     "svm": "svm_nfs",
     "username": "vsadmin",
-    "password": "secret",
+    "password": "password",
 
     "defaults": {
           "spaceReserve": "none",

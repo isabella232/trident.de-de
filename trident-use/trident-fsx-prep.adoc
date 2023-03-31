@@ -32,7 +32,7 @@ NOTE: Achten Sie darauf, dass Sie die für Amazon Linux und Ubuntu erforderliche
 +
 [listing]
 ----
-kubectl create secret generic smbcreds --from-literal username=user --from-literal password='pw'
+kubectl create secret generic smbcreds --from-literal username=user --from-literal password='password'
 ----
 * Ein CSI-Proxy, der als Windows-Dienst konfiguriert ist. Zum Konfigurieren von A `csi-proxy`Weitere Informationen finden Sie unter link:https://github.com/kubernetes-csi/csi-proxy["GitHub: CSI-Proxy"^] Oder link:https://github.com/Azure/aks-engine/blob/master/docs/topics/csi-proxy-windows.md["GitHub: CSI Proxy für Windows"^] Für Kubernetes-Knoten, die auf Windows ausgeführt werden.
 

@@ -52,7 +52,7 @@ Eine Beispiel-Back-End-Definition sieht folgendermaßen aus:
   "dataLIF": "10.0.0.2",
   "svm": "svm_nfs",
   "username": "vsadmin",
-  "password": "secret"
+  "password": "password"
 }
 ----
 Beachten Sie, dass die Backend-Definition der einzige Ort ist, an dem die Anmeldeinformationen im reinen Text gespeichert werden. Nach der Erstellung des Backend werden Benutzernamen/Passwörter mit Base64 codiert und als Kubernetes Secrets gespeichert. Die Erstellung/Aktualisierung eines Backend ist der einzige Schritt, der Kenntnisse der Anmeldeinformationen erfordert. Daher ist dieser Vorgang nur für Administratoren und wird vom Kubernetes-/Storage-Administrator ausgeführt.
@@ -156,7 +156,7 @@ cat cert-backend-updated.json
 "dataLIF": "1.2.3.8",
 "svm": "vserver_test",
 "username": "vsadmin",
-"password": "secret",
+"password": "password",
 "storagePrefix": "myPrefix_"
 }
 
@@ -209,7 +209,7 @@ Es müssen zwei Konfigurationsoptionen verwendet werden. Hier ist ein Beispiel B
     "managementLIF": "192.168.0.135",
     "svm": "svm1",
     "username": "vsadmin",
-    "password": "FaKePaSsWoRd",
+    "password": "password",
     "autoExportCIDRs": ["192.168.0.0/24"],
     "autoExportPolicy": true
 }

@@ -64,7 +64,7 @@ So sieht eine Beispiel-Backend-Definition aus:
  "managementLIF": "192.168.27.5",
  "svm": "iscsi_svm",
  "username": "admin",
- "password": "xxxxxxxxxxxx",
+ "password": "password",
  "supportedTopologies": [
 {"topology.kubernetes.io/region": "us-east1", "topology.kubernetes.io/zone": "us-east1-a"},
 {"topology.kubernetes.io/region": "us-east1", "topology.kubernetes.io/zone": "us-east1-b"}
@@ -84,7 +84,7 @@ Sie können definieren `supportedTopologies` Auch pro Storagepool. Das folgende 
 "managementLIF": "172.16.238.5",
 "svm": "nfs_svm",
 "username": "admin",
-"password": "Netapp123",
+"password": "password",
 "supportedTopologies": [
       {"topology.kubernetes.io/region": "us-central1", "topology.kubernetes.io/zone": "us-central1-a"},
       {"topology.kubernetes.io/region": "us-central1", "topology.kubernetes.io/zone": "us-central1-b"}

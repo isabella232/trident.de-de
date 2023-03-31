@@ -258,7 +258,7 @@ Dies ist ein minimales Beispiel für die Back-End-Konfiguration. Mit dieser Grun
     "chapUsername": "uh2aNCLSd6cNwxyz",
     "igroupName": "trident",
     "username": "vsadmin",
-    "password": "secret"
+    "password": "password"
 }
 ----
 
@@ -279,7 +279,7 @@ Dies ist ein minimales Beispiel für die Back-End-Konfiguration. Mit dieser Grun
     "chapUsername": "uh2aNCLSd6cNwxyz",
     "igroupName": "trident",
     "username": "vsadmin",
-    "password": "secret"
+    "password": "password"
 }
 ----
 
@@ -307,7 +307,7 @@ In diesem Beispiel legt ein Teil des Speicherpools seine eigenen fest `spaceRese
     "chapUsername": "uh2aNCLSd6cNwxyz",
     "igroupName": "trident",
     "username": "vsadmin",
-    "password": "secret",
+    "password": "password",
 
     "defaults": {
           "spaceAllocation": "false",
@@ -362,7 +362,7 @@ Hier ist ein iSCSI-Beispiel für das `ontap-san-economy` Treiber:
     "chapUsername": "uh2aNCLSd6cNwxyz",
     "igroupName": "trident",
     "username": "vsadmin",
-    "password": "secret",
+    "password": "password",
 
     "defaults": {
           "spaceAllocation": "false",
