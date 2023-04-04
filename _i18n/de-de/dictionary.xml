@@ -3580,4 +3580,5 @@
   <block id="21b2b5bca26be7b23af4468b85c68b34" category="list-text">Unterstützung von FlexGroup-Klonen und Volume-Import für SMB-Volumes wurde korrigiert.</block>
   <block id="190a9f9a8311c8a23bff1fd7a5693342" category="section-title">Änderungen in 23.01</block>
   <block id="8b418db90259290a719e83f1a2509366" category="admonition">Kubernetes 1.26 wird jetzt in Trident unterstützt. Aktualisieren Sie Astra Trident vor dem Upgrade von Kubernetes.</block>
+  <block id="1cb76b1c7887cad1e077a4cbdc765b9b" category="list-text">Überprüfen Sie die Astra Trident Version:</block>
 </blocks>
