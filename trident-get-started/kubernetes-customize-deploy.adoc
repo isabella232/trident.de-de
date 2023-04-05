@@ -12,18 +12,28 @@ summary: 'Der Trident-Operator ermöglicht es Ihnen, die Art und Weise, wie Astr
 
 
 [role="lead"]
-Über den Trident-Operator können Sie die Astra Trident-Installation anhand der Attribute im anpassen `TridentOrchestrator` Spez.
-
-Wenn Sie die Installation über die von Ihnen gewünschte hinaus anpassen möchten `TridentOrchestrator` Argumente erlauben, sollten Sie erwägen, zu verwenden `tridentctl` So generieren Sie benutzerdefinierte YAML-Manifeste, die Sie nach Bedarf ändern können.
+Über den Trident-Operator können Sie die Astra Trident-Installation anhand der Attribute im anpassen `TridentOrchestrator` Spez. Wenn Sie die Installation über die von Ihnen gewünschte hinaus anpassen möchten `TridentOrchestrator` Argumente erlauben, verwenden Sie `tridentctl` Um benutzerdefinierte YAML-Manifeste zu erzeugen, die bei Bedarf geändert werden sollen.
 
 
-WARNING: `spec.namespace` Ist in angegeben `TridentOrchestrator` Um den Namespace zu kennzeichnen, in dem Astra Trident installiert ist. Dieser Parameter *kann nicht aktualisiert werden, nachdem Astra Trident installiert wurde*. Der Versuch, dies zu tun, bewirkt das `TridentOrchestrator` Status zu ändern in `Failed`. Astra Trident ist nicht für die Migration auf Namespaces vorgesehen.
+
+== Allgemeines zu Controller-Pods und Node-Pods
+
+Astra Trident wird als einzelner Controller-Pod ausgeführt sowie als Node-Pod auf jedem Worker-Node im Cluster. Der Node Pod muss auf jedem Host ausgeführt werden, auf dem Sie ein Astra Trident Volume mounten möchten.
+
+Kubernetes link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["Knotenauswahl"^] Und link:https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/["Toleranzen und Verfleckungen"^] Werden verwendet, um die Ausführung eines Pod auf einem bestimmten oder bevorzugten Node einzuschränken. Verwenden von`ControllerPlugin` und `NodePlugin`, Sie können Bedingungen und Überschreibungen festlegen.
+
+* Das Controller-Plug-in übernimmt Volume-Bereitstellung und -Management, beispielsweise Snapshots und Größenanpassungen.
+* Das Node-Plug-in verarbeitet das Verbinden des Speichers mit dem Node.
+
 
 
 
 == Konfigurationsoptionen
 
-Diese Tabelle enthält Einzelheiten `TridentOrchestrator` Attribute:
+
+WARNING: `spec.namespace` Ist in angegeben `TridentOrchestrator` Um den Namespace zu kennzeichnen, in dem Astra Trident installiert ist. Dieser Parameter *kann nicht aktualisiert werden, nachdem Astra Trident installiert wurde*. Der Versuch, dies zu tun, bewirkt das `TridentOrchestrator` Status zu ändern in `Failed`. Astra Trident ist nicht für die Migration auf Namespaces vorgesehen.
+
+Diese Tabelle enthält Einzelheiten `TridentOrchestrator` Attribute.
 
 [cols="3"]
 |===
@@ -85,16 +95,16 @@ Diese Tabelle enthält Einzelheiten `TridentOrchestrator` Attribute:
 `Never` Nie das Bild ziehen. | `IfNotPresent` 
 
 
-| `controllerPluginNodeSelector` | Zusätzliche Node-Selektoren für Pods mit dem Trident Controller CSI Plugin Entspricht dem gleichen Format wie pod.spec.nodeSelector. | Kein Standard; optional 
+| `controllerPluginNodeSelector` | Zusätzliche Node-Auswahl für Pods Entspricht dem gleichen Format wie pod.spec.nodeSelector. | Kein Standard; optional 
 
 
-| `controllerPluginTolerations` | Überschreibungen von Verträgungen für Pods mit dem Trident Controller CSI-Plug-in Entspricht dem gleichen Format wie pod.spec.tolerations. | Kein Standard; optional 
+| `controllerPluginTolerations` | Überschreibt Kubernetes-Toleranzen für Pods. Entspricht dem gleichen Format wie pod.spec.tolerations. | Kein Standard; optional 
 
 
-| `nodePluginNodeSelector` | Zusätzliche Node-Selektoren für Pods, auf denen das Trident Node CSI Plugin ausgeführt wird. Entspricht dem gleichen Format wie pod.spec.nodeSelector. | Kein Standard; optional 
+| `nodePluginNodeSelector` | Zusätzliche Node-Auswahl für Pods Entspricht dem gleichen Format wie pod.spec.nodeSelector. | Kein Standard; optional 
 
 
-| `nodePluginTolerations` | Überschreibungen von Verträgungen für Pods mit dem Trident Node CSI Plugin Entspricht dem gleichen Format wie pod.spec.tolerations. | Kein Standard; optional 
+| `nodePluginTolerations` | Überschreibt Kubernetes-Toleranzen für Pods. Entspricht dem gleichen Format wie pod.spec.tolerations. | Kein Standard; optional 
 |===
 
 NOTE: Weitere Informationen zum Formatieren von Pod-Parametern finden Sie unter link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["Pods werden Nodes zugewiesen"^].
