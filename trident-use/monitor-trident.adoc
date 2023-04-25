@@ -148,27 +148,22 @@ Eine von Astra Trident gesendete Beispiellast sieht folgendermaßen aus:
 
 [listing]
 ----
-{
-  "items": [
-    {
-      "backendUUID": "ff3852e1-18a5-4df4-b2d3-f59f829627ed",
-      "protocol": "file",
-      "config": {
-        "version": 1,
-        "storageDriverName": "ontap-nas",
-        "debug": false,
-        "debugTraceFlags": null,
-        "disableDelete": false,
-        "serialNumbers": [
-          "nwkvzfanek_SN"
-        ],
-        "limitVolumeSize": ""
-      },
-      "state": "online",
-      "online": true
-    }
-  ]
-}
+---
+items:
+- backendUUID: ff3852e1-18a5-4df4-b2d3-f59f829627ed
+  protocol: file
+  config:
+    version: 1
+    storageDriverName: ontap-nas
+    debug: false
+    debugTraceFlags:
+    disableDelete: false
+    serialNumbers:
+    - nwkvzfanek_SN
+    limitVolumeSize: ''
+  state: online
+  online: true
+
 ----
 * Die AutoSupport Meldungen werden an den AutoSupport Endpunkt von NetApp gesendet. Wenn Sie zum Speichern von Container-Images eine private Registrierung verwenden, können Sie das verwenden `--image-registry` Flagge.
 * Sie können auch Proxy-URLs konfigurieren, indem Sie die Installation YAML-Dateien erstellen. Dies kann mit erfolgen `tridentctl install --generate-custom-yaml` So erstellen Sie die YAML-Dateien und fügen die hinzu `--proxy-url` Argument für das `trident-autosupport` Container in `trident-deployment.yaml`.

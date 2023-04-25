@@ -42,6 +42,25 @@ Astra Trident erfordert die Zugangsdaten für einen Administrator mit SVM-Umfang
 
 Eine Beispiel-Back-End-Definition sieht folgendermaßen aus:
 
+[role="tabbed-block"]
+====
+.YAML
+--
+[listing]
+----
+---
+version: 1
+backendName: ExampleBackend
+storageDriverName: ontap-nas
+managementLIF: 10.0.0.1
+dataLIF: 10.0.0.2
+svm: svm_nfs
+username: vsadmin
+password: password
+----
+--
+.JSON
+--
 [listing]
 ----
 {
@@ -55,6 +74,8 @@ Eine Beispiel-Back-End-Definition sieht folgendermaßen aus:
   "password": "password"
 }
 ----
+--
+====
 Beachten Sie, dass die Backend-Definition der einzige Ort ist, an dem die Anmeldeinformationen im reinen Text gespeichert werden. Nach der Erstellung des Backend werden Benutzernamen/Passwörter mit Base64 codiert und als Kubernetes Secrets gespeichert. Die Erstellung/Aktualisierung eines Backend ist der einzige Schritt, der Kenntnisse der Anmeldeinformationen erfordert. Daher ist dieser Vorgang nur für Administratoren und wird vom Kubernetes-/Storage-Administrator ausgeführt.
 
 
@@ -202,17 +223,17 @@ Es müssen zwei Konfigurationsoptionen verwendet werden. Hier ist ein Beispiel B
 
 [listing]
 ----
-{
-    "version": 1,
-    "storageDriverName": "ontap-nas",
-    "backendName": "ontap_nas_auto_export,
-    "managementLIF": "192.168.0.135",
-    "svm": "svm1",
-    "username": "vsadmin",
-    "password": "password",
-    "autoExportCIDRs": ["192.168.0.0/24"],
-    "autoExportPolicy": true
-}
+---
+version: 1
+storageDriverName: ontap-nas
+backendName: ontap_nas_auto_export
+managementLIF: 192.168.0.135
+svm: svm1
+username: vsadmin
+password: password
+autoExportCIDRs:
+- 192.168.0.0/24
+autoExportPolicy: true
 ----
 
 NOTE: Wenn Sie diese Funktion verwenden, müssen Sie sicherstellen, dass für die Root-Verbindung in Ihrer SVM eine zuvor erstellte Exportrichtlinie mit einer Exportregel vorhanden ist, die den CIDR-Block des Nodes zulässt (z. B. die standardmäßige Exportrichtlinie). Folgen Sie immer der von NetApp empfohlenen Best Practice, eine SVM für Astra Trident einzurichten.

@@ -59,6 +59,25 @@ NOTE: Sie können sich bei Ihrem Dateisystem anmelden (zum Beispiel Zertifikate 
 
 . Erstellen Sie eine Backend-Datei mithilfe Ihrer Zertifikate und des DNS-Namens Ihrer Management LIF, wie im folgenden Beispiel dargestellt:
 +
+[role="tabbed-block"]
+====
+.YAML
+--
+[listing]
+----
+---
+version: 1
+storageDriverName: ontap-san
+backendName: customBackendName
+managementLIF: svm-XXXXXXXXXXXXXXXXX.fs-XXXXXXXXXXXXXXXXX.fsx.us-east-2.aws.internal
+svm: svm01
+clientCertificate: ZXR0ZXJwYXB...ICMgJ3BhcGVyc2
+clientPrivateKey: vciwKIyAgZG...0cnksIGRlc2NyaX
+trustedCACertificate: zcyBbaG...b3Igb3duIGNsYXNz
+----
+--
+.JSON
+--
 [listing]
 ----
 {
@@ -69,9 +88,12 @@ NOTE: Sie können sich bei Ihrem Dateisystem anmelden (zum Beispiel Zertifikate 
   "svm": "svm01",
   "clientCertificate": "ZXR0ZXJwYXB...ICMgJ3BhcGVyc2",
   "clientPrivateKey": "vciwKIyAgZG...0cnksIGRlc2NyaX",
-  "trustedCACertificate": "zcyBbaG...b3Igb3duIGNsYXNz",
+  "trustedCACertificate": "zcyBbaG...b3Igb3duIGNsYXNz"
  }
+
 ----
+--
+====
 +
 Informationen zum Erstellen von Back-Ends finden Sie unter folgenden Links:
 

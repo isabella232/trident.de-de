@@ -53,8 +53,31 @@ kubectl get nodes -o=jsonpath='{range .items[*]}[{.metadata.name}, {.metadata.la
 
 Astra Trident Storage-Back-Ends können für die selektive Bereitstellung von Volumes basierend auf Verfügbarkeitszonen ausgelegt werden. Jedes Backend kann optional mittragen `supportedTopologies` Block, der eine Liste der zu unterstützenden Zonen und Regionen darstellt. Bei StorageClasses, die ein solches Backend nutzen, wird ein Volume nur erstellt, wenn es von einer Applikation angefordert wird, die in einer unterstützten Region/Zone geplant ist.
 
-So sieht eine Beispiel-Backend-Definition aus:
+Hier ist eine Beispiel-Backend-Definition:
 
+[role="tabbed-block"]
+====
+.YAML
+--
+[listing]
+----
+---
+version: 1
+storageDriverName: ontap-san
+backendName: san-backend-us-east1
+managementLIF: 192.168.27.5
+svm: iscsi_svm
+username: admin
+password: password
+supportedTopologies:
+- topology.kubernetes.io/region: us-east1
+  topology.kubernetes.io/zone: us-east1-a
+- topology.kubernetes.io/region: us-east1
+  topology.kubernetes.io/zone: us-east1-b
+----
+--
+.JSON
+--
 [listing]
 ----
 {
@@ -71,6 +94,8 @@ So sieht eine Beispiel-Backend-Definition aus:
 ]
 }
 ----
+--
+====
 
 NOTE: `supportedTopologies` Wird verwendet, um eine Liste von Regionen und Zonen pro Backend bereitzustellen. Diese Regionen und Zonen stellen die Liste der zulässigen Werte dar, die in einer StorageClass bereitgestellt werden können. Bei StorageClasses, die einen Teil der Regionen und Zonen enthalten, die in einem Backend bereitgestellt werden, erstellt Astra Trident ein Volume im Backend.
 
@@ -78,36 +103,34 @@ Sie können definieren `supportedTopologies` Auch pro Storagepool. Das folgende 
 
 [listing]
 ----
-{"version": 1,
-"storageDriverName": "ontap-nas",
-"backendName": "nas-backend-us-central1",
-"managementLIF": "172.16.238.5",
-"svm": "nfs_svm",
-"username": "admin",
-"password": "password",
-"supportedTopologies": [
-      {"topology.kubernetes.io/region": "us-central1", "topology.kubernetes.io/zone": "us-central1-a"},
-      {"topology.kubernetes.io/region": "us-central1", "topology.kubernetes.io/zone": "us-central1-b"}
-    ]
-"storage": [
-   {
-       "labels": {"workload":"production"},
-        "region": "Iowa-DC",
-        "zone": "Iowa-DC-A",
-        "supportedTopologies": [
-            {"topology.kubernetes.io/region": "us-central1", "topology.kubernetes.io/zone": "us-central1-a"}
-        ]
-    },
-    {
-        "labels": {"workload":"dev"},
-         "region": "Iowa-DC",
-         "zone": "Iowa-DC-B",
-         "supportedTopologies": [
-             {"topology.kubernetes.io/region": "us-central1", "topology.kubernetes.io/zone": "us-central1-b"}
-         ]
-     }
-]
-}
+---
+version: 1
+storageDriverName: ontap-nas
+backendName: nas-backend-us-central1
+managementLIF: 172.16.238.5
+svm: nfs_svm
+username: admin
+password: password
+supportedTopologies:
+- topology.kubernetes.io/region: us-central1
+  topology.kubernetes.io/zone: us-central1-a
+- topology.kubernetes.io/region: us-central1
+  topology.kubernetes.io/zone: us-central1-b
+storage:
+- labels:
+    workload: production
+  region: Iowa-DC
+  zone: Iowa-DC-A
+  supportedTopologies:
+  - topology.kubernetes.io/region: us-central1
+    topology.kubernetes.io/zone: us-central1-a
+- labels:
+    workload: dev
+  region: Iowa-DC
+  zone: Iowa-DC-B
+  supportedTopologies:
+  - topology.kubernetes.io/region: us-central1
+    topology.kubernetes.io/zone: us-central1-b
 ----
 In diesem Beispiel ist der `region` Und `zone` Etiketten stehen für die Position des Speicherpools. `topology.kubernetes.io/region` Und `topology.kubernetes.io/zone` Vorgeben, woher die Speicherpools verbraucht werden können.
 

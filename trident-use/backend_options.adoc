@@ -45,7 +45,7 @@ Um ein bereits vorhandenes Backend mit zu verwalten `kubectl`, Sie müssen ein e
 
 === Schritt 0: Identifizieren Sie das Backend
 
-Um ein zu erstellen `TridentBackendConfig` Das bindet an ein vorhandenes Backend, müssen Sie die Konfiguration des Backend erhalten. In diesem Beispiel nehmen wir an, dass ein Backend mithilfe der folgenden JSON-Definition erstellt wurde:
+Um ein zu erstellen `TridentBackendConfig` Die an ein vorhandenes Backend bindet, müssen Sie die Backend-Konfiguration abrufen. In diesem Beispiel nehmen wir an, dass ein Backend mithilfe der folgenden JSON-Definition erstellt wurde:
 
 [listing]
 ----

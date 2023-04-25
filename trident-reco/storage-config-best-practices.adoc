@@ -129,32 +129,25 @@ Beachten Sie beim Erstellen von QoS-Richtliniengruppen Folgendes:
 
 [listing]
 ----
-  {
-    "version": 1,
-    "storageDriverName": "ontap-nas",
-    "managementLIF": "0.0.0.0",
-    "dataLIF": "0.0.0.0",
-    "svm": "svm0",
-    "username": "user",
-    "password": "pass",
-    "defaults": {
-      "qosPolicy": "standard-pg"
-    },
-    "storage": [
-      {
-        "labels": {"performance": "extreme"},
-        "defaults": {
-          "adaptiveQosPolicy": "extremely-adaptive-pg"
-        }
-      },
-      {
-        "labels": {"performance": "premium"},
-        "defaults": {
-          "qosPolicy": "premium-pg"
-        }
-      }
-    ]
-  }
+  ---
+version: 1
+storageDriverName: ontap-nas
+managementLIF: 0.0.0.0
+dataLIF: 0.0.0.0
+svm: svm0
+username: user
+password: pass
+defaults:
+  qosPolicy: standard-pg
+storage:
+- labels:
+    performance: extreme
+  defaults:
+    adaptiveQosPolicy: extremely-adaptive-pg
+- labels:
+    performance: premium
+  defaults:
+    qosPolicy: premium-pg
 ----
 * Sie sollten die Richtliniengruppen pro Volume anwenden, damit jedes Volume den gesamten von der Richtliniengruppe angegebenen Durchsatz erhält. Gemeinsame Richtliniengruppen werden nicht unterstützt.
 

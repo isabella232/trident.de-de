@@ -153,15 +153,14 @@ Diese Konfiguration eignet sich ideal, wenn Sie gerade mit ANF beginnen und die 
 
 [listing]
 ----
-{
-    "version": 1,
-    "storageDriverName": "azure-netapp-files",
-    "subscriptionID": "9f87c765-4774-fake-ae98-a721add45451",
-    "tenantID": "68e4f836-edc1-fake-bff9-b2d865ee56cf",
-    "clientID": "dd043f63-bf8e-fake-8076-8de91e5713aa",
-    "clientSecret": "SECRET",
-    "location": "eastus"
-}
+---
+version: 1
+storageDriverName: azure-netapp-files
+subscriptionID: 9f87c765-4774-fake-ae98-a721add45451
+tenantID: 68e4f836-edc1-fake-bff9-b2d865ee56cf
+clientID: dd043f63-bf8e-fake-8076-8de91e5713aa
+clientSecret: SECRET
+location: eastus
 ----
 ====
 .Beispiel 2: Spezifische Service Level-Konfiguration mit Kapazitätspool-Filtern
@@ -171,20 +170,18 @@ Bei dieser Back-End-Konfiguration werden Volumes in Azure platziert `eastus` Sta
 
 [listing]
 ----
-    {
-        "version": 1,
-        "storageDriverName": "azure-netapp-files",
-        "subscriptionID": "9f87c765-4774-fake-ae98-a721add45451",
-        "tenantID": "68e4f836-edc1-fake-bff9-b2d865ee56cf",
-        "clientID": "dd043f63-bf8e-fake-8076-8de91e5713aa",
-        "clientSecret": "SECRET",
-        "location": "eastus",
-        "serviceLevel": "Ultra",
-        "capacityPools": [
-            "application-group-1/account-1/ultra-1",
-            "application-group-1/account-1/ultra-2"
-],
-    }
+---
+version: 1
+storageDriverName: azure-netapp-files
+subscriptionID: 9f87c765-4774-fake-ae98-a721add45451
+tenantID: 68e4f836-edc1-fake-bff9-b2d865ee56cf
+clientID: dd043f63-bf8e-fake-8076-8de91e5713aa
+clientSecret: SECRET
+location: eastus
+serviceLevel: Ultra
+capacityPools:
+- application-group-1/account-1/ultra-1
+- application-group-1/account-1/ultra-2
 ----
 ====
 .Beispiel 3: Erweiterte Konfiguration
@@ -194,31 +191,29 @@ Diese Back-End-Konfiguration reduziert den Umfang der Volume-Platzierung auf ein
 
 [listing]
 ----
-    {
-        "version": 1,
-        "storageDriverName": "azure-netapp-files",
-        "subscriptionID": "9f87c765-4774-fake-ae98-a721add45451",
-        "tenantID": "68e4f836-edc1-fake-bff9-b2d865ee56cf",
-        "clientID": "dd043f63-bf8e-fake-8076-8de91e5713aa",
-        "clientSecret": "SECRET",
-        "location": "eastus",
-        "serviceLevel": "Ultra",
-        "capacityPools": [
-            "application-group-1/account-1/ultra-1",
-            "application-group-1/account-1/ultra-2"
-],
-        "virtualNetwork": "my-virtual-network",
-        "subnet": "my-subnet",
-        "networkFeatures": "Standard",
-        "nfsMountOptions": "vers=3,proto=tcp,timeo=600",
-        "limitVolumeSize": "500Gi",
-        "defaults": {
-            "exportRule": "10.0.0.0/24,10.0.1.0/24,10.0.2.100",
-            "snapshotDir": "true",
-            "size": "200Gi",
-            "unixPermissions": "0777"
-        }
-    }
+---
+version: 1
+storageDriverName: azure-netapp-files
+subscriptionID: 9f87c765-4774-fake-ae98-a721add45451
+tenantID: 68e4f836-edc1-fake-bff9-b2d865ee56cf
+clientID: dd043f63-bf8e-fake-8076-8de91e5713aa
+clientSecret: SECRET
+location: eastus
+serviceLevel: Ultra
+capacityPools:
+- application-group-1/account-1/ultra-1
+- application-group-1/account-1/ultra-2
+virtualNetwork: my-virtual-network
+subnet: my-subnet
+networkFeatures: Standard
+nfsMountOptions: vers=3,proto=tcp,timeo=600
+limitVolumeSize: 500Gi
+defaults:
+  exportRule: 10.0.0.0/24,10.0.1.0/24,10.0.2.100
+  snapshotDir: 'true'
+  size: 200Gi
+  unixPermissions: '0777'
+
 ----
 ====
 .Beispiel 4: Virtuelle Pool-Konfiguration
@@ -228,47 +223,40 @@ Diese Back-End-Konfiguration definiert mehrere Storage-Pools in einer einzelnen 
 
 [listing]
 ----
-    {
-        "version": 1,
-        "storageDriverName": "azure-netapp-files",
-        "subscriptionID": "9f87c765-4774-fake-ae98-a721add45451",
-        "tenantID": "68e4f836-edc1-fake-bff9-b2d865ee56cf",
-        "clientID": "dd043f63-bf8e-fake-8076-8de91e5713aa",
-        "clientSecret": "SECRET",
-        "location": "eastus",
-        "resourceGroups": ["application-group-1"],
-        "networkFeatures": "Basic",
-        "nfsMountOptions": "vers=3,proto=tcp,timeo=600",
-        "labels": {
-            "cloud": "azure"
-        },
-        "location": "eastus",
+---
+version: 1
+storageDriverName: azure-netapp-files
+subscriptionID: 9f87c765-4774-fake-ae98-a721add45451
+tenantID: 68e4f836-edc1-fake-bff9-b2d865ee56cf
+clientID: dd043f63-bf8e-fake-8076-8de91e5713aa
+clientSecret: SECRET
+location: eastus
+resourceGroups:
+- application-group-1
+networkFeatures: Basic
+nfsMountOptions: vers=3,proto=tcp,timeo=600
+labels:
+  cloud: azure
+storage:
+- labels:
+    performance: gold
+  serviceLevel: Ultra
+  capacityPools:
+  - ultra-1
+  - ultra-2
+  networkFeatures: Standard
+- labels:
+    performance: silver
+  serviceLevel: Premium
+  capacityPools:
+  - premium-1
+- labels:
+    performance: bronze
+  serviceLevel: Standard
+  capacityPools:
+  - standard-1
+  - standard-2
 
-        "storage": [
-            {
-                "labels": {
-                    "performance": "gold"
-                },
-                "serviceLevel": "Ultra",
-                "capacityPools": ["ultra-1", "ultra-2"],
-                "networkFeatures": "Standard"
-            },
-            {
-                "labels": {
-                    "performance": "silver"
-                },
-                "serviceLevel": "Premium",
-                "capacityPools": ["premium-1"]
-            },
-            {
-                "labels": {
-                    "performance": "bronze"
-                },
-                "serviceLevel": "Standard",
-                "capacityPools": ["standard-1", "standard-2"]
-            }
-        ]
-    }
 ----
 ====
 
