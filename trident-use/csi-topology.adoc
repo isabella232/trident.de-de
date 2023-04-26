@@ -28,7 +28,7 @@ NOTE: Der `WaitForFirstConsumer` Für den Bindungsmodus sind keine Topologiebesc
 .Was Sie benötigen
 Für die Verwendung von CSI Topology benötigen Sie Folgendes:
 
-* Einen Kubernetes-Cluster mit einem link:requirements.html["Unterstützte Kubernetes-Version"]
+* Einen Kubernetes-Cluster mit einem link:../trident-get-started/requirements.html["Unterstützte Kubernetes-Version"]
 +
 [listing]
 ----
