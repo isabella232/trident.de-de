@@ -15,11 +15,11 @@ summary: Bevor Sie Ihr ANF-Backend konfigurieren können, müssen Sie sicherstel
 Bevor Sie Ihr Azure NetApp Files-Backend konfigurieren können, müssen Sie sicherstellen, dass die folgenden Anforderungen erfüllt sind.
 
 
-NOTE: Wenn Sie Azure NetApp Files zum ersten Mal oder an einem neuen Standort verwenden, ist eine Erstkonfiguration erforderlich, um Azure NetApp Files einzurichten und ein NFS-Volume zu erstellen. Siehe https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-quickstart-set-up-account-create-volumes["Azure: Azure NetApp Files einrichten und ein NFS Volume erstellen"^].
-
-
 
 == Voraussetzungen für NFS und SMB Volumes
+
+
+NOTE: Wenn Sie Azure NetApp Files zum ersten Mal oder an einem neuen Standort verwenden, ist eine Erstkonfiguration erforderlich, um Azure NetApp Files einzurichten und ein NFS-Volume zu erstellen. Siehe https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-quickstart-set-up-account-create-volumes["Azure: Azure NetApp Files einrichten und ein NFS Volume erstellen"^].
 
 Um ein zu konfigurieren und zu verwenden https://azure.microsoft.com/en-us/services/netapp/["Azure NetApp Dateien"^] Back-End, Sie benötigen Folgendes:
 

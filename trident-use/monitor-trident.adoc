@@ -11,7 +11,12 @@ summary: Astra Trident bietet eine Reihe von Prometheus Metriken-Endpunkten, mit
 :imagesdir: ../media/
 
 
-Astra Trident bietet eine Reihe von Prometheus-Kennzahlendpunkten, mit denen Sie die Leistung von Astra Trident überwachen können.
+[role="lead"]
+Astra Trident bietet eine Reihe von Prometheus Kennzahlen-Endpunkten, mit denen Sie die Performance von Astra Trident überwachen können.
+
+
+
+== Überblick
 
 Mit den von Astra Trident bereitgestellten Metriken können Sie:
 

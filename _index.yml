@@ -4,16 +4,16 @@ indexpage:
     mit Unterstützung von NetApp. Die Software ermöglicht die Erstellung von Storage
     Volumes für Container-Applikationen, die von Docker und Kubernetes gemanagt werden.
   tiles:
-  - title: Wichtige Informationen für Version 23.01
+  - title: Versionshinweise
     links:
-    - title: Versionshinweise
+    - title: Was ist neu
       url: trident-rn.html
+    - title: Frühere Versionen
+      url: "/earlier-versions.html"
   - title: Los geht's
     links:
     - title: Erfahren Sie mehr über Astra Trident
       url: "/trident-concepts/intro.html"
-    - title: Versionshinweise
-      url: trident-rn.html
     - title: Anforderungen
       url: "/trident-get-started/requirements.html"
     - title: Probieren Sie es aus

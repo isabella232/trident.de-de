@@ -145,7 +145,7 @@ NOTE: Siehe link:https://docs.netapp.com/us-en/ontap/smb-config/create-share-tas
 | Parameter | Beschreibung | Beispiel 
 
 
-| `smbShare` | Name der SMB-Freigabe, die mithilfe der Microsoft Management Console für freigegebene Ordner erstellt wurde. Zum Beispiel „smb-Share“. *Erforderlich für SMB Volumes.* | `smb-share` 
+| `smbShare` | Sie können den Namen der SMB-Freigabe angeben, die mit der Microsoft Management Console für freigegebene Ordner erstellt wurde, oder einen Freigabenamen angeben, damit Astra Trident die SMB-Freigabe erstellen kann. Alternativ können Sie den Parameter leer lassen, um den gemeinsamen Zugriff auf Volumes zu verhindern. | `smb-share` 
 
 
 | `nasType` | *Muss auf eingestellt sein `smb`.* Wenn Null, wird standardmäßig auf gesetzt `nfs`. | `smb` 

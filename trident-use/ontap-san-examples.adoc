@@ -11,6 +11,7 @@ summary: Erfahren Sie, wie Sie mit Ihrer Installation von Astra Trident ONTAP SA
 :imagesdir: ../media/
 
 
+[role="lead"]
 Erfahren Sie, wie Sie mit Ihrer Installation von Astra Trident ONTAP SAN-Treiber erstellen und verwenden. Dieser Abschnitt enthält Beispiele für die Back-End-Konfiguration und Details zur Zuordnung von Back-Ends zu StorageClasses.
 
 
@@ -27,7 +28,7 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 | `version` |  | Immer 1 
 
 
-| `storageDriverName` | Name des Speichertreibers | „ontap-nas“, „ontap-nas-Economy“, „ontap-nas-flexgroup“, „ontap-san“, „ontap-san-Economy“ 
+| `storageDriverName` | Name des Speichertreibers | `ontap-nas`, `ontap-nas-economy`, `ontap-nas-flexgroup`, `ontap-san`, `ontap-san-economy` 
 
 
 | `backendName` | Benutzerdefinierter Name oder das Storage-Backend | Treibername + „_“ + DatenLIF 
@@ -39,7 +40,7 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 | `dataLIF` | IP-Adresse des LIF-Protokolls. *Nicht für iSCSI angeben.* Astra Trident verwendet link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP selektive LUN-Zuordnung"^] Um die iSCI LIFs zu ermitteln, die für die Einrichtung einer Multi-Path-Sitzung erforderlich sind. Wenn eine Warnung erzeugt wird `dataLIF` Ist explizit definiert. | Abgeleitet von SVM 
 
 
-| `useCHAP` | Verwenden Sie CHAP, um iSCSI für ONTAP-SAN-Treiber zu authentifizieren [Boolesch]. Auf einstellen `true` Damit Astra Trident bidirektionales CHAP als Standardauthentifizierung für die im Backend angegebene SVM konfiguriert und verwendet. Siehe link:ontap-san-prep.html["Vorbereiten der Konfiguration des Back-End mit ONTAP-SAN-Treibern"] Entsprechende Details. | Falsch 
+| `useCHAP` | Verwenden Sie CHAP, um iSCSI für ONTAP-SAN-Treiber zu authentifizieren [Boolesch]. Auf einstellen `true` Damit Astra Trident bidirektionales CHAP als Standardauthentifizierung für die im Backend angegebene SVM konfiguriert und verwendet. Siehe link:ontap-san-prep.html["Vorbereiten der Konfiguration des Back-End mit ONTAP-SAN-Treibern"] Entsprechende Details. | `false` 
 
 
 | `chapInitiatorSecret` | CHAP-Initiatorschlüssel. Erforderlich, wenn `useCHAP=true` | „“ 
@@ -75,10 +76,7 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 | `svm` | Zu verwendende Storage Virtual Machine | Abgeleitet wenn eine SVM `managementLIF` Angegeben ist 
 
 
-| `igroupName` | Der Name der Initiatorgruppe für die zu verwendenden SAN Volumes. Siehe  Finden Sie weitere Informationen. | „Trident-<Backend-UUID>“ 
-
-
-| `storagePrefix` | Das Präfix wird beim Bereitstellen neuer Volumes in der SVM verwendet. Kann später nicht mehr geändert werden. Um diesen Parameter zu aktualisieren, müssen Sie ein neues Backend erstellen. | „Dreizack“ 
+| `storagePrefix` | Das Präfix wird beim Bereitstellen neuer Volumes in der SVM verwendet. Kann später nicht mehr geändert werden. Um diesen Parameter zu aktualisieren, müssen Sie ein neues Backend erstellen. | `trident` 
 
 
 | `limitAggregateUsage` | Bereitstellung fehlgeschlagen, wenn die Nutzung über diesem Prozentsatz liegt. Wenn Sie ein Amazon FSX für das NetApp ONTAP-Back-End verwenden, geben Sie diese bitte nicht an  `limitAggregateUsage`. Die vorhanden `fsxadmin` Und `vsadmin` Enthalten Sie nicht die erforderlichen Berechtigungen, um die Aggregatnutzung abzurufen und sie mit Astra Trident zu begrenzen. | „“ (nicht standardmäßig durchgesetzt) 
@@ -87,30 +85,16 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 | `limitVolumeSize` | Bereitstellung fehlgeschlagen, wenn die angeforderte Volume-Größe über diesem Wert liegt. Schränkt auch die maximale Größe der Volumes ein, die es für qtrees und LUNs managt. | „“ (nicht standardmäßig durchgesetzt) 
 
 
-| `lunsPerFlexvol` | Die maximale Anzahl an LUNs pro FlexVol muss im Bereich [50, 200] liegen. | „100“ 
+| `lunsPerFlexvol` | Die maximale Anzahl an LUNs pro FlexVol muss im Bereich [50, 200] liegen. | `100` 
 
 
-| `debugTraceFlags` | Fehler-Flags bei der Fehlerbehebung beheben. Beispiel: { „API“:false, „Methode“:true} Verwenden Sie nur, wenn Sie eine Fehlerbehebung durchführen und einen detaillierten Logdump benötigen. | Null 
+| `debugTraceFlags` | Fehler-Flags bei der Fehlerbehebung beheben. Beispiel: { „API“:false, „Methode“:true} Verwenden Sie nur, wenn Sie eine Fehlerbehebung durchführen und einen detaillierten Logdump benötigen. | `null` 
 
 
 | `useREST` | Boolescher Parameter zur Verwendung von ONTAP REST-APIs. *Technische Vorschau*
 `useREST` Wird als **Tech-Vorschau bereitgestellt**, das für Testumgebungen und nicht für Produktions-Workloads empfohlen wird. Wenn eingestellt auf `true`, Astra Trident wird ONTAP REST APIs zur Kommunikation mit dem Backend verwenden. Diese Funktion erfordert ONTAP 9.11.1 und höher. Darüber hinaus muss die verwendete ONTAP-Login-Rolle Zugriff auf den haben `ontap` Applikation. Dies wird durch die vordefinierte zufrieden `vsadmin` Und `cluster-admin` Rollen:
-`useREST` Wird mit MetroCluster nicht unterstützt. | Falsch 
+`useREST` Wird mit MetroCluster nicht unterstützt. | `false` 
 |===
-
-
-=== Details zu `igroupName`
-
-`igroupName` Kann auf eine Initiatorgruppe festgelegt werden, die bereits auf dem ONTAP Cluster erstellt wurde. Wenn nicht angegeben, erstellt Astra Trident automatisch eine igroup mit dem Namen `trident-<backend-UUID>`.
-
-Bei Bereitstellung eines vordefinierten igroupName empfehlen wir die Verwendung einer Initiatorgruppe pro Kubernetes Cluster, sofern die SVM zwischen Umgebungen gemeinsam genutzt werden soll. Dies ist notwendig, damit Astra Trident automatisch IQN-Ergänzungen und -Löschungen pflegt.
-
-* `igroupName` Kann aktualisiert werden, um auf eine neue igroup zu verweisen, die auf der SVM außerhalb des Astra Trident erstellt und gemanagt wird.
-* `igroupName` Kann weggelassen werden. In diesem Fall wird Astra Trident eine igroup mit dem Namen erstellen und verwalten `trident-<backend-UUID>` Automatisch
-
-
-In beiden Fällen können Sie weiterhin auf Volume-Anhänge zugreifen. Zukünftige Volume-Anhänge verwenden die aktualisierte Initiatorgruppe. Dieses Update wird den Zugriff auf Volumes im Backend nicht unterbrechen.
-
 
 
 == Back-End-Konfigurationsoptionen für die Bereitstellung von Volumes

@@ -11,7 +11,14 @@ summary: Astra Trident bietet verschiedene Funktionen zum Management Ihrer Volum
 :imagesdir: ../media/
 
 
+[role="lead"]
 Erfahren Sie mehr über die Funktionen von Astra Trident zum Management Ihrer Volumes.
+
+
+
+== Verwalten von Volumes
+
+Informationen zum Management von Volumes mit Astra Trident finden Sie im Folgenden.
 
 * link:csi-topology.html["Verwenden Sie die CSI-Topologie"^]
 * link:vol-snapshots.html["Arbeiten Sie mit Snapshots"^]

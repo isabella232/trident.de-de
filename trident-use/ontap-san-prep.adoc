@@ -11,11 +11,18 @@ summary: Erfahren Sie, wie Sie ein ONTAP-Back-End mit ONTAP-SAN-Treibern vorbere
 :imagesdir: ../media/
 
 
-Erfahren Sie, wie Sie ein ONTAP-Back-End mit ONTAP-SAN-Treibern vorbereiten. Für alle ONTAP Back-Ends benötigt Astra Trident mindestens ein Aggregat, das der SVM zugewiesen ist.
+[role="lead"]
+Erfahren Sie, wie Sie ein ONTAP-Back-End mit ONTAP-SAN-Treibern vorbereiten.
+
+
+
+== Überblick
+
+Für alle ONTAP Back-Ends benötigt Astra Trident mindestens ein Aggregat, das der SVM zugewiesen ist.
 
 Denken Sie daran, dass Sie auch mehr als einen Treiber ausführen können und Speicherklassen erstellen können, die auf den einen oder anderen verweisen. Beispielsweise könnten Sie A konfigurieren `san-dev` Klasse, die den verwendet `ontap-san` Fahrer und A `san-default` Klasse, die den verwendet `ontap-san-economy` Eins.
 
-Alle Kubernetes-Worker-Nodes müssen über die entsprechenden iSCSI-Tools verfügen. Siehe link:worker-node-prep.html["Hier"] Entnehmen.
+Alle Kubernetes-Worker-Nodes müssen über die entsprechenden iSCSI-Tools verfügen. Siehe link:worker-node-prep.html["Bereiten Sie den Knoten „Worker“ vor"] Entsprechende Details.
 
 
 
@@ -183,25 +190,6 @@ Durch die Aktualisierung eines Backend wird der Zugriff auf Volumes, die bereits
 
 
 
-== Geben Sie Initiatorgruppen an
-
-Astra Trident verwendet Initiatorgruppen, um den Zugriff auf die Volumes (LUNs) zu steuern, die er bereitstellt. Administratoren verfügen über zwei Optionen, wenn es um das Angeben von Initiatorgruppen für Back-Ends geht:
-
-* Astra Trident kann automatisch eine igroup pro Backend erstellen und managen. Wenn `igroupName` Ist nicht in der Backend-Definition enthalten, erstellt Astra Trident eine igroup mit dem Namen `trident-<backend-UUID>` Auf der SVM. So wird sichergestellt, dass jedes Backend über eine dedizierte iGroup verfügt und das automatisierte Hinzufügen/Löschen von Kubernetes Node-IQNs behandelt.
-* Alternativ können auch vorab erstellte Initiatorgruppen in einer Backend-Definition bereitgestellt werden. Dies kann mit dem erfolgen `igroupName` Konfigurationsparameter. Astra Trident fügt der bereits vorhandenen iGroup Kubernetes-Node-IQNs hinzu/löschen.
-
-
-Für Back-Ends mit `igroupName` Definiert, das `igroupName` Kann mit einem gelöscht werden `tridentctl backend update` Astra Trident ist die Auto-Handle-Initiatorgruppen. Dadurch wird der Zugriff auf Volumes nicht unterbrochen, die bereits an Workloads angeschlossen sind. Künftige Verbindungen werden mit der von der igroup Astra Trident erstellten iGroup behandelt.
-
-
-IMPORTANT: Die Einwidmung einer Initiatorgruppe für jede einzelne Instanz des Astra Trident ist eine Best Practice, die sowohl dem Kubernetes-Administrator als auch dem Storage-Administrator von Vorteil ist. CSI Trident automatisiert das Hinzufügen und Entfernen von Cluster Node-IQNs zur igroup und vereinfacht das Management enorm. Wenn in Kubernetes-Umgebungen dieselben SVMs verwendet werden (und Astra Trident-Installationen), stellt die Verwendung einer dedizierten igroup sicher, dass Änderungen an einem Kubernetes-Cluster keinen Einfluss auf Initiatorgruppen haben, die anderen zugeordnet sind. Darüber hinaus ist es wichtig, dass jeder Node im Kubernetes Cluster über einen eindeutigen IQN verfügt. Wie oben erwähnt, übernimmt Astra Trident automatisch das Hinzufügen und Entfernen von IQNs. Die Wiederverwendung von IQNs über Hosts kann zu unerwünschten Szenarien führen, in denen Hosts sich gegenseitig irren und der Zugriff auf LUNs verweigert wird.
-
-Wenn Astra Trident als CSI-Bereitstellung konfiguriert ist, werden Kubernetes-Node-IQNs automatisch der Initiatorgruppe hinzugefügt/entfernt. Wenn Nodes zu einem Kubernetes-Cluster hinzugefügt werden, `trident-csi` DemonSet setzt einen POD ein (`trident-csi-xxxxx` In Versionen vor 23.01 oder `trident-node<operating system>-xxxx` Ab 23.01) auf den neu hinzugefügten Knoten und registriert die neuen Knoten, an die es Volumes hinzufügen kann. Node-IQNs werden ebenfalls zur iGroup des Backend hinzugefügt. Eine ähnliche Reihe von Schritten behandelt das Entfernen von IQNs, wenn Nodes aus Kubernetes abgesperrt, entleert und gelöscht werden.
-
-Wenn Astra Trident nicht als CSI-Bereitstellung ausgeführt wird, muss die Initiatorgruppe manuell aktualisiert werden, um die iSCSI-IQNs von jedem Worker-Node im Kubernetes-Cluster zu enthalten. IQNs von Nodes, die dem Kubernetes-Cluster beitreten, müssen zur Initiatorgruppe hinzugefügt werden. Ebenso müssen IQNs von Nodes, die aus dem Kubernetes-Cluster entfernt werden, aus der Initiatorgruppe entfernt werden.
-
-
-
 == Verbindungen mit bidirektionalem CHAP authentifizieren
 
 Astra Trident kann iSCSI-Sitzungen mit bidirektionalem CHAP für die authentifizieren `ontap-san` Und `ontap-san-economy` Treiber. Hierfür muss die Aktivierung von erforderlich sein `useCHAP` Option in der Back-End-Definition. Wenn eingestellt auf `true`, Astra Trident konfiguriert die Standard-Initiator-Sicherheit der SVM auf bidirektionales CHAP und legt den Benutzernamen und die Schlüssel aus der Backend-Datei. NetApp empfiehlt die Verwendung von bidirektionalem CHAP zur Authentifizierung von Verbindungen. Die folgende Beispielkonfiguration ist verfügbar:
@@ -241,7 +229,6 @@ Nach Einstellung `useCHAP` Der Storage-Administrator weist Astra Trident an, CHA
 
 
 * Konfigurieren des CHAP-Initiators und des Ziel-Usernamens und der Schlüssel; diese Optionen müssen in der Back-End-Konfiguration angegeben werden (siehe oben).
-* Verwalten des Hinzufügung von Initiatoren zu dem `igroupName` Gegeben im Backend. Wenn die Angabe nicht festgelegt ist, wird standardmäßig auf diese Option gesetzt `trident`.
 
 
 Nach der Erstellung des Backend erstellt Astra Trident eine entsprechende `tridentbackend` CRD: Speichert die CHAP-Geheimnisse und Benutzernamen als Kubernetes-Geheimnisse. Alle PVS, die von Astra Trident auf diesem Backend erstellt werden, werden über CHAP gemountet und angeschlossen.
@@ -267,7 +254,6 @@ cat backend-san.json
     "useCHAP": true,
     "username": "vsadmin",
     "password": "password",
-    "igroupName": "trident",
     "chapInitiatorSecret": "cl9qxUpDaTeD",
     "chapTargetInitiatorSecret": "rqxigXgkeUpDaTeD",
     "chapTargetUsername": "iJF4heBRT0TCwxyz",

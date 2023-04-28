@@ -11,7 +11,14 @@ summary: Astra Trident kann mithilfe der CSI-Topologiefunktion Volumes selektiv 
 :imagesdir: ../media/
 
 
-Astra Trident kann Volumes selektiv erstellen und zu Nodes in einem Kubernetes Cluster verbinden, indem der verwendet wird https://kubernetes-csi.github.io/docs/topology.html["Funktion CSI Topology"^]. Mithilfe der CSI Topology-Funktion kann der Zugriff auf Volumes auf einen Teil von Nodes basierend auf Regionen und Verfügbarkeitszonen begrenzt werden. Cloud-Provider ermöglichen Kubernetes-Administratoren inzwischen das Erstellen von Nodes, die zonenbasiert sind. Die Nodes können sich in verschiedenen Verfügbarkeitszonen innerhalb einer Region oder über verschiedene Regionen hinweg befinden. Astra Trident verwendet CSI Topology, um die Provisionierung von Volumes für Workloads in einer Multi-Zone-Architektur zu vereinfachen.
+[role="lead"]
+Astra Trident kann Volumes selektiv erstellen und zu Nodes in einem Kubernetes Cluster verbinden, indem der verwendet wird https://kubernetes-csi.github.io/docs/topology.html["Funktion CSI Topology"^].
+
+
+
+== Überblick
+
+Mithilfe der CSI Topology-Funktion kann der Zugriff auf Volumes auf einen Teil von Nodes basierend auf Regionen und Verfügbarkeitszonen begrenzt werden. Cloud-Provider ermöglichen Kubernetes-Administratoren inzwischen das Erstellen von Nodes, die zonenbasiert sind. Die Nodes können sich in verschiedenen Verfügbarkeitszonen innerhalb einer Region oder über verschiedene Regionen hinweg befinden. Astra Trident verwendet CSI Topology, um die Provisionierung von Volumes für Workloads in einer Multi-Zone-Architektur zu vereinfachen.
 
 
 TIP: Erfahren Sie mehr über die Funktion CSI Topology https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/["Hier"^].

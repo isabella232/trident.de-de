@@ -11,7 +11,14 @@ summary: Erfahren Sie in Astra Trident, wie Back-Ends auf verschiedene Art und W
 :imagesdir: ../media/
 
 
-Erfahren Sie in Astra Trident, wie Back-Ends auf verschiedene Art und Weise gemanagt werden. Mit der Einführung von `TridentBackendConfig`, Administratoren haben jetzt zwei unterschiedliche Arten von Back-Ends zu verwalten. Dies stellt die folgenden Fragen:
+[role="lead"]
+Erfahren Sie in Astra Trident, wie Back-Ends auf verschiedene Art und Weise gemanagt werden.
+
+
+
+== Optionen für das Management von Back-Ends
+
+Mit der Einführung von `TridentBackendConfig`, Administratoren haben jetzt zwei unterschiedliche Arten von Back-Ends zu verwalten. Dies stellt die folgenden Fragen:
 
 * Mit können Back-Ends erstellt werden `tridentctl` Gemanagt werden mit `TridentBackendConfig`?
 * Mit können Back-Ends erstellt werden `TridentBackendConfig` Gemanagt werden mit `tridentctl`?

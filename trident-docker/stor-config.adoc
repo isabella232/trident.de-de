@@ -141,9 +141,13 @@ Feingranulare Steuerung der NFS-Mount-Optionen; standardmäßig „-o nfsvers=3�
 
 
 | `igroupName`  a| 
-Die vom Plug-in verwendete Initiatorgruppe wird standardmäßig verwendet `netappdvp`. *Nur erhältlich für den `ontap-san`dFluss*.
+Astra Trident erstellt und managt pro Node `igroups` Als `netappdvp`.
+
+Dieser Wert kann nicht geändert oder weggelassen werden.
+
+*Nur für die verfügbar `ontap-san` Fahrer*.
  a| 
-`myigroup`
+`netappdvp`
 
 
 
@@ -348,7 +352,7 @@ Um erweiterte Funktionen und die enorme Skalierbarkeit in derselben Umgebung zu 
     "username": "vsadmin",
     "password": "password",
     "aggregate": "aggr1",
-    "igroupName": "myigroup"
+    "igroupName": "netappdvp"
 }
 ----
 *NFS Beispiel für `ontap-san-economy` Fahrer*
@@ -364,7 +368,7 @@ Um erweiterte Funktionen und die enorme Skalierbarkeit in derselben Umgebung zu 
     "username": "vsadmin",
     "password": "password",
     "aggregate": "aggr1",
-    "igroupName": "myigroup"
+    "igroupName": "netappdvp"
 }
 ----
 

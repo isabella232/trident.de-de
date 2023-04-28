@@ -11,7 +11,12 @@ summary: Erfahren Sie, wie Sie ein ONTAP-Back-End mit ONTAP-NAS-Treibern vorbere
 :imagesdir: ../media/
 
 
-Erfahren Sie, wie Sie ein ONTAP-Back-End mit ONTAP-NAS-Treibern vorbereiten. Für alle ONTAP Back-Ends benötigt Astra Trident mindestens ein Aggregat, das der SVM zugewiesen ist.
+[role="lead"]
+Erfahren Sie, wie Sie ein ONTAP-Back-End mit ONTAP-NAS-Treibern vorbereiten.
+
+
+
+== Überblick
 
 Für alle ONTAP Back-Ends benötigt Astra Trident mindestens ein Aggregat, das der SVM zugewiesen ist.
 

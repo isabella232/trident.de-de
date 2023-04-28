@@ -11,15 +11,24 @@ summary: Erfahren Sie, wie Sie mit Ihrer Astra Trident Installation ein Element 
 :imagesdir: ../media/
 
 
+[role="lead"]
 Erfahren Sie, wie Sie mit Ihrer Astra Trident Installation ein Element Backend erstellen und verwenden.
 
-.Was Sie benötigen
+
+
+== Bevor Sie beginnen
+
+Sie benötigen Folgendes, bevor Sie ein Element-Backend erstellen.
+
 * Ein unterstütztes Storage-System, auf dem die Element Software ausgeführt wird.
 * Anmeldedaten für einen NetApp HCI/SolidFire Cluster-Administrator oder einen Mandantenbenutzer, der Volumes managen kann
 * Alle Kubernetes-Worker-Nodes sollten die entsprechenden iSCSI-Tools installiert haben. Siehe link:../trident-use/worker-node-prep.html["Informationen zur Vorbereitung auf den Worker-Node"].
 
 
-.Was Sie wissen müssen
+
+
+== Lautstärkemodi
+
 Der `solidfire-san` Der Storage-Treiber unterstützt beide Volume-Modi: Datei und Block. Für das `Filesystem` VolumeMode erstellt Astra Trident ein Volume und erstellt ein Dateisystem. Der Dateisystem-Typ wird von StorageClass angegeben.
 
 [cols="5"]

@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/trident-fsx.html 
 keywords: Amazon FSx for NetApp ONTAP, FSx for ONTAP, deploy Trident, integrate Trident, Trident 
-summary: 'Durch den Einsatz von Astra Trident mit Amazon FSX für NetApp ONTAP können Sie sicherstellen, dass Ihre Kubernetes Cluster, die im Amazon Elastic Kubernetes Service (EKS) ausgeführt werden, persistente Block- und Datei-Volumes bereitstellen können, die von ONTAP unterstützt werden.' 
+summary: 'Durch den Einsatz von Astra Trident mit Amazon FSX for NetApp ONTAP stellen Sie sicher, dass Ihre Kubernetes-Cluster, die in Amazon Elastic Kubernetes Service (EKS) ausgeführt werden, persistente Block- und dateibasierte Volumes mit ONTAP bereitstellen können.' 
 ---
 = Setzen Sie Astra Trident mit Amazon FSX für NetApp ONTAP ein
 :hardbreaks:
@@ -13,6 +13,10 @@ summary: 'Durch den Einsatz von Astra Trident mit Amazon FSX für NetApp ONTAP k
 
 [role="lead"]
 https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["Amazon FSX für NetApp ONTAP"^] Ist ein vollständig gemanagter AWS Service, mit dem Kunden Filesysteme auf Basis des NetApp ONTAP Storage-Betriebssystems starten und ausführen können. Mit FSX für ONTAP können Sie bekannte NetApp Funktionen sowie die Performance und Administration nutzen und gleichzeitig die Einfachheit, Agilität, Sicherheit und Skalierbarkeit beim Speichern von Daten in AWS nutzen. FSX für ONTAP unterstützt ONTAP Dateisystemfunktionen und Administrations-APIs.
+
+
+
+== Überblick
 
 Ein Dateisystem ist die primäre Ressource in Amazon FSX, analog zu einem ONTAP-Cluster vor Ort. Innerhalb jeder SVM können Sie ein oder mehrere Volumes erstellen, bei denen es sich um Daten-Container handelt, die die Dateien und Ordner im Filesystem speichern. Amazon FSX für NetApp ONTAP wird Data ONTAP als gemanagtes Dateisystem in der Cloud zur Verfügung stellen. Der neue Dateisystemtyp heißt *NetApp ONTAP*.
 
@@ -28,7 +32,6 @@ Amazon FSX für NetApp ONTAP https://docs.netapp.com/ontap-9/topic/com.netapp.do
 +
 ** SMB Volumes werden mit unterstützt `ontap-nas` Nur Treiber.
 ** Astra Trident unterstützt SMB Volumes, die nur auf Windows Nodes laufenden Pods gemountet werden.
-** Astra Trident unterstützt die Architektur von Windows ARM nicht.
 
 
 * Volumes, die auf Amazon FSX Filesystemen erstellt wurden und bei denen automatische Backups aktiviert sind, können nicht durch Trident gelöscht werden. Um PVCs zu löschen, müssen Sie das PV und das FSX für ONTAP-Volume manuell löschen. So vermeiden Sie dieses Problem:

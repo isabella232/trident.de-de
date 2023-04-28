@@ -11,6 +11,7 @@ summary: 'Ein Backend definiert die Beziehung zwischen Astra Trident und einem S
 :imagesdir: ../media/
 
 
+[role="lead"]
 Ein Backend definiert die Beziehung zwischen Astra Trident und einem Storage-System. Er erzählt Astra Trident, wie man mit diesem Storage-System kommuniziert und wie Astra Trident Volumes darauf bereitstellen sollte. Nach der Installation von Astra Trident ist der nächste Schritt die Erstellung eines Backend. Der `TridentBackendConfig` Mit Custom Resource Definition (CRD) können Sie Trident Back-Ends direkt über die Kubernetes Schnittstelle erstellen und managen. Dies können Sie mit tun `kubectl` Oder das vergleichbare CLI Tool für Ihre Kubernetes Distribution.
 
 

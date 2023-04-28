@@ -11,6 +11,7 @@ summary: 'Erfahren Sie, wie Sie mit Backend-Management-Operationen durchführen 
 :imagesdir: ../media/
 
 
+[role="lead"]
 Erfahren Sie, wie Sie mit Backend-Management-Operationen durchführen `kubectl`.
 
 

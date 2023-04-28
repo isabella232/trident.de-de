@@ -11,7 +11,8 @@ summary: Sie können eine Speicherklasse erstellen, eine Speicherklasse löschen
 :imagesdir: ../media/
 
 
-Suchen Sie Informationen zum Erstellen einer Speicherklasse, Löschen einer Speicherklasse und Anzeigen vorhandener Speicherklassen.
+[role="lead"]
+Sie können eine Speicherklasse erstellen, eine Speicherklasse löschen und vorhandene Speicherklassen anzeigen.
 
 
 
