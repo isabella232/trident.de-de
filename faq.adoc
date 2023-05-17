@@ -141,7 +141,7 @@ Auch wenn Astra Trident kostenlos über Open-Source-Software bereitgestellt wird
 Wenn Sie einen Support-Case anheben möchten, führen Sie einen der folgenden Schritte aus:
 
 . Kontaktieren Sie Ihren Support Account Manager und erhalten Sie Hilfe bei der Ticketausstellung.
-. Eröffnen Sie einen Support-Case, indem Sie Kontakt aufnehmen https://www.netapp.com/company/contact-us/support/["NetApp Support"^].
+. Eröffnen Sie einen Support-Case, indem Sie Kontakt aufnehmen https://["NetApp Support"^].
 
 
 
@@ -154,13 +154,13 @@ Sie können ein Support-Bundle erstellen, indem Sie ausführen `tridentctl logs 
 
 === Was muss ich tun, wenn ich einen Antrag auf eine neue Funktion stellen muss?
 
-Erstellen Sie ein Problem bei https://github.com/NetApp/trident["Astra Trident Github"^] Und erwähnen Sie *RFE* im Thema und Beschreibung der Ausgabe.
+Erstellen Sie ein Problem bei https://["Astra Trident Github"^] Und erwähnen Sie *RFE* im Thema und Beschreibung der Ausgabe.
 
 
 
 === Wo kann ich einen Defekt aufwerfen?
 
-Erstellen Sie ein Problem bei https://github.com/NetApp/trident["Astra Trident Github"^]. Achten Sie darauf, alle erforderlichen Informationen und Protokolle für das Problem einzubeziehen.
+Erstellen Sie ein Problem bei https://["Astra Trident Github"^]. Achten Sie darauf, alle erforderlichen Informationen und Protokolle für das Problem einzubeziehen.
 
 
 

@@ -19,7 +19,7 @@ Bevor Sie Astra Trident implementieren können, müssen Sie die erforderlichen P
 == Überprüfen Sie die Anforderungen
 
 * Stellen Sie sicher, dass Ihre Implementierung alle Anforderungen erfüllt link:../trident-get-started/requirements.html["Anforderungen"].
-* Vergewissern Sie sich, dass eine unterstützte Version von Docker installiert ist. Wenn Ihre Docker Version veraltet ist, https://docs.docker.com/engine/install/["Installieren oder aktualisieren Sie sie"^].
+* Vergewissern Sie sich, dass eine unterstützte Version von Docker installiert ist. Wenn Ihre Docker Version veraltet ist, https://["Installieren oder aktualisieren Sie sie"^].
 +
 [listing]
 ----

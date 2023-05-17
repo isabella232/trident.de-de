@@ -47,7 +47,7 @@ systemctl restart docker
 docker --version
 ----
 +
-Wenn Ihre Version veraltet ist, https://docs.docker.com/engine/install/["Installieren oder aktualisieren Sie Ihre Installation"^].
+Wenn Ihre Version veraltet ist, https://["Installieren oder aktualisieren Sie Ihre Installation"^].
 
 
 
@@ -135,7 +135,7 @@ Wenn Ihre Version veraltet ist, aktualisieren Sie Ihre Installation.
 curl -fsSL https://get.docker.com/ | sh
 ----
 +
-Oder https://docs.docker.com/engine/install/["Befolgen Sie die Anweisungen für Ihre Distribution"^].
+Oder https://["Befolgen Sie die Anweisungen für Ihre Distribution"^].
 
 . Stellen Sie sicher, dass NFS und/oder iSCSI für Ihr System konfiguriert ist.
 

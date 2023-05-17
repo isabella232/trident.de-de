@@ -12,7 +12,7 @@ summary: Astra Trident kann mithilfe der CSI-Topologiefunktion Volumes selektiv 
 
 
 [role="lead"]
-Astra Trident kann Volumes selektiv erstellen und zu Nodes in einem Kubernetes Cluster verbinden, indem der verwendet wird https://kubernetes-csi.github.io/docs/topology.html["Funktion CSI Topology"^].
+Astra Trident kann Volumes selektiv erstellen und zu Nodes in einem Kubernetes Cluster verbinden, indem der verwendet wird https://["Funktion CSI Topology"^].
 
 
 
@@ -21,7 +21,7 @@ Astra Trident kann Volumes selektiv erstellen und zu Nodes in einem Kubernetes C
 Mithilfe der CSI Topology-Funktion kann der Zugriff auf Volumes auf einen Teil von Nodes basierend auf Regionen und Verfügbarkeitszonen begrenzt werden. Cloud-Provider ermöglichen Kubernetes-Administratoren inzwischen das Erstellen von Nodes, die zonenbasiert sind. Die Nodes können sich in verschiedenen Verfügbarkeitszonen innerhalb einer Region oder über verschiedene Regionen hinweg befinden. Astra Trident verwendet CSI Topology, um die Provisionierung von Volumes für Workloads in einer Multi-Zone-Architektur zu vereinfachen.
 
 
-TIP: Erfahren Sie mehr über die Funktion CSI Topology https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/["Hier"^].
+TIP: Erfahren Sie mehr über die Funktion CSI Topology https://["Hier"^].
 
 Kubernetes bietet zwei unterschiedliche Modi für die Volume-Bindung:
 
@@ -289,8 +289,8 @@ Vorhandene Back-Ends können mit einer Liste von aktualisiert werden `supportedT
 
 == Weitere Informationen
 
-* https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/["Management von Ressourcen für Container"^]
-* https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector["NodeSelector"^]
-* https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity["Affinität und Antiaffinität"^]
-* https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/["Tönungen und Tolerationen"^]
+* https://["Management von Ressourcen für Container"^]
+* https://["NodeSelector"^]
+* https://["Affinität und Antiaffinität"^]
+* https://["Tönungen und Tolerationen"^]
 

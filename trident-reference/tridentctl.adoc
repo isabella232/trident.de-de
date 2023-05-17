@@ -12,7 +12,7 @@ summary: Erfahren Sie mehr über tridentctl, ein Befehlszeilenprogramm mit einfa
 
 
 [role="lead"]
-Der https://github.com/NetApp/trident/releases["Trident Installationspaket"^] Enthält ein Befehlszeilendienstprogramm, `tridentctl`, Das ist ein einfacher Zugriff auf Astra Trident. Kubernetes-Benutzer mit ausreichenden Berechtigungen können es verwenden, um Astra Trident zu installieren und direkt damit zu interagieren, um den Namespace zu managen, der den Astra Trident Pod enthält.
+Der https://["Trident Installationspaket"^] Enthält ein Befehlszeilendienstprogramm, `tridentctl`, Das ist ein einfacher Zugriff auf Astra Trident. Kubernetes-Benutzer mit ausreichenden Berechtigungen können es verwenden, um Astra Trident zu installieren und direkt damit zu interagieren, um den Namespace zu managen, der den Astra Trident Pod enthält.
 
 
 

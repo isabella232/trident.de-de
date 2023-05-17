@@ -17,7 +17,7 @@ Rechtliche Hinweise ermöglichen den Zugriff auf Copyright-Erklärungen, Marken,
 
 == Urheberrecht
 
-http://www.netapp.com/us/legal/copyright.aspx[]
+http://[]
 
 
 
@@ -25,7 +25,7 @@ http://www.netapp.com/us/legal/copyright.aspx[]
 
 NetApp, das NETAPP Logo und die auf der NetApp Markenseite aufgeführten Marken sind Marken von NetApp Inc. Andere Firmen- und Produktnamen können Marken der jeweiligen Eigentümer sein.
 
-http://www.netapp.com/us/legal/netapptmlist.aspx[]
+http://[]
 
 
 
@@ -33,16 +33,16 @@ http://www.netapp.com/us/legal/netapptmlist.aspx[]
 
 Eine aktuelle Liste der NetApp Patente finden Sie unter:
 
-https://www.netapp.com/us/media/patents-page.pdf[]
+https://[]
 
 
 
 == Datenschutzrichtlinie
 
-https://www.netapp.com/us/legal/privacypolicy/index.aspx[]
+https://[]
 
 
 
 == Open Source
 
-Sie können das Copyright und die Lizenzen, die in der NetApp Software für Astra Trident verwendet werden, auch in der Notizen für die jeweilige Version unter lesen https://github.com/NetApp/trident/[].
+Sie können das Copyright und die Lizenzen, die in der NetApp Software für Astra Trident verwendet werden, auch in der Notizen für die jeweilige Version unter lesen https://[].

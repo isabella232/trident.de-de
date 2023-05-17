@@ -20,8 +20,8 @@ Sie können mithilfe von ganz einfach eine bestehende Astra Trident Installation
 
 Bei einem Upgrade auf die neueste Version von Astra Trident sollten Sie Folgendes berücksichtigen:
 
-* Ab Trident 20.01 gilt nur als Beta-Version von https://kubernetes.io/docs/concepts/storage/volume-snapshots/["Volume Snapshots"^] Wird unterstützt. Kubernetes-Administratoren sollten darauf achten, dass sie die Alpha-Snapshot-Objekte sicher in Beta-Version sichern oder in sie konvertieren können, um die älteren Alpha-Snapshots zu behalten.
-* Die Beta-Version von Volume Snapshots führt einen geänderten Satz von CRDs und einen Snapshot-Controller ein, die beide vor der Installation von Astra Trident eingerichtet werden sollten. https://netapp.io/2020/01/30/alpha-to-beta-snapshots/["Diesem Blog"^] Erläutert die Schritte, die bei der Migration von Alpha-Volume-Snapshots in das Beta-Format erforderlich sind.
+* Ab Trident 20.01 gilt nur als Beta-Version von https://["Volume Snapshots"^] Wird unterstützt. Kubernetes-Administratoren sollten darauf achten, dass sie die Alpha-Snapshot-Objekte sicher in Beta-Version sichern oder in sie konvertieren können, um die älteren Alpha-Snapshots zu behalten.
+* Die Beta-Version von Volume Snapshots führt einen geänderten Satz von CRDs und einen Snapshot-Controller ein, die beide vor der Installation von Astra Trident eingerichtet werden sollten. https://["Diesem Blog"^] Erläutert die Schritte, die bei der Migration von Alpha-Volume-Snapshots in das Beta-Format erforderlich sind.
 * Deinstallation und Neuinstallation von Astra Trident fungiert als Upgrade. Bei der Deinstallation von Trident werden die von der Astra Trident Implementierung verwendeten Persistent Volume Claim (PVC) und Persistent Volume (PV) nicht gelöscht. PVS, die bereits bereitgestellt wurden, bleiben verfügbar, während Astra Trident offline ist. Astra Trident stellt Volumes für alle PVCs bereit, die in der Zwischenzeit erstellt werden, sobald sie wieder online sind.
 
 

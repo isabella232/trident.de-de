@@ -12,7 +12,7 @@ summary: 'Durch den Einsatz von Astra Trident mit Amazon FSX for NetApp ONTAP st
 
 
 [role="lead"]
-https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["Amazon FSX für NetApp ONTAP"^] Ist ein vollständig gemanagter AWS Service, mit dem Kunden Filesysteme auf Basis des NetApp ONTAP Storage-Betriebssystems starten und ausführen können. Mit FSX für ONTAP können Sie bekannte NetApp Funktionen sowie die Performance und Administration nutzen und gleichzeitig die Einfachheit, Agilität, Sicherheit und Skalierbarkeit beim Speichern von Daten in AWS nutzen. FSX für ONTAP unterstützt ONTAP Dateisystemfunktionen und Administrations-APIs.
+https://["Amazon FSX für NetApp ONTAP"^] Ist ein vollständig gemanagter AWS Service, mit dem Kunden Filesysteme auf Basis des NetApp ONTAP Storage-Betriebssystems starten und ausführen können. Mit FSX für ONTAP können Sie bekannte NetApp Funktionen sowie die Performance und Administration nutzen und gleichzeitig die Einfachheit, Agilität, Sicherheit und Skalierbarkeit beim Speichern von Daten in AWS nutzen. FSX für ONTAP unterstützt ONTAP Dateisystemfunktionen und Administrations-APIs.
 
 
 
@@ -22,7 +22,7 @@ Ein Dateisystem ist die primäre Ressource in Amazon FSX, analog zu einem ONTAP-
 
 Mit Astra Trident mit Amazon FSX für NetApp ONTAP können Sie sicherstellen, dass Kubernetes Cluster, die in Amazon Elastic Kubernetes Service (EKS) ausgeführt werden, persistente Block- und Datei-Volumes bereitstellen, die durch ONTAP gesichert sind.
 
-Amazon FSX für NetApp ONTAP https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-mgng-stor-tier-fp/GUID-5A78F93F-7539-4840-AB0B-4A6E3252CF84.html["FabricPool"^] Für das Management von Storage Tiers benötigen. Diese ermöglicht die Speicherung von Daten in einer Tier, basierend darauf, ob häufig auf die Daten zugegriffen wird.
+Amazon FSX für NetApp ONTAP https://["FabricPool"^] Für das Management von Storage Tiers benötigen. Diese ermöglicht die Speicherung von Daten in einer Tier, basierend darauf, ob häufig auf die Daten zugegriffen wird.
 
 
 
@@ -86,6 +86,6 @@ Weitere Informationen zur Aktivierung der Authentifizierung finden Sie in der Au
 
 == Weitere Informationen
 
-* https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["Dokumentation zu Amazon FSX für NetApp ONTAP"^]
-* https://www.netapp.com/blog/amazon-fsx-for-netapp-ontap/["Blogbeitrag zu Amazon FSX für NetApp ONTAP"^]
+* https://["Dokumentation zu Amazon FSX für NetApp ONTAP"^]
+* https://["Blogbeitrag zu Amazon FSX für NetApp ONTAP"^]
 
