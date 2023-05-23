@@ -22,7 +22,7 @@ Zusätzlich zu link:../trident-get-started/requirements.html["Anforderungen von 
 * Worker-Nodes, die vorbereitet sind link:worker-node-prep.html["NFS oder iSCSI"].
 +
 
-NOTE: Achten Sie darauf, dass Sie die für Amazon Linux und Ubuntu erforderlichen Schritte zur Knotenvorbereitung befolgen https://["Amazon Machine Images"^] (Amis) je nach EKS AMI-Typ.
+NOTE: Achten Sie darauf, dass Sie die für Amazon Linux und Ubuntu erforderlichen Schritte zur Knotenvorbereitung befolgen https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html["Amazon Machine Images"^] (Amis) je nach EKS AMI-Typ.
 
 
 

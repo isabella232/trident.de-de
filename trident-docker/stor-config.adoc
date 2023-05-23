@@ -134,7 +134,7 @@ Optionale, fail-Provisioning-Funktion, wenn die Nutzung über diesem Prozentsatz
 
 
 | `nfsMountOptions`  a| 
-Feingranulare Steuerung der NFS-Mount-Optionen; standardmäßig „-o nfsvers=3“. *Nur für die verfügbar `ontap-nas` Und `ontap-nas-economy` Fahrer*. https://["Siehe Informationen zur NFS-Host-Konfiguration hier"^].
+Feingranulare Steuerung der NFS-Mount-Optionen; standardmäßig „-o nfsvers=3“. *Nur für die verfügbar `ontap-nas` Und `ontap-nas-economy` Fahrer*. https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf["Siehe Informationen zur NFS-Host-Konfiguration hier"^].
  a| 
 `-o nfsvers=4`
 
@@ -277,7 +277,7 @@ Wählen Sie die aus `ontap-nas-flexgroup` Treiber zur Erhöhung der Parallelitä
 * Klonen wird für FlexGroup Volumes nicht unterstützt.
 
 
-Informationen zu FlexGroups und Workloads, die für FlexGroups geeignet sind, finden Sie im https://["NetApp FlexGroup Volume Best Practices und Implementierungsleitfaden"^].
+Informationen zu FlexGroups und Workloads, die für FlexGroups geeignet sind, finden Sie im https://www.netapp.com/pdf.html?item=/media/12385-tr4571pdf.pdf["NetApp FlexGroup Volume Best Practices und Implementierungsleitfaden"^].
 
 Um erweiterte Funktionen und die enorme Skalierbarkeit in derselben Umgebung zu erhalten, können Sie mehrere Instanzen des Docker Volume Plug-ins ausführen. Dabei kommt ein Storage-Plug-in zum Einsatz `ontap-nas` Und ein anderes mit `ontap-nas-economy`.
 

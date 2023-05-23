@@ -73,13 +73,13 @@ cluster1::*> volume snapshot restore -vserver vs0 -volume vol3 -snapshot vol3_sn
 Die Replizierung von Daten kann eine wichtige Rolle beim Schutz vor Datenverlusten aufgrund von Storage-Array-Ausfällen spielen.
 
 
-NOTE: Weitere Informationen zu ONTAP Replizierungstechnologien finden Sie im https://["ONTAP-Dokumentation"^].
+NOTE: Weitere Informationen zu ONTAP Replizierungstechnologien finden Sie im https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-concepts/GUID-A9A2F347-3E05-4F80-9E9C-CEF8F0A2F8E1.html["ONTAP-Dokumentation"^].
 
 
 
 === Replizierung von SnapMirror Storage Virtual Machines (SVM)
 
-Verwenden Sie können https://["SnapMirror"^] Zur Replizierung einer vollständigen SVM, die ihre Konfigurationseinstellungen und ihre Volumes enthält. Bei einem Notfall können Sie die SnapMirror Ziel-SVM aktivieren, um die Datenbereitstellung zu starten. Sie können bei der Wiederherstellung der Systeme zurück auf das primäre System wechseln.
+Verwenden Sie können https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-concepts/GUID-8B187484-883D-4BB4-A1BC-35AC278BF4DC.html["SnapMirror"^] Zur Replizierung einer vollständigen SVM, die ihre Konfigurationseinstellungen und ihre Volumes enthält. Bei einem Notfall können Sie die SnapMirror Ziel-SVM aktivieren, um die Datenbereitstellung zu starten. Sie können bei der Wiederherstellung der Systeme zurück auf das primäre System wechseln.
 
 Astra Trident kann die Replizierungsbeziehungen nicht selbst konfigurieren, sodass der Storage-Administrator mithilfe der ONTAP SnapMirror SVM Replication-Funktion Volumes automatisch zu einem Disaster Recovery-Ziel (DR) replizieren kann.
 

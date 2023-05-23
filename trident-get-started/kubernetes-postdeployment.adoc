@@ -48,7 +48,7 @@ Nachdem Sie das Problem behoben haben, gehen Sie einfach zurück zum Anfang dies
 
 == Schritt 2: Erstellen Sie eine Storage-Klasse
 
-Kubernetes Benutzer stellen Volumes mithilfe von persistenten Volume Claims (PVCs) bereit, die einen angeben https://["Storage-Klasse"^] Nach Name. Die Details sind für die Benutzer verborgen. In einer Storage-Klasse wird jedoch die provisionierung für die jeweilige Klasse (in diesem Fall Trident) angegeben, und die Bedeutung dieser Klasse für die provisionierung angegeben.
+Kubernetes Benutzer stellen Volumes mithilfe von persistenten Volume Claims (PVCs) bereit, die einen angeben https://kubernetes.io/docs/concepts/storage/storage-classes/["Storage-Klasse"^] Nach Name. Die Details sind für die Benutzer verborgen. In einer Storage-Klasse wird jedoch die provisionierung für die jeweilige Klasse (in diesem Fall Trident) angegeben, und die Bedeutung dieser Klasse für die provisionierung angegeben.
 
 Kubernetes-Benutzer in Storage-Klasse erstellen geben an, wann sie ein Volume möchten. Die Konfiguration der Klasse muss das im vorherigen Schritt erstellte Backend modellieren, damit Astra Trident neue Volumes bereitstellen wird.
 
@@ -111,7 +111,7 @@ basic-csi    csi.trident.netapp.io   15h
 
 == Schritt 3: Stellen Sie Ihr erstes Volumen bereit
 
-Nun können Sie das erste Volume dynamisch bereitstellen. Dazu wird ein Kubernetes erstellt https://["Persistent Volume Claim"^] (PVC) Objekt.
+Nun können Sie das erste Volume dynamisch bereitstellen. Dazu wird ein Kubernetes erstellt https://kubernetes.io/docs/concepts/storage/persistent-volumes["Persistent Volume Claim"^] (PVC) Objekt.
 
 Erstellen Sie eine PVC für ein Volume, das die soeben erstellte Storage-Klasse verwendet.
 

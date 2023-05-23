@@ -31,14 +31,14 @@ NOTE: Die Metriken von Trident sind standardmäßig auf dem Ziel-Port offengeleg
 
 .Was Sie benötigen
 * Kubernetes-Cluster mit installiertem Astra Trident
-* Eine Prometheus Instanz. Dies kann ein sein https://["Implementierung von Container-Prometheus"^] Oder Sie können Prometheus als ein ausführen https://["Native Applikation"^].
+* Eine Prometheus Instanz. Dies kann ein sein https://github.com/prometheus-operator/prometheus-operator["Implementierung von Container-Prometheus"^] Oder Sie können Prometheus als ein ausführen https://prometheus.io/download/["Native Applikation"^].
 
 
 
 
 == Schritt 1: Definieren Sie ein Prometheus-Ziel
 
-Sie sollten ein Prometheus Ziel definieren, um die Kennzahlen zu sammeln und Informationen über das Management von Back-Ends Astra Trident, die von ihm erstellten Volumes usw. zu erhalten. Das https://["Blog"^] Erläutert, wie Sie mithilfe von Prometheus und Grafana mit Astra Trident Kennzahlen abrufen können. Der Blog erläutert, wie Sie Prometheus als Operator in Ihrem Kubernetes Cluster und die Erstellung eines ServiceMonitor ausführen können, um die Kennzahlen von Astra Trident zu erhalten.
+Sie sollten ein Prometheus Ziel definieren, um die Kennzahlen zu sammeln und Informationen über das Management von Back-Ends Astra Trident, die von ihm erstellten Volumes usw. zu erhalten. Das https://netapp.io/2020/02/20/prometheus-and-trident/["Blog"^] Erläutert, wie Sie mithilfe von Prometheus und Grafana mit Astra Trident Kennzahlen abrufen können. Der Blog erläutert, wie Sie Prometheus als Operator in Ihrem Kubernetes Cluster und die Erstellung eines ServiceMonitor ausführen können, um die Kennzahlen von Astra Trident zu erhalten.
 
 
 
@@ -69,7 +69,7 @@ metadata:
 ----
 Diese ServiceMonitor-Definition ruft vom zurückgegebene Kennzahlen ab `trident-csi` Service und insbesondere sucht nach dem `metrics` endpunkt des Dienstes: Das Ergebnis: Prometheus ist jetzt so konfiguriert, dass sie die Kennzahlen von Astra Trident verstehen.
 
-Neben den direkt bei Astra Trident verfügbaren Kennzahlen gibt kubelet auch viele andere Lösungen auf `kubelet_volume_*` Kennzahlen über den Endpunkt der IT-eigenen Kennzahlen. Kubelet kann Informationen über verbundene Volumes bereitstellen und Pods und andere interne Vorgänge, die er übernimmt. Siehe https://["Hier"^].
+Neben den direkt bei Astra Trident verfügbaren Kennzahlen gibt kubelet auch viele andere Lösungen auf `kubelet_volume_*` Kennzahlen über den Endpunkt der IT-eigenen Kennzahlen. Kubelet kann Informationen über verbundene Volumes bereitstellen und Pods und andere interne Vorgänge, die er übernimmt. Siehe https://kubernetes.io/docs/concepts/cluster-administration/monitoring/["Hier"^].
 
 
 
@@ -143,10 +143,10 @@ kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes * 100
 Standardmäßig sendet Astra Trident in einem täglichen Intervall Prometheus-Kennzahlen und grundlegende Backend-Informationen an NetApp.
 
 * Um zu verhindern, dass Astra Trident die Prometheus Kennzahlen und grundlegende Backend-Informationen an NetApp sendet, bestehen Sie am `--silence-autosupport` Fahne während der Installation von Astra Trident.
-* Astra Trident kann auch Container-Protokolle per On-Demand an den NetApp Support senden `tridentctl send autosupport`. Sie müssen Astra Trident auslösen, um seine Protokolle hochzuladen. Bevor Sie Protokolle einreichen, sollten Sie die von NetApp akzeptierenhttps://["datenschutzrichtlinie"^].
+* Astra Trident kann auch Container-Protokolle per On-Demand an den NetApp Support senden `tridentctl send autosupport`. Sie müssen Astra Trident auslösen, um seine Protokolle hochzuladen. Bevor Sie Protokolle einreichen, sollten Sie die von NetApp akzeptierenhttps://www.netapp.com/company/legal/privacy-policy/["datenschutzrichtlinie"^].
 * Sofern nicht angegeben, ruft Astra Trident die Protokolle der letzten 24 Stunden ab.
-* Sie können den Zeitrahmen für die Protokollaufbewahrung mit festlegen `--since` Flagge. Beispiel: `tridentctl send autosupport --since=1h`. Diese Informationen werden über ein gesammelt und versendet `trident-autosupport` Container, der zusammen mit Astra Trident installiert wird Sie können das Container-Image unter abrufen https://["Trident AutoSupport"^].
-* Trident AutoSupport erfasst oder übermittelt keine personenbezogenen Daten oder personenbezogenen Daten. Es kommt mit einem https://["EULA"^] Dies gilt nicht für das Trident Container-Image selbst. Weitere Informationen zum Engagement von NetApp für Datensicherheit und Vertrauen https://["Hier"^].
+* Sie können den Zeitrahmen für die Protokollaufbewahrung mit festlegen `--since` Flagge. Beispiel: `tridentctl send autosupport --since=1h`. Diese Informationen werden über ein gesammelt und versendet `trident-autosupport` Container, der zusammen mit Astra Trident installiert wird Sie können das Container-Image unter abrufen https://hub.docker.com/r/netapp/trident-autosupport["Trident AutoSupport"^].
+* Trident AutoSupport erfasst oder übermittelt keine personenbezogenen Daten oder personenbezogenen Daten. Es kommt mit einem https://www.netapp.com/us/media/enduser-license-agreement-worldwide.pdf["EULA"^] Dies gilt nicht für das Trident Container-Image selbst. Weitere Informationen zum Engagement von NetApp für Datensicherheit und Vertrauen https://www.netapp.com/us/company/trust-center/index.aspx["Hier"^].
 
 
 Eine von Astra Trident gesendete Beispiellast sieht folgendermaßen aus:

@@ -42,7 +42,7 @@ Unabhängig von Ihrem Installationspfad müssen Sie Folgendes haben:
 * Kann Volumes von allen Kubernetes Worker-Nodes aus mounten
 * Einem Linux-Host mit `kubectl` (Oder `oc`, Falls Sie OpenShift nutzen) ist installiert und konfiguriert, um den Kubernetes-Cluster zu managen, den Sie verwenden möchten.
 * Der `KUBECONFIG` Umgebungsvariable auf die Kubernetes-Cluster-Konfiguration verweisen.
-* Bei Verwendung von Kubernetes mit Docker Enterprise https://["Führen Sie die entsprechenden Schritte aus, um den CLI-Zugriff zu aktivieren"^].
+* Bei Verwendung von Kubernetes mit Docker Enterprise https://docs.docker.com/ee/ucp/user-access/cli/["Führen Sie die entsprechenden Schritte aus, um den CLI-Zugriff zu aktivieren"^].
 
 
 

@@ -12,4 +12,4 @@ summary: Weitere Informationen zu den Komponenten des Kubernetes Systems.
 
 
 [role="lead"]
-Erfahren Sie mehr über die Teile des https://["Kubernetes-System"^].
+Erfahren Sie mehr über die Teile des https://kubernetes.io/docs/concepts/["Kubernetes-System"^].

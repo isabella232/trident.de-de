@@ -47,7 +47,7 @@ Astra Trident bietet zwei Optionen für ein Upgrade. Im Allgemeinen verwenden Si
 
 
 
-WARNING: CSI Volume Snapshots ist jetzt eine GA-Funktion, die ab Kubernetes 1.20 beginnt. Beim Upgrade von Astra Trident müssen alle vorherigen Alpha-Snapshot-CRS und CRDs (Volume Snapshot-Klassen, Volume-Snapshots und Volume Snapshot-Inhalt) entfernt werden, bevor das Upgrade durchgeführt wird. Siehe https://["Diesem Blog"^] Schritte zur Migration von Alpha-Snapshots in die Beta/GA-Spezifikation
+WARNING: CSI Volume Snapshots ist jetzt eine GA-Funktion, die ab Kubernetes 1.20 beginnt. Beim Upgrade von Astra Trident müssen alle vorherigen Alpha-Snapshot-CRS und CRDs (Volume Snapshot-Klassen, Volume-Snapshots und Volume Snapshot-Inhalt) entfernt werden, bevor das Upgrade durchgeführt wird. Siehe https://netapp.io/2020/01/30/alpha-to-beta-snapshots/["Diesem Blog"^] Schritte zur Migration von Alpha-Snapshots in die Beta/GA-Spezifikation
 
 
 
@@ -61,5 +61,5 @@ In der Version 21.01 von Astra Trident werden dem Betreiber einige wichtige arch
 ** Aufräumarbeiten während der Deinstallation: Eine vollständige Entfernung von Astra Trident würde alle damit verbundenen Ressourcen zu löschen benötigen. Ein Operator mit Namespace-Scoped kann Probleme beim Entfernen von Cluster-Scoped-Ressourcen (wie clusterRole, ClusterRoleBending und PodSecurityPolicy) haben und eine unvollständige Bereinigung zur Folge haben. Ein Operator mit Cluster-Umfang beseitigt dieses Problem. Benutzer können Astra Trident vollständig deinstallieren und bei Bedarf neu installieren.
 
 
-* `TridentProvisioner` Wird nun durch ersetzt `TridentOrchestrator` Als benutzerdefinierte Ressource, die für die Installation und das Management von Astra Trident verwendet wird. Darüber hinaus wird dem ein neues Feld vorgestellt `TridentOrchestrator` Spez. Benutzer können angeben, dass der Namespace Trident über den installiert/aktualisiert werden muss `spec.namespace` Feld. Sie können sich ein Beispiel ansehen https://["Hier"^].
+* `TridentProvisioner` Wird nun durch ersetzt `TridentOrchestrator` Als benutzerdefinierte Ressource, die für die Installation und das Management von Astra Trident verwendet wird. Darüber hinaus wird dem ein neues Feld vorgestellt `TridentOrchestrator` Spez. Benutzer können angeben, dass der Namespace Trident über den installiert/aktualisiert werden muss `spec.namespace` Feld. Sie können sich ein Beispiel ansehen https://github.com/NetApp/trident/blob/stable/v21.01/deploy/crds/tridentorchestrator_cr.yaml["Hier"^].
 
