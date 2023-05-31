@@ -8,7 +8,7 @@ entries:
   url: "/trident-reco/storage-config-best-practices.html"
 - title: Astra Trident Integration
   url: "/trident-reco/integrate-trident.html"
-- title: Datensicherung
+- title: Datensicherung und Disaster Recovery
   url: "/trident-reco/backup.html"
 - title: Sicherheit
   entries:
