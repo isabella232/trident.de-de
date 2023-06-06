@@ -51,9 +51,17 @@ Eine Beispiel-Back-End-Definition sieht folgendermaßen aus:
 ====
 .YAML
 --
-'''
-Version: 1 backendName: BeispieleBackend storageDriverName: ontap-san ManagementLIF: 10.0.0.1 svm: svm_nfs Benutzername: Vsadmin Passwort: Passwort
-
+[listing]
+----
+---
+version: 1
+backendName: ExampleBackend
+storageDriverName: ontap-san
+managementLIF: 10.0.0.1
+svm: svm_nfs
+username: vsadmin
+password: password
+----
 --
 .JSON
 --
