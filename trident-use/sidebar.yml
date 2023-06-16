@@ -54,7 +54,6 @@ entries:
 - title: Management von Storage-Klassen
   url: "/trident-use/manage-stor-class.html"
 - title: Durchführung von Volume-Vorgängen
-  url: "/trident-use/vol-operations.html"
   entries:
   - title: Verwenden Sie die CSI-Topologie
     url: "/trident-use/csi-topology.html"

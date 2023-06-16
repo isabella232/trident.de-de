@@ -20,7 +20,7 @@ Sie müssen über einen externen Snapshot-Controller und benutzerdefinierte Ress
 Wenn die Kubernetes-Distribution den Snapshot-Controller und die CRDs nicht enthält, lesen Sie <<Bereitstellung eines Volume Snapshot Controllers>>.
 
 
-NOTE: Erstellen Sie keinen Snapshot-Controller, wenn Sie On-Demand-Volumen-Schnappschüsse in einer GKE-Umgebung erstellen. GKE verwendet einen integrierten, versteckten Snapshot-Controller.
+NOTE: Erstellen Sie keinen Snapshot Controller, wenn Sie On-Demand Volume Snapshots in einer GKE-Umgebung erstellen. GKE verwendet einen integrierten, versteckten Snapshot-Controller.
 
 
 
@@ -38,7 +38,7 @@ metadata:
 driver: csi.trident.netapp.io
 deletionPolicy: Delete
 ----
-Der `driver` Zeigt auf den CSI-Treiber von Astra Trident. `deletionPolicy` Kann sein `Delete` Oder `Retain`. Wenn eingestellt auf `Retain`, Der zugrunde liegende physische Snapshot auf dem Storage-Cluster wird auch dann beibehalten, wenn der `VolumeSnapshot` Objekt wurde gelöscht.
+Der `driver` Verweist auf den Astra Trident CSI-Treiber. `deletionPolicy` Kann sein `Delete` Oder `Retain`. Wenn eingestellt auf `Retain`, Der zugrunde liegende physische Snapshot auf dem Storage-Cluster wird auch dann beibehalten, wenn der `VolumeSnapshot` Objekt wurde gelöscht.
 
 Weitere Informationen finden Sie unter Link:../trident-reference/Objects.HTML#kubernetes-volumesnapshotclass-Objects[`VolumeSnapshotClass`].
 
