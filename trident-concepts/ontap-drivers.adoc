@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-concepts/ontap-drivers.html 
-keywords: trident backend, AFF, FAS, ONTAP Select, Cloud, Amazon FSx for NetApp ONTAP, drivers, ONTAP drivers 
-summary: Erfahren Sie, wie Sie mit Ihrer Trident Installation ein Element Backend erstellen und verwenden. 
+keywords: trident backend, AFF, FAS, ONTAP Select, Cloud, Amazon FSx for NetApp ONTAP, drivers, ONTAP drivers, access modes, rwo, rwx, rwp, rwop 
+summary: Astra Trident bietet fünf einzigartige ONTAP-Storage-Treiber für die Kommunikation mit ONTAP Clustern. 
 ---
 = ONTAP-Treiber
 :hardbreaks:
@@ -12,16 +12,16 @@ summary: Erfahren Sie, wie Sie mit Ihrer Trident Installation ein Element Backen
 
 
 [role="lead"]
-Astra Trident bietet fünf einzigartige ONTAP-Storage-Treiber für die Kommunikation mit ONTAP Clustern. Erfahren Sie mehr darüber, wie jeder Treiber die Erstellung von Volumes und Zugriffssteuerung sowie seine Funktionen übernimmt.
+Astra Trident bietet fünf einzigartige ONTAP-Storage-Treiber für die Kommunikation mit ONTAP Clustern.
 
 
 
-== Erfahren Sie mehr über die ONTAP Storage-Treiber
+== Von Astra Control unterstützte Treiber
+
+Astra Control bietet nahtlosen Schutz, Disaster Recovery und Mobilität (Verschieben von Volumes zwischen Kubernetes Clustern) für Volumes, die mit der erstellt wurden `ontap-nas`, `ontap-nas-flexgroup`, und `ontap-san` Treiber. Siehe link:https://docs.netapp.com/us-en/astra-control-center/use/replicate_snapmirror.html#replication-prerequisites["Voraussetzungen für die Astra Control Replikation"^] Entsprechende Details.
 
 [WARNING]
 ====
-Astra Control bietet nahtlosen Schutz, Disaster Recovery und Mobilität (Verschieben von Volumes zwischen Kubernetes Clustern) für Volumes, die mit der erstellt wurden `ontap-nas`, `ontap-nas-flexgroup`, und `ontap-san` Treiber. Siehe link:https://docs.netapp.com/us-en/astra-control-center/use/replicate_snapmirror.html#replication-prerequisites["Voraussetzungen für die Astra Control Replikation"^] Entsprechende Details.
-
 * Sie müssen verwenden `ontap-nas` Für produktive Workloads, die Datensicherung, Disaster Recovery und Mobilität erfordern.
 * Nutzung `ontap-san-economy` Nach einer voraussichtlichen Volume-Nutzung ist zu erwarten, dass sie wesentlich höher ist, als das von ONTAP unterstützt wird.
 * Nutzung `ontap-nas-economy` Nur in dem eine zu erwartende Volume-Nutzung größer als die von ONTAP wird, und `ontap-san-economy` Treiber kann nicht verwendet werden.
@@ -29,7 +29,13 @@ Astra Control bietet nahtlosen Schutz, Disaster Recovery und Mobilität (Verschi
 
 
 ====
-[cols="5"]
+
+
+== Astra Trident Storage-Treiber für ONTAP
+
+Astra Trident bietet die folgenden Storage-Treiber für die Kommunikation mit dem ONTAP Cluster. Unterstützte Zugriffsmodi sind: _ReadWriteOnce_ (RWO), _ReadOnly Many_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).
+
+[cols="2, 1, 1, 2, 2"]
 |===
 | Treiber | Protokoll | VolumeModus | Unterstützte Zugriffsmodi | Unterstützte Filesysteme 
 
@@ -39,7 +45,7 @@ NFS
  a| 
 Dateisystem
  a| 
-RWO, ROX, RWX
+RWO, ROX, RWX, RWOP
  a| 
 „“, nfs
 
@@ -61,7 +67,7 @@ NFS
  a| 
 Dateisystem
  a| 
-RWO, ROX, RWX
+RWO, ROX, RWX, RWOP
  a| 
 „“, nfs
 
@@ -72,7 +78,7 @@ ISCSI
  a| 
 Block-Storage
  a| 
-RWO, ROX, RWX
+RWO, ROX, RWX, RWOP
  a| 
 Kein Filesystem, rohes Block-Gerät
 
@@ -83,7 +89,7 @@ ISCSI
  a| 
 Dateisystem
  a| 
-RWO, ROX
+RWO, ROX, RWOP
 
 RWX ist im Volume-Modus des Dateisystems nicht verfügbar.
  a| 
@@ -96,7 +102,7 @@ ISCSI
  a| 
 Block-Storage
  a| 
-RWO, ROX, RWX
+RWO, ROX, RWX, RWOP
  a| 
 Kein Filesystem, rohes Block-Gerät
 
@@ -107,7 +113,7 @@ ISCSI
  a| 
 Dateisystem
  a| 
-RWO, ROX
+RWO, ROX, RWOP
 
 RWX ist im Volume-Modus des Dateisystems nicht verfügbar.
  a| 
@@ -115,4 +121,4 @@ RWX ist im Volume-Modus des Dateisystems nicht verfügbar.
 
 |===
 
-NOTE: ONTAP-Back-Ends können mit Anmeldeinformationen für eine Sicherheitsrolle (Benutzername/Passwort) oder mit dem privaten Schlüssel und dem Zertifikat, das auf dem ONTAP-Cluster installiert ist, authentifiziert werden. Sie können vorhandene Back-Ends aktualisieren, um mit von einem Authentifizierungsmodus in den anderen zu verschieben `tridentctl update backend`.
+NOTE: ONTAP-Back-Ends können mithilfe von Anmeldedaten für eine Sicherheitsrolle (Benutzername/Passwort) oder den privaten Schlüssel und das auf dem ONTAP Cluster installierte Zertifikat authentifiziert werden. Sie können vorhandene Back-Ends aktualisieren, um mit von einem Authentifizierungsmodus in den anderen zu verschieben `tridentctl update backend`.

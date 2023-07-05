@@ -1158,10 +1158,7 @@
   <block id="fd2915a467b0d801691fa5242e597f02" category="paragraph">Dieses Beispiel veranschaulicht die Implementierung von Trident mit Node-Selektoren:</block>
   <block id="aa5b232f08f4f3a911b242c500c5c9a1" category="example-title">Beispiel 3: Bereitstellung auf Windows Worker-Nodes</block>
   <block id="74b19e3113c78692266e87afce12f681" category="paragraph">Dieses Beispiel zeigt die Bereitstellung auf einem Windows Worker-Knoten.</block>
-  <block id="48dec026afe488df8faca35c5c3a39ea" category="summary">Erfahren Sie, wie Sie mit Ihrer Trident Installation ein Element Backend erstellen und verwenden.</block>
   <block id="f58e95baa778c9a2bd1a4597fb49d9b7" category="doc">ONTAP-Treiber</block>
-  <block id="0e842f431ce1b4dfb57598e5682e3adc" category="paragraph">Astra Trident bietet fünf einzigartige ONTAP-Storage-Treiber für die Kommunikation mit ONTAP Clustern. Erfahren Sie mehr darüber, wie jeder Treiber die Erstellung von Volumes und Zugriffssteuerung sowie seine Funktionen übernimmt.</block>
-  <block id="5e3a3cabc9ba472e33de86a5a8f32dcd" category="section-title">Erfahren Sie mehr über die ONTAP Storage-Treiber</block>
   <block id="48cf24486d9a8e65a142b25682f19949" category="cell">Treiber</block>
   <block id="4f0e7dc30ffb3e25e75331c9afb2243a" category="cell">VolumeModus</block>
   <block id="d5e2d9f8d8f10044e38b71b49e675d2e" category="cell">Unterstützte Zugriffsmodi</block>
@@ -1174,7 +1171,6 @@
   <block id="0b86d82002caac6130185da4ef1be67e" category="paragraph">RWO, ROX</block>
   <block id="0453a3e06be842b09a9479fe06f0dd13" category="paragraph">RWX ist im Volume-Modus des Dateisystems nicht verfügbar.</block>
   <block id="a029cca698cbf05f07897f86c43cf9e8" category="paragraph"><block ref="310201b6353c5f38bc039e0e51b079d3" prefix="" category="inline-code"></block>,<block ref="66f137c5dc684da2a6a65917c86edd67" prefix=" " category="inline-code"></block>,<block ref="40d1d2ce03569076bd0dc1e0ff90aa4c" prefix=" " category="inline-code"></block></block>
-  <block id="04de2f1b0cab8344abeded774f82f9d5" category="admonition">ONTAP-Back-Ends können mit Anmeldeinformationen für eine Sicherheitsrolle (Benutzername/Passwort) oder mit dem privaten Schlüssel und dem Zertifikat, das auf dem ONTAP-Cluster installiert ist, authentifiziert werden. Sie können vorhandene Back-Ends aktualisieren, um mit von einem Authentifizierungsmodus in den anderen zu verschieben<block ref="defd1e55f93269ac9278afc086951ba8" prefix=" " category="inline-code"></block>.</block>
   <block id="2a778cf7220cdde142651975e1bcd90f" category="paragraph">Jeder außerhalb der Liste der virtuellen Pools angegebene Aspekt ist global für das Backend und gilt für alle virtuellen Pools, während jeder virtuelle Pool einen oder mehrere Aspekte einzeln angeben kann (alle Backend-globalen Aspekte außer Kraft setzen).</block>
   <block id="e1b3ec89ead7f83a9245ed5c9cacfdbf" category="cell">Operator</block>
   <block id="499badcb6f450c7f46c51d873eb84286" category="cell"><block ref="43ec3e5dee6e706af7766fffea512721" prefix="" category="inline-code"></block></block>
@@ -3662,4 +3658,11 @@
   <block id="8eb8a41b260e1d77c7ffe733b87d87a1" category="list-text">docker.io/netapp/Trident-Operator:23.04.0 (optional)</block>
   <block id="0b8ca2be5f4fe564fb8e843cbc53703d" category="admonition">Erstellen Sie keinen Snapshot Controller, wenn Sie On-Demand Volume Snapshots in einer GKE-Umgebung erstellen. GKE verwendet einen integrierten, versteckten Snapshot-Controller.</block>
   <block id="dfbfe722a0ce7e388b78027f9cfed8dd" category="paragraph">Der<block ref="e2d45d57c7e2941b65c6ccd64af4223e" prefix=" " category="inline-code"></block> Verweist auf den Astra Trident CSI-Treiber.<block ref="98e7d6463271d7848db255ae6467817a" prefix=" " category="inline-code"></block> Kann sein<block ref="f2a6c498fb90ee345d997f888fce3b18" prefix=" " category="inline-code"></block> Oder<block ref="afece4245269582cb2f1009d4fb52047" prefix=" " category="inline-code"></block>. Wenn eingestellt auf<block ref="afece4245269582cb2f1009d4fb52047" prefix=" " category="inline-code"></block>, Der zugrunde liegende physische Snapshot auf dem Storage-Cluster wird auch dann beibehalten, wenn der<block ref="310a3378435f31620fbc3e7831ac7286" prefix=" " category="inline-code"></block> Objekt wurde gelöscht.</block>
+  <block id="1f0c7a14cb87fb29a7346e9b4c770751" category="summary">Astra Trident bietet fünf einzigartige ONTAP-Storage-Treiber für die Kommunikation mit ONTAP Clustern.</block>
+  <block id="99379de626bf97f4e3e66d3a8cdb8802" category="section-title">Von Astra Control unterstützte Treiber</block>
+  <block id="9e5914532c650440b8c559c303ae8e04" category="section-title">Astra Trident Storage-Treiber für ONTAP</block>
+  <block id="bff3ebc4ae5702fb7f811ba9acabc13a" category="paragraph">Astra Trident bietet die folgenden Storage-Treiber für die Kommunikation mit dem ONTAP Cluster. Unterstützte Zugriffsmodi sind: _ReadWriteOnce_ (RWO), _ReadOnly Many_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).</block>
+  <block id="ad90b7d29d0d8a9c746868fe1f38ca90" category="paragraph">RWO, ROX, RWX, RWOP</block>
+  <block id="96b38cb92e67a8f09c2d13169b8bb555" category="paragraph">RWO, ROX, RWOP</block>
+  <block id="a38f7647d54be4cddc3f0b8e4c746caa" category="admonition">ONTAP-Back-Ends können mithilfe von Anmeldedaten für eine Sicherheitsrolle (Benutzername/Passwort) oder den privaten Schlüssel und das auf dem ONTAP Cluster installierte Zertifikat authentifiziert werden. Sie können vorhandene Back-Ends aktualisieren, um mit von einem Authentifizierungsmodus in den anderen zu verschieben<block ref="defd1e55f93269ac9278afc086951ba8" prefix=" " category="inline-code"></block>.</block>
 </blocks>
