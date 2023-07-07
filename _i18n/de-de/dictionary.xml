@@ -2212,7 +2212,6 @@
   <block id="b3841b02d7da01fde480332e3295a08e" category="paragraph">Der<block ref="25fb031d6a134e0fb5a240d6d4c12b01" prefix=" " category="inline-code"></block> Identifiziert das VolumeSnapshotContent-Objekt, das diesen Snapshot bereitstellt. Der<block ref="a701d928aada0f89c8ad0abc16ccdfcc" prefix=" " category="inline-code"></block> Der Parameter gibt an, dass der Snapshot zum Erstellen einer neuen PVC verwendet werden kann.</block>
   <block id="7957320b126678e9b713ef146b3ac009" category="section-title">Schritt 3: PVCs aus VolumeSnapshots erstellen</block>
   <block id="2592284f87bba60e4c05337a134ef047" category="paragraph"><block ref="d9d448f70687a1aa1f12b2f5ddaa4977" prefix="" category="inline-code"></block> Zeigt an, dass das PVC mit dem Namen VolumeSnapshot erstellt werden muss<block ref="2599ab7993e15386327b6345bc1cc4e1" prefix=" " category="inline-code"></block> Als Quelle der Daten. Damit beauftragt Astra Trident, aus dem Snapshot ein PVC zu erstellen. Nachdem die PVC erstellt wurde, kann sie an einem Pod befestigt und wie jedes andere PVC verwendet werden.</block>
-  <block id="bda01e3aa44c411129a6fbf29445bfb4" category="admonition">Wenn Sie ein persistentes Volume mit zugeordneten Snapshots löschen, wird das entsprechende Trident-Volume in einen „Löschzustand“ aktualisiert. Damit das Astra Trident Volume gelöscht werden kann, sollten die Snapshots des Volume entfernt werden.</block>
   <block id="8682abd0ce083533bad141869c96ab2a" category="summary">Astra Trident bietet verschiedene Funktionen zum Management Ihrer Volumes. Erfahren Sie mehr über die Funktionen, die Astra Trident für Volumes bietet.</block>
   <block id="b42cbc6e68075c106b9faa27e4931091" category="doc">Durchführung von Volume-Vorgängen</block>
   <block id="eb487790322c4b8e9b4953d60be1acee" category="paragraph">Erfahren Sie mehr über die Funktionen von Astra Trident zum Management Ihrer Volumes.</block>
@@ -2686,7 +2685,6 @@
   <block id="ce43eda1a51d5de70f422e14ca195db3" category="paragraph">Weitere Informationen finden Sie unter Link:../trident-reference/Objects.HTML#kubernetes-volumesnapshotclass-Objects<block ref="19476662cd814e0aa085eca121de89b8" prefix="[" category="inline-code"></block>].</block>
   <block id="a599393b295f7ad56a8c7f1d327290de" category="paragraph">In diesem Beispiel wird ein Snapshot eines vorhandenen PVC erstellt.</block>
   <block id="4191daf22334ac03a54cdf8adbfd6dfe" category="paragraph">In diesem Beispiel wird der Snapshot für ein PVC mit dem Namen erstellt<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block> Der Name des Snapshots lautet<block ref="2599ab7993e15386327b6345bc1cc4e1" prefix=" " category="inline-code"></block>.</block>
-  <block id="b2b2f8b28370c274887f8aa2f82bb5d4" category="paragraph">Das Beispiel erstellt ein PVC anhand eines Snapshots:</block>
   <block id="f6bd0d7447ff66cc6b859603a88fbde9" category="section-title">Weiterführende Links</block>
   <block id="35aa4a2a819e526c2e930e487df8d423" category="list-text"><block ref="35aa4a2a819e526c2e930e487df8d423" category="inline-link-macro-rx"></block></block>
   <block id="19476662cd814e0aa085eca121de89b8" category="inline-link-macro">VolumeSnapshotKlasse</block>
@@ -3665,4 +3663,8 @@
   <block id="ad90b7d29d0d8a9c746868fe1f38ca90" category="paragraph">RWO, ROX, RWX, RWOP</block>
   <block id="96b38cb92e67a8f09c2d13169b8bb555" category="paragraph">RWO, ROX, RWOP</block>
   <block id="a38f7647d54be4cddc3f0b8e4c746caa" category="admonition">ONTAP-Back-Ends können mithilfe von Anmeldedaten für eine Sicherheitsrolle (Benutzername/Passwort) oder den privaten Schlüssel und das auf dem ONTAP Cluster installierte Zertifikat authentifiziert werden. Sie können vorhandene Back-Ends aktualisieren, um mit von einem Authentifizierungsmodus in den anderen zu verschieben<block ref="defd1e55f93269ac9278afc086951ba8" prefix=" " category="inline-code"></block>.</block>
+  <block id="ec777b0a7c2a3d6602a440dae083b7c3" category="paragraph">In diesem Beispiel wird eine PVC mithilfe eines Snapshots erstellt.</block>
+  <block id="5e4708ea6e1c08a91834bc9405f43f5d" category="admonition">Die PVC muss im gleichen Namespace wie ITS erstellt werden<block ref="d9d448f70687a1aa1f12b2f5ddaa4977" prefix=" " category="inline-code"></block>.</block>
+  <block id="32945bec28dab31706e6de80b1c28cc4" category="section-title">Löschen eines PV mit Snapshots</block>
+  <block id="f28228f84cb57be6c4037bf94a6afbd2" category="paragraph">Wenn Sie ein persistentes Volume mit zugeordneten Snapshots löschen, wird das entsprechende Trident-Volume in einen „Löschzustand“ aktualisiert. Entfernen Sie die Volume Snapshots, um das Astra Trident Volume zu löschen.</block>
 </blocks>

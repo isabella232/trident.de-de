@@ -103,7 +103,7 @@ Der `Snapshot Content Name` Identifiziert das VolumeSnapshotContent-Objekt, das 
 
 == Schritt 3: PVCs aus VolumeSnapshots erstellen
 
-Das Beispiel erstellt ein PVC anhand eines Snapshots:
+In diesem Beispiel wird eine PVC mithilfe eines Snapshots erstellt.
 
 [listing]
 ----
@@ -127,7 +127,13 @@ spec:
 `dataSource` Zeigt an, dass das PVC mit dem Namen VolumeSnapshot erstellt werden muss `pvc1-snap` Als Quelle der Daten. Damit beauftragt Astra Trident, aus dem Snapshot ein PVC zu erstellen. Nachdem die PVC erstellt wurde, kann sie an einem Pod befestigt und wie jedes andere PVC verwendet werden.
 
 
-NOTE: Wenn Sie ein persistentes Volume mit zugeordneten Snapshots löschen, wird das entsprechende Trident-Volume in einen „Löschzustand“ aktualisiert. Damit das Astra Trident Volume gelöscht werden kann, sollten die Snapshots des Volume entfernt werden.
+WARNING: Die PVC muss im gleichen Namespace wie ITS erstellt werden `dataSource`.
+
+
+
+== Löschen eines PV mit Snapshots
+
+Wenn Sie ein persistentes Volume mit zugeordneten Snapshots löschen, wird das entsprechende Trident-Volume in einen „Löschzustand“ aktualisiert. Entfernen Sie die Volume Snapshots, um das Astra Trident Volume zu löschen.
 
 
 
