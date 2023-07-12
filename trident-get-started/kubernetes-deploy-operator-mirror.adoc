@@ -118,7 +118,7 @@ kubectl kustomize deploy/ > deploy/<BUNDLE>.yaml
 ====
 Das Astra Trident-Installationsprogramm stellt eine Paketdatei bereit, mit der der Operator installiert und zugehörige Objekte erstellt werden können. Die Bundle-Datei ist eine einfache Möglichkeit, den Operator zu implementieren und Astra Trident mit einer Standardkonfiguration zu installieren.
 
-** Verwenden Sie für Cluster mit Kubernetes 1.24 oder älter `bundle_pre_1_25.yaml`.
+** Verwenden Sie für Cluster mit Kubernetes 1.24 oder früheren Versionen `bundle_pre_1_25.yaml`.
 ** Verwenden Sie für Cluster mit Kubernetes 1.25 oder höher `bundle_post_1_25.yaml`.
 
 
