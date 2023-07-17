@@ -5,8 +5,9 @@ entries:
 - title: Bereiten Sie den Knoten „Worker“ vor
   url: "/trident-use/worker-node-prep.html"
 - title: Back-Ends konfigurieren
-  url: "/trident-use/backends.html"
   entries:
+  - title: Überblick
+    url: "/trident-use/backends.html"
   - title: Azure NetApp Dateien
     entries:
     - title: Überblick
