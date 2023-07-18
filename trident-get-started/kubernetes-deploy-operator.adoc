@@ -99,7 +99,30 @@ Das Astra Trident-Installationsprogramm stellt eine Paketdatei bereit, mit der d
 * Verwenden Sie für Cluster mit Kubernetes 1.25 oder höher `bundle_post_1_25.yaml`.
 
 
-Das Trident-Installationsprogramm implementiert den Operator im `trident` Namespace. Wenn der `trident` Der Namespace ist nicht vorhanden, verwenden Sie `kubectl apply -f deploy/namespace.yaml` Um sie zu erstellen.
+.Bevor Sie beginnen
+* Standardmäßig stellt das Trident-Installationsprogramm den Operator in bereit `trident` Namespace. Wenn der `trident` Namespace ist nicht vorhanden, erstellen Sie ihn mit:
++
+[listing]
+----
+kubectl apply -f deploy/namespace.yaml
+----
+* Um den Operator in einem anderen Namespace als dem bereitzustellen `trident` Namespace, Update `serviceaccount.yaml`, `clusterrolebinding.yaml` Und `operator.yaml` Und erstellen Sie Ihre Bundle-Datei mit `kustomization.yaml`.
++
+.. Erstellen Sie die `kustomization.yaml` Verwenden des folgenden Befehls, wobei _<bundle>_ ist `bundle_pre_1_25` Oder `bundle_post_1_25` Basierend auf Ihrer Kubernetes-Version
++
+[listing]
+----
+cp kustomization_<bundle>.yaml kustomization.yaml
+----
+.. Kompilieren Sie das Bündel mit dem folgenden Befehl, wobei _<bundle>_ ist `bundle_pre_1_25` Oder `bundle_post_1_25` Basierend auf Ihrer Kubernetes-Version
++
+[listing]
+----
+kubectl kustomize deploy/ > deploy/<bundle>.yaml
+----
+
+
+
 
 .Schritte
 . Erstellen Sie die Ressourcen und stellen Sie den Operator bereit:
@@ -108,24 +131,11 @@ Das Trident-Installationsprogramm implementiert den Operator im `trident` Namesp
 ----
 kubectl create -f deploy/<bundle>.yaml
 ----
-+
-[NOTE]
-====
-Um den Operator in einem anderen Namespace als dem bereitzustellen `trident` Namespace, Update `serviceaccount.yaml`, `clusterrolebinding.yaml` Und `operator.yaml` Und erstellen Sie Ihre Bundle-Datei mit `kustomization.yaml`:
-
-[listing]
-----
-kubectl kustomize deploy/ > deploy/<bundle>.yaml
-----
-====
-. Überprüfen Sie, ob der Bediener bereitgestellt wurde.
+. Überprüfen Sie, ob der Operator, die Bereitstellung und Replikasets erstellt wurden.
 +
 [listing]
 ----
-kubectl get deployment -n <operator-namespace>
-
-NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-trident-operator   1/1     1            1           3m
+kubectl get all -n <operator-namespace>
 ----
 
 
