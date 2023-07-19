@@ -91,7 +91,9 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 | `qtreesPerFlexvol` | Maximale Ques pro FlexVol, muss im Bereich [50, 300] liegen | `200` 
 
 
-| `smbShare` | Sie können den Namen der SMB-Freigabe angeben, die mit der Microsoft Management Console für freigegebene Ordner erstellt wurde, oder einen Freigabenamen angeben, damit Astra Trident die SMB-Freigabe erstellen kann. Alternativ können Sie den Parameter leer lassen, um den gemeinsamen Zugriff auf Volumes zu verhindern. | `smb-share` 
+| `smbShare` | Sie können eine der folgenden Optionen angeben: Den Namen einer SMB-Freigabe, die mit der Microsoft Management Console oder der ONTAP-CLI erstellt wurde, oder einen Namen, mit dem Astra Trident die SMB-Freigabe erstellen kann.
+
+Dieser Parameter ist für Amazon FSX for ONTAP Back-Ends erforderlich. | `smb-share` 
 
 
 | `useREST` | Boolescher Parameter zur Verwendung von ONTAP REST-APIs. *Technische Vorschau*

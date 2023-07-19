@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/ontap-nas-prep.html 
 keywords: trident backend, ontap nas, ontap-nas, ontap-nas-economy, ontap-nas-flexgroups 
-summary: Erfahren Sie, wie Sie ein ONTAP-Back-End mit ONTAP-NAS-Treibern vorbereiten. 
+summary: Verstehen Sie die Anforderungen, Authentifizierungsoptionen und Exportrichtlinien für die Konfiguration eines ONTAP-Backends mit ONTAP-NAS-Treibern. 
 ---
 = Bereiten Sie sich auf die Konfiguration eines Backend mit ONTAP-NAS-Treibern vor
 :hardbreaks:
@@ -12,21 +12,21 @@ summary: Erfahren Sie, wie Sie ein ONTAP-Back-End mit ONTAP-NAS-Treibern vorbere
 
 
 [role="lead"]
-Erfahren Sie, wie Sie ein ONTAP-Back-End mit ONTAP-NAS-Treibern vorbereiten.
+Verstehen Sie die Anforderungen, Authentifizierungsoptionen und Exportrichtlinien für die Konfiguration eines ONTAP-Backends mit ONTAP-NAS-Treibern.
 
 
 
-== Überlegungen
+== Anforderungen
 
 * Für alle ONTAP Back-Ends benötigt Astra Trident mindestens ein Aggregat, das der SVM zugewiesen ist.
 * Sie können mehrere Treiber ausführen und Speicherklassen erstellen, die auf den einen oder den anderen zeigen. Beispielsweise könnten Sie eine Gold-Klasse konfigurieren, die den verwendet `ontap-nas` Fahrer und eine Bronze-Klasse, die den verwendet `ontap-nas-economy` Eins.
 * Alle Kubernetes-Worker-Nodes müssen über die entsprechenden NFS-Tools verfügen. Siehe link:worker-node-prep.html["Hier"] Entnehmen.
-* Astra Trident unterstützt SMB Volumes, die nur auf Windows Nodes laufenden Pods gemountet werden.
+* Astra Trident unterstützt SMB Volumes, die nur auf Windows Nodes laufenden Pods gemountet werden. Siehe <<Vorbereitung zur Bereitstellung von SMB Volumes>> Entsprechende Details.
 
 
 
 
-== Authentifizierung
+== Authentifizieren Sie das ONTAP-Backend
 
 Astra Trident bietet zwei Arten der Authentifizierung eines ONTAP-Backend.
 
@@ -288,3 +288,79 @@ Aktualisieren Sie bei zuvor vorhandenen Back-Ends das Backend mit `tridentctl up
 NOTE: Wenn Sie ein Backend mit automatisch gemanagten Exportrichtlinien löschen, wird die dynamisch erstellte Exportrichtlinie gelöscht. Wenn das Backend neu erstellt wird, wird es als neues Backend behandelt und erzeugt eine neue Exportrichtlinie.
 
 Wenn die IP-Adresse eines aktiven Node aktualisiert wird, müssen Sie den Astra Trident Pod auf dem Node neu starten. Astra Trident aktualisiert dann die Exportrichtlinie für Back-Ends, die es verwaltet, um diese IP-Änderung zu berücksichtigen.
+
+
+
+== Vorbereitung zur Bereitstellung von SMB Volumes
+
+Mit ein wenig Vorbereitung können Sie SMB Volumes mit bereitstellen `ontap-nas` Treiber.
+
+
+WARNING: Zur Erstellung eines müssen Sie auf der SVM sowohl NFS- als auch SMB/CIFS-Protokolle konfigurieren `ontap-nas-economy` SMB Volume für ONTAP vor Ort: Ist eines dieser Protokolle nicht konfiguriert, schlägt die Erstellung von SMB Volumes fehl.
+
+.Bevor Sie beginnen
+Bevor Sie SMB-Volumes bereitstellen können, müssen Sie über Folgendes verfügen:
+
+* Kubernetes-Cluster mit einem Linux-Controller-Knoten und mindestens einem Windows-Worker-Node, auf dem Windows Server 2019 ausgeführt wird. Astra Trident unterstützt SMB Volumes, die nur auf Windows Nodes laufenden Pods gemountet werden.
+* Mindestens ein Astra Trident-Geheimnis, der Ihre Active Directory-Anmeldedaten enthält. Um Geheimnis zu erzeugen `smbcreds`:
++
+[listing]
+----
+kubectl create secret generic smbcreds --from-literal username=user --from-literal password='password'
+----
+* Ein CSI-Proxy, der als Windows-Dienst konfiguriert ist. Zum Konfigurieren von A `csi-proxy`Weitere Informationen finden Sie unter link:https://github.com/kubernetes-csi/csi-proxy["GitHub: CSI-Proxy"^] Oder link:https://github.com/Azure/aks-engine/blob/master/docs/topics/csi-proxy-windows.md["GitHub: CSI Proxy für Windows"^] Für Kubernetes-Knoten, die auf Windows ausgeführt werden.
+
+
+.Schritte
+. Bei On-Premises-ONTAP können Sie optional eine SMB-Freigabe erstellen oder Astra Trident eine für Sie erstellen.
++
+
+NOTE: SMB-Freigaben sind für Amazon FSX for ONTAP erforderlich.
+
++
+Sie können SMB-Admin-Freigaben auf zwei Arten erstellen: Mit link:https://learn.microsoft.com/en-us/troubleshoot/windows-server/system-management-components/what-is-microsoft-management-console["Microsoft Management Console"^] Snap-in für freigegebene Ordner oder mit der ONTAP-CLI. So erstellen Sie SMB-Freigaben mithilfe der ONTAP-CLI:
+
++
+.. Erstellen Sie bei Bedarf die Verzeichnispfadstruktur für die Freigabe.
++
+Der `vserver cifs share create` Der Befehl überprüft während der Freigabenerstellung den in der Option -path angegebenen Pfad. Wenn der angegebene Pfad nicht vorhanden ist, schlägt der Befehl fehl.
+
+.. Erstellen einer mit der angegebenen SVM verknüpften SMB-Freigabe:
++
+[listing]
+----
+vserver cifs share create -vserver vserver_name -share-name share_name -path path [-share-properties share_properties,...] [other_attributes] [-comment text]
+----
+.. Vergewissern Sie sich, dass die Freigabe erstellt wurde:
++
+[listing]
+----
+vserver cifs share show -share-name share_name
+----
++
+
+NOTE: Siehe link:https://docs.netapp.com/us-en/ontap/smb-config/create-share-task.html["Erstellen Sie eine SMB-Freigabe"^] Vollständige Informationen.
+
+
+
+. Beim Erstellen des Backend müssen Sie Folgendes konfigurieren, um SMB-Volumes festzulegen. Alle FSX-Konfigurationsoptionen für ONTAP-Backend finden Sie unter link:trident-fsx-examples.html["FSX für ONTAP Konfigurationsoptionen und Beispiele"].
++
+[cols="3"]
+|===
+| Parameter | Beschreibung | Beispiel 
+
+
+| `smbShare`
+Sie können eine der folgenden Optionen angeben: Den Namen einer SMB-Freigabe, die mit der Microsoft Management Console oder der ONTAP-CLI erstellt wurde, einen Namen, über den Astra Trident die SMB-Freigabe erstellen kann, oder Sie können den Parameter leer lassen, um den Zugriff auf gemeinsame Freigaben auf Volumes zu verhindern.
+
+Dieser Parameter ist für On-Premises-ONTAP optional.
+
+Dieser Parameter ist für Amazon FSX for ONTAP-Back-Ends erforderlich und darf nicht leer sein. | `smb-share` | `nasType` 
+
+
+| *Muss auf eingestellt sein `smb`.* Wenn Null, wird standardmäßig auf gesetzt `nfs`. | `smb` | `securityStyle` 
+
+
+| Sicherheitstyp für neue Volumes. *Muss auf eingestellt sein `ntfs` Oder `mixed` Für SMB Volumes.* | `ntfs` Oder `mixed` Für SMB Volumes | `unixPermissions` 
+|===
+

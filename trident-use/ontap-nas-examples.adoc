@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/ontap-nas-examples.html 
 keywords: map backends, storage classes, trident backend, ontap-nas, ontap-nas-economy, ontap-nas-flexgroups, options, storageclasses, fsx 
-summary: Erfahren Sie, wie Sie mit Ihrer Installation von Astra Trident ONTAP NAS-Treiber erstellen und verwenden. Dieser Abschnitt enthält Beispiele für die Back-End-Konfiguration und Details zur Zuordnung von Back-Ends zu StorageClasses. 
+summary: Erfahren Sie, wie Sie ONTAP NAS-Treiber mit Ihrer Astra Trident Installation erstellen und verwenden. Dieser Abschnitt enthält Beispiele für die Back-End-Konfiguration und Details zur Zuordnung von Back-Ends zu StorageClasses. 
 ---
 = ONTAP NAS-Konfigurationsoptionen und -Beispiele
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: Erfahren Sie, wie Sie mit Ihrer Installation von Astra Trident ONTAP NA
 
 
 [role="lead"]
-Erfahren Sie, wie Sie mit Ihrer Installation von Astra Trident ONTAP NAS-Treiber erstellen und verwenden. Dieser Abschnitt enthält Beispiele für die Back-End-Konfiguration und Details zur Zuordnung von Back-Ends zu StorageClasses.
+Erfahren Sie, wie Sie ONTAP NAS-Treiber mit Ihrer Astra Trident Installation erstellen und verwenden. Dieser Abschnitt enthält Beispiele für die Back-End-Konfiguration und Details zur Zuordnung von Back-Ends zu StorageClasses.
 
 
 
@@ -94,7 +94,11 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 | `qtreesPerFlexvol` | Maximale Ques pro FlexVol, muss im Bereich [50, 300] liegen | „200“ 
 
 
-| `smbShare` | Sie können den Namen der SMB-Freigabe angeben, die mit der Microsoft Management Console für freigegebene Ordner erstellt wurde, oder einen Freigabenamen angeben, damit Astra Trident die SMB-Freigabe erstellen kann. Alternativ können Sie den Parameter leer lassen, um den gemeinsamen Zugriff auf Volumes zu verhindern. | `smb-share` 
+| `smbShare` | Sie können eine der folgenden Optionen angeben: Den Namen einer SMB-Freigabe, die mit der Microsoft Management Console oder der ONTAP-CLI erstellt wurde, einen Namen, über den Astra Trident die SMB-Freigabe erstellen kann, oder Sie können den Parameter leer lassen, um den Zugriff auf gemeinsame Freigaben auf Volumes zu verhindern.
+
+Dieser Parameter ist für On-Premises-ONTAP optional.
+
+Dieser Parameter ist für Amazon FSX for ONTAP-Back-Ends erforderlich und darf nicht leer sein. | `smb-share` 
 
 
 | `useREST` | Boolescher Parameter zur Verwendung von ONTAP REST-APIs. *Technische Vorschau*
@@ -210,11 +214,9 @@ Die folgenden Beispiele zeigen grundlegende Konfigurationen, bei denen die meist
 
 NOTE: Wenn Sie Amazon FSX auf NetApp ONTAP mit Trident verwenden, empfiehlt es sich, DNS-Namen für LIFs anstelle von IP-Adressen anzugeben.
 
-.ONTAP NAS Economy – Beispiel für eine minimale Konfiguration
+.Minimalkonfiguration für <code>ontap-nas-economy</code>
 [%collapsible%open]
 ====
-Dies ist eine grundlegende Konfiguration mit dem `ontap-nas-economy` Treiber.
-
 [listing]
 ----
 ---
@@ -224,14 +226,12 @@ managementLIF: 10.0.0.1
 dataLIF: 10.0.0.2
 svm: svm_nfs
 username: vsadmin
-password: <password>
+password: password
 ----
 ====
-.Beispiel für eine minimale Konfiguration von ONTAP NAS FlexGroup
+.Minimalkonfiguration für <code>ontap-nas-flexgroup</code>
 [%collapsible%open]
 ====
-Dies ist eine grundlegende Konfiguration mit dem `ontap-nas-flexgroup` Treiber.
-
 [listing]
 ----
 ---
@@ -241,13 +241,33 @@ managementLIF: 10.0.0.1
 dataLIF: 10.0.0.2
 svm: svm_nfs
 username: vsadmin
-password: <password>
+password: password
 ----
 ====
-.Beispiel für die zertifikatbasierte Authentifizierung
+.Minimale Konfiguration für SMB Volumes
 [%collapsible%open]
 ====
-In diesem Beispiel der Grundkonfiguration `clientCertificate`, `clientPrivateKey`, und `trustedCACertificate` (Optional, wenn Sie eine vertrauenswürdige CA verwenden) werden ausgefüllt `backend.json` Und nehmen Sie die base64-kodierten Werte des Clientzertifikats, des privaten Schlüssels und des vertrauenswürdigen CA-Zertifikats.
+[listing]
+----
+
+---
+version: 1
+backendName: ExampleBackend
+storageDriverName: ontap-nas
+managementLIF: 10.0.0.1
+nasType: smb
+securityStyle: ntfs
+unixPermissions: ""
+dataLIF: 10.0.0.2
+svm: svm_nfs
+username: vsadmin
+password: password
+----
+====
+.Zertifikatbasierte Authentifizierung
+[%collapsible%open]
+====
+Dies ist ein minimales Beispiel für die Back-End-Konfiguration. `clientCertificate`, `clientPrivateKey`, und `trustedCACertificate` (Optional, wenn Sie eine vertrauenswürdige CA verwenden) werden ausgefüllt `backend.json` Und nehmen Sie die base64-kodierten Werte des Clientzertifikats, des privaten Schlüssels und des vertrauenswürdigen CA-Zertifikats.
 
 [listing]
 ----
@@ -264,10 +284,10 @@ trustedCACertificate: zcyBbaG...b3Igb3duIGNsYXNz
 storagePrefix: myPrefix_
 ----
 ====
-.Beispiel für eine Richtlinie für den automatischen Export
+.Automatische Exportrichtlinie
 [%collapsible%open]
 ====
-Dieses Beispiel beauftragt Astra Trident, dynamische Exportrichtlinien zur automatischen Erstellung und Verwaltung der Exportrichtlinie zu verwenden. Das funktioniert auch für das `ontap-nas-economy` Und `ontap-nas-flexgroup` Treiber.
+In diesem Beispiel erfahren Sie, wie Sie Astra Trident anweisen können, dynamische Exportrichtlinien zu verwenden, um die Exportrichtlinie automatisch zu erstellen und zu verwalten. Das funktioniert auch für das `ontap-nas-economy` Und `ontap-nas-flexgroup` Treiber.
 
 [listing]
 ----
@@ -284,11 +304,11 @@ autoExportPolicy: true
 autoExportCIDRs:
 - 10.0.0.0/24
 username: admin
-password: <password>
+password: password
 nfsMountOptions: nfsvers=4
 ----
 ====
-.Beispiel für IPv6-Adressen
+.Verwenden von IPv6-Adressen
 [%collapsible%open]
 ====
 Dieses Beispiel zeigt `managementLIF` Verwenden einer IPv6-Adresse.
@@ -305,14 +325,13 @@ labels:
   backend: test1-ontap-ipv6
 svm: nas_ipv6_svm
 username: vsadmin
-password: <password>
-
+password: password
 ----
 ====
-.Amazon FSX für ONTAP mit SMB-Volumes – Beispiel
+.Amazon FSX für ONTAP, die SMB Volumes nutzen
 [%collapsible%open]
 ====
-Dieses Beispiel erstellt ein Back-End von Amazon FSX für ONTAP unter Verwendung von SMB-Volumes.
+Der `smbShare` Der Parameter ist für FSX for ONTAP mit SMB Volumes erforderlich.
 
 [listing]
 ----
@@ -324,6 +343,7 @@ managementLIF: example.mgmt.fqdn.aws.com
 nasType: smb
 dataLIF: 10.0.0.15
 svm: nfs_svm
+smbShare: smb-share
 clientCertificate: ZXR0ZXJwYXB...ICMgJ3BhcGVyc2
 clientPrivateKey: vciwKIyAgZG...0cnksIGRlc2NyaX
 trustedCACertificate: zcyBbaG...b3Igb3duIGNsYXNz

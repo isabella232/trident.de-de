@@ -12,11 +12,11 @@ summary: Erfahren Sie, wie Sie ein ONTAP-Back-End mit ONTAP-SAN-Treibern vorbere
 
 
 [role="lead"]
-Erfahren Sie, wie Sie ein ONTAP-Back-End mit ONTAP-SAN-Treibern vorbereiten.
+Verstehen Sie die Anforderungen und Authentifizierungsoptionen für die Konfiguration eines ONTAP-Backends mit ONTAP-SAN-Treibern.
 
 
 
-== Überblick
+== Anforderungen
 
 Für alle ONTAP Back-Ends benötigt Astra Trident mindestens ein Aggregat, das der SVM zugewiesen ist.
 
@@ -26,7 +26,7 @@ Alle Kubernetes-Worker-Nodes müssen über die entsprechenden iSCSI-Tools verfü
 
 
 
-== Authentifizierung
+== Authentifizieren Sie das ONTAP-Backend
 
 Astra Trident bietet zwei Arten der Authentifizierung eines ONTAP-Backend.
 
