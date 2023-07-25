@@ -42,34 +42,37 @@ Astra Trident bietet die folgenden Storage-Treiber für die Kommunikation mit de
 
 | `ontap-nas`  a| 
 NFS
+SMB
  a| 
 Dateisystem
  a| 
 RWO, ROX, RWX, RWOP
  a| 
-„“, nfs
+„“, nfs, smb
 
 
 
 | `ontap-nas-economy`  a| 
 NFS
+SMB
  a| 
 Dateisystem
  a| 
 RWO, ROX, RWX, RWOP
  a| 
-„“, nfs
+„“, nfs, smb
 
 
 
 | `ontap-nas-flexgroup`  a| 
 NFS
+SMB
  a| 
 Dateisystem
  a| 
 RWO, ROX, RWX, RWOP
  a| 
-„“, nfs
+„“, nfs, smb
 
 
 
