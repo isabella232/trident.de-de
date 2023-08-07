@@ -46,7 +46,7 @@ Verwenden Sie die `tridentctl get` Befehl für weitere Informationen über Ihre 
 
 === Kann ich Metriken abrufen, wie Storage von Astra Trident bereitgestellt wird?
 
-Ja. Trident 20.01 führt Prometheus Endpunkte ein, mit denen Informationen über den Betrieb von Astra Trident erfasst werden können. Dazu zählen die Anzahl der verwalteten Back-Ends, die Anzahl der bereitgestellten Volumes, die verbrauchten Bytes usw. Außerdem können Sie Cloud Insights zur Überwachung und Analyse einsetzen.
+Ja. Prometheus Endpunkte, die zur Erfassung von Informationen über den Astra Trident Vorgang verwendet werden können, z. B. die Anzahl der gemanagten Back-Ends, die Anzahl der bereitgestellten Volumes, die verbrauchten Byte usw. Sie können auch verwenden link:https://docs.netapp.com/us-en/cloudinsights/["Einblicke in die Cloud"^] Zur Überwachung und Analyse.
 
 
 
@@ -57,12 +57,6 @@ Nein Es gibt keine Änderungen hinsichtlich der Benutzerfreundlichkeit und Funkt
 
 
 == Installation und Verwendung von Astra Trident in einem Kubernetes Cluster
-
-
-
-=== Welche Versionen werden von unterstützt `etcd`?
-
-Astra Trident muss nicht mehr ein `etcd`. Er verwendet CRDs, um den Status beizubehalten.
 
 
 
@@ -220,19 +214,13 @@ Die Management-LIF ist erforderlich. Logische Datenschnittstelle variiert:
 
 === Kann Astra Trident CHAP für ONTAP-Back-Ends konfigurieren?
 
-Ja. Ab 20.04 unterstützt Astra Trident bidirektionale CHAP-Back-Ends für ONTAP. Dazu ist eine Einstellung erforderlich `useCHAP=true` Der Back-End-Konfiguration durchgeführt.
+Ja. Astra Trident unterstützt bidirektionales CHAP für ONTAP Back-Ends. Dazu ist eine Einstellung erforderlich `useCHAP=true` Der Back-End-Konfiguration durchgeführt.
 
 
 
 === Wie schaffe ich Exportrichtlinien mit Astra Trident?
 
-Astra Trident kann Exportrichtlinien ab Version 20.04 dynamisch erstellen und verwalten. Dadurch kann der Storage-Administrator einen oder mehrere CIDR-Blöcke in seiner Back-End-Konfiguration bereitstellen und Trident Add-Node-IPs erstellen, die einer erstellten Exportrichtlinie innerhalb dieses Bereichs liegen. Auf diese Weise managt Astra Trident das Hinzufügen und Löschen von Regeln für Knoten mit IPs innerhalb der angegebenen CIDRs automatisch. Diese Funktion erfordert CSI Trident.
-
-
-
-=== Können wir einen Port im DataLIF angeben?
-
-Astra Trident 19.01 und höher unterstützt die Angabe eines Ports in der DataLIF. Konfigurieren Sie es im `backend.json` Datei als ``“managementLIF”: <ip address>:<port>”``. Wenn die IP-Adresse Ihres Management LIF beispielsweise 192.0.2.1 ist und der Port 1000 ist, konfigurieren Sie ``"managementLIF": "192.0.2.1:1000"``.
+Astra Trident kann Exportrichtlinien ab Version 20.04 dynamisch erstellen und verwalten. Dadurch kann der Storage-Administrator einen oder mehrere CIDR-Blöcke in seiner Back-End-Konfiguration bereitstellen und Trident Add-Node-IPs erstellen, die einer erstellten Exportrichtlinie innerhalb dieses Bereichs liegen. Auf diese Weise managt Astra Trident das Hinzufügen und Löschen von Regeln für Knoten mit IPs innerhalb der angegebenen CIDRs automatisch.
 
 
 
@@ -354,12 +342,6 @@ Ja. Sie können ein von Astra Trident erstelltes PVC erweitern. Beachten Sie, da
 
 
 
-=== Kann ich es in Astra Trident importieren, wenn ich ein Volume habe, das außerhalb von Astra Trident erstellt wurde?
-
-Ab Version 19.04 können Sie Volumes mit der Importfunktion für Volumes in Kubernetes einbringen.
-
-
-
 === Kann ich ein Volume importieren, während es sich in SnapMirror Data Protection (DP) oder offline Modus befindet?
 
 Der Volumenimport schlägt fehl, wenn sich das externe Volume im DP-Modus befindet oder offline ist. Sie erhalten die folgende Fehlermeldung:
@@ -369,12 +351,6 @@ Der Volumenimport schlägt fehl, wenn sich das externe Volume im DP-Modus befind
 Error: could not import volume: volume import failed to get size of volume: volume <name> was not found (400 Bad Request) command terminated with exit code 1.
 Make sure to remove the DP mode or put the volume online before importing the volume.
 ----
-
-
-=== Kann ich die von Astra Trident erstellten iSCSI PVCs erweitern?
-
-Trident 19.10 unterstützt die Erweiterung von iSCSI PVS mithilfe von CSI-Bereitstellung.
-
 
 
 === Wie wird ein Ressourcenkontingent auf ein NetApp Cluster übersetzt?

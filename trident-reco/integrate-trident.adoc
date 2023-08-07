@@ -67,7 +67,12 @@ Astra Trident bietet 2 SAN-Treiber für ONTAP, die unten aufgeführt sind.
 | `ontap-san-economy` | Ja. | Ja. | Yesfootnote:4[] | Ja. | Yesfootnote:3[] | Ja. | Yesfootnote:3[] 
 |===
 [verse]
-Fußnote für die obigen Tabellen: Jafootnote:1[]: Not Managed by Astra Trident Jafootnote:2[]: Managed by Astra Trident, but not PV granular Jafootnote:3[]: Nicht verwaltet durch Astra Trident und nicht durch PV-Granularität Jafootnote:4[]: Unterstützt von RAW-Block-Volumes Jafootnote:5[]: Unterstützt von CSI Trident
+Fußnote für die obigen Tabellen:
+Yesfootnote:1[]: Wird nicht von Astra Trident gemanagt
+Yesfootnote:2[]: Wird von Astra Trident gemanagt, jedoch nicht mit PV-Granularität
+Yesfootnote:3[]: Wird nicht von Astra Trident gemanagt und nicht von PV-Granularität
+Yesfootnote:4[]: Unterstützt für RAW-Block-Volumes
+Yesfootnote:5[]: Unterstützt von Astra Trident
 
 Die Funktionen, die keine PV-Granularität sind, werden auf das gesamte FlexVolume angewendet, und alle PVs (also qtrees oder LUNs in gemeinsam genutzten FlexVols) teilen einen gemeinsamen Zeitplan.
 

@@ -4,7 +4,7 @@ permalink: trident-get-started/quickstart.html
 keywords: kubernetes cluster, simple installation, Kubernetes installation 
 summary: Falls Sie gerade mit Kubernetes beginnen, sollten Sie Kubernetes gemäß den Anweisungen installieren, um es auszuprobieren. Diese Anweisungen stellen ein Single-Node Cluster von Bare-Knochen bereit, mit dem Trident zu Demonstrationszwecken integriert werden kann. 
 ---
-= Probieren Sie es aus
+= Der Einstieg in Astra Trident ist schnell möglich
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,17 +12,51 @@ summary: Falls Sie gerade mit Kubernetes beginnen, sollten Sie Kubernetes gemä�
 
 
 [role="lead"]
-NetApp stellt ein sofort einsatzbereites Lab-Image bereit, das Sie über anfordern können link:https://www.netapp.com/us/try-and-buy/test-drive/index.aspx["NetApp Testversion"^].
+Sie können Astra Trident installieren und beginnen mit dem Management der Storage-Ressourcen in wenigen Schritten. Bevor Sie beginnen, überprüfen Sie link:requirements.html["Anforderungen von Astra Trident"].
+
+
+NOTE: Informationen zu Docker finden Sie unter link:../trident-docker/deploy-docker.html["Astra Trident für Docker"].
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Eins"] Installation Von Astra Trident
+[role="quick-margin-para"]
+Astra Trident bietet mehrere Installationsmethoden und -Modi, die für eine Vielzahl von Umgebungen und Organisationen optimiert sind.
+
+[role="quick-margin-para"]
+link:../trident-get-started/kubernetes-deploy.html["Installation Von Astra Trident"]
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Zwei"] Bereiten Sie den Knoten „Worker“ vor
+[role="quick-margin-para"]
+Alle Worker-Nodes im Kubernetes-Cluster müssen in der Lage sein, die Volumes, die Sie für Ihre Pods bereitgestellt haben, zu mounten.
+
+[role="quick-margin-para"]
+link:../trident-use/worker-node-prep.html["Bereiten Sie den Knoten „Worker“ vor"]
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Drittens"] Erstellen Sie ein Backend
+[role="quick-margin-para"]
+Ein Backend definiert die Beziehung zwischen Astra Trident und einem Storage-System. Er erzählt Astra Trident, wie man mit diesem Storage-System kommuniziert und wie Astra Trident Volumes darauf bereitstellen sollte.
+
+[role="quick-margin-para"]
+link:../trident-use/backends.html["Konfigurieren Sie ein Backend"] Für Ihr Speichersystem
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Vier"] Kubernetes StorageClass erstellen
+[role="quick-margin-para"]
+Das Objekt Kubernetes StorageClass gibt Astra Trident als bereitstellung an und ermöglicht die Erstellung einer Storage-Klasse zur Bereitstellung von Volumes mit anpassbaren Attributen. Astra Trident erstellt eine passende Storage-Klasse für Kubernetes-Objekte, mit der der Astra Trident-bereitstellung angegeben wird.
+
+[role="quick-margin-para"]
+link:../trident-use/create-stor-class.html["Erstellen Sie eine Speicherklasse"]
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png["Fünf"] Bereitstellen eines Volumes
+[role="quick-margin-para"]
+Ein _PersistentVolume_ (PV) ist eine physische Speicherressource, die vom Cluster-Administrator auf einem Kubernetes-Cluster bereitgestellt wird. Das _PersistentVolumeClaim_ (PVC) ist eine Anforderung für den Zugriff auf das PersistentVolume auf dem Cluster.
+
+[role="quick-margin-para"]
+Erstellen Sie ein PersistentVolume (PV) und ein PersistentVolumeClaim (PVC), das die konfigurierte Kubernetes StorageClass verwendet, um Zugriff auf das PV anzufordern. Anschließend können Sie das PV an einem Pod montieren.
+
+[role="quick-margin-para"]
+link:../trident-use/vol-provision.html["Bereitstellen eines Volumes"]
 
 
 
-== Erfahren Sie mehr über die Testversion
+== Was kommt als Nächstes?
 
-Die Testversion bietet eine Sandbox-Umgebung, die mit einem Kubernetes Cluster mit drei Nodes und Astra Trident installiert und konfiguriert ist. Es ist eine gute Möglichkeit, sich mit Astra Trident vertraut zu machen und die Funktionen zu erkunden.
-
-Eine weitere Option ist, die zu sehen link:https://kubernetes.io/docs/setup/independent/install-kubeadm/["Installationsanleitung für kubeadm"] Von Kubernetes bereitgestellt.
-
-
-NOTE: In der Produktion sollte nicht das Kubernetes-Cluster, das Sie erstellen, mit diesen Anweisungen verwendet werden. Verwenden Sie die von der Distribution bereitgestellten Leitfäden zur Implementierung der Produktionsumgebung, um Cluster zu erstellen, die produktionsbereit sind.
-
-Wenn Sie Kubernetes zum ersten Mal verwenden, sollten Sie sich mit den Konzepten und Tools vertraut machen link:https://kubernetes.io/docs/home/["Hier"^].
+Sie können nun zusätzliche Back-Ends hinzufügen, Storage-Klassen managen, Back-Ends managen und Volume-Operationen durchführen.

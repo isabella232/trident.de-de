@@ -16,7 +16,7 @@ Damit Astra Trident in einer Vielzahl von Umgebungen und Organisationen installi
 
 
 
-== Kritische Informationen zu Astra Trident 23.04
+== Kritische Informationen zu Astra Trident 23.07
 
 *Sie müssen die folgenden wichtigen Informationen über Astra Trident lesen.*
 
@@ -74,6 +74,12 @@ Der Trident Operator erstellt automatisch die folgenden Objekte für Ihre Kubern
 
 
 ====
+.<strong>-</strong>
+[%collapsible]
+====
+Der Cluster-scoped Trident Operator verwaltet Ressourcen, die mit einer Astra Trident Installation auf Cluster-Ebene verbunden sind. Dies reduziert Fehler, die bei der Verwaltung von Clusterressourcen mit einem Namespace-Scoped-Operator auftreten können. Dies ist wichtig für die Selbstheilung und das Patching.
+
+====
 .<strong> Verheilen cappecackeIT </strong>
 [%collapsible]
 ====
@@ -92,6 +98,12 @@ Betrachten Sie zum Beispiel ein Szenario, bei dem Sie Astra Trident aktivieren m
 kubectl patch torc <trident-orchestrator-name> -n trident --type=merge -p '{"spec":{"debug":true}}'
 ----
 Nachher `TridentOrchestrator` Wird aktualisiert, verarbeitet der Bediener die Updates und Patches für die vorhandene Installation. Dies kann dazu führen, dass neue Pods erstellt werden, um die Installation entsprechend zu ändern.
+
+====
+.<strong> Retinstallbeam </strong>
+[%collapsible]
+====
+Der im Cluster enthaltene Trident Operator ermöglicht die saubere Entfernung von im Cluster-Umfang enthaltenen Ressourcen. Benutzer können Astra Trident vollständig deinstallieren und einfach neu installieren.
 
 ====
 .<strong> </strong> für Kubernetes Upgrade

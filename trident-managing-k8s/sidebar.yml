@@ -1,16 +1,20 @@
 ---
 section: trident-managing-k8s
-title: Managen Sie Astra Trident
+title: Management und Monitoring von Astra Trident
 entries:
 - title: Upgrade Astra Trident
   entries:
   - title: Upgrade-Übersicht
     url: "/trident-managing-k8s/upgrade-trident.html"
   - title: Upgrade mit dem Bediener
-    url: "/trident-managing-k8s/upgrade-operator.html"
+    entries:
+    - title: Den Upgrade-Workflow für Bediener verstehen
+      url: "/trident-managing-k8s/upgrade-operator-overview.html"
+    - title: Upgrade mit dem Bediener
+      url: "/trident-managing-k8s/upgrade-operator.html"
   - title: Upgrade mit tridentctl
     url: "/trident-managing-k8s/upgrade-tridentctl.html"
+- title: Überwachen Sie Astra Trident
+  url: "/trident-use/monitor-trident.html"
 - title: Deinstallieren Sie Astra Trident
   url: "/trident-managing-k8s/uninstall-trident.html"
-- title: Downgrade Astra Trident
-  url: "/trident-managing-k8s/downgrade-trident.html"

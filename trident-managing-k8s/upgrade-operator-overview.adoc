@@ -1,0 +1,57 @@
+---
+sidebar: sidebar 
+permalink: trident-managing-k8s/upgrade-operator-overview.html 
+keywords: upgrade, trident, operator, helm, controller, daemonset, node pods 
+summary: Bevor Sie ein Upgrade von Astra Trident mit dem Trident-Operator durchführen, sollten Sie sich über die während des Upgrades auftretenden Hintergrundprozesse informieren. Dazu gehören Änderungen am Trident Controller, am Controller Pod und an Node-Pods sowie am Node-DemonSet. 
+---
+= Den Upgrade-Workflow für Bediener verstehen
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bevor Sie ein Upgrade von Astra Trident mit dem Trident-Operator durchführen, sollten Sie sich über die während des Upgrades auftretenden Hintergrundprozesse informieren. Dazu gehören Änderungen am Trident Controller, am Controller Pod und an Node-Pods sowie am Node-DemonSet.
+
+
+
+== Bearbeitung von Trident Upgrades für Betreiber
+
+Einer der vielen link:../trident-get-started/kubernetes-deploy.html["Vorteile der Verwendung des Trident-Bedieners"] Die Installation und das Upgrade von Astra Trident erfolgt automatisch für Astra Trident und Kubernetes-Objekte, ohne vorhandene gemountete Volumes zu unterbrechen. Insbesondere kommuniziert der Trident Betreiber mit dem Kubernetes-Cluster, um:
+
+* Löschen Sie die Trident Controller-Implementierung und den Node DemonSet und erstellen Sie sie neu.
+* Ersetzen Sie den Trident Controller Pod und die Trident Node Pods durch neue Versionen.
++
+** Wenn ein Node nicht aktualisiert wird, verhindert dies nicht, dass die verbleibenden Nodes aktualisiert werden.
+** Nur Nodes mit einem laufenden Trident Node Pod können Volumes mounten.
+
+
+
+
+
+TIP: Weitere Informationen zur Architektur von Astra Trident auf dem Kubernetes-Cluster finden Sie unter link:trident-concepts/intro.html#astra-trident-architecture["Die Architektur von Astra Trident"].
+
+
+
+== Arbeitsablauf für die Benutzeraktualisierung
+
+Wenn Sie ein Upgrade mit dem Trident Operator initiieren:
+
+. Der *Trident-Operator*:
++
+.. Erkennt die aktuell installierte Version von Astra Trident (Version _n_).
+.. Aktualisiert alle Kubernetes-Objekte einschließlich CRDs, RBAC und Trident SVC.
+.. Löscht die Trident Controller-Bereitstellung für Version _n_.
+.. Erstellt die Trident-Controller-Bereitstellung für Version _n+1_.
+
+
+. *Kubernetes* erstellt Trident Controller Pod für _n+1_.
+. Der *Trident-Operator*:
++
+.. Löscht das Trident Node DemonSet für _n_. Der Operator wartet nicht auf die Beendigung des Node-Pod.
+.. Erstellt den Trident Node Demonset für _n+1_.
+
+
+. *Kubernetes* erstellt Trident Node Pods auf Nodes, auf denen Trident Node Pod _n_ nicht ausgeführt wird. So wird sichergestellt, dass auf einem Node nie mehr als ein Trident Node Pod einer beliebigen Version vorhanden ist.
+

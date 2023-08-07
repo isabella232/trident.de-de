@@ -1,0 +1,89 @@
+---
+sidebar: sidebar 
+permalink: trident-get-started/architecture.html 
+keywords: trident backend, AFF, FAS, ONTAP Select, Cloud, Amazon FSx for NetApp ONTAP, drivers, ONTAP drivers 
+summary: Astra Trident wird als einzelner Controller Pod plus Node Pod auf jedem Worker-Node im Cluster ausgeführt. Der Node Pod muss auf jedem Host ausgeführt werden, auf dem Sie ein Astra Trident Volume mounten möchten. 
+---
+= Die Architektur von Astra Trident
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Astra Trident wird als einzelner Controller Pod plus Node Pod auf jedem Worker-Node im Cluster ausgeführt. Der Node Pod muss auf jedem Host ausgeführt werden, auf dem Sie ein Astra Trident Volume mounten möchten.
+
+
+
+== Allgemeines zu Controller-Pods und Node-Pods
+
+Astra Trident wird einzeln implementiert <<Trident Controller Pod>> Und eines oder mehrere <<Trident Node Pods>> Auf dem Kubernetes-Cluster und verwendet standardmäßige Kubernetes _CSI Sidecar Container_, um die Implementierung von CSI-Plug-ins zu vereinfachen. link:https://kubernetes-csi.github.io/docs/sidecar-containers.html["Kubernetes CSI Sidecar-Container"^] Werden von der Kubernetes Storage Community unterhalten.
+
+Kubernetes link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["Knotenauswahl"^] Und link:https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/["Toleranzen und Verfleckungen"^] Werden verwendet, um die Ausführung eines Pod auf einem bestimmten oder bevorzugten Node einzuschränken. Während der Astra Trident Installation können Node-Selektoren und Toleranzen für Controller- und Node-Pods konfiguriert werden.
+
+* Das Controller-Plug-in übernimmt Volume-Bereitstellung und -Management, beispielsweise Snapshots und Größenanpassungen.
+* Das Node-Plug-in verarbeitet das Verbinden des Speichers mit dem Node.
+
+
+.Astra Trident wird auf dem Kubernetes-Cluster implementiert
+image::../media/trident-arch.png[Diagramm der Astra Trident Architektur auf dem Kubernetes Cluster.]
+
+
+
+=== Trident Controller Pod
+
+Beim Trident Controller Pod handelt es sich um einen einzelnen Pod, auf dem das CSI Controller Plug-in ausgeführt wird.
+
+* Verantwortlich für die Bereitstellung und das Management von Volumes in NetApp Storage
+* Management durch eine Kubernetes-Implementierung
+* Kann je nach Installationsparameter auf der Steuerebene oder auf den Arbeitsknoten ausgeführt werden.
+
+
+.Trident Controller Pod-Diagramm
+image::../media/controller-pod.png[Diagramm des Trident Controller Pod, auf dem das CSI Controller-Plug-in mit entsprechenden CSI-Seitenwagen ausgeführt wird.]
+
+
+
+=== Trident Node Pods
+
+Trident Node Pods sind privilegierte Pods, auf denen das CSI Node Plug-in ausgeführt wird.
+
+* Verantwortlich für das Mounten und Entmounten von Speicher für Pods, die auf dem Host ausgeführt werden
+* Gemanagt von einem Kubernetes DemonSet
+* Muss auf jedem Node ausgeführt werden, auf dem NetApp Storage gemountet werden soll
+
+
+.Trident Node Pod-Diagramm
+image::../media/node-pod.png[Diagramm des Trident Node Pod, auf dem das CSI Node Plug-in mit dem entsprechenden CSI-Sidcar ausgeführt wird.]
+
+
+
+== Unterstützte Kubernetes-Cluster-Architekturen
+
+Astra Trident wird durch die folgenden Kubernetes-Architekturen unterstützt:
+
+[cols="3,1,2"]
+|===
+| Kubernetes-Cluster-Architekturen | Unterstützt | Standardinstallation 
+
+
+| Ein Master Computing | Ja.  a| 
+Ja.
+
+
+
+| Mehrere Master-Computer und Computing-Ressourcen | Ja.  a| 
+Ja.
+
+
+
+| Master, `etcd`, Datenverarbeitung | Ja.  a| 
+Ja.
+
+
+
+| Master, Infrastruktur, Computing | Ja.  a| 
+Ja.
+
+|===

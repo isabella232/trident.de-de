@@ -40,7 +40,7 @@ Diese Tabelle enthält Einzelheiten `TridentOrchestrator` Attribute.
 | Parameter | Beschreibung | Standard 
 
 
-| `autosupportImage` | Das Container-Image für AutoSupport Telemetrie | „netapp/Trident-AutoSupport:23.04.0“ 
+| `autosupportImage` | Das Container-Image für AutoSupport Telemetrie | „netapp/Trident-AutoSupport:23.07.0“ 
 
 
 | `autosupportProxy` | Die Adresse/der Port eines Proxys zum Senden von AutoSupport Telemetrie | "http://proxy.example.com:8888"[] 

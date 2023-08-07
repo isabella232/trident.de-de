@@ -16,24 +16,12 @@ Astra Trident bietet fünf einzigartige ONTAP-Storage-Treiber für die Kommunika
 
 
 
-== Von Astra Control unterstützte Treiber
-
-Astra Control bietet nahtlosen Schutz, Disaster Recovery und Mobilität (Verschieben von Volumes zwischen Kubernetes Clustern) für Volumes, die mit der erstellt wurden `ontap-nas`, `ontap-nas-flexgroup`, und `ontap-san` Treiber. Siehe link:https://docs.netapp.com/us-en/astra-control-center/use/replicate_snapmirror.html#replication-prerequisites["Voraussetzungen für die Astra Control Replikation"^] Entsprechende Details.
-
-[WARNING]
-====
-* Sie müssen verwenden `ontap-nas` Für produktive Workloads, die Datensicherung, Disaster Recovery und Mobilität erfordern.
-* Nutzung `ontap-san-economy` Nach einer voraussichtlichen Volume-Nutzung ist zu erwarten, dass sie wesentlich höher ist, als das von ONTAP unterstützt wird.
-* Nutzung `ontap-nas-economy` Nur in dem eine zu erwartende Volume-Nutzung größer als die von ONTAP wird, und `ontap-san-economy` Treiber kann nicht verwendet werden.
-* Verwenden Sie ihn nicht `ontap-nas-economy` Wenn Sie die Notwendigkeit von Datensicherung, Disaster Recovery oder Mobilität erwarten.
-
-
-====
-
-
 == Astra Trident Storage-Treiber für ONTAP
 
 Astra Trident bietet die folgenden Storage-Treiber für die Kommunikation mit dem ONTAP Cluster. Unterstützte Zugriffsmodi sind: _ReadWriteOnce_ (RWO), _ReadOnly Many_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).
+
+
+IMPORTANT: Wenn Sie Astra Control für Schutz, Recovery und Mobilität verwenden, lesen Sie bitte <<Treiberkompatibilität bei Astra Control>>.
 
 [cols="2, 1, 1, 2, 2"]
 |===
@@ -124,4 +112,20 @@ RWX ist im Volume-Modus des Dateisystems nicht verfügbar.
 
 |===
 
-NOTE: ONTAP-Back-Ends können mithilfe von Anmeldedaten für eine Sicherheitsrolle (Benutzername/Passwort) oder den privaten Schlüssel und das auf dem ONTAP Cluster installierte Zertifikat authentifiziert werden. Sie können vorhandene Back-Ends aktualisieren, um mit von einem Authentifizierungsmodus in den anderen zu verschieben `tridentctl update backend`.
+NOTE: ONTAP-Back-Ends können mit Anmeldeinformationen für eine Sicherheitsrolle (Benutzername/Passwort) oder den privaten Schlüssel und das Zertifikat, das auf dem ONTAP Cluster installiert ist, authentifiziert werden. Sie können vorhandene Back-Ends aktualisieren, um mit von einem Authentifizierungsmodus in den anderen zu verschieben `tridentctl update backend`.
+
+
+
+== Treiberkompatibilität bei Astra Control
+
+Astra Control bietet nahtlosen Schutz, Disaster Recovery und Mobilität (Verschieben von Volumes zwischen Kubernetes Clustern) für Volumes, die mit der erstellt wurden `ontap-nas`, `ontap-nas-flexgroup`, und `ontap-san` Treiber. Siehe link:https://docs.netapp.com/us-en/astra-control-center/use/replicate_snapmirror.html#replication-prerequisites["Voraussetzungen für die Astra Control Replikation"^] Entsprechende Details.
+
+[WARNING]
+====
+* Sie müssen verwenden `ontap-nas` Für produktive Workloads, die Datensicherung, Disaster Recovery und Mobilität erfordern.
+* Nutzung `ontap-san-economy` Nach einer voraussichtlichen Volume-Nutzung ist zu erwarten, dass sie wesentlich höher ist, als das von ONTAP unterstützt wird.
+* Nutzung `ontap-nas-economy` Nur in dem eine zu erwartende Volume-Nutzung größer als die von ONTAP wird, und `ontap-san-economy` Treiber kann nicht verwendet werden.
+* Verwenden Sie ihn nicht `ontap-nas-economy` Wenn Sie die Notwendigkeit von Datensicherung, Disaster Recovery oder Mobilität erwarten.
+
+
+====

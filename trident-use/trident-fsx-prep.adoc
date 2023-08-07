@@ -97,9 +97,6 @@ Informationen zum Erstellen von Back-Ends finden Sie unter folgenden Links:
 
 
 
-.Ergebnisse
-Nach der Bereitstellung können Sie ein erstellen link:../trident-get-started/kubernetes-postdeployment.html["Storage-Klasse, Volumes bereitstellen und das Volume in einem POD mounten"].
-
 
 
 == Vorbereitung zur Bereitstellung von SMB Volumes
