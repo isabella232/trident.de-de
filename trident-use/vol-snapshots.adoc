@@ -113,6 +113,9 @@ Status:
 
 Verwenden Sie können `dataSource` So erstellen Sie eine PVC mit einem VolumeSnapshot namens `<pvc-name>` Als Quelle der Daten. Nachdem die PVC erstellt wurde, kann sie an einem Pod befestigt und wie jedes andere PVC verwendet werden.
 
+
+WARNING: Die PVC muss im gleichen Namespace wie ITS erstellt werden `dataSource`.
+
 Im folgenden Beispiel wird die PVC mit erstellt `pvc1-snap` Als Datenquelle speichern.
 
 [listing]
@@ -134,9 +137,6 @@ spec:
     kind: VolumeSnapshot
     apiGroup: snapshot.storage.k8s.io
 ----
-
-WARNING: Die PVC muss im gleichen Namespace wie ITS erstellt werden `dataSource`.
-
 
 
 == Importieren Sie einen Volume-Snapshot
