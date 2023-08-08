@@ -82,56 +82,56 @@ Die nachfolgende Tabelle enthält einen Überblick über die Funktionen dieser V
 
 
 | Astra Trident  a| 
-1.21 - 1.27
+1.22 - 1.27
  a| 
 Nein
 
 
 
 | Volume Snapshots  a| 
-1.21 - 1.27
+1.22 - 1.27
  a| 
 Nein
 
 
 
 | PVC aus Volume Snapshots  a| 
-1.21 - 1.27
+1.22 - 1.27
  a| 
 Nein
 
 
 
 | ISCSI PV-Größe  a| 
-1.21 - 1.27
+1.22 - 1.27
  a| 
 Nein
 
 
 
 | Bidirektionales ONTAP-CHAP  a| 
-1.21 - 1.27
+1.22 - 1.27
  a| 
 Nein
 
 
 
 | Dynamische Exportrichtlinien  a| 
-1.21 - 1.27
+1.22 - 1.27
  a| 
 Nein
 
 
 
 | Trident Operator  a| 
-1.21 - 1.27
+1.22 - 1.27
  a| 
 Nein
 
 
 
 | CSI-Topologie  a| 
-1.21 - 1.27
+1.22 - 1.27
  a| 
 Nein
 
