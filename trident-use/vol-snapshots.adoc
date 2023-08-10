@@ -114,7 +114,7 @@ Status:
 Verwenden Sie können `dataSource` So erstellen Sie eine PVC mit einem VolumeSnapshot namens `<pvc-name>` Als Quelle der Daten. Nachdem die PVC erstellt wurde, kann sie an einem Pod befestigt und wie jedes andere PVC verwendet werden.
 
 
-WARNING: Die PVC muss im gleichen Namespace wie ITS erstellt werden `dataSource`.
+WARNING: Die PVC wird im selben Backend wie das Quell-Volume erstellt. Siehe link:https://kb.netapp.com/Cloud/Astra/Trident/Creating_a_PVC_from_a_Trident_PVC_Snapshot_cannot_be_created_in_an_alternate_backend["KB: Die Erstellung einer PVC aus einem Trident PVC-Snapshot kann nicht in einem alternativen Backend erstellt werden"^].
 
 Im folgenden Beispiel wird die PVC mit erstellt `pvc1-snap` Als Datenquelle speichern.
 
