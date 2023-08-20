@@ -86,7 +86,7 @@ Astra Trident liest den Kubernetes API Server aus, um zu bestimmen, wann Applika
 
 === Welche Rollen und Privilegien werden von Astra Trident verwendet?
 
-Das Trident-Installationsprogramm erstellt ein Kubernetes ClusterRole, das spezifischen Zugriff auf das PersistentVolume, PersistVolumeClaim, StorageClass und Secret Ressourcen des Kubernetes Clusters hat. Siehe link:https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-customize-deploy-tridentctl.html["Hier"].
+Das Trident-Installationsprogramm erstellt ein Kubernetes ClusterRole, das spezifischen Zugriff auf die Ressourcen PersistentVolume, PersistentVolumeClaim, StorageClass und Secret des Kubernetes-Clusters hat. Siehe link:https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-customize-deploy-tridentctl.html["Hier"].
 
 
 
@@ -164,7 +164,7 @@ Wenn Sie Fragen, Probleme oder Wünsche haben, wenden Sie sich über unseren Ast
 
 
 
-=== Das Passwort meines Storage-Systems hat sich geändert und Astra Trident funktioniert nicht mehr. Wie kann ich es wiederherstellen?
+=== Das Passwort meines Storage-Systems hat sich geändert und Astra Trident funktioniert nicht mehr. Wie kann ich das Recovery durchführen?
 
 Aktualisieren Sie das Back-End-Passwort mit `tridentctl update backend myBackend -f </path/to_new_backend.json> -n trident`. Austausch `myBackend` Im Beispiel mit Ihrem Backend-Namen, und ``/path/to_new_backend.json` Mit dem Pfad zum richtigen `backend.json` Datei:
 
@@ -178,7 +178,7 @@ Es gibt zwei wahrscheinliche Szenarien, warum Astra Trident keinen Kubernetes-No
 
 === Geht der Trident Pod verloren, gehen die Daten verloren?
 
-Daten gehen nicht verloren, wenn der Trident Pod zerstört wird. Die Trident-Metadaten werden in CRD-Objekten gespeichert. Alle PVS, die von Trident bereitgestellt wurden, funktionieren ordnungsgemäß.
+Daten gehen nicht verloren, wenn der Trident Pod zerstört wird. Trident Metadaten werden in CRD-Objekten gespeichert. Alle PVS, die von Trident bereitgestellt wurden, funktionieren ordnungsgemäß.
 
 
 

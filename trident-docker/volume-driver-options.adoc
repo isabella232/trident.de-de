@@ -48,7 +48,7 @@ Dadurch wird die Snapshot-Reserve auf den gewünschten Prozentsatz eingestellt. 
 
 
 | `splitOnClone`  a| 
-Beim Klonen eines Volume wird dadurch ONTAP den Klon sofort von seinem übergeordneten Volume aufteilen. Die Standardeinstellung lautet `false`. Einige Anwendungsfälle für das Klonen von Volumes werden am besten bedient, indem der Klon unmittelbar nach der Erstellung von seinem übergeordneten Volume aufgeteilt wird, da sich die Storage-Effizienz wahrscheinlich nicht erhöhen wird. Zum Beispiel kann das Klonen einer leeren Datenbank große Zeitersparnis bieten, aber nur geringe Storage-Einsparungen. Daher ist es am besten, den Klon sofort zu teilen.
+Beim Klonen eines Volume wird dadurch ONTAP den Klon sofort von seinem übergeordneten Volume aufteilen. Die Standardeinstellung lautet `false`. Einige Anwendungsfälle für das Klonen von Volumes werden am besten bedient, indem der Klon unmittelbar nach der Erstellung von seinem übergeordneten Volume aufgeteilt wird, da sich die Storage-Effizienz wahrscheinlich nicht erhöhen wird. Das Klonen einer leeren Datenbank spart beispielsweise viel Zeit, spart aber nur wenig Storage. Daher ist es am besten, den Klon sofort zu teilen.
 
 
 
@@ -78,7 +78,7 @@ Dadurch wird der Berechtigungssatz für das Volume selbst festgelegt. Standardm�
 
 
 | `snapshotDir`  a| 
-Einstellen auf `true` Wird die schaffen `.snapshot` Für Clients, die auf das Volume zugreifen, sichtbares Verzeichnis Der Standardwert ist `false`, Das bedeutet, dass die Sichtbarkeit des `.snapshot` Das Verzeichnis ist standardmäßig deaktiviert. Einige Bilder, zum Beispiel das offizielle MySQL-Bild, funktionieren nicht wie erwartet, wenn die `.snapshot` Verzeichnis wird angezeigt.
+Einstellen auf `true` Wird die schaffen `.snapshot` Für Clients, die auf das Volume zugreifen, sichtbares Verzeichnis Der Standardwert ist `false`, Das bedeutet, dass die Sichtbarkeit des `.snapshot` Das Verzeichnis ist standardmäßig deaktiviert. Einige Bilder, zum Beispiel das offizielle MySQL-Image, funktionieren nicht wie erwartet, wenn das `.snapshot` Verzeichnis wird angezeigt.
 
 
 
@@ -101,7 +101,7 @@ Die folgenden zusätzlichen Optionen sind für iSCSI *nur*:
 | `fileSystemType` | Legt das Dateisystem fest, das zum Formatieren von iSCSI-Volumes verwendet wird. Die Standardeinstellung lautet `ext4`. Gültige Werte sind `ext3`, `ext4`, und `xfs`. 
 
 
-| `spaceAllocation` | Einstellen auf `false` Wird die Raumzuordnungsfunktion der LUN deaktivieren. Der Standardwert ist `true`, Die Bedeutung von ONTAP benachrichtigt den Host, wenn der Speicherplatz des Volume erschöpft ist, und die LUN im Volume kann Schreibvorgänge nicht akzeptieren. Mit dieser Option kann ONTAP auch automatisch Speicherplatz freigeben, wenn der Host Daten löscht. 
+| `spaceAllocation` | Einstellen auf `false` Deaktiviert die Funktion zur Speicherplatzzuweisung der LUN. Der Standardwert ist `true`, Die Bedeutung von ONTAP benachrichtigt den Host, wenn der Speicherplatz des Volume erschöpft ist, und die LUN im Volume kann Schreibvorgänge nicht akzeptieren. Mit dieser Option kann ONTAP auch automatisch Speicherplatz freigeben, wenn der Host Daten löscht. 
 |===
 
 
