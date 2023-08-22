@@ -10,8 +10,6 @@ entries:
     url: "/trident-get-started/architecture.html"
   - title: Konzepte
     entries:
-    - title: ONTAP-Treiber
-      url: "/trident-concepts/ontap-drivers.html"
     - title: Bereitstellung
       url: "/trident-concepts/provisioning.html"
     - title: Volume Snapshots

@@ -58,7 +58,7 @@ Sie können Astra Trident mithilfe der folgenden Treiber in Amazon FSX für NetA
 * `ontap-nas-flexgroup`: Jedes bereitgestellte PV ist ein vollständiger Amazon FSX für NetApp ONTAP FlexGroup Volume.
 
 
-Informationen zu den Fahrern finden Sie unter link:../trident-concepts/ontap-drivers.html["ONTAP-Treiber"].
+Informationen zu den Fahrern finden Sie unter link:../trident-use/ontap-nas.html.html["NAS-Treiber"] Und link:../trident-use/ontap-san.html.html["SAN-Treiber"].
 
 
 

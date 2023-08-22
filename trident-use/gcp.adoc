@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/gcp.html 
-keywords: trident backend, cloud volumes service for google cloud platform, google cloud platform, gcp, storage pool labels, storage pool, cvs, cvs-performance, service type, service level, cloud volumes service, cloud volumes 
+keywords: trident backend, cloud volumes service for google cloud platform, google cloud platform, gcp, storage pool labels, storage pool, cvs, cvs-performance, service type, service level, cloud volumes service, cloud volumes, drivers, access modes, rwo, rwx, rwp, rwop, file system 
 summary: Erfahren Sie, wie Sie Cloud Volumes Service für Google Cloud mit den angegebenen Beispielkonfigurationen als Backend für Ihre Astra Trident Installation konfigurieren. 
 ---
 = Cloud Volumes Service für Google Cloud-Back-End konfigurieren
@@ -14,6 +14,27 @@ summary: Erfahren Sie, wie Sie Cloud Volumes Service für Google Cloud mit den a
 [role="lead"]
 Erfahren Sie, wie Sie NetApp Cloud Volumes Service für Google Cloud mit den vorgegebenen Beispielkonfigurationen als Backend für Ihre Astra Trident Installation konfigurieren.
 
+
+
+== Treiberdetails zu Google Cloud
+
+Astra Trident bietet die `gcp-cvs` Treiber für die Kommunikation mit dem Cluster. Unterstützte Zugriffsmodi sind: _ReadWriteOnce_ (RWO), _ReadOnly Many_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).
+
+[cols="1, 1, 1, 2, 2"]
+|===
+| Treiber | Protokoll | VolumeModus | Unterstützte Zugriffsmodi | Unterstützte Filesysteme 
+
+
+| `gcp-cvs`  a| 
+NFS
+ a| 
+Dateisystem
+ a| 
+RWO, ROX, RWX, RWOP
+ a| 
+`nfs`
+
+|===
 
 
 == Erfahren Sie mehr über den Astra Trident Support für Cloud Volumes Service für Google Cloud
@@ -50,7 +71,7 @@ Um den zu konfigurieren und zu verwenden https://cloud.netapp.com/cloud-volumes-
 
 Jedes Back-End stellt Volumes in einer einzigen Google Cloud-Region bereit. Um Volumes in anderen Regionen zu erstellen, können Sie zusätzliche Back-Ends definieren.
 
-[cols="3"]
+[cols="1, 2, 1"]
 |===
 | Parameter | Beschreibung | Standard 
 
