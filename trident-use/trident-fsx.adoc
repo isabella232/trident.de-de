@@ -47,7 +47,7 @@ image:screenshot-fsx-backup-disable.png["Ein Screenshot der AWS Konsole mit dem 
 
 
 
-== Treiber
+== FSX für ONTAP-Treiber Details
 
 Sie können Astra Trident mithilfe der folgenden Treiber in Amazon FSX für NetApp ONTAP integrieren:
 
@@ -58,7 +58,7 @@ Sie können Astra Trident mithilfe der folgenden Treiber in Amazon FSX für NetA
 * `ontap-nas-flexgroup`: Jedes bereitgestellte PV ist ein vollständiger Amazon FSX für NetApp ONTAP FlexGroup Volume.
 
 
-Informationen zu den Fahrern finden Sie unter link:../trident-use/ontap-nas.html.html["NAS-Treiber"] Und link:../trident-use/ontap-san.html.html["SAN-Treiber"].
+Informationen zu den Fahrern finden Sie unter link:../trident-use/ontap-nas.html["NAS-Treiber"] Und link:../trident-use/ontap-san.html["SAN-Treiber"].
 
 
 
