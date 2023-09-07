@@ -75,8 +75,8 @@ Das Astra Trident Installationspaket enthält alles, was Sie für die Bereitstel
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v23.07.0/trident-installer-23.07.0.tar.gz
-tar -xf trident-installer-23.07.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v23.07.1/trident-installer-23.07.1.tar.gz
+tar -xf trident-installer-23.07.1.tar.gz
 cd trident-installer
 ----
 
@@ -93,10 +93,10 @@ kubectl create -f deploy/crds/<VERSION>.yaml
 
 === Schritt 3: Aktualisieren Sie den Registrierungsort im Operator
 
-In `/deploy/operator.yaml`, Update `image: docker.io/netapp/trident-operator:23.07.0` So geben Sie den Speicherort Ihrer Bildregistrierung an. Ihr link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident und CSI-Images"] Kann in einer Registrierung oder in verschiedenen Registern gefunden werden, aber alle CSI-Images müssen sich in derselben Registrierung befinden. Beispiel:
+In `/deploy/operator.yaml`, Update `image: docker.io/netapp/trident-operator:23.07.1` So geben Sie den Speicherort Ihrer Bildregistrierung an. Ihr link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident und CSI-Images"] Kann in einer Registrierung oder in verschiedenen Registern gefunden werden, aber alle CSI-Images müssen sich in derselben Registrierung befinden. Beispiel:
 
-* `image: <your-registry>/trident-operator:23.07.0` Wenn Ihre Bilder alle in einer Registrierung gespeichert sind.
-* `image: <your-registry>/netapp/trident-operator:23.07.0` Wenn sich Ihr Trident-Image in einer anderen Registrierung als Ihre CSI-Images befindet.
+* `image: <your-registry>/trident-operator:23.07.1` Wenn Ihre Bilder alle in einer Registrierung gespeichert sind.
+* `image: <your-registry>/netapp/trident-operator:23.07.1` Wenn sich Ihr Trident-Image in einer anderen Registrierung als Ihre CSI-Images befindet.
 
 
 
@@ -166,7 +166,7 @@ Ihr link:../trident-get-started/requirements.html#container-images-and-correspon
 ----
 imageRegistry: "<your-registry>"
 autosupportImage: "<your-registry>/trident-autosupport:23.07"
-tridentImage: "<your-registry>/trident:23.07.0"
+tridentImage: "<your-registry>/trident:23.07.1"
 ----
 --
 .Bilder in verschiedenen Registern
@@ -177,7 +177,7 @@ Sie müssen anhängen `sig-storage` Bis zum `imageRegistry` Um unterschiedliche 
 ----
 imageRegistry: "<your-registry>/sig-storage"
 autosupportImage: "<your-registry>/netapp/trident-autosupport:23.07"
-tridentImage: "<your-registry>/netapp/trident:23.07.0"
+tridentImage: "<your-registry>/netapp/trident:23.07.1"
 ----
 --
 ====
@@ -206,7 +206,7 @@ Spec:
   Debug:              true
   Image Registry:     <your-registry>/sig-storage
   Namespace:          trident
-  Trident Image:      <your-registry>/netapp/trident:23.07.0
+  Trident Image:      <your-registry>/netapp/trident:23.07.1
 Status:
   Current Installation Params:
     IPv6:                       false
@@ -223,11 +223,11 @@ Status:
     Log Format:           text
     Probe Port:           17546
     Silence Autosupport:  false
-    Trident Image:        <your-registry>/netapp/trident:23.07.0
+    Trident Image:        <your-registry>/netapp/trident:23.07.1
   Message:                Trident installed
   Namespace:              trident
   Status:                 Installed
-  Version:                v23.07.0
+  Version:                v23.07.1
 Events:
     Type Reason Age From Message ---- ------ ---- ---- -------Normal
     Installing 74s trident-operator.netapp.io Installing Trident Normal
@@ -301,6 +301,6 @@ Verwenden Sie können `tridentctl` Um die installierte Version von Astra Trident
 +----------------+----------------+
 | SERVER VERSION | CLIENT VERSION |
 +----------------+----------------+
-| 23.07.0        | 23.07.0        |
+| 23.07.1        | 23.07.1        |
 +----------------+----------------+
 ----

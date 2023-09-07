@@ -16,7 +16,7 @@ Sie können den Trident-Operator implementieren und Astra Trident mithilfe von H
 
 
 
-== Kritische Informationen zu Astra Trident 23.07
+== Kritische Informationen zu Astra Trident 23.07.1
 
 *Sie müssen die folgenden wichtigen Informationen über Astra Trident lesen.*
 
@@ -49,11 +49,11 @@ Zusätzlich zum link:../trident-get-started/kubernetes-deploy.html#before-you-de
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. Nutzung `helm install` Und geben Sie einen Namen für Ihre Bereitstellung an, wie im folgenden Beispiel, wo `23.07.0` Ist die Version des Astra Trident, die Sie installieren.
+. Nutzung `helm install` Und geben Sie einen Namen für Ihre Bereitstellung an, wie im folgenden Beispiel, wo `23.07.1` Ist die Version des Astra Trident, die Sie installieren.
 +
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 23.07.0 --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 23.07.1 --create-namespace --namespace <trident-namespace>
 ----
 +
 
@@ -83,11 +83,11 @@ Geben Sie eine YAML-Datei mit Überschreibungen an. Dies kann mehrfach angegeben
 Geben Sie Überschreibungen in der Befehlszeile an.
 
 |===
-Um beispielsweise den Standardwert von zu ändern `debug`, Ausführen Sie das folgende `--set` Befehl wo `23.07.0` Ist die Version von Astra Trident, die Sie installieren:
+Um beispielsweise den Standardwert von zu ändern `debug`, Ausführen Sie das folgende `--set` Befehl wo `23.07.1` Ist die Version von Astra Trident, die Sie installieren:
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 23.07.0  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 23.07.1  --create-namespace --namespace trident --set tridentDebug=true
 ----
 
 

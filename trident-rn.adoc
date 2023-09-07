@@ -19,7 +19,13 @@ WARNING: Der `tridentctl` Binary for Linux, die in der ZIP-Datei des Installatio
 
 
 
-== Was ist neu in 23.07
+== Was ist neu in 23.07.1
+
+*Kubernetes:* Behobene Dämonenlöschung zur Unterstützung von Upgrades ohne Ausfallzeiten (link:https://github.com/NetApp/trident/issues/740["Ausgabe #740"^]).
+
+
+
+== Änderungen in 23.07
 
 
 
