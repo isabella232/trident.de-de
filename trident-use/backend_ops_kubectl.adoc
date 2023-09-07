@@ -47,25 +47,33 @@ Sie können auch ausführen `tridentctl get backend -n trident` Oder `tridentctl
 Es gibt mehrere Gründe für die Aktualisierung eines Backend:
 
 * Die Anmeldeinformationen für das Speichersystem wurden geändert. Um Anmeldedaten zu aktualisieren, wird das in verwendete Kubernetes Secret verwendet `TridentBackendConfig` Objekt muss aktualisiert werden. Astra Trident aktualisiert automatisch das Backend mit den neuesten Zugangsdaten. Führen Sie den folgenden Befehl aus, um den Kubernetes Secret zu aktualisieren:
-
-
++
 [listing]
 ----
 kubectl apply -f <updated-secret-file.yaml> -n trident
 ----
-* Parameter (wie der Name der verwendeten ONTAP-SVM) müssen aktualisiert werden. In diesem Fall `TridentBackendConfig` Objekte können direkt über Kubernetes aktualisiert werden.
-
-
+* Parameter (wie der Name der verwendeten ONTAP-SVM) müssen aktualisiert werden.
++
+** Sie können aktualisieren `TridentBackendConfig` Objekte können direkt über Kubernetes mit dem folgenden Befehl abgerufen werden:
++
 [listing]
 ----
 kubectl apply -f <updated-backend-file.yaml>
 ----
-Alternativ können Sie Änderungen an der vorhandenen vornehmen `TridentBackendConfig` CR durch Ausführen des folgenden Befehls:
-
+** Alternativ können Sie Änderungen an der vorhandenen vornehmen `TridentBackendConfig` CR mit folgendem Befehl:
++
 [listing]
 ----
 kubectl edit tbc <tbc-name> -n trident
 ----
-Wenn ein Backend-Update fehlschlägt, bleibt das Backend in seiner letzten bekannten Konfiguration erhalten. Sie können die Protokolle anzeigen, um die Ursache durch Ausführen zu bestimmen `kubectl get tbc <tbc-name> -o yaml -n trident` Oder `kubectl describe tbc <tbc-name> -n trident`.
 
-Nachdem Sie das Problem mit der Konfigurationsdatei erkannt und behoben haben, können Sie den Befehl Update erneut ausführen.
+
+
+
+[NOTE]
+====
+* Wenn ein Backend-Update fehlschlägt, bleibt das Backend in seiner letzten bekannten Konfiguration erhalten. Sie können die Protokolle anzeigen, um die Ursache durch Ausführen zu bestimmen `kubectl get tbc <tbc-name> -o yaml -n trident` Oder `kubectl describe tbc <tbc-name> -n trident`.
+* Nachdem Sie das Problem mit der Konfigurationsdatei erkannt und behoben haben, können Sie den Befehl Update erneut ausführen.
+
+
+====

@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/ontap-san-examples.html 
-keywords: map backends, storage classes, trident backend, ontap san, ontap san economy, options, storageclasses, fsx 
+keywords: map backends, storage classes, trident backend, ontap san, ontap san economy, options, storageclasses, fsx, metrocluster 
 summary: Erfahren Sie, wie Sie mit Ihrer Installation von Astra Trident ONTAP SAN-Treiber erstellen und verwenden. Dieser Abschnitt enthält Beispiele für die Back-End-Konfiguration und Details zur Zuordnung von Back-Ends zu StorageClasses. 
 ---
 = ONTAP SAN-Konfigurationsoptionen und -Beispiele
@@ -12,7 +12,7 @@ summary: Erfahren Sie, wie Sie mit Ihrer Installation von Astra Trident ONTAP SA
 
 
 [role="lead"]
-Erfahren Sie, wie Sie mit Ihrer Installation von Astra Trident ONTAP SAN-Treiber erstellen und verwenden. Dieser Abschnitt enthält Beispiele für die Back-End-Konfiguration und Details zur Zuordnung von Back-Ends zu StorageClasses.
+Erfahren Sie, wie Sie ONTAP SAN Treiber für Ihre Astra Trident Installation erstellen und verwenden. Dieser Abschnitt enthält Beispiele und Details zur Back-End-Konfiguration für die Zuordnung von Back-Ends zu StorageClasses.
 
 
 
@@ -20,7 +20,7 @@ Erfahren Sie, wie Sie mit Ihrer Installation von Astra Trident ONTAP SAN-Treiber
 
 Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 
-[cols="3"]
+[cols="1,3,2"]
 |===
 | Parameter | Beschreibung | Standard 
 
@@ -34,10 +34,25 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 | `backendName` | Benutzerdefinierter Name oder das Storage-Backend | Treibername + „_“ + DatenLIF 
 
 
-| `managementLIF` | IP-Adresse eines Clusters oder SVM-Management-LIF für nahtlose MetroCluster-Umschaltung müssen Sie eine SVM-Management-LIF angeben. Es kann ein vollständig qualifizierter Domänenname (FQDN) angegeben werden. Kann so eingestellt werden, dass IPv6-Adressen verwendet werden, wenn Astra Trident mit installiert wurde `--use-ipv6` Flagge. IPv6-Adressen müssen in eckigen Klammern definiert werden, z. B. [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]. | „10.0.0.1“, „[2001:1234:abcd::fefe]“ 
+| `managementLIF` | Die IP-Adresse einer Cluster- oder SVM-Management-LIF.
+
+Es kann ein vollständig qualifizierter Domänenname (FQDN) angegeben werden.
+
+Kann so eingestellt werden, dass IPv6-Adressen verwendet werden, wenn Astra Trident mit installiert wurde `--use-ipv6` Flagge. IPv6-Adressen müssen in eckigen Klammern definiert werden, z. B. `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]`.
+
+Informationen zur nahtlosen MetroCluster-Umschaltung finden Sie im <<mcc-best>>. | „10.0.0.1“, „[2001:1234:abcd::fefe]“ 
 
 
-| `dataLIF` | IP-Adresse des LIF-Protokolls. *Nicht für iSCSI angeben.* Astra Trident verwendet link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP selektive LUN-Zuordnung"^] Um die iSCI LIFs zu ermitteln, die für die Einrichtung einer Multi-Path-Sitzung erforderlich sind. Wenn eine Warnung erzeugt wird `dataLIF` Ist explizit definiert. | Abgeleitet von SVM 
+| `dataLIF` | IP-Adresse des LIF-Protokolls.
+
+*Nicht für iSCSI angeben.* Astra Trident verwendet link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP selektive LUN-Zuordnung"^] Um die iSCI LIFs zu ermitteln, die für die Einrichtung einer Multi-Path-Sitzung erforderlich sind. Wenn eine Warnung erzeugt wird `dataLIF` Ist explizit definiert.
+
+*Für MetroCluster weglassen.* Siehe <<mcc-best>>. | Abgeleitet von SVM 
+
+
+| `svm` | Zu verwendende Storage Virtual Machine
+
+*Für MetroCluster weglassen.* Siehe <<mcc-best>>. | Abgeleitet wenn eine SVM `managementLIF` Angegeben ist 
 
 
 | `useCHAP` | Verwenden Sie CHAP, um iSCSI für ONTAP-SAN-Treiber zu authentifizieren [Boolesch]. Auf einstellen `true` Damit Astra Trident bidirektionales CHAP als Standardauthentifizierung für die im Backend angegebene SVM konfiguriert und verwendet. Siehe link:ontap-san-prep.html["Vorbereiten der Konfiguration des Back-End mit ONTAP-SAN-Treibern"] Entsprechende Details. | `false` 
@@ -71,9 +86,6 @@ Die Back-End-Konfigurationsoptionen finden Sie in der folgenden Tabelle:
 
 
 | `password` | Passwort, das für die Kommunikation mit dem ONTAP Cluster erforderlich ist. Wird für die Anmeldeinformationsbasierte Authentifizierung verwendet. | „“ 
-
-
-| `svm` | Zu verwendende Storage Virtual Machine | Abgeleitet wenn eine SVM `managementLIF` Angegeben ist 
 
 
 | `storagePrefix` | Das Präfix wird beim Bereitstellen neuer Volumes in der SVM verwendet. Kann später nicht mehr geändert werden. Um diesen Parameter zu aktualisieren, müssen Sie ein neues Backend erstellen. | `trident` 
@@ -192,8 +204,8 @@ Die folgenden Beispiele zeigen grundlegende Konfigurationen, bei denen die meist
 
 NOTE: Wenn Sie Amazon FSX auf NetApp ONTAP mit Astra Trident verwenden, empfehlen wir, DNS-Namen für LIFs anstelle von IP-Adressen anzugeben.
 
-.Beispiel für eine Minimalkonfiguration des ONTAP-SAN
-[%collapsible%open]
+.Beispiel: ONTAP SAN
+[%collapsible]
 ====
 Dies ist eine grundlegende Konfiguration mit dem `ontap-san` Treiber.
 
@@ -211,8 +223,8 @@ username: vsadmin
 password: <password>
 ----
 ====
-.ONTAP SAN Economy – Beispiel für eine Minimalkonfiguration
-[%collapsible%open]
+.Beispiel für die SAN-Ökonomie von ONTAP
+[%collapsible]
 ====
 [listing]
 ----
@@ -225,8 +237,25 @@ username: vsadmin
 password: <password>
 ----
 ====
+.Beispiel: MetroCluster
+[#mcc-best%collapsible]
+====
+Sie können das Backend so konfigurieren, dass die Backend-Definition nach Umschaltung und einem Wechsel während nicht manuell aktualisiert werden muss link:../trident-reco/backup.html#svm-replication-and-recovery["SVM-Replizierung und Recovery"].
+
+Für nahtloses Switchover und Switchback geben Sie die SVM über an `managementLIF` Und lassen Sie die aus `dataLIF` Und `svm` Parameter. Beispiel:
+
+[listing]
+----
+---
+version: 1
+storageDriverName: ontap-san
+managementLIF: 192.168.1.66
+username: vsadmin
+password: password
+----
+====
 .Beispiel für die zertifikatbasierte Authentifizierung
-[%collapsible%open]
+[%collapsible]
 ====
 In diesem Beispiel der Grundkonfiguration `clientCertificate`, `clientPrivateKey`, und `trustedCACertificate` (Optional, wenn Sie eine vertrauenswürdige CA verwenden) werden ausgefüllt `backend.json` Und nehmen Sie die base64-kodierten Werte des Clientzertifikats, des privaten Schlüssels und des vertrauenswürdigen CA-Zertifikats.
 
@@ -249,7 +278,7 @@ trustedCACertificate: zcyBbaG...b3Igb3duIGNsYXNz
 ----
 ====
 .Beispiele für bidirektionales CHAP
-[%collapsible%open]
+[%collapsible]
 ====
 Diese Beispiele erstellen ein Backend mit `useCHAP` Auf einstellen `true`.
 
@@ -300,7 +329,7 @@ Astra Trident setzt Provisioning-Labels im Bereich „Comments“. Kommentare we
 In diesen Beispielen legen einige Speicherpools eigene fest `spaceReserve`, `spaceAllocation`, und `encryption` Werte und einige Pools überschreiben die Standardwerte.
 
 .Beispiel: ONTAP SAN
-[%collapsible%open]
+[%collapsible]
 ====
 [listing]
 ----
@@ -351,7 +380,7 @@ storage:
 ----
 ====
 .Beispiel für die SAN-Ökonomie von ONTAP
-[%collapsible%open]
+[%collapsible]
 ====
 [listing]
 ----
