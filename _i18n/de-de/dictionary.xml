@@ -3865,4 +3865,7 @@ Kann so eingestellt werden, dass IPv6-Adressen verwendet werden, wenn Astra Trid
   <block id="b686eadf7765eed3e9de8f9cbded0fe8" category="section-title">Was ist neu in 23.07.1</block>
   <block id="06918a8f55f386d79e64a70ca217b501" category="paragraph">*Kubernetes:* Behobene Dämonenlöschung zur Unterstützung von Upgrades ohne Ausfallzeiten (<block ref="6f993c83118cc4a1dd5351c8501e26c9" category="inline-link-macro-rx"></block>).</block>
   <block id="ca6a658f1db1af30f178530c90cbe8fc" category="section-title">Änderungen in 23.07</block>
+  <block id="57154d2dcf591aaa3d4dcbfbba196075" category="inline-link-macro">Unterstützte ONTAP-Volume-Größen</block>
+  <block id="7fe76f1189ac93d41118f7ba3e36e3ab" category="list-text">Nutzung<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> Nur wenn die Nutzungszahl für persistente Volumes voraussichtlich höher ist als <block ref="e5997a58d747f862af8a862cd1b54e31" category="inline-link-macro-rx"></block>.</block>
+  <block id="dd19a3f7646938a74ee3f35605e9c306" category="list-text">Nutzung<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> Nur, wenn die Nutzung persistenter Volumes erwartungsgemäß höher ist als welche <block ref="e5997a58d747f862af8a862cd1b54e31" category="inline-link-macro-rx"></block> Und das<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> Treiber kann nicht verwendet werden.</block>
 </blocks>
