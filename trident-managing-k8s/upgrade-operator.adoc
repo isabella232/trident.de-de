@@ -18,7 +18,7 @@ Sie können ein Upgrade von Astra Trident mit dem Trident Operator entweder manu
 
 == Aktualisieren einer manuellen Installation
 
-Sie können ein Upgrade von einer Installation eines Trident Operators mit Cluster-Umfang auf eine andere Installation eines Trident Operators mit Cluster-Umfang durchführen. Alle Astra Trident Versionen 21.01 und höher verwenden einen Operator mit Cluster-Umfang.
+Sie können von einer Installation eines Trident Operators mit Cluster-Umfang auf eine andere Installation eines Trident Operators mit Cluster-Umfang aktualisieren. Alle Astra Trident Versionen 21.01 und höher verwenden einen Operator mit Cluster-Umfang.
 
 
 NOTE: Für ein Upgrade von Astra Trident, das mit dem Namespace-Scoped Operator (Versionen 20.07 bis 20.10) installiert wurde, verwenden Sie die Upgrade-Anweisungen für link:../earlier-versions.html["Ihre installierte Version"] Von Astra Trident zu erhalten.

@@ -85,22 +85,24 @@ Verwenden der `autoExportPolicy` Und `autoExportCIDRs` Optionen: Astra Trident k
 | `password` | Passwort für die Verbindung mit dem Cluster/SVM Wird für Anmeldeinformationsbasierte verwendet |  
 
 
-| `storagePrefix` | Das Präfix wird beim Bereitstellen neuer Volumes in der SVM verwendet. Kann nicht aktualisiert werden, nachdem Sie sie festgelegt haben | „Dreizack“ 
+| `storagePrefix` | Das Präfix wird beim Bereitstellen neuer Volumes in der SVM verwendet. Kann nicht aktualisiert werden, nachdem Sie sie festgelegt haben | trident 
 
 
 | `limitAggregateUsage` | Bereitstellung fehlgeschlagen, wenn die Nutzung über diesem Prozentsatz liegt. *Gilt nicht für Amazon FSX für ONTAP* | „“ (nicht standardmäßig durchgesetzt) 
 
 
-| `limitVolumeSize` | Bereitstellung fehlgeschlagen, wenn die angeforderte Volume-Größe über diesem Wert liegt. | „“ (nicht standardmäßig durchgesetzt) 
+| `limitVolumeSize` | Bereitstellung fehlgeschlagen, wenn die angeforderte Volume-Größe über diesem Wert liegt. | „“ (standardmäßig nicht erzwungen) 
 
 
-| `limitVolumeSize` | Bereitstellung fehlgeschlagen, wenn die angeforderte Volume-Größe über diesem Wert liegt. Schränkt auch die maximale Größe der Volumes ein, die es für qtrees und LUNs verwaltet, und auf ein `qtreesPerFlexvol` Mit Option kann die maximale Anzahl von qtrees pro FlexVol angepasst werden. | „“ (nicht standardmäßig durchgesetzt) 
+| `limitVolumeSize` | Bereitstellung fehlgeschlagen, wenn die angeforderte Volume-Größe über diesem Wert liegt. Schränkt auch die maximale Größe der Volumes ein, die es für qtrees und LUNs verwaltet, und auf ein `qtreesPerFlexvol` Mit Option kann die maximale Anzahl von qtrees pro FlexVol angepasst werden. | „“ (standardmäßig nicht erzwungen) 
 
 
 | `lunsPerFlexvol` | Die maximale Anzahl an LUNs pro FlexVol muss im Bereich [50, 200] liegen. | „100“ 
 
 
-| `debugTraceFlags` | Fehler-Flags bei der Fehlerbehebung beheben. Beispiel: { „API“:false, „Methode“:true} Verwenden Sie nicht `debugTraceFlags` Es sei denn, Sie beheben Fehler und benötigen einen detaillierten Log Dump. | Null 
+| `debugTraceFlags` | Fehler-Flags bei der Fehlerbehebung beheben. Beispiel, {„API“:false, „method“:true}
+
+Verwenden Sie es nicht `debugTraceFlags` Es sei denn, Sie beheben Fehler und benötigen einen detaillierten Log Dump. | Null 
 
 
 | `nasType` | Konfiguration der Erstellung von NFS- oder SMB-Volumes Die Optionen lauten `nfs`, `smb` Oder null. Einstellung auf null setzt standardmäßig auf NFS-Volumes. | `nfs` 
@@ -137,7 +139,7 @@ Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults`
 | `spaceAllocation` | Speicherplatzzuweisung für LUNs | „Wahr“ 
 
 
-| `spaceReserve` | Space Reservation Mode; „none“ (Thin) oder „Volume“ (Thick) | „Keine“ 
+| `spaceReserve` | Modus für Speicherplatzreservierung; „none“ (Thin) oder „Volume“ (Thick) | „Keine“ 
 
 
 | `snapshotPolicy` | Die Snapshot-Richtlinie zu verwenden | „Keine“ 
@@ -149,7 +151,7 @@ Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults`
 | `adaptiveQosPolicy` | Adaptive QoS-Richtliniengruppe mit Zuordnung für erstellte Volumes Wählen Sie eine der qosPolicy oder adaptiveQosPolicy pro Storage Pool/Backend. Nicht unterstützt durch ontap-nas-Ökonomie | „“ 
 
 
-| `snapshotReserve` | Prozentsatz des für Snapshots reservierten Volumens „0“ | Wenn `snapshotPolicy` Ist „keine“, sonst „“ 
+| `snapshotReserve` | Prozentsatz des für Snapshots reservierten Volumes | „0“ wenn `snapshotPolicy` Ist „keine“, andernfalls „“ 
 
 
 | `splitOnClone` | Teilen Sie einen Klon bei der Erstellung von seinem übergeordneten Objekt auf | „Falsch“ 
@@ -158,13 +160,13 @@ Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults`
 | `encryption` | Aktivieren Sie NetApp Volume Encryption (NVE) auf dem neuen Volume, standardmäßig aktiviert `false`. NVE muss im Cluster lizenziert und aktiviert sein, damit diese Option verwendet werden kann. Wenn NAE auf dem Backend aktiviert ist, wird jedes im Astra Trident bereitgestellte Volume NAE aktiviert. Weitere Informationen finden Sie unter: link:../trident-reco/security-reco.html["Astra Trident arbeitet mit NVE und NAE zusammen"]. | „Falsch“ 
 
 
-| `tieringPolicy` | Tiering-Richtlinie zur Verwendung von „keiner“ | „Nur Snapshot“ für eine ONTAP 9.5 SVM-DR-Konfiguration 
+| `tieringPolicy` | Tiering-Richtlinie, die zu „keinen“ verwendet wird | „Nur snapshot“ für eine SVM-DR-Konfiguration vor ONTAP 9.5 
 
 
 | `unixPermissions` | Modus für neue Volumes | „777“ für NFS Volumes; leer (nicht zutreffend) für SMB Volumes 
 
 
-| `snapshotDir` | Steuert die Sichtbarkeit des `.snapshot` Verzeichnis | „Falsch“ 
+| `snapshotDir` | Steuert den Zugriff auf das `.snapshot` Verzeichnis | „Falsch“ 
 
 
 | `exportPolicy` | Zu verwendende Exportrichtlinie | „Standard“ 
@@ -391,7 +393,7 @@ storagePrefix: myPrefix_
 
 In den unten gezeigten Beispieldateien für die Backend-Definition werden spezifische Standardwerte für alle Speicherpools festgelegt, z. B. `spaceReserve` Bei keiner, `spaceAllocation` Bei false, und `encryption` Bei false. Die virtuellen Pools werden im Abschnitt Speicher definiert.
 
-Astra Trident setzt Provisioning-Labels im Bereich „Comments“. Kommentare wurden auf FlexVol für gesetzt `ontap-nas` Oder FlexGroup für `ontap-nas-flexgroup`. Astra Trident kopiert alle Labels auf einem virtuellen Pool auf das Storage-Volume während der Bereitstellung. Storage-Administratoren können Labels je virtuellen Pool definieren und Volumes nach Label gruppieren.
+Astra Trident bestimmt die Bereitstellungsetiketten im Feld „Kommentare“. Kommentare werden auf FlexVol für gesetzt `ontap-nas` Oder FlexGroup für `ontap-nas-flexgroup`. Astra Trident kopiert alle Labels auf einem virtuellen Pool auf das Storage-Volume während der Bereitstellung. Storage-Administratoren können Labels je virtuellen Pool definieren und Volumes nach Label gruppieren.
 
 In diesen Beispielen legen einige Speicherpools eigene fest `spaceReserve`, `spaceAllocation`, und `encryption` Werte und einige Pools überschreiben die Standardwerte.
 

@@ -88,19 +88,24 @@ Informationen zur nahtlosen MetroCluster-Umschaltung finden Sie im <<mcc-best>>.
 | `password` | Passwort, das für die Kommunikation mit dem ONTAP Cluster erforderlich ist. Wird für die Anmeldeinformationsbasierte Authentifizierung verwendet. | „“ 
 
 
+| `svm` | Zu verwendende Storage Virtual Machine | Abgeleitet wenn eine SVM `managementLIF` Angegeben ist 
+
+
 | `storagePrefix` | Das Präfix wird beim Bereitstellen neuer Volumes in der SVM verwendet. Kann später nicht mehr geändert werden. Um diesen Parameter zu aktualisieren, müssen Sie ein neues Backend erstellen. | `trident` 
 
 
 | `limitAggregateUsage` | Bereitstellung fehlgeschlagen, wenn die Nutzung über diesem Prozentsatz liegt. Wenn Sie ein Amazon FSX für das NetApp ONTAP-Back-End verwenden, geben Sie diese bitte nicht an  `limitAggregateUsage`. Die vorhanden `fsxadmin` Und `vsadmin` Enthalten Sie nicht die erforderlichen Berechtigungen, um die Aggregatnutzung abzurufen und sie mit Astra Trident zu begrenzen. | „“ (nicht standardmäßig durchgesetzt) 
 
 
-| `limitVolumeSize` | Bereitstellung fehlgeschlagen, wenn die angeforderte Volume-Größe über diesem Wert liegt. Schränkt auch die maximale Größe der Volumes ein, die es für qtrees und LUNs managt. | „“ (nicht standardmäßig durchgesetzt) 
+| `limitVolumeSize` | Bereitstellung fehlgeschlagen, wenn die angeforderte Volume-Größe über diesem Wert liegt. Schränkt auch die maximale Größe der Volumes ein, die es für qtrees und LUNs managt. | „“ (standardmäßig nicht erzwungen) 
 
 
 | `lunsPerFlexvol` | Die maximale Anzahl an LUNs pro FlexVol muss im Bereich [50, 200] liegen. | `100` 
 
 
-| `debugTraceFlags` | Fehler-Flags bei der Fehlerbehebung beheben. Beispiel: { „API“:false, „Methode“:true} Verwenden Sie nur, wenn Sie eine Fehlerbehebung durchführen und einen detaillierten Logdump benötigen. | `null` 
+| `debugTraceFlags` | Fehler-Flags bei der Fehlerbehebung beheben. Beispiel, {„API“:false, „method“:true}
+
+Verwenden Sie diese Funktion nur, wenn Sie eine Fehlerbehebung durchführen und einen detaillierten Protokollauszug benötigen. | `null` 
 
 
 | `useREST` | Boolescher Parameter zur Verwendung von ONTAP REST-APIs. *Technische Vorschau*
@@ -121,7 +126,7 @@ Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults`
 | `spaceAllocation` | Speicherplatzzuweisung für LUNs | „Wahr“ 
 
 
-| `spaceReserve` | Space Reservation Mode; „none“ (Thin) oder „Volume“ (Thick) | „Keine“ 
+| `spaceReserve` | Modus für Speicherplatzreservierung; „none“ (Thin) oder „Volume“ (Thick) | „Keine“ 
 
 
 | `snapshotPolicy` | Die Snapshot-Richtlinie zu verwenden | „Keine“ 
@@ -133,7 +138,7 @@ Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults`
 | `adaptiveQosPolicy` | Adaptive QoS-Richtliniengruppe mit Zuordnung für erstellte Volumes Wählen Sie eine der qosPolicy oder adaptiveQosPolicy pro Storage Pool/Backend | „“ 
 
 
-| `snapshotReserve` | Prozentsatz des für Snapshots reservierten Volumens „0“ | Wenn `snapshotPolicy` Ist „keine“, sonst „“ 
+| `snapshotReserve` | Prozentsatz des für Snapshots reservierten Volumes | „0“ wenn `snapshotPolicy` Ist „keine“, andernfalls „“ 
 
 
 | `splitOnClone` | Teilen Sie einen Klon bei der Erstellung von seinem übergeordneten Objekt auf | „Falsch“ 
@@ -148,7 +153,7 @@ Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults`
 | `securityStyle` | Sicherheitstyp für neue Volumes | `unix` 
 
 
-| `tieringPolicy` | Tiering-Richtlinie zur Verwendung von „keiner“ | „Nur Snapshot“ für eine ONTAP 9.5 SVM-DR-Konfiguration 
+| `tieringPolicy` | Tiering-Richtlinie, die zu „keinen“ verwendet wird | „Nur snapshot“ für eine SVM-DR-Konfiguration vor ONTAP 9.5 
 |===
 
 
@@ -324,7 +329,7 @@ password: <password>
 
 In diesen Beispiel-Back-End-Definitionsdateien werden spezifische Standardwerte für alle Speicherpools festgelegt, z. B. `spaceReserve` Bei keiner, `spaceAllocation` Bei false, und `encryption` Bei false. Die virtuellen Pools werden im Abschnitt Speicher definiert.
 
-Astra Trident setzt Provisioning-Labels im Bereich „Comments“. Kommentare werden auf dem FlexVol gesetzt. Astra Trident kopiert alle Labels auf einem virtuellen Pool auf das Storage-Volume während der Bereitstellung. Storage-Administratoren können Labels je virtuellen Pool definieren und Volumes nach Label gruppieren.
+Astra Trident bestimmt die Bereitstellungsetiketten im Feld „Kommentare“. Kommentare werden auf dem FlexVol gesetzt. Astra Trident kopiert alle Labels auf einem virtuellen Pool auf das Storage-Volume während der Bereitstellung. Storage-Administratoren können Labels je virtuellen Pool definieren und Volumes nach Label gruppieren.
 
 In diesen Beispielen legen einige Speicherpools eigene fest `spaceReserve`, `spaceAllocation`, und `encryption` Werte und einige Pools überschreiben die Standardwerte.
 

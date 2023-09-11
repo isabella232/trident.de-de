@@ -274,12 +274,12 @@ NOTE: Der Lebenszyklus eines VolumeSnapshots ist unabhängig von der Quelle PVC:
 
 Ein Kubernetes `VolumeSnapshotContent` Objekt stellt einen Snapshot dar, der von einem bereits bereitgestellten Volume entnommen wurde. Es ist analog zu einem `PersistentVolume` Und bedeutet einen bereitgestellten Snapshot auf dem Storage-Cluster. Ähnlich `PersistentVolumeClaim` Und `PersistentVolume` Objekte, wenn ein Snapshot erstellt wird, das `VolumeSnapshotContent` Objekt verwaltet eine 1:1-Zuordnung zum `VolumeSnapshot` Objekt, das die Snapshot-Erstellung angefordert hatte.
 
-
-NOTE: Trident erstellt `VolumeSnapshotContent` Objekte werden beim Kubernetes Cluster automatisch auf Basis der Volumes registriert, die bereitgestellt werden. Sie sollten diese nicht selbst verwalten.
-
 Der `VolumeSnapshotContent` Das Objekt enthält Details, die den Snapshot eindeutig identifizieren, z. B. den `snapshotHandle`. Das `snapshotHandle` Ist eine einzigartige Kombination aus dem Namen des PV und dem Namen des `VolumeSnapshotContent` Objekt:
 
 Wenn eine Snapshot-Anfrage eingeht, erstellt Trident den Snapshot auf dem Back-End. Nach der Erstellung des Snapshots konfiguriert Trident einen `VolumeSnapshotContent` Objekt-Storage erstellt und damit den Snapshot der Kubernetes API zur Verfügung gestellt.
+
+
+NOTE: In der Regel müssen Sie das nicht verwalten `VolumeSnapshotContent` Objekt: Eine Ausnahme ist, wann Sie möchten link:../trident-use/vol-snapshots.html#import-a-volume-snapshot["Importieren Sie einen Volume-Snapshot"] Erstellt außerhalb von Astra Trident.
 
 
 
