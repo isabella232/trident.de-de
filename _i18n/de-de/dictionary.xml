@@ -2886,9 +2886,6 @@
   <block id="361d997e700d422835e56b644784bb7e" category="list-text">Das Node-Plug-in verarbeitet das Verbinden des Speichers mit dem Node.</block>
   <block id="1736b3823517cc62395e05494b09ddb9" category="admonition"><block ref="b2c66bca748ffde67c7b6817cb8dd795" prefix="" category="inline-code"></block> Ist in angegeben<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> Um den Namespace zu kennzeichnen, in dem Astra Trident installiert ist. Dieser Parameter *kann nicht aktualisiert werden, nachdem Astra Trident installiert wurde*. Der Versuch, dies zu tun, bewirkt das<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> Status zu ändern in<block ref="d7c8c85bf79bbe1b7188497c32c3b0ca" prefix=" " category="inline-code"></block>. Astra Trident ist nicht für die Migration auf Namespaces vorgesehen.</block>
   <block id="a739aa7f082abebdf65f4b114dd3ad7d" category="paragraph">Diese Tabelle enthält Einzelheiten<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> Attribute.</block>
-  <block id="b520e4144a27e0f45e8e22d5ccd8328d" category="cell">Zusätzliche Node-Auswahl für Pods Entspricht dem gleichen Format wie pod.spec.nodeSelector.</block>
-  <block id="e138e2a410035dad85499a3dabe692d5" category="cell">Überschreibt Kubernetes-Toleranzen für Pods. Entspricht dem gleichen Format wie pod.spec.tolerations.</block>
-  <block id="d4cc4428c9a6422247c8ff288ea4b5eb" category="cell">Zusätzliche Node-Auswahl für Pods Entspricht dem gleichen Format wie pod.spec.nodeSelector.</block>
   <block id="c350769115c3c8e4132e9c428b166b12" category="doc">Die Architektur von Astra Trident</block>
   <block id="d90582d42d65d5af05c3d40ad0eb4987" category="admonition">Wenn Sie Azure NetApp Files zum ersten Mal oder an einem neuen Standort verwenden, ist eine Erstkonfiguration erforderlich, um Azure NetApp Files einzurichten und ein NFS-Volume zu erstellen. Siehe<block ref="b6e93c3bfc36cf835c63e42e55586d97" category="inline-link-rx"></block>.</block>
   <block id="84444089b52eed627a838de74ae8d652" category="section-title">Voraussetzungen für NFS und SMB Volumes</block>
@@ -3025,9 +3022,6 @@
   <block id="f53514cf8829a41463c245b088ae732e" category="paragraph">So aktivieren Sie die Ausführung von Astra Trident auf Windows Nodes:</block>
   <block id="a921baa9e8c81f13d59fed4fce57ec88" category="example-title">Beispiel 2: Force Abtrennen aktivieren</block>
   <block id="c5b5b00ff1b3a892c8694ab932cbf9ca" category="paragraph">Weitere Informationen zum gewaltsam Lösen finden Sie unter <block ref="63cac71755fb6ef1f1fea34cf4037121" category="inline-link-macro-rx"></block>.</block>
-  <block id="85be37285c336ae757f07d58eb0d7ea2" category="cell">Die Adresse/der Port eines Proxys zum Senden von AutoSupport Telemetrie</block>
-  <block id="33fb79e5ddc4ef005332c52292e20c59" category="cell">Zusätzliche Node-Selektoren für Pods mit dem Trident Controller CSI Plugin Entspricht dem Format<block ref="6ae8be3433bfc36ced79a1271e6ebf11" prefix=" " category="inline-code"></block>.</block>
-  <block id="4a1522be236156dbc873375541a627e1" category="cell">Überschreibungen von Verträgungen für Pods mit dem Trident Controller CSI-Plug-in Entspricht dem gleichen Format wie<block ref="f1fa64fcf5077601cb803e995a51fa4f" prefix=" " category="inline-code"></block>.</block>
   <block id="30042512b273723cf2eec336b6576d84" category="cell"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block> Und<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> Nur. Arbeitet mit Kubernetes Non-Graceful Node Shutdown (NGNS), um Clusteradministratoren die Möglichkeit zu geben, Workloads mit gemounteten Volumes sicher auf neue Nodes zu migrieren, sollte ein Node fehlerhaft werden. *Dies ist ein experimentelles Feature in 23.04.* Siehe <block ref="620ff2552a2d798650bb027eb1271b17" category="inline-xref-macro-rx"></block> Wichtige Hinweise.</block>
   <block id="38a0b9f59e6fe23e1617dc0e78498afe" category="section-title">Details zum Ablösen von Krafteinwirkung</block>
   <block id="20c0c9efee2da2645ec0eefaf3c75d8c" category="inline-link-macro">Kubernetes: Nicht ordnungsgemäßes Herunterfahren von Nodes</block>
@@ -3862,4 +3856,35 @@ Verwenden Sie es nicht<block ref="effa2d809c72dcb6cce15a1e0b040e63" prefix=" " c
   <block id="0b5b18e58101a5fdc2d3618c85a04814" category="list-text">**Löschen<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>**: Durch Entfernen der<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> CR, das zur Implementierung von Astra Trident verwendet wurde, weisen Sie den Bediener an, Trident zu deinstallieren. Der Bediener verarbeitet die Entfernung von<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> Außerdem wird die Implementierung und das Dämonenset Astra Trident entfernt und die im Rahmen der Installation erstellten Trident-Pods gelöscht.</block>
   <block id="566ef0ea3e228b1c501652e83def2c9d" category="paragraph">Verwenden Sie die<block ref="fe98497efedbe156ecc4b953aea77e07" prefix=" " category="inline-code"></block> Befehl in<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> So entfernen Sie alle Ressourcen, die Astra Trident mit Ausnahme der CRDs und zugehörigen Objekte zugeordnet sind:</block>
   <block id="3d11c687c20c6a6a9fec2b3d07f861f0" category="section-title">Neuerungen in 23.07.1</block>
+  <block id="f3f30d479f6e3b393d917a3b2f88c770" category="cell"><block ref="89801e9e98979062e84647433a8ed3e9" prefix="" category="inline-code"></block></block>
+  <block id="c9db68ea6cff44f42ac5acbbfccec399" category="cell">Namespace für die Installation von Astra Trident in</block>
+  <block id="fbbd7b4b14060c4fdb02f92c4c08e702" category="cell">Einstellung auf<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> Ermöglicht die Installation auf Windows Worker-Knoten.</block>
+  <block id="16e20a5ba5cd6442f3cdd49b16e8a5f3" category="cell"><block ref="8bd1aa960638ccc5869583e34d702ce6" prefix="" category="inline-code"></block></block>
+  <block id="3dd791c4864e77ae6cf11572e2d7b374" category="cell">Installieren Sie Astra Trident über IPv6</block>
+  <block id="077e99fe42ced522b462656cffffe09c" category="cell"><block ref="d5276bb17ae062102e883a18454c2f1b" prefix="" category="inline-code"></block></block>
+  <block id="4448b73eac083e33b7142f0e5790fac5" category="cell">Zeitüberschreitung für Kubernetes-Betrieb</block>
+  <block id="e4d71bf2abad047425f4463e27bb83b0" category="cell">30 Sek.</block>
+  <block id="42cf123e93ecc5c0297652edbc547fc0" category="cell"><block ref="2fac1659431903a30e063d49b3effb9d" prefix="" category="inline-code"></block></block>
+  <block id="4a213b7c3b997ffb0794b25909381d16" category="cell">Senden Sie keine AutoSupport Bundles an NetApp
+Automatisch</block>
+  <block id="7f54ca385f028308d19e228ce0534a47" category="cell">Die Adresse/den Port eines Proxys zum Senden von AutoSupport
+Telemetrie</block>
+  <block id="076bc379a24183ce77834bac007ca852" category="cell">Eine Flagge, die zum Deinstallieren von Astra Trident verwendet wird</block>
+  <block id="cad060d2f14dbf08315c20014ed31daa" category="cell"><block ref="0b19d236934f609fe765b504a36b637e" prefix="" category="inline-code"></block></block>
+  <block id="acfc4a8e6d53bad27d4e2d393bfff61e" category="cell">Astra Trident Protokollformat zur Verwendung [Text, json]</block>
+  <block id="20cd815523e5806aec29a57282b0d49f" category="cell">„Text“</block>
+  <block id="20f408a3276af1f7f1bf02ba374786ca" category="cell">Astra Trident-Image zu installieren</block>
+  <block id="0498ee65f9f6b76f08a28e7b6715c963" category="cell">„netapp/Trident:23.07“</block>
+  <block id="4f25f4cca5c1939f4a728d2678e719f7" category="cell">Pfad zur internen Registrierung des Formats<block ref="d2ce1f53a5f0e84f4f1b5e28836eb05b" prefix=" " category="inline-code"></block></block>
+  <block id="fb4feec526f3a24c097c73a5f36af4bd" category="cell">„K8s.gcr.io/SIG-Storage“ (K8s 1.19+)
+Oder „Quay.io/k8scsi“</block>
+  <block id="31aad37dce0c28e12908582a0d63736a" category="cell">Pfad zum kubelet-Verzeichnis auf dem Host</block>
+  <block id="df8f3af91e96fe841267201ed450cd6b" category="cell">„/var/lib/kubelet“</block>
+  <block id="b6e0e2c4168573f0ed61c842470342ba" category="cell"><block ref="c13a52521693f799a16fd56a35c77a04" prefix="" category="inline-code"></block></block>
+  <block id="4e33345575b5a443dec89767624a1ee8" category="cell">Eine Liste der zu löschenden Ressourcen, um eine vollständige Entfernung von durchzuführen
+Astra Trident</block>
+  <block id="f73bb4a0bc9913e7fc6db5f9e5f2afeb" category="cell">Secrets, um Bilder aus einer internen Registrierung zu ziehen</block>
+  <block id="d64d0e5bb5a552ae4986a713f41c8fc3" category="cell">Zusätzliche Node-Auswahl für Pods	Entspricht dem Format<block ref="6ae8be3433bfc36ced79a1271e6ebf11" prefix=" " category="inline-code"></block>.</block>
+  <block id="875ce721843c20d7f9aae240673ed68b" category="cell">Überschreibt Kubernetes-Toleranzen für Pods. Entspricht dem gleichen Format wie<block ref="f1fa64fcf5077601cb803e995a51fa4f" prefix=" " category="inline-code"></block>.</block>
+  <block id="00e8e1706119ce5300bdc9141ececc37" category="cell">Zusätzliche Node-Auswahl für Pods Entspricht dem Format<block ref="6ae8be3433bfc36ced79a1271e6ebf11" prefix=" " category="inline-code"></block>.</block>
 </blocks>

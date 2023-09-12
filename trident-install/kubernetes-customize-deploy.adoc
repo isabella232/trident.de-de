@@ -35,27 +35,62 @@ WARNING: `spec.namespace` Ist in angegeben `TridentOrchestrator` Um den Namespac
 
 Diese Tabelle enthält Einzelheiten `TridentOrchestrator` Attribute.
 
-[cols="3"]
+[cols="1,2,1"]
 |===
 | Parameter | Beschreibung | Standard 
+
+
+| `namespace` | Namespace für die Installation von Astra Trident in | „Standard“ 
+
+
+| `debug` | Aktivieren Sie das Debugging für Astra Trident | Falsch 
+
+
+| `enableForceDetach` | `ontap-san` Und `ontap-san-economy` Nur. Arbeitet mit Kubernetes Non-Graceful Node Shutdown (NGNS), um Clusteradministratoren die Möglichkeit zu geben, Workloads mit gemounteten Volumes sicher auf neue Nodes zu migrieren, sollte ein Node fehlerhaft werden. *Dies ist ein experimentelles Feature in 23.04.* Siehe <<Details zum Ablösen von Krafteinwirkung>> Wichtige Hinweise. | `false` 
+
+
+| `windows` | Einstellung auf `true` Ermöglicht die Installation auf Windows Worker-Knoten. | Falsch 
+
+
+| `useIPv6` | Installieren Sie Astra Trident über IPv6 | Falsch 
+
+
+| `k8sTimeout` | Zeitüberschreitung für Kubernetes-Betrieb | 30 Sek. 
+
+
+| `silenceAutosupport` | Senden Sie keine AutoSupport Bundles an NetApp
+Automatisch | Falsch 
 
 
 | `autosupportImage` | Das Container-Image für AutoSupport Telemetrie | „netapp/Trident-AutoSupport:23.07“ 
 
 
-| `autosupportProxy` | Die Adresse/der Port eines Proxys zum Senden von AutoSupport Telemetrie | "http://proxy.example.com:8888"[] 
+| `autosupportProxy` | Die Adresse/den Port eines Proxys zum Senden von AutoSupport
+Telemetrie | "http://proxy.example.com:8888"[] 
 
 
-| `controllerPluginNodeSelector` | Zusätzliche Node-Selektoren für Pods mit dem Trident Controller CSI Plugin Entspricht dem Format `pod.spec.nodeSelector`. | Kein Standard; optional 
+| `uninstall` | Eine Flagge, die zum Deinstallieren von Astra Trident verwendet wird | Falsch 
 
 
-| `controllerPluginTolerations` | Überschreibungen von Verträgungen für Pods mit dem Trident Controller CSI-Plug-in Entspricht dem gleichen Format wie `pod.spec.Tolerations`. | Kein Standard; optional 
+| `logFormat` | Astra Trident Protokollformat zur Verwendung [Text, json] | „Text“ 
 
 
-| `debug` | Aktivieren Sie das Debugging für Astra Trident | `false` 
+| `tridentImage` | Astra Trident-Image zu installieren | „netapp/Trident:23.07“ 
 
 
-| `enableForceDetach` | `ontap-san` Und `ontap-san-economy` Nur. Arbeitet mit Kubernetes Non-Graceful Node Shutdown (NGNS), um Clusteradministratoren die Möglichkeit zu geben, Workloads mit gemounteten Volumes sicher auf neue Nodes zu migrieren, sollte ein Node fehlerhaft werden. *Dies ist ein experimentelles Feature in 23.04.* Siehe <<Details zum Ablösen von Krafteinwirkung>> Wichtige Hinweise. | `false` 
+| `imageRegistry` | Pfad zur internen Registrierung des Formats
+`<registry FQDN>[:port][/subpath]` | „K8s.gcr.io/SIG-Storage“ (K8s 1.19+)
+Oder „Quay.io/k8scsi“ 
+
+
+| `kubeletDir` | Pfad zum kubelet-Verzeichnis auf dem Host | „/var/lib/kubelet“ 
+
+
+| `wipeout` | Eine Liste der zu löschenden Ressourcen, um eine vollständige Entfernung von durchzuführen
+Astra Trident |  
+
+
+| `imagePullSecrets` | Secrets, um Bilder aus einer internen Registrierung zu ziehen |  
 
 
 | `imagePullPolicy` | Legt die BildPull-Richtlinie für den Trident-Operator fest. Gültige Werte sind:
@@ -64,16 +99,16 @@ Diese Tabelle enthält Einzelheiten `TridentOrchestrator` Attribute.
 `Never` Nie das Bild ziehen. | `IfNotPresent` 
 
 
-| `controllerPluginNodeSelector` | Zusätzliche Node-Auswahl für Pods Entspricht dem gleichen Format wie pod.spec.nodeSelector. | Kein Standard; optional 
+| `controllerPluginNodeSelector` | Zusätzliche Node-Auswahl für Pods	Entspricht dem Format `pod.spec.nodeSelector`. | Kein Standard; optional 
 
 
-| `controllerPluginTolerations` | Überschreibt Kubernetes-Toleranzen für Pods. Entspricht dem gleichen Format wie pod.spec.tolerations. | Kein Standard; optional 
+| `controllerPluginTolerations` | Überschreibt Kubernetes-Toleranzen für Pods. Entspricht dem gleichen Format wie `pod.spec.Tolerations`. | Kein Standard; optional 
 
 
-| `nodePluginNodeSelector` | Zusätzliche Node-Auswahl für Pods Entspricht dem gleichen Format wie pod.spec.nodeSelector. | Kein Standard; optional 
+| `nodePluginNodeSelector` | Zusätzliche Node-Auswahl für Pods Entspricht dem Format `pod.spec.nodeSelector`. | Kein Standard; optional 
 
 
-| `nodePluginTolerations` | Überschreibt Kubernetes-Toleranzen für Pods. Entspricht dem gleichen Format wie pod.spec.tolerations. | Kein Standard; optional 
+| `nodePluginTolerations` | Überschreibt Kubernetes-Toleranzen für Pods. Entspricht dem gleichen Format wie `pod.spec.Tolerations`. | Kein Standard; optional 
 |===
 
 NOTE: Weitere Informationen zum Formatieren von Pod-Parametern finden Sie unter link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["Pods werden Nodes zugewiesen"^].
