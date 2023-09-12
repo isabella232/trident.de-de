@@ -388,8 +388,6 @@
   <block id="3de05f78e401869f4630ec8cabf339df" category="section-title">Kann ich ein Upgrade von einer älteren Version direkt auf eine neuere Version durchführen (einige Versionen werden übersprungen)?</block>
   <block id="ce44cbbc54839f39b351c091b0e3caa5" category="paragraph">NetApp unterstützt das Upgrade des Astra Trident von einer Hauptversion auf das nächste sofort größere Release. Sie können ein Upgrade von Version 18.xx auf 19.xx, 19.xx auf 20.xx usw. durchführen. Sie sollten das Upgrade vor der Implementierung in einer Produktionsumgebung in einem Labor testen.</block>
   <block id="0399b9e6348e554937a4d65efc97a1b8" category="section-title">Ist es möglich, Trident auf eine vorherige Version herunterzustufen?</block>
-  <block id="d307563c01953bd90a41ddd049f96d51" category="inline-link-macro">Der Abschnitt zum Downgrade</block>
-  <block id="72fec731c958562fd09df08eef5fbb89" category="paragraph">Es gibt eine Reihe von Faktoren, die bewertet werden müssen, wenn Sie herunterstufen möchten. Siehe <block ref="ea621a0de3f004c488ea799d0fd7e41d" category="inline-link-macro-rx"></block>.</block>
   <block id="ba9c59aa9d07b25e124dcf6ca88d689a" category="section-title">Back-Ends und Volumes managen</block>
   <block id="ffe72215dff9a93d62ee68905212025e" category="section-title">Muss ich Management- und Daten-LIFs in einer ONTAP-Back-End-Definitionsdatei definieren?</block>
   <block id="f3997f0b9446951754e665cfe7591cef" category="section-title">Kann Astra Trident CHAP für ONTAP-Back-Ends konfigurieren?</block>
@@ -3887,4 +3885,6 @@ Astra Trident</block>
   <block id="d64d0e5bb5a552ae4986a713f41c8fc3" category="cell">Zusätzliche Node-Auswahl für Pods	Entspricht dem Format<block ref="6ae8be3433bfc36ced79a1271e6ebf11" prefix=" " category="inline-code"></block>.</block>
   <block id="875ce721843c20d7f9aae240673ed68b" category="cell">Überschreibt Kubernetes-Toleranzen für Pods. Entspricht dem gleichen Format wie<block ref="f1fa64fcf5077601cb803e995a51fa4f" prefix=" " category="inline-code"></block>.</block>
   <block id="00e8e1706119ce5300bdc9141ececc37" category="cell">Zusätzliche Node-Auswahl für Pods Entspricht dem Format<block ref="6ae8be3433bfc36ced79a1271e6ebf11" prefix=" " category="inline-code"></block>.</block>
+  <block id="7786076739da628161f45de338cd6e69" category="inline-link-macro">Deinstallieren Sie Astra Trident</block>
+  <block id="bc2d347a4b0e30ef46f4d91b07267ca7" category="paragraph">Wenn Sie eine Korrektur für Fehler benötigen, die nach einem Upgrade, Abhängigkeitsproblemen oder einem nicht erfolgreichen oder unvollständigen Upgrade beobachtet wurden, sollten Sie dies tun <block ref="b6be8ee390417a446f993452ffee9585" category="inline-link-macro-rx"></block> Und installieren Sie die frühere Version mithilfe der entsprechenden Anweisungen für diese Version neu. Dies ist der einzige empfohlene Weg, um ein Downgrade auf eine frühere Version.</block>
 </blocks>
