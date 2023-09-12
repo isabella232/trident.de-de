@@ -52,20 +52,18 @@ Sie können die Installation eines Dreizack-Bedieners manuell oder mithilfe von 
 
 === Deinstallieren Sie die manuelle Installation
 
-Wenn Sie Astra Trident über den Operator installiert haben, können Sie es deinstallieren, indem Sie einen der folgenden Schritte durchführen:
+Falls Sie Astra Trident mit dem Operator installiert haben, können Sie es deinstallieren, indem Sie einen der folgenden Schritte ausführen:
 
-* **Bearbeiten `TridentOrchestrator` So legen Sie die Deinstallationsflag fest:** können Sie bearbeiten `TridentOrchestrator` Und gesetzt `spec.uninstall=true`.
-+
-** Bearbeiten Sie das `TridentOrchestrator` CR und stellen Sie den ein `uninstall` Flag wie unten gezeigt:
+. **Bearbeiten `TridentOrchestrator` CR und stellen Sie das Deinstallationsflag** ein:
 +
 [listing]
 ----
 kubectl patch torc <trident-orchestrator-name> --type=merge -p '{"spec":{"uninstall":true}}'
 ----
-** Wenn der `uninstall` Flag ist auf festgelegt `true`, Der Trident-Operator deinstalliert Trident, entfernt jedoch nicht den tridentOrchestrator selbst. Sie sollten den TridentOrchestrator aufräumen und einen neuen erstellen, wenn Sie Trident erneut installieren möchten.
++
+Wenn der `uninstall` Flag ist auf festgelegt `true`, Der Trident-Operator deinstalliert Trident, entfernt jedoch nicht den tridentOrchestrator selbst. Sie sollten den TridentOrchestrator aufräumen und einen neuen erstellen, wenn Sie Trident erneut installieren möchten.
 
-
-* **Löschen `TridentOrchestrator`:** durch Entfernen des `TridentOrchestrator` CR, das zur Implementierung von Astra Trident verwendet wurde, weisen Sie den Bediener an, Trident zu deinstallieren. Der Bediener verarbeitet die Entfernung von `TridentOrchestrator` Außerdem wird die Implementierung und das Dämonenset Astra Trident entfernt und die im Rahmen der Installation erstellten Trident-Pods gelöscht.
+. **Löschen `TridentOrchestrator`**: Durch Entfernen der `TridentOrchestrator` CR, das zur Implementierung von Astra Trident verwendet wurde, weisen Sie den Bediener an, Trident zu deinstallieren. Der Bediener verarbeitet die Entfernung von `TridentOrchestrator` Außerdem wird die Implementierung und das Dämonenset Astra Trident entfernt und die im Rahmen der Installation erstellten Trident-Pods gelöscht.
 
 
 
@@ -89,7 +87,7 @@ release "trident" uninstalled
 
 == Deinstallieren Sie A `tridentctl` Installation
 
-Verwenden Sie die `uninstall` Befehl in `tridentctl` So entfernen Sie alle mit Astra Trident verbundenen Ressourcen mit Ausnahme der CRDs und zugehörigen Objekte.
+Verwenden Sie die `uninstall` Befehl in `tridentctl` So entfernen Sie alle Ressourcen, die Astra Trident mit Ausnahme der CRDs und zugehörigen Objekte zugeordnet sind:
 
 [listing]
 ----
