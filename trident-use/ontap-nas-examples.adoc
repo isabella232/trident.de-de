@@ -91,9 +91,6 @@ Verwenden der `autoExportPolicy` Und `autoExportCIDRs` Optionen: Astra Trident k
 | `limitAggregateUsage` | Bereitstellung fehlgeschlagen, wenn die Nutzung über diesem Prozentsatz liegt. *Gilt nicht für Amazon FSX für ONTAP* | „“ (nicht standardmäßig durchgesetzt) 
 
 
-| `limitVolumeSize` | Bereitstellung fehlgeschlagen, wenn die angeforderte Volume-Größe über diesem Wert liegt. | „“ (standardmäßig nicht erzwungen) 
-
-
 | `limitVolumeSize` | Bereitstellung fehlgeschlagen, wenn die angeforderte Volume-Größe über diesem Wert liegt. Schränkt auch die maximale Größe der Volumes ein, die es für qtrees und LUNs verwaltet, und auf ein `qtreesPerFlexvol` Mit Option kann die maximale Anzahl von qtrees pro FlexVol angepasst werden. | „“ (standardmäßig nicht erzwungen) 
 
 
