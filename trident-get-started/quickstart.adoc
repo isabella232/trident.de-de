@@ -12,7 +12,7 @@ summary: Falls Sie gerade mit Kubernetes beginnen, sollten Sie Kubernetes gemä�
 
 
 [role="lead"]
-Sie können Astra Trident installieren und beginnen mit dem Management der Storage-Ressourcen in wenigen Schritten. Bevor Sie beginnen, überprüfen Sie link:requirements.html["Anforderungen von Astra Trident"].
+Sie können Astra Trident installieren und mit dem Management von Storage-Ressourcen in wenigen Schritten beginnen. Bevor Sie beginnen, überprüfen Sie link:requirements.html["Anforderungen von Astra Trident"].
 
 
 NOTE: Informationen zu Docker finden Sie unter link:../trident-docker/deploy-docker.html["Astra Trident für Docker"].
