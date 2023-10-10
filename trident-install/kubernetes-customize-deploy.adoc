@@ -52,7 +52,7 @@ Diese Tabelle enthält Einzelheiten `TridentOrchestrator` Attribute.
 | `windows` | Einstellung auf `true` Ermöglicht die Installation auf Windows Worker-Knoten. | Falsch 
 
 
-| `useIPv6` | Installieren Sie Astra Trident über IPv6 | Falsch 
+| `IPv6` | Installieren Sie Astra Trident über IPv6 | Falsch 
 
 
 | `k8sTimeout` | Zeitüberschreitung für Kubernetes-Betrieb | 30 Sek. 
