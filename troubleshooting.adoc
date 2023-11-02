@@ -162,7 +162,7 @@ INFO Trident uninstallation succeeded.
 Sie können Astra Trident und alle erstellten CRDs und zugehörigen benutzerdefinierten Ressourcen vollständig entfernen.
 
 
-WARNING: Dieser Vorgang kann nicht rückgängig gemacht werden. Tun Sie dies nur, wenn Sie eine völlig frische Installation von Astra Trident wollen. Informationen zur Deinstallation von Astra Trident ohne Entfernen von CRDs finden Sie unter link:../trident-managing-k8s/uninstall-trident.html["Deinstallieren Sie Astra Trident"].
+WARNING: Dieser Vorgang kann nicht rückgängig gemacht werden. Tun Sie dies nur, wenn Sie eine völlig frische Installation von Astra Trident wollen. Informationen zur Deinstallation von Astra Trident ohne Entfernen von CRDs finden Sie unter link:trident-managing-k8s/uninstall-trident.html["Deinstallieren Sie Astra Trident"].
 
 [role="tabbed-block"]
 ====
