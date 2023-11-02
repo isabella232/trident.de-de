@@ -118,17 +118,17 @@ kubectl apply -f deploy/namespace.yaml
 ----
 * Um den Operator in einem anderen Namespace als dem bereitzustellen `trident` Namespace, Update `serviceaccount.yaml`, `clusterrolebinding.yaml` Und `operator.yaml` Und erstellen Sie Ihre Bundle-Datei mit `kustomization.yaml`.
 +
-.. Erstellen Sie die `kustomization.yaml` Verwenden des folgenden Befehls, wobei _<bundle>_ ist `bundle_pre_1_25` Oder `bundle_post_1_25` Basierend auf Ihrer Kubernetes-Version
+.. Erstellen Sie die `kustomization.yaml` Verwenden des folgenden Befehls, wobei _<bundle.yaml>_ ist `bundle_pre_1_25.yaml` Oder `bundle_post_1_25.yaml` Basierend auf Ihrer Kubernetes-Version
 +
 [listing]
 ----
-cp kustomization_<bundle>.yaml kustomization.yaml
+cp deploy/kustomization_<bundle.yaml> deploy/kustomization.yaml
 ----
-.. Kompilieren Sie das Bündel mit dem folgenden Befehl, wobei _<bundle>_ ist `bundle_pre_1_25` Oder `bundle_post_1_25` Basierend auf Ihrer Kubernetes-Version
+.. Kompilieren Sie das Bündel mit dem folgenden Befehl, wobei _<bundle.yaml>_ ist `bundle_pre_1_25.yaml` Oder `bundle_post_1_25.yaml` Basierend auf Ihrer Kubernetes-Version
 +
 [listing]
 ----
-kubectl kustomize deploy/ > deploy/<bundle>.yaml
+kubectl kustomize deploy/ > deploy/<bundle.yaml>
 ----
 
 
@@ -139,7 +139,7 @@ kubectl kustomize deploy/ > deploy/<bundle>.yaml
 +
 [listing]
 ----
-kubectl kustomize deploy/ > deploy/<bundle>.yaml
+kubectl create -f deploy/<bundle.yaml>
 ----
 . Überprüfen Sie, ob der Operator, die Bereitstellung und Replikasets erstellt wurden.
 +
