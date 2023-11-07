@@ -31,6 +31,11 @@ Self-Support:: Die Dokumentation zu Astra Trident ist für die Monate 25 bis 36 
 
 
  a| 
+link:https://docs.netapp.com/us-en/trident/index.html["23.10"^]
+| Oktober 2024 | Oktober 2025 | Oktober 2026 
+
+
+ a| 
 link:https://docs.netapp.com/us-en/trident/index.html["23.07"^]
 | Juli 2024 | Juli 2025 | Juli 2026 
 
@@ -47,7 +52,7 @@ link:https://docs.netapp.com/us-en/trident-2301/index.html["23.01"^]
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2210/index.html["22.10"^]
-| Oktober 2023 | Oktober 2024 | Oktober 2025 
+| -- | Oktober 2024 | Oktober 2025 
 
 
  a| 
@@ -67,7 +72,7 @@ link:https://docs.netapp.com/us-en/trident-2201/index.html["22.01"^]
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2110/index.html["21.10"^]
-| -- | Oktober 2023 | Oktober 2024 
+| -- | -- | Oktober 2024 
 
 
  a| 
@@ -83,11 +88,6 @@ link:https://netapp-trident.readthedocs.io/en/stable-v21.04/["21.04"^]
  a| 
 link:https://netapp-trident.readthedocs.io/en/stable-v21.01/["21.01"^]
 | -- | -- | Januar 2024 
-
-
- a| 
-link:https://netapp-trident.readthedocs.io/en/stable-v20.11/["20.10"^]
-| -- | -- | Oktober 2023 
 |===
 
 NOTE: Versionen vor 21.07, Umleitung zum Standort für ältere Dokumentation.

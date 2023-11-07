@@ -342,22 +342,24 @@ NOTE: Siehe link:https://docs.netapp.com/us-en/ontap/smb-config/create-share-tas
 
 . Beim Erstellen des Backend müssen Sie Folgendes konfigurieren, um SMB-Volumes festzulegen. Alle FSX-Konfigurationsoptionen für ONTAP-Backend finden Sie unter link:trident-fsx-examples.html["FSX für ONTAP Konfigurationsoptionen und Beispiele"].
 +
-[cols="3"]
+[cols="1,2,1"]
 |===
 | Parameter | Beschreibung | Beispiel 
 
 
-| `smbShare`
-Sie können eine der folgenden Optionen angeben: Den Namen einer SMB-Freigabe, die mit der Microsoft Management Console oder der ONTAP-CLI erstellt wurde, einen Namen, über den Astra Trident die SMB-Freigabe erstellen kann, oder Sie können den Parameter leer lassen, um den Zugriff auf gemeinsame Freigaben auf Volumes zu verhindern.
+| `smbShare` | Sie können eine der folgenden Optionen angeben: Den Namen einer SMB-Freigabe, die mit der Microsoft Management Console oder der ONTAP-CLI erstellt wurde, einen Namen, über den Astra Trident die SMB-Freigabe erstellen kann, oder Sie können den Parameter leer lassen, um den Zugriff auf gemeinsame Freigaben auf Volumes zu verhindern.
 
 Dieser Parameter ist für On-Premises-ONTAP optional.
 
-Dieser Parameter ist für Amazon FSX for ONTAP-Back-Ends erforderlich und darf nicht leer sein. | `smb-share` | `nasType` 
+Dieser Parameter ist für Amazon FSX for ONTAP-Back-Ends erforderlich und darf nicht leer sein. | `smb-share` 
 
 
-| *Muss auf eingestellt sein `smb`.* Wenn Null, wird standardmäßig auf gesetzt `nfs`. | `smb` | `securityStyle` 
+| `nasType` | *Muss auf eingestellt sein `smb`.* Wenn Null, wird standardmäßig auf gesetzt `nfs`. | `smb` 
 
 
-| Sicherheitstyp für neue Volumes. *Muss auf eingestellt sein `ntfs` Oder `mixed` Für SMB Volumes.* | `ntfs` Oder `mixed` Für SMB Volumes | `unixPermissions` 
+| `securityStyle` | Sicherheitstyp für neue Volumes. *Muss auf eingestellt sein `ntfs` Oder `mixed` Für SMB Volumes.* | `ntfs` Oder `mixed` Für SMB Volumes 
+
+
+| `unixPermissions` | Modus für neue Volumes. *Muss für SMB Volumes leer gelassen werden.* | „“ 
 |===
 

@@ -16,7 +16,7 @@ Damit Astra Trident in einer Vielzahl von Umgebungen und Organisationen installi
 
 
 
-== Kritische Informationen zu Astra Trident 23.07
+== Kritische Informationen zu Astra Trident 23.10
 
 *Sie müssen die folgenden wichtigen Informationen über Astra Trident lesen.*
 

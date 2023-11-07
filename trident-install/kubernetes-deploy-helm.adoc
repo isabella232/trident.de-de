@@ -16,7 +16,7 @@ Sie können den Trident-Operator implementieren und Astra Trident mithilfe von H
 
 
 
-== Kritische Informationen zu Astra Trident 23.07.1
+== Kritische Informationen zu Astra Trident 23.10
 
 *Sie müssen die folgenden wichtigen Informationen über Astra Trident lesen.*
 
@@ -49,11 +49,11 @@ Zusätzlich zum link:../trident-get-started/kubernetes-deploy.html#before-you-de
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. Nutzung `helm install` Und geben Sie einen Namen für Ihre Bereitstellung an, wie im folgenden Beispiel, wo `23.07.1` Ist die Version des Astra Trident, die Sie installieren.
+. Nutzung `helm install` Und geben Sie einen Namen für Ihre Bereitstellung an, wie im folgenden Beispiel, wo `23.10.0` Ist die Version des Astra Trident, die Sie installieren.
 +
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 23.07.1 --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 23.10.0 --create-namespace --namespace <trident-namespace>
 ----
 +
 
@@ -83,11 +83,11 @@ Geben Sie eine YAML-Datei mit Überschreibungen an. Dies kann mehrfach angegeben
 Geben Sie Überschreibungen in der Befehlszeile an.
 
 |===
-Um beispielsweise den Standardwert von zu ändern `debug`, Ausführen Sie das folgende `--set` Befehl wo `23.07.1` Ist die Version von Astra Trident, die Sie installieren:
+Um beispielsweise den Standardwert von zu ändern `debug`, Ausführen Sie das folgende `--set` Befehl wo `23.10.0` Ist die Version von Astra Trident, die Sie installieren:
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 23.07.1  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 23.10.0  --create-namespace --namespace trident --set tridentDebug=true
 ----
 
 
@@ -95,7 +95,7 @@ helm install <name> netapp-trident/trident-operator --version 23.07.1  --create-
 
 Diese Tabelle und die `values.yaml` Datei, die Teil des Helm-Diagramms ist, enthält die Liste der Schlüssel und ihre Standardwerte.
 
-[cols="3"]
+[cols="1,2,1"]
 |===
 | Option | Beschreibung | Standard 
 
@@ -127,7 +127,7 @@ Diese Tabelle und die `values.yaml` Datei, die Teil des Helm-Diagramms ist, enth
 | `tridentNodePluginTolerations` | Überschreibt Kubernetes-Toleranzen für Pods. Siehe <<Allgemeines zu Controller-Pods und Node-Pods>> Entsprechende Details. |  
 
 
-| `imageRegistry` | Identifiziert die Registrierung für den `trident-operator`, `trident`, Und andere Bilder. Lassen Sie das Feld leer, um die Standardeinstellung zu übernehmen. | „“ 
+| `imageRegistry` | Identifiziert die Registrierung für den `trident-operator`, `trident`, Und andere Bilder. Lassen Sie das Feld leer, um die Standardeinstellung zu übernehmen. | `""` 
 
 
 | `imagePullPolicy` | Legt die Richtlinie zum Abziehen von Bildern für den fest `trident-operator`. | `IfNotPresent` 
@@ -136,7 +136,7 @@ Diese Tabelle und die `values.yaml` Datei, die Teil des Helm-Diagramms ist, enth
 | `imagePullSecrets` | Legt die Abzugsgeheimnisse für das Bild fest `trident-operator`, `trident`, Und andere Bilder. |  
 
 
-| `kubeletDir` | Ermöglicht das Überschreiben der Hostposition des internen Status von kubelet. | '“/var/lib/kubelet“` 
+| `kubeletDir` | Ermöglicht das Überschreiben der Hostposition des internen Status von kubelet. | `"/var/lib/kubelet"` 
 
 
 | `operatorLogLevel` | Ermöglicht die Einstellung der Protokollebene des Trident-Operators auf: `trace`, `debug`, `info`, `warn`, `error`, Oder `fatal`. | `"info"` 
@@ -145,10 +145,10 @@ Diese Tabelle und die `values.yaml` Datei, die Teil des Helm-Diagramms ist, enth
 | `operatorDebug` | Ermöglicht es, die Protokollebene des Trident-Operators auf Debug zu setzen. | `true` 
 
 
-| `operatorImage` | Ermöglicht die vollständige Überschreibung des Bildes für `trident-operator`. | „“ 
+| `operatorImage` | Ermöglicht die vollständige Überschreibung des Bildes für `trident-operator`. | `""` 
 
 
-| `operatorImageTag` | Ermöglicht das Überschreiben des Tags des `trident-operator` Bild: | „“ 
+| `operatorImageTag` | Ermöglicht das Überschreiben des Tags des `trident-operator` Bild: | `""` 
 
 
 | `tridentIPv6` | Ermöglicht die Aktivierung von Astra Trident in IPv6-Clustern. | `false` 
@@ -166,7 +166,7 @@ Diese Tabelle und die `values.yaml` Datei, die Teil des Helm-Diagramms ist, enth
 | `tridentAutosupportImageTag` | Ermöglicht das Überschreiben des Tags des Images für den Astra Trident AutoSupport-Container. | `<version>` 
 
 
-| `tridentAutosupportProxy` | Der Astra Trident AutoSupport Container kann über einen HTTP-Proxy nach Hause telefonieren. | „“ 
+| `tridentAutosupportProxy` | Der Astra Trident AutoSupport Container kann über einen HTTP-Proxy nach Hause telefonieren. | `""` 
 
 
 | `tridentLogFormat` | Legt das Astra Trident Protokollierungsformat fest (`text` Oder `json`). | `"text"` 
@@ -181,19 +181,19 @@ Diese Tabelle und die `values.yaml` Datei, die Teil des Helm-Diagramms ist, enth
 | `tridentDebug` | Ermöglicht das Festlegen der Protokollebene für Astra Trident `debug`. | `false` 
 
 
-| `tridentLogWorkflows` | Ermöglicht die Aktivierung bestimmter Astra Trident Workflows für die Trace-Protokollierung oder Protokollunterdrückung. | „“ 
+| `tridentLogWorkflows` | Ermöglicht die Aktivierung bestimmter Astra Trident Workflows für die Trace-Protokollierung oder Protokollunterdrückung. | `""` 
 
 
-| `tridentLogLayers` | Ermöglicht die Aktivierung bestimmter Astra Trident-Ebenen für die Trace-Protokollierung oder Protokollunterdrückung. | „“ 
+| `tridentLogLayers` | Ermöglicht die Aktivierung bestimmter Astra Trident-Ebenen für die Trace-Protokollierung oder Protokollunterdrückung. | `""` 
 
 
-| `tridentImage` | Ermöglicht die vollständige Überschreibung des Images für Astra Trident. | „“ 
+| `tridentImage` | Ermöglicht die vollständige Überschreibung des Images für Astra Trident. | `""` 
 
 
-| `tridentImageTag` | Ermöglicht das Überschreiben des Tags des Images für Astra Trident. | „“ 
+| `tridentImageTag` | Ermöglicht das Überschreiben des Tags des Images für Astra Trident. | `""` 
 
 
-| `tridentProbePort` | Ermöglicht das Überschreiben des Standardports, der für Kubernetes Liveness/Readiness-Sonden verwendet wird. | „“ 
+| `tridentProbePort` | Ermöglicht das Überschreiben des Standardports, der für Kubernetes Liveness/Readiness-Sonden verwendet wird. | `""` 
 
 
 | `windows` | Ermöglicht die Installation von Astra Trident auf einem Windows Worker-Node. | `false` 
@@ -203,6 +203,9 @@ Diese Tabelle und die `values.yaml` Datei, die Teil des Helm-Diagramms ist, enth
 
 
 | `excludePodSecurityPolicy` | Schließt die Sicherheitsrichtlinie des Operator POD von der Erstellung aus. | `false` 
+
+
+| `cloudProvider` | Auf einstellen `"Azure"` Bei Verwendung von verwalteten Identitäten auf einem AKS-Cluster. | `""` 
 |===
 
 

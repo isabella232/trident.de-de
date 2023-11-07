@@ -68,7 +68,7 @@ Mit tridentctl installiert::
 
 
 
-== Fehlerbehebung bei einer nicht erfolgreichen Trident-Implementierung mithilfe des Betreibers
+== Die Bereitstellung von Trident mit dem Operator ist fehlgeschlagen
 
 Wenn Sie Trident über den Operator implementieren, lautet der Status von `TridentOrchestrator` Änderungen von `Installing` Bis `Installed`. Wenn Sie die beobachten `Failed` Der Status, und der Operator kann sich nicht selbst wiederherstellen. Sie sollten die Protokolle des Operators überprüfen, indem Sie folgenden Befehl ausführen:
 
@@ -135,7 +135,7 @@ Um das Problem zu beheben, sollten Sie die bearbeiten `TridentOrchestrator` CR. 
 
 
 
-== Fehlerbehebung bei einer nicht erfolgreichen Trident-Implementierung mit `tridentctl`
+== Erfolglose Trident-Implementierung mit `tridentctl`
 
 Um herauszufinden, was schief gelaufen ist, können Sie den Installer mit dem erneut ausführen ``-d`` Argument, das den Debug-Modus aktiviert und Ihnen hilft zu verstehen, was das Problem ist:
 
@@ -194,3 +194,33 @@ tridentctl obliviate crd
 ----
 --
 ====
+
+
+== Fehler beim Entstopen des NVMe-Node bei den RWX-RAW-Block-Namespaces o Kubernetes 1.26
+
+Wenn Sie Kubernetes 1.26 ausführen, schlägt das Entstauen der Nodes möglicherweise fehl, wenn NVMe/TCP mit RWX-unformatierten Block-Namespaces verwendet wird. Die folgenden Szenarien bieten eine Behelfslösung für den Fehler. Alternativ können Sie ein Upgrade von Kubernetes auf 1.27 durchführen.
+
+
+
+=== Namespace und Pod wurden gelöscht
+
+Stellen Sie sich ein Szenario vor, in dem ein von Astra Trident gemanagter Namespace (persistentes Volume NVMe) mit einem Pod verbunden ist. Wenn Sie den Namespace direkt aus dem ONTAP-Backend löschen, bleibt der Entstempungsprozess hängen, nachdem Sie versucht haben, den Pod zu löschen. Dieses Szenario beeinträchtigt nicht das Kubernetes-Cluster oder andere Funktionen.
+
+.Behelfslösung
+Heben Sie das persistente Volume (entsprechend dem Namespace) vom entsprechenden Node auf und löschen Sie es.
+
+
+
+=== Blockierte Daten-LIFs
+
+ If you block (or bring down) all the dataLIFs of the NVMe Astra Trident backend, the unstaging process gets stuck when you attempt to delete the pod. In this scenario, you cannot run any NVMe CLI commands on the Kubernetes node.
+.Behelfslösung
+Das DataLIFS wird zur Wiederherstellung der vollen Funktionalität angezeigt.
+
+
+
+=== Namespace-Zuordnung wurde gelöscht
+
+ If you remove the `hostNQN` of the worker node from the corresponding subsystem, the unstaging process gets stuck when you attempt to delete the pod. In this scenario, you cannot run any NVMe CLI commands on the Kubernetes node.
+.Behelfslösung
+Fügen Sie die hinzu `hostNQN` Zurück zum Subsystem.

@@ -51,9 +51,12 @@ spec:
     path: "/my/host/path"
 ----
 ====
-.PersistentVolumeClaim-Beispielmanifest
+.PersistentVolumeClaim-Beispielmanifeste
 [%collapsible]
 ====
+Diese Beispiele zeigen grundlegende PVC-Konfigurationsoptionen.
+
+.PVC mit RWO-Zugang
 Dieses Beispiel zeigt eine grundlegende PVC mit RWO-Zugriff, die einer StorageClass mit dem Namen zugeordnet ist `basic-csi`.
 
 [listing]
@@ -70,10 +73,31 @@ spec:
       storage: 1Gi
   storageClassName: basic-csi
 ----
+.PVC mit NVMe/TCP
+Dieses Beispiel zeigt eine grundlegende PVC für NVMe/TCP mit RWO-Zugriff, die einer StorageClass mit dem Namen zugeordnet ist `protection-gold`.
+
+[listing]
+----
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+name: pvc-san-nvme
+spec:
+accessModes:
+  - ReadWriteOnce
+resources:
+  requests:
+    storage: 300Mi
+storageClassName: protection-gold
+----
 ====
-.Pod-Manifest-Beispiel
+.Pod-Manifest-Proben
 [%collapsible]
 ====
+Diese Beispiele zeigen grundlegende Konfigurationen zum Anschließen der PVC an einen Pod.
+
+.Basiskonfiguration
 [listing]
 ----
 kind: Pod
@@ -94,6 +118,32 @@ spec:
       volumeMounts:
         - mountPath: "/my/mount/path"
           name: pv-storage
+----
+.Grundlegende NVMe/TCP-Konfiguration
+[listing]
+----
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  containers:
+    - image: nginx
+      name: nginx
+      resources: {}
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: task-pv-storage
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+      claimName: pvc-san-nvme
 ----
 ====
 

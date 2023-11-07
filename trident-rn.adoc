@@ -19,7 +19,54 @@ WARNING: Der `tridentctl` Binary for Linux, die in der ZIP-Datei des Installatio
 
 
 
-== Neuerungen in 23.07.1
+== Neuerungen in 23.10
+
+
+
+=== Korrekturen
+
+* Feste Volume-Erweiterung, wenn eine neu angeforderte Größe kleiner ist als die gesamte Volume-Größe für ontap-nas und ontap-nas-flexgroup-Storage-Treiber (link:https://github.com/NetApp/trident/issues/834["Ausgabe #834"^]).
+* Feste Volume-Größe zur Anzeige nur nutzbarer Größe des Volumes beim Import für ontap-nas und ontap-nas-flexgroup-Storage-Treiber (link:https://github.com/NetApp/trident/issues/722["Ausgabe #722"^]).
+* FlexVol Namenskonvertierung für ONTAP-NAS-Economy wurde korrigiert.
+* Das Astra Trident Initialisierungsproblem wurde bei einem Neustart des Nodes auf einem Windows Node behoben.
+
+
+
+
+=== Vorgestellt Werden
+
+
+
+==== Kubernetes
+
+Unterstützung für Kubernetes 1.28 hinzugefügt.
+
+
+
+==== Astra Trident
+
+* Unterstützung für die Nutzung von Azure Managed Identities (AMI) mit Azure-netapp-Files Storage-Treibern hinzugefügt.
+* Zusätzliche Unterstützung für NVMe over TCP für den ONTAP-SAN-Treiber.
+* Zusätzliche Möglichkeit, die Bereitstellung eines Volumes anzuhalten, wenn das Backend vom Benutzer auf „ausgesetzt“ gesetzt wird (link:https://github.com/NetApp/trident/issues/558["Ausgabe #558"^]).
+
+
+
+
+=== Erweiterte Funktionen in Astra Control verfügbar
+
+Mit Astra Trident 23.10 ist eine neue Software-Komponente namens Astra Control Provisioner für lizenzierte Astra Control Benutzer verfügbar. Mit diesem provisioner erhalten Sie Zugriff auf umfassende Funktionen für erweitertes Management und Storage-Bereitstellung, die Astra Trident selbst unterstützt. Für Version 23.10 sind dies unter anderem folgende Funktionen:
+
+* Backup- und Restore-Funktionen für Applikationen mit ontap-nas-Economy-Storage-Back-Ends mit Treiberunterstützung
+* Verbesserte Sicherheit des Storage-Backends mit Kerberos 5-Verschlüsselung
+* Datenwiederherstellung mithilfe eines Snapshots
+* SnapMirror Verbesserungen
+
+
+link:https://docs.netapp.com/us-en/astra-control-center/release-notes/whats-new.html["Erfahren Sie mehr über die Astra Control Provisioner."^]
+
+
+
+== Änderungen in 23.07.1
 
 *Kubernetes:* Behobene Dämonenlöschung zur Unterstützung von Upgrades ohne Ausfallzeiten (link:https://github.com/NetApp/trident/issues/740["Ausgabe #740"^]).
 

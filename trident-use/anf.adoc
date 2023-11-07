@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/anf.html 
-keywords: trident backend, azure netapp files, smb volumes, smb, windows, drivers, access modes, rwo, rwx, rwp, rwop, file system 
-summary: Sie können Azure NetApp Files als Backend für Astra Trident konfigurieren. Sie können NAS- und SMB-Volumes über ein Azure NetApp Files-Back-End anschließen. 
+keywords: trident backend, azure netapp files, smb volumes, smb, windows, drivers, access modes, rwo, rwx, rwp, rwop, file system, aks, managed identities, azure 
+summary: 'Sie können Azure NetApp Files als Backend für Astra Trident konfigurieren. Sie können NFS- und SMB-Volumes über ein Azure NetApp Files-Back-End einbinden. Astra Trident unterstützt auch das Anmeldeinformationsmanagement mithilfe von Managed Identities für AKS-Cluster (Azure Kubernetes Services).' 
 ---
 = Konfigurieren Sie ein Azure NetApp Files-Backend
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: Sie können Azure NetApp Files als Backend für Astra Trident konfiguri
 
 
 [role="lead"]
-Sie können Azure NetApp Files als Backend für Astra Trident konfigurieren. Sie können NFS- und SMB-Volumes über ein Azure NetApp Files-Back-End einbinden.
+Sie können Azure NetApp Files als Backend für Astra Trident konfigurieren. Sie können NFS- und SMB-Volumes über ein Azure NetApp Files-Back-End einbinden. Astra Trident unterstützt auch das Anmeldeinformationsmanagement mithilfe von Managed Identities für AKS-Cluster (Azure Kubernetes Services).
 
 
 
@@ -38,8 +38,58 @@ RWO, ROX, RWX, RWOP
 |===
 
 
-== Überlegungen
+=== Überlegungen
 
 * Der Azure NetApp Files-Service unterstützt keine Volumes mit einer Größe von weniger als 100 GB. Astra Trident erstellt automatisch 100-GB-Volumes, wenn ein kleineres Volume benötigt wird.
 * Astra Trident unterstützt SMB Volumes, die nur auf Windows Nodes laufenden Pods gemountet werden.
+
+
+
+
+== Verwaltete Identitäten für AKS
+
+Astra Trident unterstützt link:https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview["Verwaltete Identitäten"^] Für Cluster von Azure Kubernetes Services. Um die Vorteile einer optimierten Verwaltung von Anmeldeinformationen zu nutzen, die von verwalteten Identitäten angeboten wird, müssen Sie über Folgendes verfügen:
+
+* Ein mit AKS implementierter Kubernetes-Cluster
+* Verwaltete Identitäten, die auf dem AKS kubernetes-Cluster konfiguriert sind
+* Astra Trident installiert, einschließlich `cloudProvider` Angabe `"Azure"`.
++
+[role="tabbed-block"]
+====
+.Betreiber von Trident
+--
+Um Astra Trident mit dem Trident-Operator zu installieren, bearbeiten Sie `tridentorchestrator_cr.yaml` Einstellen `cloudProvider` Bis `"Azure"`. Beispiel:
+
+[listing]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+  imagePullPolicy: IfNotPresent
+  cloudProvider: "Azure"
+----
+--
+.Helm
+--
+Im folgenden Beispiel werden die Astra Trident Sets installiert `cloudProvider` Zu Azure unter Verwendung der Umgebungsvariable `$CP`:
+
+[listing]
+----
+helm install trident trident-operator-23.10.0-custom.tgz --create-namespace --namespace <trident-namespace> --set cloudProvider=$CP
+----
+--
+.<code>tridentctl</code>
+--
+Im folgenden Beispiel werden die Astra Trident Sets installiert `cloudProvider` Flag an `Azure`:
+
+[listing]
+----
+tridentctl install --cloud-provider="Azure" -n trident
+----
+--
+====
 

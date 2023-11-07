@@ -159,14 +159,21 @@ Maximale anforderbare Volume-Größe und übergeordnete qtree Volume-Größe * F
 
 
 | `qtreesPerFlexvol`  a| 
-Maximale Anzahl der qtrees pro FlexVol, die im Bereich [50, 300] liegen müssen, die Standardeinstellung ist 200. * Für die `ontap-nas-economy` Treiber: Mit dieser Option kann die maximale Anzahl von qtrees pro FlexVol* angepasst werden.
+Maximale Anzahl der qtrees pro FlexVol, die im Bereich [50, 300] liegen müssen, die Standardeinstellung ist 200.
+
+* Für die `ontap-nas-economy` Treiber: Mit dieser Option kann die maximale Anzahl von qtrees pro FlexVol* angepasst werden.
  a| 
 `300`
 
+
+
+| `sanType` | *Unterstützt für `ontap-san` Nur Fahrer.*
+
+Verwenden Sie, um auszuwählen `iscsi` Für iSCSI oder `nvme` Für NVMe/TCP | `iscsi` Falls leer 
 |===
 Es stehen Standardoptionen zur Verfügung, um zu vermeiden, dass sie auf jedem von Ihnen erstellten Volume angegeben werden müssen:
 
-[cols="3*"]
+[cols="1,3,2"]
 |===
 | Option | Beschreibung | Beispiel 
 
@@ -285,8 +292,9 @@ Um erweiterte Funktionen und die enorme Skalierbarkeit in derselben Umgebung zu 
 
 === Beispiel für ONTAP-Konfigurationsdateien
 
-*NFS Beispiel für `ontap-nas` Fahrer*
-
+.NFS-Beispiel für <code>ontap-nas</code> Treiber
+[%collapsible]
+====
 [listing]
 ----
 {
@@ -305,8 +313,10 @@ Um erweiterte Funktionen und die enorme Skalierbarkeit in derselben Umgebung zu 
     }
 }
 ----
-*NFS Beispiel für `ontap-nas-flexgroup` Fahrer*
-
+====
+.NFS-Beispiel für <code>ontap-nas-flexgroup</code> Treiber
+[%collapsible]
+====
 [listing]
 ----
 {
@@ -324,8 +334,10 @@ Um erweiterte Funktionen und die enorme Skalierbarkeit in derselben Umgebung zu 
     }
 }
 ----
-*NFS Beispiel für `ontap-nas-economy` Fahrer*
-
+====
+.NFS-Beispiel für <code>ontap-nas-economy</code> Treiber
+[%collapsible]
+====
 [listing]
 ----
 {
@@ -339,8 +351,10 @@ Um erweiterte Funktionen und die enorme Skalierbarkeit in derselben Umgebung zu 
     "aggregate": "aggr1"
 }
 ----
-*ISCSI-Beispiel für `ontap-san` Fahrer*
-
+====
+.ISCSI-Beispiel für <code>ontap-san</code> Treiber
+[%collapsible]
+====
 [listing]
 ----
 {
@@ -355,8 +369,10 @@ Um erweiterte Funktionen und die enorme Skalierbarkeit in derselben Umgebung zu 
     "igroupName": "netappdvp"
 }
 ----
-*NFS Beispiel für `ontap-san-economy` Fahrer*
-
+====
+.NFS-Beispiel für <code>ontap-san-economy</code> Treiber
+[%collapsible]
+====
 [listing]
 ----
 {
@@ -371,6 +387,25 @@ Um erweiterte Funktionen und die enorme Skalierbarkeit in derselben Umgebung zu 
     "igroupName": "netappdvp"
 }
 ----
+====
+.NVMe/TCP – Beispiel für <code>ontap-san</code> Treiber
+[%collapsible]
+====
+[listing]
+----
+{
+  "version": 1,
+  "backendName": "NVMeBackend",
+  "storageDriverName": "ontap-san",
+  "managementLIF": "10.0.0.1",
+  "svm": "svm_nvme",
+  "username":"vsadmin",
+  "password":"password",
+  "sanType": "nvme",
+  "useREST": true
+}
+----
+====
 
 
 == Konfiguration von Element Software
