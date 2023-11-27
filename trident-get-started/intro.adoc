@@ -50,6 +50,58 @@ NOTE: Verwenden Sie in einer Produktionsumgebung keine Kubernetes-Cluster, die S
 
 
 
+== Kubernetes-Integration in NetApp Produkte
+
+Das NetApp Portfolio an Storage-Produkten kann in viele Aspekte eines Kubernetes Clusters integriert werden und bietet erweiterte Datenmanagement-Funktionen, mit denen die Funktionalität, Funktionalität, Performance und Verfügbarkeit der Kubernetes-Implementierung verbessert werden.
+
+.Amazon FSX für NetApp ONTAP
+[%collapsible]
+====
+link:https://www.netapp.com/aws/fsx-ontap/["Amazon FSX für NetApp ONTAP"^] Ist ein vollständig gemanagter AWS Service, mit dem Sie Dateisysteme mit dem NetApp ONTAP Storage-Betriebssystem starten und ausführen können.
+
+====
+.Azure NetApp Dateien
+[%collapsible]
+====
+https://www.netapp.com/azure/azure-netapp-files/["Azure NetApp Dateien"^] Ist ein Azure-Dateifreigabeservice der Enterprise-Klasse auf der Basis von NetApp. Sie können anspruchsvollste dateibasierte Workloads nativ in Azure ausführen. So erhalten Sie die Performance und das umfassende Datenmanagement, die Sie von NetApp gewohnt sind.
+
+====
+.Cloud Volumes ONTAP
+[%collapsible]
+====
+link:https://www.netapp.com/cloud-services/cloud-volumes-ontap/["Cloud Volumes ONTAP"^] Ist eine rein softwarebasierte Storage Appliance, die die ONTAP Datenmanagement-Software in der Cloud ausführt.
+
+====
+.Cloud Volumes Service für Google Cloud
+[%collapsible]
+====
+link:https://bluexp.netapp.com/google-cloud-netapp-volumes?utm_source=GitHub&utm_campaign=Trident["NetApp Cloud Volumes Service für Google Cloud"^] Ist ein Cloud-nativer Fileservice, der NAS-Volumes über NFS und SMB mit All-Flash-Performance bereitstellt.
+
+====
+.Element Software
+[%collapsible]
+====
+https://www.netapp.com/data-management/element-software/["Element"^] Storage-Administrator kann Workloads konsolidieren, indem die Performance garantiert und der Storage-Bedarf vereinfacht und optimiert wird.
+
+====
+.NetApp HCI
+[%collapsible]
+====
+link:https://docs.netapp.com/us-en/hci/docs/concept_hci_product_overview.html["NetApp HCI"^] Vereinfacht das Management und die Skalierung des Datacenters durch Automatisierung von Routineaufgaben und ermöglicht es Infrastrukturadministratoren, sich auf wichtigere Funktionen zu konzentrieren.
+
+Astra Trident kann Storage-Geräte für Container-Applikationen direkt auf der zugrunde liegenden NetApp HCI Storage-Plattform bereitstellen und managen.
+
+====
+.NetApp ONTAP
+[%collapsible]
+====
+link:https://docs.netapp.com/us-en/ontap/index.html["NetApp ONTAP"^] Ist das Unified Storage-Betriebssystem NetApp für mehrere Protokolle und bietet für jede Applikation erweiterte Datenmanagementfunktionen.
+
+ONTAP Systeme verfügen über rein Flash-basierte, hybride oder rein HDD-basierte Konfigurationen und bieten eine Vielzahl unterschiedlicher Implementierungsmodelle, darunter speziell entwickelte Hardware (FAS und AFF), White-Box (ONTAP Select) und rein Cloud-basierte Cloud Volumes ONTAP Systeme. Astra Trident unterstützt diese ONTAP Implementierungsmodelle.
+
+====
+
+
 == Finden Sie weitere Informationen
 
 * https://docs.netapp.com/us-en/astra-family/intro-family.html["Die NetApp Astra-Produktfamilie"^]

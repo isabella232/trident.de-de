@@ -26,33 +26,41 @@ Für höhere Sicherheit bietet der Astra Trident an `REST API` Ist standardmäß
 
 == REST-API wird verwendet
 
+Für Beispiele, wie diese APIs aufgerufen werden, geben Sie das Debug (`-d`) Flagge. Weitere Informationen finden Sie unter link:../trident-managing-k8s/tridentctl.html["Managen Sie Astra Trident mit tridentctl"].
+
 Die API funktioniert wie folgt:
 
 
 
-=== `GET`
+=== GET
 
-* `GET <trident-address>/trident/v1/<object-type>`: Listet alle Objekte dieses Typs auf.
-* `GET <trident-address>/trident/v1/<object-type>/<object-name>`: Erhält die Details des genannten Objekts.
-
-
+`GET <trident-address>/trident/v1/<object-type>`:: Listet alle Objekte dieses Typs auf.
+`GET <trident-address>/trident/v1/<object-type>/<object-name>`:: Ruft die Details des benannten Objekts ab.
 
 
-=== `POST`
 
-`POST <trident-address>/trident/v1/<object-type>`: Erzeugt ein Objekt des angegebenen Typs.
 
-* Eine JSON-Konfiguration für das zu erstellenden Objekt erforderlich. Informationen zu den einzelnen Objekttypen finden Sie unter Link:tridentctl.html[`tridentctl` Befehle und Optionen].
+=== POST
+
+`POST <trident-address>/trident/v1/<object-type>`:: Erstellt ein Objekt des angegebenen Typs.
++
+--
+* Eine JSON-Konfiguration für das zu erstellenden Objekt erforderlich. Informationen zur Spezifikation der einzelnen Objekttypen finden Sie unter link:../trident-managing-k8s/tridentctl.html["Managen Sie Astra Trident mit tridentctl"].
 * Falls das Objekt bereits vorhanden ist, variiert das Verhalten: Back-Ends aktualisiert das vorhandene Objekt, während alle anderen Objekttypen den Vorgang nicht ausführen.
 
 
+--
 
 
-=== `DELETE`
-
-`DELETE <trident-address>/trident/v1/<object-type>/<object-name>`: Löscht die benannte Ressource.
 
 
-NOTE: Es existieren weiterhin Volumes, die mit Back-Ends oder Storage-Klassen verbunden sind. Diese müssen separat gelöscht werden. Weitere Informationen finden Sie unter Link:tridentctl.html[`tridentctl` Befehle und Optionen].
+=== Löschen
 
-Für Beispiele, wie diese APIs aufgerufen werden, geben Sie das Debug (`-d`) Flagge. Weitere Informationen finden Sie unter Link:tridentctl.html[`tridentctl` Befehle und Optionen].
+`DELETE <trident-address>/trident/v1/<object-type>/<object-name>`:: Löscht die benannte Ressource.
++
+--
+
+NOTE: Es existieren weiterhin Volumes, die mit Back-Ends oder Storage-Klassen verbunden sind. Diese müssen separat gelöscht werden. Weitere Informationen finden Sie unter link:../trident-managing-k8s/tridentctl.html["Managen Sie Astra Trident mit tridentctl"].
+
+--
+

@@ -197,13 +197,3 @@ Weitere Informationen zum gewaltsam Lösen finden Sie unter link:..trident-get-s
 tridentctl install --enable-force-detach=true -n trident
 ----
 ====
-.Verwaltete Identitäten auf einem AKS-Cluster
-[%collapsible]
-====
-In diesem Beispiel wird Astra Trident installiert, um gemanagte Identitäten zu aktivieren.
-
-[listing]
-----
-tridentctl install --cloud-provider="Azure" -n trident
-----
-====
