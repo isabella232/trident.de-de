@@ -87,7 +87,7 @@ basic-csi    csi.trident.netapp.io   15h
 
 === Proben der Lagerklasse
 
-Astra Trident bietet das https://github.com/NetApp/trident/tree/master/trident-installer/sample-input/pvc-samples["Einfache Definitionen von Storage-Klassen für spezifische Back-Ends"^].
+Astra Trident bietet das https://github.com/NetApp/trident/tree/master/trident-installer/sample-input/storage-class-samples["Einfache Definitionen von Storage-Klassen für spezifische Back-Ends"^].
 
 Alternativ können Sie bearbeiten `sample-input/storage-class-csi.yaml.templ` Datei, die im Lieferumfang des Installationsprogramms enthalten ist und ersetzt wird `__BACKEND_TYPE__` Mit dem Namen des Speichertreibers.
 
