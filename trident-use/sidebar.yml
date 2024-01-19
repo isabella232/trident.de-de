@@ -44,6 +44,8 @@ entries:
       url: "/trident-use/trident-fsx-prep.html"
     - title: Konfigurationsoptionen und Beispiele
       url: "/trident-use/trident-fsx-examples.html"
+    - title: Konfiguration des Astra Trident EKS Add-ons auf EKS-Cluster
+      url: "/trident-use/trident-aws-addon.html"
   - title: Back-Ends mit kubectl erstellen
     url: "/trident-use/backend-kubectl.html"
   - title: Back-Ends managen
