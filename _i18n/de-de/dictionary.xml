@@ -2054,7 +2054,6 @@
   <block id="4d0d37d727675761e4c0e324eb57ca2f" category="list-text"><block ref="4d0d37d727675761e4c0e324eb57ca2f" category="inline-link-macro-rx"></block></block>
   <block id="19ce3b2e7823907e5153f00fe04f64f7" category="inline-link-macro">Konfigurationsoptionen und Beispiele</block>
   <block id="ea61e2c2ff507048203824add1eb7c21" category="section-title">Überlegungen</block>
-  <block id="8f395c84ad002394e9f070a25937dcc4" category="list-text">Der Azure NetApp Files-Service unterstützt keine Volumes mit einer Größe von weniger als 100 GB. Astra Trident erstellt automatisch 100-GB-Volumes, wenn ein kleineres Volume benötigt wird.</block>
   <block id="1cf44a6bee7fa333861e5d0042926fb5" category="list-text">Astra Trident unterstützt SMB Volumes, die nur auf Windows Nodes laufenden Pods gemountet werden.</block>
   <block id="ff342df7522d6b527768cc6bfe5f9fae" category="summary">Astra Trident bietet Kubernetes-Benutzern die Möglichkeit, ihre Volumes nach Erstellung zu erweitern. Hier finden Sie Informationen zu den erforderlichen Konfigurationen zum erweitern von iSCSI- und NFS-Volumes.</block>
   <block id="15d79b565b148caa23e6f2b53813413d" category="section-title">Erweitern Sie ein iSCSI-Volume</block>
@@ -2078,7 +2077,6 @@
   <block id="27b4a9ed8609e35526601aa8d8be1ab9" category="paragraph">Wenn Sie bereits eine Storage-Klasse ohne diese Option erstellt haben, können Sie die vorhandene Storage-Klasse einfach mit bearbeiten<block ref="04e7749715e986f27d9cb67434b65b72" prefix=" " category="inline-code"></block> Um eine Volume-Erweiterung zu ermöglichen.</block>
   <block id="784f78e647973a0dcfa11b7a028c7eae" category="paragraph">Astra Trident sollte ein 20MiB NFS PV für diese PVC erstellen:</block>
   <block id="3b16cea25bd4a9aaf5a9c3dcc13ea7eb" category="section-title">Schritt 3: Erweitern Sie das PV</block>
-  <block id="e5c2c0bfcfbe01e6174199aaff9616a5" category="paragraph">Um die Größe des neu erstellten 20MiB PV auf 1 gib zu ändern, bearbeiten Sie die PVC und den Satz<block ref="02b011e6fe36e26e5f7365ba08bf5a48" prefix=" " category="inline-code"></block> Bis 1 GB:</block>
   <block id="4a59ce1bc63fd7e6333968fb4bbd9d45" category="section-title">Schritt 4: Validieren Sie die Erweiterung</block>
   <block id="c70f05fed7c73e0be4a0b24c8532a87c" category="paragraph">Sie können die korrekte Größenänderung validieren, indem Sie die Größe des PVC, des PV und des Astra Trident Volume überprüfen:</block>
   <block id="3bda6d3452a50ffddd40bb74b05d6c50" category="summary">Astra Trident folgt einem vierteljährlichen Release-Intervall mit vier Hauptversionen pro Kalenderjahr. Jede neue Version baut auf den vorherigen Versionen auf und bietet neue Funktionen, Performance-Verbesserungen sowie Bug Fixes und Verbesserungen. Führen Sie ein Upgrade mindestens einmal pro Jahr durch, um von den neuen Funktionen in Astra Trident zu profitieren.</block>
@@ -4050,4 +4048,6 @@ Oder<block ref="28994d623a492f2e5b2eb3ffbcdd4dd0" prefix=" " category="inline-co
   <block id="e1f272eb0b2aaba7b1cb689543f653e0" category="paragraph">Mit dem folgenden Befehl wird das Astra Trident EKS Add-on deinstalliert:<block ref="09a3e9c644b219341aa6e2e8a8922e59" prefix=" " category="inline-code"></block></block>
   <block id="c6861e88433ccd90f1ce8143d7e5fed0" category="sidebar">Konfiguration des Astra Trident EKS Add-ons auf EKS-Cluster</block>
   <block id="7ed15597cafdca20d5859b7e394bc0ab" category="doc">Konfiguration des Astra Trident EKS Add-On Version 23.10 im EKS Cluster</block>
+  <block id="4262957957c18f0bab73d8ddafcb642f" category="list-text">Der Azure NetApp Files-Service unterstützt keine Volumes mit einer Größe von weniger als 100 GB. Astra Trident erstellt automatisch 100-gib-Volumes, wenn ein kleineres Volume angefordert wird.</block>
+  <block id="f825c914a8659f5b0de8a9219ab365b6" category="paragraph">Um die Größe des neu erstellten 20MiB PV auf 1 gib zu ändern, bearbeiten Sie die PVC und den Satz<block ref="02b011e6fe36e26e5f7365ba08bf5a48" prefix=" " category="inline-code"></block> Bis 1 gib:</block>
 </blocks>
