@@ -51,7 +51,7 @@ spec:
 ----
 Sie können sich auch die Beispiele im ansehen https://github.com/NetApp/trident/tree/stable/v21.07/trident-installer/sample-input/backends-samples["trident-Installationsprogramm"^] Verzeichnis für Beispielkonfigurationen für die gewünschte Speicherplattform/den gewünschten Service.
 
-Der `spec` Nimmt Back-End-spezifische Konfigurationsparameter ein. In diesem Beispiel verwendet das Backend `ontap-san` Speichertreiber und verwendet die hier tabellarischen Konfigurationsparameter. Eine Liste der Konfigurationsoptionen für den gewünschten Speichertreiber finden Sie unter link:backends.html["Back-End-Konfigurationsinformationen für Ihren Speichertreiber"^].
+Der `spec` Nimmt Back-End-spezifische Konfigurationsparameter ein. In diesem Beispiel verwendet das Backend `ontap-san` Speichertreiber und verwendet die hier tabellarischen Konfigurationsparameter. Eine Liste der Konfigurationsoptionen für den gewünschten Speichertreiber finden Sie im link:backends.html["Back-End-Konfigurationsinformationen für Ihren Speichertreiber"^].
 
 Der `spec` Abschnitt enthält auch `credentials` Und `deletionPolicy` Felder, die neu in den eingeführt werden `TridentBackendConfig` CR:
 

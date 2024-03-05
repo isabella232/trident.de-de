@@ -16,7 +16,7 @@ Sie können den Trident-Operator implementieren und Astra Trident mithilfe von H
 
 
 
-== Kritische Informationen zu Astra Trident 23.10
+== Kritische Informationen zu Astra Trident 24.02
 
 *Sie müssen die folgenden wichtigen Informationen über Astra Trident lesen.*
 
@@ -49,7 +49,7 @@ Zusätzlich zum link:../trident-get-started/kubernetes-deploy.html#before-you-de
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. Nutzung `helm install` Und geben Sie einen Namen für die Bereitstellung und den Speicherort der Image-Registrierung an. Ihr link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident und CSI-Images"] Kann in einer Registrierung oder in verschiedenen Registern gefunden werden, aber alle CSI-Images müssen sich in derselben Registrierung befinden. In den Beispielen: `23.10.0` Ist die Version des Astra Trident, die Sie installieren.
+. Nutzung `helm install` Und geben Sie einen Namen für die Bereitstellung und den Speicherort der Image-Registrierung an. Ihr link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident und CSI-Images"] Kann in einer Registrierung oder in verschiedenen Registern gefunden werden, aber alle CSI-Images müssen sich in derselben Registrierung befinden. In den Beispielen: `24.02.0` Ist die Version des Astra Trident, die Sie installieren.
 +
 [role="tabbed-block"]
 ====
@@ -57,7 +57,7 @@ helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 --
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 23.10.0 --set imageRegistry=<your-registry> --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 24.02.0 --set imageRegistry=<your-registry> --create-namespace --namespace <trident-namespace>
 ----
 --
 .Bilder in verschiedenen Registern
@@ -66,7 +66,7 @@ Sie müssen anhängen `sig-storage` Bis zum `imageRegistry` Um unterschiedliche 
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 23.10.0 --set imageRegistry=<your-registry>/sig-storage --set operatorImage=<your-registry>/netapp/trident-operator:23.10.0 --set tridentAutosupportImage=<your-registry>/netapp/trident-autosupport:23.10 --set tridentImage=<your-registry>/netapp/trident:23.10.0 --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 24.02.0 --set imageRegistry=<your-registry>/sig-storage --set operatorImage=<your-registry>/netapp/trident-operator:24.02.0 --set tridentAutosupportImage=<your-registry>/netapp/trident-autosupport:24.02 --set tridentImage=<your-registry>/netapp/trident:24.02.0 --create-namespace --namespace <trident-namespace>
 ----
 --
 ====
@@ -98,11 +98,11 @@ Geben Sie eine YAML-Datei mit Überschreibungen an. Dies kann mehrfach angegeben
 Geben Sie Überschreibungen in der Befehlszeile an.
 
 |===
-Um beispielsweise den Standardwert von zu ändern `debug`, Ausführen Sie das folgende `--set` Befehl wo `23.10.0` Ist die Version von Astra Trident, die Sie installieren:
+Um beispielsweise den Standardwert von zu ändern `debug`, Ausführen Sie das folgende `--set` Befehl wo `24.02.0` Ist die Version von Astra Trident, die Sie installieren:
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 23.10.0  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 24.02.0  --create-namespace --namespace trident --set tridentDebug=true
 ----
 
 
@@ -130,16 +130,16 @@ Diese Tabelle und die `values.yaml` Datei, die Teil des Helm-Diagramms ist, enth
 | `affinity` | Affinität für Pod-Zuweisung |  
 
 
-| `tridentControllerPluginNodeSelector` | Zusätzliche Node-Auswahl für Pods Siehe <<Allgemeines zu Controller-Pods und Node-Pods>> Entsprechende Details. |  
+| `tridentControllerPluginNodeSelector` | Zusätzliche Node-Auswahl für Pods Siehe link:../trident-get-started/architecture.html#understanding-controller-pods-and-node-pods["Allgemeines zu Controller-Pods und Node-Pods"] Entsprechende Details. |  
 
 
-| `tridentControllerPluginTolerations` | Überschreibt Kubernetes-Toleranzen für Pods. Siehe <<Allgemeines zu Controller-Pods und Node-Pods>> Entsprechende Details. |  
+| `tridentControllerPluginTolerations` | Überschreibt Kubernetes-Toleranzen für Pods. Siehe link:../trident-get-started/architecture.html#understanding-controller-pods-and-node-pods["Allgemeines zu Controller-Pods und Node-Pods"] Entsprechende Details. |  
 
 
-| `tridentNodePluginNodeSelector` | Zusätzliche Node-Auswahl für Pods Siehe <<Allgemeines zu Controller-Pods und Node-Pods>> Entsprechende Details. |  
+| `tridentNodePluginNodeSelector` | Zusätzliche Node-Auswahl für Pods Siehe link:../trident-get-started/architecture.html#understanding-controller-pods-and-node-pods["Allgemeines zu Controller-Pods und Node-Pods"] Entsprechende Details. |  
 
 
-| `tridentNodePluginTolerations` | Überschreibt Kubernetes-Toleranzen für Pods. Siehe <<Allgemeines zu Controller-Pods und Node-Pods>> Entsprechende Details. |  
+| `tridentNodePluginTolerations` | Überschreibt Kubernetes-Toleranzen für Pods. Siehe link:../trident-get-started/architecture.html#understanding-controller-pods-and-node-pods["Allgemeines zu Controller-Pods und Node-Pods"] Entsprechende Details. |  
 
 
 | `imageRegistry` | Identifiziert die Registrierung für den `trident-operator`, `trident`, Und andere Bilder. Lassen Sie das Feld leer, um die Standardeinstellung zu übernehmen. | „“ 
@@ -151,7 +151,7 @@ Diese Tabelle und die `values.yaml` Datei, die Teil des Helm-Diagramms ist, enth
 | `imagePullSecrets` | Legt die Abzugsgeheimnisse für das Bild fest `trident-operator`, `trident`, Und andere Bilder. |  
 
 
-| `kubeletDir` | Ermöglicht das Überschreiben der Hostposition des internen Status von kubelet. | '“/var/lib/kubelet“` 
+| `kubeletDir` | Ermöglicht das Überschreiben der Hostposition des internen Status von kubelet. | `"/var/lib/kubelet"` 
 
 
 | `operatorLogLevel` | Ermöglicht die Einstellung der Protokollebene des Trident-Operators auf: `trace`, `debug`, `info`, `warn`, `error`, Oder `fatal`. | `"info"` 
@@ -219,6 +219,3 @@ Diese Tabelle und die `values.yaml` Datei, die Teil des Helm-Diagramms ist, enth
 
 | `excludePodSecurityPolicy` | Schließt die Sicherheitsrichtlinie des Operator POD von der Erstellung aus. | `false` 
 |===
-
-
-== Wie es weiter geht

@@ -28,7 +28,8 @@ Zur Trennung der anderen Applikationen und Benutzer von Astra Trident muss immer
 
 Astra Trident unterstützt die CHAP-basierte Authentifizierung für ONTAP-SAN-Workloads (mithilfe von `ontap-san` Und `ontap-san-economy` Treiber). NetApp empfiehlt die Verwendung von bidirektionalem CHAP mit Astra Trident zur Authentifizierung zwischen einem Host und dem Storage-Backend.
 
-Bei ONTAP-Back-Ends, die die SAN-Storage-Treiber verwenden, kann Astra Trident bidirektionales CHAP einrichten und CHAP-Benutzernamen und -Schlüssel über managen `tridentctl`. Siehe link:../trident-use/ontap-san-prep.html["Hier"] Um zu erfahren, wie Astra Trident CHAP auf ONTAP Back-Ends konfiguriert.
+Bei ONTAP-Back-Ends, die die SAN-Storage-Treiber verwenden, kann Astra Trident bidirektionales CHAP einrichten und CHAP-Benutzernamen und -Schlüssel über managen `tridentctl`.
+Siehe link:../trident-use/ontap-san-prep.html[""^] Um zu erfahren, wie Astra Trident CHAP auf ONTAP Back-Ends konfiguriert.
 
 
 

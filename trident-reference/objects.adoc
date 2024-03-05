@@ -468,7 +468,7 @@ spec:
          scopeName: PriorityClass
          values: ["system-node-critical"]
 ----
-Weitere Informationen zu Ressourcenkontingenten finden Sie unter link:https://kubernetes.io/docs/concepts/policy/resource-quotas/["Kubernetes: Ressourcenkontingente"^].
+Weitere Informationen zu Ressourcenquoten finden Sie unter link:https://kubernetes.io/docs/concepts/policy/resource-quotas/["Kubernetes: Ressourcenkontingente"^].
 
 
 

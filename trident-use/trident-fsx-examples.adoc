@@ -110,6 +110,25 @@ Dieser Parameter ist für Amazon FSX for ONTAP Back-Ends erforderlich. | `smb-sh
 
 | `useREST` | Boolescher Parameter zur Verwendung von ONTAP REST-APIs. *Technische Vorschau*
 `useREST` Wird als **Tech-Vorschau bereitgestellt**, das für Testumgebungen und nicht für Produktions-Workloads empfohlen wird. Wenn eingestellt auf `true`, Astra Trident wird ONTAP REST APIs zur Kommunikation mit dem Backend verwenden. Diese Funktion erfordert ONTAP 9.11.1 und höher. Darüber hinaus muss die verwendete ONTAP-Login-Rolle Zugriff auf den haben `ontap` Applikation. Dies wird durch die vordefinierte zufrieden `vsadmin` Und `cluster-admin` Rollen: | `false` 
+
+
+| `aws` | In der Konfigurationsdatei für AWS FSX für ONTAP können Sie Folgendes angeben:
+- `fsxFilesystemID`: Geben Sie die ID des AWS FSX Dateisystems an.
+- `apiRegion`: Name der AWS API-Region.
+- `apikey`: AWS API-Schlüssel.
+- `secretKey`: AWS geheimer Schlüssel. | ``
+``
+
+
+`""`
+`""`
+`""` 
+
+
+| `credentials` | Geben Sie die FSX SVM-Anmeldeinformationen an, die in AWS Secret Manager zu speichern sind.
+- `name`: Amazon Resource Name (ARN) des Geheimnisses, das die Zugangsdaten von SVM enthält.
+- `type`: Auf eingestellt `awsarn`.
+Siehe link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["Erstellen Sie einen AWS Secrets Manager-Schlüssel"^] Finden Sie weitere Informationen. |  
 |===
 
 
@@ -172,8 +191,11 @@ Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults`
 |===
 
 
-== Beispiel
+== Beispielkonfigurationen
 
+.Konfiguration der Storage-Klasse für SMB Volumes
+[%collapsible]
+====
 Wird Verwendet `nasType`, `node-stage-secret-name`, und `node-stage-secret-namespace`, Sie können ein SMB-Volume angeben und die erforderlichen Active Directory-Anmeldeinformationen angeben. SMB Volumes werden mit unterstützt `ontap-nas` Nur Treiber.
 
 [listing]
@@ -189,3 +211,26 @@ parameters:
   csi.storage.k8s.io/node-stage-secret-name: "smbcreds"
   csi.storage.k8s.io/node-stage-secret-namespace: "default"
 ----
+====
+.Konfiguration für AWS FSX für ONTAP mit Secret Manager
+[%collapsible]
+====
+[listing]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-nas
+spec:
+  version: 1
+  storageDriverName: ontap-nas
+  backendName: tbc-ontap-nas
+  svm: svm-name
+  aws:
+    fsxFilesystemID: fs-xxxxxxxxxx
+  managementLIF:
+  credentials:
+    name: "arn:aws:secretsmanager:us-west-2:xxxxxxxx:secret:secret-name"
+    type: awsarn
+----
+====
