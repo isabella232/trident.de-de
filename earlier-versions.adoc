@@ -12,12 +12,6 @@ summary: Mit der Versionsauswahl können Sie zwischen der aktuellen Version und 
 
 
 [role="lead"]
-Mit der Versionsauswahl können Sie zwischen der aktuellen Version und den vorherigen vier Versionen navigieren oder die untenstehenden Links verwenden.
-
-
-
-== Frühere Versionen
-
 Wenn Sie Astra Trident 24.02 nicht ausführen, ist die Dokumentation für frühere Versionen auf Basis der verfügbar link:get-help.html["Astra Trident Support-Lebenszyklus"].
 
 * https://docs.netapp.com/us-en/trident-2310/index.html["Astra Trident 23.10"^]
