@@ -66,7 +66,7 @@ Sie können ein Upgrade für eine Astra Trident Helm Installation durchführen.
 WARNING: Wenn Sie ein Kubernetes-Cluster von 1.24 auf 1.25 oder höher aktualisieren, auf das Astra Trident installiert ist, müssen Sie Werte.yaml aktualisieren `excludePodSecurityPolicy` Bis `true` Oder hinzufügen `--set excludePodSecurityPolicy=true` Bis zum `helm upgrade` Befehl bevor Sie ein Upgrade des Clusters durchführen können.
 
 .Schritte
-. Wenn Sie link:../trident-get-started/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-astra-trident-using-helm["Astra Trident mit Helm installiert"], Können Sie verwenden `helm upgrade trident netapp-trident/trident-operator --version 24.02.0` Um das Upgrade in einem Schritt durchzuführen. Wenn Sie den Helm Repo nicht hinzugefügt haben oder ihn nicht zum Upgrade verwenden können:
+. Wenn Sie link:../trident-get-started/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-astra-trident-using-helm["Astra Trident mit Helm installiert"], Können Sie verwenden `helm upgrade trident netapp-trident/trident-operator --version 100.2402.0` Um das Upgrade in einem Schritt durchzuführen. Wenn Sie den Helm Repo nicht hinzugefügt haben oder ihn nicht zum Upgrade verwenden können:
 +
 .. Die neueste Version von Astra Trident kann von heruntergeladen werden link:https://github.com/NetApp/trident/releases/latest["Die Sektion _Assets_ auf GitHub"^].
 .. Verwenden Sie die `helm upgrade` Befehl wo `trident-operator-24.02.0.tgz` Gibt die Version an, auf die Sie ein Upgrade durchführen möchten.
