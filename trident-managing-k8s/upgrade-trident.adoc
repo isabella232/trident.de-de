@@ -38,11 +38,11 @@ Bei einem Upgrade auf die neueste Version von Astra Trident sollten Sie Folgende
 
 Astra Trident Versionen folgen einem datumbasierten `YY.MM` Namensgebungskonvention, wobei „YY“ die letzten beiden Ziffern des Jahres und „MM“ der Monat ist. Dot Releases folgen einem `YY.MM.X` konvention, wo "X" die Patch-Ebene ist. Sie wählen die Version, auf die Sie aktualisieren möchten, basierend auf der Version aus, von der Sie aktualisieren.
 
-* Sie können ein direktes Upgrade auf jede Zielversion durchführen, die sich innerhalb eines Fensters mit vier Versionen Ihrer installierten Version befindet. Sie können beispielsweise direkt von 22.10 (oder einem beliebigen 22.10-Punkt-Release) auf 24.02 aktualisieren.
-* Wenn Sie ein Upgrade von einer Version außerhalb des Fensters mit vier Releases durchführen, führen Sie ein Upgrade in mehreren Schritten durch. Befolgen Sie die Upgrade-Anweisungen für link:../earlier-versions.html["Frühere Version"] Sie führen ein Upgrade von auf die neueste Version durch, die für das Fenster mit vier Versionen geeignet ist. Wenn Sie beispielsweise 21.10 verwenden und ein Upgrade auf 24.02 durchführen möchten:
+* Sie können ein direktes Upgrade auf jede Zielversion durchführen, die sich innerhalb eines Fensters mit vier Versionen Ihrer installierten Version befindet. Sie können beispielsweise direkt von 23.01 (oder einem beliebigen 23.01-Punkt-Release) auf 24.02 aktualisieren.
+* Wenn Sie ein Upgrade von einer Version außerhalb des Fensters mit vier Releases durchführen, führen Sie ein Upgrade in mehreren Schritten durch. Befolgen Sie die Upgrade-Anweisungen für link:../earlier-versions.html["Frühere Version"] Sie führen ein Upgrade von auf die neueste Version durch, die für das Fenster mit vier Versionen geeignet ist. Wenn Sie beispielsweise 22.01 verwenden und ein Upgrade auf 24.02 durchführen möchten:
 +
-.. Erstes Upgrade von 21.10 auf 22.10.
-.. Dann Upgrade von 22.10 auf 24.02.
+.. Erstes Upgrade von 22.01 auf 23.01.
+.. Dann Upgrade von 23.01 auf 24.02.
 
 
 
