@@ -195,11 +195,11 @@ Bei luftvergaschten Installationen ist die folgende Liste eine Referenz für Con
 | V1.23.0  a| 
 * docker.io/netapp/Trident:24.02.0
 * docker.io/netapp/Trident-AutoSupport:24.02
-* Registry.k8s.io/SIG-Storage/csi-provisioner:v3.6.0
-* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.4.0
-* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.0
-* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.0
-* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.9.0
+* Registry.k8s.io/SIG-Storage/csi-provisioner:v4.0.0
+* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.5.0
+* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.3
+* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.3
+* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.10.0
 * docker.io/netapp/Trident-Operator:24.02.0 (optional)
 
 
@@ -208,11 +208,11 @@ Bei luftvergaschten Installationen ist die folgende Liste eine Referenz für Con
 | V1.24.0  a| 
 * docker.io/netapp/Trident:24.02.0
 * docker.io/netapp/Trident-AutoSupport:24.02
-* Registry.k8s.io/SIG-Storage/csi-provisioner:v3.6.0
-* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.4.0
-* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.0
-* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.0
-* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.9.0
+* Registry.k8s.io/SIG-Storage/csi-provisioner:v4.0.0
+* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.5.0
+* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.3
+* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.3
+* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.10.0
 * docker.io/netapp/Trident-Operator:24.02.0 (optional)
 
 
@@ -221,11 +221,11 @@ Bei luftvergaschten Installationen ist die folgende Liste eine Referenz für Con
 | V1.25.0  a| 
 * docker.io/netapp/Trident:24.02.0
 * docker.io/netapp/Trident-AutoSupport:24.02
-* Registry.k8s.io/SIG-Storage/csi-provisioner:v3.6.0
-* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.4.0
-* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.0
-* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.0
-* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.9.0
+* Registry.k8s.io/SIG-Storage/csi-provisioner:v4.0.0
+* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.5.0
+* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.3
+* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.3
+* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.10.0
 * docker.io/netapp/Trident-Operator:24.02.0 (optional)
 
 
@@ -234,11 +234,11 @@ Bei luftvergaschten Installationen ist die folgende Liste eine Referenz für Con
 | V1.26.0  a| 
 * docker.io/netapp/Trident:24.02.0
 * docker.io/netapp/Trident-AutoSupport:24.02
-* Registry.k8s.io/SIG-Storage/csi-provisioner:v3.6.0
-* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.4.0
-* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.0
-* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.0
-* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.9.0
+* Registry.k8s.io/SIG-Storage/csi-provisioner:v4.0.0
+* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.5.0
+* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.3
+* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.3
+* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.10.0
 * docker.io/netapp/Trident-Operator:24.02.0 (optional)
 
 
@@ -247,11 +247,11 @@ Bei luftvergaschten Installationen ist die folgende Liste eine Referenz für Con
 | V1.27.0  a| 
 * docker.io/netapp/Trident:24.02.0
 * docker.io/netapp/Trident-AutoSupport:24.02
-* Registry.k8s.io/SIG-Storage/csi-provisioner:v3.6.0
-* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.4.0
-* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.0
-* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.0
-* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.9.0
+* Registry.k8s.io/SIG-Storage/csi-provisioner:v4.0.0
+* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.5.0
+* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.3
+* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.3
+* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.10.0
 * docker.io/netapp/Trident-Operator:24.02.0 (optional)
 
 
@@ -260,11 +260,11 @@ Bei luftvergaschten Installationen ist die folgende Liste eine Referenz für Con
 | V1.28.0  a| 
 * docker.io/netapp/Trident:24.02.0
 * docker.io/netapp/Trident-AutoSupport:24.02
-* Registry.k8s.io/SIG-Storage/csi-provisioner:v3.6.0
-* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.4.0
-* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.0
-* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.0
-* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.9.0
+* Registry.k8s.io/SIG-Storage/csi-provisioner:v4.0.0
+* Registry.k8s.io/SIG-Storage/csi-Attacher:v4.5.0
+* Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.3
+* Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.3
+* Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.10.0
 * docker.io/netapp/Trident-Operator:24.02.0 (optional)
 
 
