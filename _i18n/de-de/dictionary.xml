@@ -328,7 +328,6 @@
   <block id="af2a4d2810d86aa0169c117f82682f9a" category="doc">Häufig gestellte Fragen</block>
   <block id="96ab491ef73d5db0cd15f55e1552cc22" category="section-title">Allgemeine Fragen</block>
   <block id="b34c3d20de0f1b2c7a69bdc59002ad47" category="section-title">Wie oft wird Astra Trident veröffentlicht?</block>
-  <block id="2f55088c7d055eb361252b15d5d7af10" category="paragraph">Astra Trident wird alle drei Monate veröffentlicht: Januar, April, Juli und Oktober. Dies ist ein Monat nach der Kubernetes-Version.</block>
   <block id="15602d1e4b699ebca549a3d953672d8c" category="section-title">Unterstützt Astra Trident alle Funktionen, die in einer bestimmten Version von Kubernetes verfügbar sind?</block>
   <block id="d860923e20119473e7f7d50683cb0559" category="paragraph">Astra Trident unterstützt in der Regel keine Alpha-Funktionen in Kubernetes. Trident unterstützt möglicherweise Beta-Funktionen in den beiden Trident Versionen, die nach der Kubernetes Beta-Version folgen.</block>
   <block id="52ffcf336df0055235949cf324a8624b" category="section-title">Verfügt Astra Trident über irgendwelche Abhängigkeiten von anderen NetApp Produkten für seine Funktionsweise?</block>
@@ -3278,7 +3277,6 @@ Yesfootnote:5[]: Unterstützt von Astra Trident</block>
   <block id="33ab2c3f94452baf7f17dab03982edfb" category="paragraph">Nachher<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> Wird aktualisiert, verarbeitet der Bediener die Updates und Patches für die vorhandene Installation. Dies kann dazu führen, dass neue Pods erstellt werden, um die Installation entsprechend zu ändern.</block>
   <block id="ac0482b416d6b2d907db760f79e018a7" category="example-title">&lt;strong&gt; Retinstallbeam &lt;/strong&gt;</block>
   <block id="ae2cbb250a37c9e09570ff02857e4cbe" category="paragraph">Der im Cluster enthaltene Trident Operator ermöglicht die saubere Entfernung von im Cluster-Umfang enthaltenen Ressourcen. Benutzer können Astra Trident vollständig deinstallieren und einfach neu installieren.</block>
-  <block id="8e2504f56599a577cd2bbee322a41d4e" category="paragraph">Astra Trident folgt einem vierteljährlichen Release-Intervall mit vier Hauptversionen pro Kalenderjahr. Jede neue Version baut auf den vorherigen Versionen auf und bietet neue Funktionen, Performance-Verbesserungen, Bug Fixes und Verbesserungen. Wir empfehlen Ihnen, ein Upgrade mindestens einmal pro Jahr durchzuführen, um von den neuen Funktionen in Astra Trident zu profitieren.</block>
   <block id="4aa39142850a8999e9a4e9350f8bfbe9" category="list-text">Astra Trident 23.07 und höher benötigt v1-Volume-Snapshots und unterstützt keine Alpha- oder Beta-Snapshots mehr.</block>
   <block id="34c1edfb4ac8581528c3791be680aeb3" category="inline-link-macro">CVS-Diensttyp</block>
   <block id="5797c3891863b81173e1bb10d6488a72" category="inline-link-macro">Beispiele für CVS-Diensttypen</block>
@@ -3770,11 +3768,6 @@ LUKS-Verschlüsselung wird für NVMe/TCP nicht unterstützt.</block>
   <block id="0acb661700c6422ee3bfc29c43c715c6" category="paragraph">Verwendung einer Konfiguration ohne Multipathing oder Verwendung von<block ref="a3a1d5b95e345a3db24a5a30e349f699" prefix=" " category="inline-code"></block> Oder<block ref="e82e6d155396541f07f7347c984444ea" prefix=" " category="inline-code"></block> Der Wert in der Multipath.conf-Datei führt zu Mount-Fehlern. Astra Trident hat die Verwendung von empfohlen<block ref="db729c5c8df447087e5a84b961df14f6" prefix=" " category="inline-code"></block> Seit der Version 21.07.</block>
   <block id="8554748be67b956e550de942edae807d" category="admonition">Für NVMe/TCP ist RHEL 9 oder höher erforderlich.</block>
   <block id="e379ebca8f2245b4a0c32803c6d7f845" category="paragraph">Alle Worker-Nodes im Kubernetes-Cluster müssen in der Lage sein, die Volumes, die Sie für Ihre Pods bereitgestellt haben, zu mounten. Um die Worker-Nodes vorzubereiten, müssen Sie auf der Grundlage Ihrer Treiberauswahl NFS-, iSCSI- oder NVMe-Tools installieren.</block>
-  <block id="f1ddd80e14c81c1d754dfbdb2f850757" category="list-text">Registry.k8s.io/SIG-Storage/csi-provisioner:v3.6.0</block>
-  <block id="9907e74008defde26417cd6b70b41a28" category="list-text">Registry.k8s.io/SIG-Storage/csi-Attacher:v4.4.0</block>
-  <block id="0412a949ebb008aa6aa55f27dd6db71c" category="list-text">Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.0</block>
-  <block id="1b18bb70ac8b9e2989b63f692a170f14" category="list-text">Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.0</block>
-  <block id="bfcfde74961d9f3991b8fb27f23b564f" category="list-text">Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.9.0</block>
   <block id="df935b95f4f5aa4b8cc6b78b9011196d" category="cell">V1.28.0</block>
   <block id="2564a762d021b4beae21f01627773c0f" category="inline-link-macro">Ausgabe #834</block>
   <block id="e53ddb8a6947ad5b93f8c82a86836f16" category="list-text">Feste Volume-Erweiterung, wenn eine neu angeforderte Größe kleiner ist als die gesamte Volume-Größe für ontap-nas und ontap-nas-flexgroup-Storage-Treiber (<block ref="6140c2bc2ecfc555b47da5841f5fd8ae" category="inline-link-macro-rx"></block>).</block>
@@ -4086,7 +4079,6 @@ Arbeitet mit Kubernetes Non-Graceful Node Shutdown (NGNS), um Clusteradministrat
   <block id="e7afa8f188dd7bf2c172108b10e2e2df" category="list-text">Registry.k8s.io/SIG-Storage/csi-resizer:v1.9.3</block>
   <block id="5268a90435480eab7edcef1c31af78ea" category="list-text">Registry.k8s.io/SIG-Storage/csi-snapshotter:v6.3.3</block>
   <block id="dc33446faca12c219dd12f5e1c73cf51" category="list-text">Registry.k8s.io/SIG-Storage/csi-Node-driver-Registrar:v2.10.0</block>
-  <block id="528d64fadb48dbbc71a3bf878d210988" category="list-text">docker.io/netapp/Trident-Operator:24.02.0 (optional)</block>
   <block id="62f429770359674b482a69dc8eb1c822" category="paragraph">Weitere Informationen zu Cloud Volumes Service auf Google Cloud Service-Typen und Service-Leveln finden Sie unter <block ref="5b5fd03722abab2c395288a6ee42ad11" category="inline-link-macro-rx"></block>.</block>
   <block id="cb1cfaffdbb4cc0c4c444a11e40e3262" category="paragraph">Bei ONTAP-Back-Ends, die die SAN-Storage-Treiber verwenden, kann Astra Trident bidirektionales CHAP einrichten und CHAP-Benutzernamen und -Schlüssel über managen<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>.
 Siehe <block ref="5cdb093a3afb814148505ae9813b18af" category="inline-link-macro-rx"></block> Um zu erfahren, wie Astra Trident CHAP auf ONTAP Back-Ends konfiguriert.</block>
@@ -4120,4 +4112,6 @@ Sie können QoS-Richtliniengruppen im Backend oder im Storage-Pool festlegen und
   <block id="fabc0fa737916420805fcbdf1e73d723" category="list-text">Wenn ein Benutzer-Pod vorhanden ist, verwenden Sie<block ref="9ce56b0c50ae80fe754522969b1c96b9" prefix=" " category="inline-code"></block> Um festzustellen, ob Astra Trident mit Helm installiert wurde.</block>
   <block id="f77d4be42f8ef9e2474d677786cf6d7a" category="paragraph">Die Cloud-Identität ermöglicht Kubernetes-Pods den Zugriff auf Azure-Ressourcen durch Authentifizierung als Workload-Identität anstatt durch Angabe explizite Azure-Anmeldedaten.</block>
   <block id="088be2b53cfa8710d751578d273c4af0" category="paragraph">Um die Vorteile der Cloud-Identität in Azure zu nutzen, müssen Sie über folgende Voraussetzungen verfügen:</block>
+  <block id="309d4be2a929a72254d2e0ec91b427b3" category="paragraph">Ab dem Release 24.02 wird Astra Trident alle vier Monate veröffentlicht: Februar, Juni und Oktober. Dies ist ein Monat nach der Kubernetes-Version.</block>
+  <block id="d9242a3acb300b393c2167774404ecc0" category="paragraph">Ab Version 24.02 folgt Astra Trident einem viermonatigen Release-Intervall und liefert drei wichtige Releases pro Kalenderjahr. Jede neue Version baut auf den vorherigen Versionen auf und bietet neue Funktionen, Performance-Verbesserungen, Bug Fixes und Verbesserungen. Wir empfehlen Ihnen, ein Upgrade mindestens einmal pro Jahr durchzuführen, um von den neuen Funktionen in Astra Trident zu profitieren.</block>
 </blocks>

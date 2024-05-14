@@ -22,7 +22,7 @@ Hier finden Sie Antworten auf die häufig gestellten Fragen zur Installation, Ko
 
 === Wie oft wird Astra Trident veröffentlicht?
 
-Astra Trident wird alle drei Monate veröffentlicht: Januar, April, Juli und Oktober. Dies ist ein Monat nach der Kubernetes-Version.
+Ab dem Release 24.02 wird Astra Trident alle vier Monate veröffentlicht: Februar, Juni und Oktober. Dies ist ein Monat nach der Kubernetes-Version.
 
 
 
