@@ -230,9 +230,6 @@ NOTE: Für Ubuntu 18.04, müssen Sie Ziel-Ports mit erkennen `iscsiadm` Vor dem 
 --
 ====
 
-WARNING: Starten Sie die Worker-Knoten nach der Installation der iSCSI-Tools neu, um Fehler beim Anschließen von Volumes an Container zu vermeiden.
-
-
 
 == NVMe/TCP-Volumes
 
