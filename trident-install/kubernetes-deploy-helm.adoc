@@ -209,6 +209,12 @@ Diese Tabelle und die `values.yaml` Datei, die Teil des Helm-Diagramms ist, enth
 
 
 | `cloudIdentity` | Bei Verwendung der Cloud-Identität auf einem AKS-Cluster auf Workload-Identität („Azure.Workload.Identity/Client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx“) einstellen. Bei Verwendung der Cloud-Identität auf einem EKS-Cluster auf AWS iam-Rolle („eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/astradent-role“) einstellen. | `""` 
+
+
+| `iscsiSelfHealingInterval` | Das Intervall, in dem die iSCSI-Selbstheilung aufgerufen wird. | `5m0s` 
+
+
+| `iscsiSelfHealingWaitTime` | Die Dauer, nach der die iSCSI-Selbstheilung den Versuch startet, eine veraltete Sitzung durch Abmeldung und anschließende Anmeldung aufzulösen. | `7m0s` 
 |===
 
 
