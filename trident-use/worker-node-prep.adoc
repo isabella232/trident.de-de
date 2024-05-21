@@ -21,13 +21,13 @@ Alle Worker-Nodes im Kubernetes-Cluster müssen in der Lage sein, die Volumes, d
 Wenn Sie eine Kombination von Treibern verwenden, sollten Sie alle erforderlichen Tools für Ihre Treiber installieren. Bei aktuellen Versionen von RedHat CoreOS sind die Tools standardmäßig installiert.
 
 .NFS Tools
-Installieren Sie die NFS Tools, sofern Sie Folgendes verwenden: `ontap-nas`, `ontap-nas-economy`, `ontap-nas-flexgroup`, `azure-netapp-files`, `gcp-cvs`.
+link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nfs-volumes["Installieren Sie die NFS Tools"] Wenn Sie Folgendes verwenden: `ontap-nas`, `ontap-nas-economy`, `ontap-nas-flexgroup`, `azure-netapp-files`, `gcp-cvs`.
 
 .ISCSI-Tools
-Installieren Sie die iSCSI-Tools, wenn Sie Folgendes verwenden: `ontap-san`, `ontap-san-economy`, `solidfire-san`.
+link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#install-the-iscsi-tools["Installieren Sie die iSCSI-Tools"] Wenn Sie Folgendes verwenden: `ontap-san`, `ontap-san-economy`, `solidfire-san`.
 
 .NVMe-Tools
-Installieren Sie bei Verwendung der NVMe Tools `ontap-san` Für das NVMe-over-TCP-Protokoll (Nonvolatile Memory Express).
+link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nvmetcp-volumes["Installation der NVMe Tools"] Wenn Sie verwenden `ontap-san` Für das NVMe-over-TCP-Protokoll (Nonvolatile Memory Express).
 
 
 NOTE: Wir empfehlen ONTAP 9.12 oder höher für NVMe/TCP.

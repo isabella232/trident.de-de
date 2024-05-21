@@ -4,7 +4,7 @@ permalink: trident-managing-k8s/upgrade-operator.html
 keywords: upgrade, trident, methods, operator, tridentctl, helm 
 summary: Sie können eine bestehende Astra Trident-Installation ganz einfach mithilfe des Bedieners aufrüsten. 
 ---
-= Upgrade einer Trident-Bedienerinstallation
+= Upgrade einer Astra Trident Installation mit dem Trident Operator oder Helm
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

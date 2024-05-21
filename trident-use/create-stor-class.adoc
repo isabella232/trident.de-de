@@ -18,7 +18,7 @@ Konfigurieren Sie ein Kubernetes StorageClass-Objekt und erstellen Sie die Stora
 
 == Konfigurieren Sie ein Kubernetes StorageClass-Objekt
 
-Der https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass-Objekt"^] Astra Trident wird als bereitstellung identifiziert, die für diese Klasse verwendet wird und Astra Trident zur Bereitstellung eines Volumes anweist. Beispiel:
+Der https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass-Objekt"^] Astra Trident wird als bereitstellung für diese Klasse identifiziert. Astra Trident weist Anweisungen zur Provisionierung eines Volumes aus. Beispiel:
 
 [listing]
 ----
