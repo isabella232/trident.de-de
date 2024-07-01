@@ -70,6 +70,8 @@ entries:
     url: "/trident-use/vol-expansion.html"
   - title: Volumes importieren
     url: "/trident-use/vol-import.html"
+  - title: Anpassen von Volume-Namen
+    url: "/trident-use/vol-custom-name.html"
   - title: NFS-Volumes können über Namespaces hinweg genutzt werden
     url: "/trident-use/volume-share.html"
   - title: Verwenden Sie die CSI-Topologie

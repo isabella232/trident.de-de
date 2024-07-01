@@ -118,9 +118,7 @@ Dieser Parameter ist für On-Premises-ONTAP optional.
 Dieser Parameter ist für Amazon FSX for ONTAP-Back-Ends erforderlich und darf nicht leer sein. | `smb-share` 
 
 
-| `useREST` | Boolescher Parameter zur Verwendung von ONTAP REST-APIs. *Technische Vorschau*
-`useREST` Wird als **Tech-Vorschau bereitgestellt**, das für Testumgebungen und nicht für Produktions-Workloads empfohlen wird. Wenn eingestellt auf `true`, Astra Trident wird ONTAP REST APIs zur Kommunikation mit dem Backend verwenden. Diese Funktion erfordert ONTAP 9.11.1 und höher. Darüber hinaus muss die verwendete ONTAP-Login-Rolle Zugriff auf den haben `ontap` Applikation. Dies wird durch die vordefinierte zufrieden `vsadmin` Und `cluster-admin` Rollen:
-`useREST` Wird mit MetroCluster nicht unterstützt. | Falsch 
+| `useREST` | Boolescher Parameter zur Verwendung von ONTAP REST-APIs.  `useREST` Bei Einstellung auf `true`verwendet Astra Trident ONTAP REST APIs zur Kommunikation mit dem Backend; bei Einstellung auf `false`verwendet Astra Trident ONTAP ZAPI Aufrufe zur Kommunikation mit dem Backend. Diese Funktion erfordert ONTAP 9.11.1 und höher. Darüber hinaus muss die verwendete ONTAP-Anmelderolle Zugriff auf die Anwendung haben `ontap` . Dies wird durch die vordefinierten `vsadmin` Rollen und `cluster-admin` erreicht. Ab Astra Trident 24.06-Version und ONTAP 9.15.1 oder höher `userREST` ist standardmäßig auf eingestellt `true` . Wechseln Sie zu ONTAP ZAPI-Aufrufe. `useREST` `false` | `true` Für ONTAP 9.15.1 oder höher, andernfalls `false`. 
 |===
 
 
@@ -170,6 +168,9 @@ Sie können die Standardbereitstellung mit diesen Optionen im steuern `defaults`
 
 
 | `securityStyle` | Sicherheitstyp für neue Volumes. NFS unterstützt `mixed` Und `unix` Sicherheitsstile. SMB unterstützt `mixed` Und `ntfs` Sicherheitsstile. | NFS-Standard ist `unix`. SMB-Standard ist `ntfs`. 
+
+
+| `nameTemplate` | Vorlage zum Erstellen benutzerdefinierter Volume-Namen. | „“ 
 |===
 
 NOTE: Die Verwendung von QoS Policy Groups mit Astra Trident erfordert ONTAP 9.8 oder höher. Es wird empfohlen, eine nicht gemeinsam genutzte QoS-Richtliniengruppe zu verwenden und sicherzustellen, dass die Richtliniengruppe auf jede Komponente einzeln angewendet wird. Eine Richtliniengruppe für Shared QoS führt zur Durchsetzung der Obergrenze für den Gesamtdurchsatz aller Workloads.
@@ -382,6 +383,25 @@ clientCertificate: ZXR0ZXJwYXB...ICMgJ3BhcGVyc2
 clientPrivateKey: vciwKIyAgZG...0cnksIGRlc2NyaX
 trustedCACertificate: zcyBbaG...b3Igb3duIGNsYXNz
 storagePrefix: myPrefix_
+----
+====
+.Back-End-Konfigurationsbeispiel mit nameTemplate
+[%collapsible]
+====
+[listing]
+----
+---
+version: 1
+storageDriverName: ontap-nas
+backendName: ontap-nas-backend
+managementLIF: <ip address>
+svm: svm0
+username: <admin>
+password: <password>
+defaults: {
+    "nameTemplate": "{{.volume.Name}}_{{.labels.cluster}}_{{.volume.Namespace}}_{{.volume.RequestName}}"
+},
+"labels": {"cluster": "ClusterA", "PVC": "{{.volume.Namespace}}_{{.volume.RequestName}}"}
 ----
 ====
 

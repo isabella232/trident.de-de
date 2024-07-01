@@ -16,14 +16,14 @@ Sie können den Trident-Operator manuell implementieren, um Astra Trident zu ins
 
 
 
-== Kritische Informationen zu Astra Trident 24.02
+== Kritische Informationen zu Astra Trident 24.06
 
 *Sie müssen die folgenden wichtigen Informationen über Astra Trident lesen.*
 
 .<strong> Informationen über Astra TripereIT </strong>
 [%collapsible%open]
 ====
-* Kubernetes 1.27 wird jetzt in Trident unterstützt. Upgrade von Trident vor dem Upgrade von Kubernetes.
+* Kubernetes 1.29 wird jetzt in Astra Trident unterstützt. Upgrade von Trident vor dem Upgrade von Kubernetes.
 * Astra Trident setzt die Verwendung von Multipathing-Konfiguration in SAN-Umgebungen strikt um und empfiehlt den Nutzen von `find_multipaths: no` In Multipath.conf Datei.
 +
 Verwendung einer Konfiguration ohne Multipathing oder Verwendung von `find_multipaths: yes` Oder `find_multipaths: smart` Der Wert in der Multipath.conf-Datei führt zu Mount-Fehlern. Trident empfiehlt die Verwendung von `find_multipaths: no` Seit der Version 21.07.
@@ -75,8 +75,8 @@ Das Astra Trident Installationspaket enthält alles, was Sie für die Bereitstel
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v24.02.0/trident-installer-24.02.0.tar.gz
-tar -xf trident-installer-24.02.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v24.06.0/trident-installer-24.06.0.tar.gz
+tar -xf trident-installer-24.06.0.tar.gz
 cd trident-installer
 ----
 
@@ -93,10 +93,10 @@ kubectl create -f deploy/crds/<VERSION>.yaml
 
 === Schritt 3: Aktualisieren Sie den Registrierungsort im Operator
 
-In `/deploy/operator.yaml`, Update `image: docker.io/netapp/trident-operator:24.02.0` So geben Sie den Speicherort Ihrer Bildregistrierung an. Ihr link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident und CSI-Images"] Kann in einer Registrierung oder in verschiedenen Registern gefunden werden, aber alle CSI-Images müssen sich in derselben Registrierung befinden. Beispiel:
+Aktualisieren Sie in `/deploy/operator.yaml`, `image: docker.io/netapp/trident-operator:24.06.0` um den Speicherort Ihrer Bildregistrierung anzuzeigen. Ihr link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident und CSI-Images"] kann sich in einer Registrierung oder in verschiedenen Registrierungen befinden, aber alle CSI-Bilder müssen sich in derselben Registrierung befinden. Beispiel:
 
-* `image: <your-registry>/trident-operator:24.02.0` Wenn Ihre Bilder alle in einer Registrierung gespeichert sind.
-* `image: <your-registry>/netapp/trident-operator:24.02.0` Wenn sich Ihr Trident-Image in einer anderen Registrierung als Ihre CSI-Images befindet.
+* `image: <your-registry>/trident-operator:24.06.0` Wenn Ihre Bilder alle in einer Registrierung gespeichert sind.
+* `image: <your-registry>/netapp/trident-operator:24.06.0` Wenn sich Ihr Trident-Image in einer anderen Registrierung als Ihre CSI-Images befindet.
 
 
 
@@ -105,7 +105,7 @@ In `/deploy/operator.yaml`, Update `image: docker.io/netapp/trident-operator:24.
 
 Das Astra Trident-Installationsprogramm stellt eine Paketdatei bereit, mit der der Operator installiert und zugehörige Objekte erstellt werden können. Die Bundle-Datei ist eine einfache Möglichkeit, den Operator zu implementieren und Astra Trident mit einer Standardkonfiguration zu installieren.
 
-* Verwenden Sie für Cluster mit Kubernetes 1.24 oder früheren Versionen `bundle_pre_1_25.yaml`.
+* Verwenden Sie für Cluster mit Kubernetes 1.24 `bundle_pre_1_25.yaml`.
 * Verwenden Sie für Cluster mit Kubernetes 1.25 oder höher `bundle_post_1_25.yaml`.
 
 
@@ -165,8 +165,8 @@ Ihr link:../trident-get-started/requirements.html#container-images-and-correspon
 [listing]
 ----
 imageRegistry: "<your-registry>"
-autosupportImage: "<your-registry>/trident-autosupport:24.02"
-tridentImage: "<your-registry>/trident:24.02.0"
+autosupportImage: "<your-registry>/trident-autosupport:24.06"
+tridentImage: "<your-registry>/trident:24.06.0"
 ----
 --
 .Bilder in verschiedenen Registern
@@ -176,8 +176,8 @@ Sie müssen anhängen `sig-storage` Bis zum `imageRegistry` Um unterschiedliche 
 [listing]
 ----
 imageRegistry: "<your-registry>/sig-storage"
-autosupportImage: "<your-registry>/netapp/trident-autosupport:24.02"
-tridentImage: "<your-registry>/netapp/trident:24.02.0"
+autosupportImage: "<your-registry>/netapp/trident-autosupport:24.06"
+tridentImage: "<your-registry>/netapp/trident:24.06.0"
 ----
 --
 ====
@@ -202,16 +202,16 @@ API Version: trident.netapp.io/v1
 Kind:        TridentOrchestrator
 ...
 Spec:
-  Autosupport Image:  <your-registry>/netapp/trident-autosupport:24.02
+  Autosupport Image:  <your-registry>/netapp/trident-autosupport:24.06
   Debug:              true
   Image Registry:     <your-registry>/sig-storage
   Namespace:          trident
-  Trident Image:      <your-registry>/netapp/trident:24.02.0
+  Trident Image:      <your-registry>/netapp/trident:24.06.0
 Status:
   Current Installation Params:
     IPv6:                       false
     Autosupport Hostname:
-    Autosupport Image:          <your-registry>/netapp/trident-autosupport:24.02
+    Autosupport Image:          <your-registry>/netapp/trident-autosupport:24.06
     Autosupport Proxy:
     Autosupport Serial Number:
     Debug:                      true
@@ -223,11 +223,11 @@ Status:
     Log Format:           text
     Probe Port:           17546
     Silence Autosupport:  false
-    Trident Image:        <your-registry>/netapp/trident:24.02.0
+    Trident Image:        <your-registry>/netapp/trident:24.06.0
   Message:                Trident installed
   Namespace:              trident
   Status:                 Installed
-  Version:                v24.02.0
+  Version:                v24.06.0
 Events:
     Type Reason Age From Message ---- ------ ---- ---- -------Normal
     Installing 74s trident-operator.netapp.io Installing Trident Normal
@@ -301,6 +301,6 @@ Verwenden Sie können `tridentctl` Um die installierte Version von Astra Trident
 +----------------+----------------+
 | SERVER VERSION | CLIENT VERSION |
 +----------------+----------------+
-| 24.02.0        | 24.02.0        |
+| 24.06.0        | 24.06.0        |
 +----------------+----------------+
 ----

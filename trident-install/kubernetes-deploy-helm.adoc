@@ -16,14 +16,14 @@ Sie können den Trident-Operator implementieren und Astra Trident mithilfe von H
 
 
 
-== Kritische Informationen zu Astra Trident 24.02
+== Kritische Informationen zu Astra Trident 24.06
 
 *Sie müssen die folgenden wichtigen Informationen über Astra Trident lesen.*
 
 .<strong> Informationen über Astra TripereIT </strong>
 [%collapsible%open]
 ====
-* Kubernetes 1.27 wird jetzt in Trident unterstützt. Upgrade von Trident vor dem Upgrade von Kubernetes.
+* Kubernetes 1.29 wird jetzt in Astra Trident unterstützt. Upgrade von Trident vor dem Upgrade von Kubernetes.
 * Astra Trident setzt die Verwendung von Multipathing-Konfiguration in SAN-Umgebungen strikt um und empfiehlt den Nutzen von `find_multipaths: no` In Multipath.conf Datei.
 +
 Verwendung einer Konfiguration ohne Multipathing oder Verwendung von `find_multipaths: yes` Oder `find_multipaths: smart` Der Wert in der Multipath.conf-Datei führt zu Mount-Fehlern. Trident empfiehlt die Verwendung von `find_multipaths: no` Seit der Version 21.07.
@@ -53,7 +53,7 @@ helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 +
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2402.0 --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 100.2406.0 --create-namespace --namespace <trident-namespace>
 ----
 +
 
@@ -87,7 +87,7 @@ Um beispielsweise den Standardwert von zu ändern `debug`, Ausführen Sie das fo
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2402.0  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 100.2406.0  --create-namespace --namespace trident --set tridentDebug=true
 ----
 
 

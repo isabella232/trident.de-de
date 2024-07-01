@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-managing-k8s/upgrade-trident.html 
 keywords: upgrade, trident, methods, operator, tridentctl, helm 
-summary: Astra Trident folgt einem vierteljährlichen Release-Intervall mit vier Hauptversionen pro Kalenderjahr. Jede neue Version baut auf den vorherigen Versionen auf und bietet neue Funktionen, Performance-Verbesserungen sowie Bug Fixes und Verbesserungen. Führen Sie ein Upgrade mindestens einmal pro Jahr durch, um von den neuen Funktionen in Astra Trident zu profitieren. 
+summary: Astra Trident folgt einem viermonatigen Release-Intervall und liefert drei wichtige Releases pro Kalenderjahr. Jede neue Version baut auf den vorherigen Versionen auf und bietet neue Funktionen, Performance-Verbesserungen sowie Bug Fixes und Verbesserungen. Führen Sie ein Upgrade mindestens einmal pro Jahr durch, um von den neuen Funktionen in Astra Trident zu profitieren. 
 ---
 = Upgrade Astra Trident
 :hardbreaks:
@@ -38,11 +38,11 @@ Bei einem Upgrade auf die neueste Version von Astra Trident sollten Sie Folgende
 
 Astra Trident Versionen folgen einem datumbasierten `YY.MM` Namensgebungskonvention, wobei „YY“ die letzten beiden Ziffern des Jahres und „MM“ der Monat ist. Dot Releases folgen einem `YY.MM.X` konvention, wo "X" die Patch-Ebene ist. Sie wählen die Version, auf die Sie aktualisieren möchten, basierend auf der Version aus, von der Sie aktualisieren.
 
-* Sie können ein direktes Upgrade auf jede Zielversion durchführen, die sich innerhalb eines Fensters mit vier Versionen Ihrer installierten Version befindet. Sie können beispielsweise direkt von 23.01 (oder einem beliebigen 23.01-Punkt-Release) auf 24.02 aktualisieren.
-* Wenn Sie ein Upgrade von einer Version außerhalb des Fensters mit vier Releases durchführen, führen Sie ein Upgrade in mehreren Schritten durch. Befolgen Sie die Upgrade-Anweisungen für link:../earlier-versions.html["Frühere Version"] Sie führen ein Upgrade von auf die neueste Version durch, die für das Fenster mit vier Versionen geeignet ist. Wenn Sie beispielsweise 22.01 verwenden und ein Upgrade auf 24.02 durchführen möchten:
+* Sie können ein direktes Upgrade auf jede Zielversion durchführen, die sich innerhalb eines Fensters mit vier Versionen Ihrer installierten Version befindet. Sie können beispielsweise direkt von 23.04 (oder einem beliebigen 23.04-Punkt-Release) auf 24.06 aktualisieren.
+* Wenn Sie ein Upgrade von einer Version außerhalb des Fensters mit vier Releases durchführen, führen Sie ein Upgrade in mehreren Schritten durch. Verwenden Sie die Upgrade-Anweisungen für das, von dem link:../earlier-versions.html["Frühere Version"] Sie aktualisieren, um auf die neueste Version zu aktualisieren, die für das Fenster mit vier Versionen passt. Wenn Sie beispielsweise 22.01 verwenden und ein Upgrade auf 24.06 durchführen möchten:
 +
-.. Erstes Upgrade von 22.01 auf 23.01.
-.. Dann Upgrade von 23.01 auf 24.02.
+.. Erstes Upgrade von 22.07 auf 23.04.
+.. Dann Upgrade von 23.04 auf 24.06.
 
 
 

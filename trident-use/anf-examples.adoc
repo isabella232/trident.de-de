@@ -95,6 +95,9 @@ Optional, wenn verwaltete Identitäten auf einem AKS-Cluster aktiviert sind. |
 
 
 | `nasType` | Konfiguration der Erstellung von NFS- oder SMB-Volumes Die Optionen lauten `nfs`, `smb` Oder null. Einstellung auf null setzt standardmäßig auf NFS-Volumes. | `nfs` 
+
+
+| `supportedTopologies` | Stellt eine Liste von Regionen und Zonen dar, die von diesem Backend unterstützt werden. Weitere Informationen finden Sie unter link:../trident-use/csi-topology.html["Verwenden Sie die CSI-Topologie"]. |  
 |===
 
 NOTE: Weitere Informationen zu den Netzwerkfunktionen finden Sie unter link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/configure-network-features["Konfigurieren Sie Netzwerkfunktionen für ein Azure NetApp Files Volume"^].
@@ -316,6 +319,32 @@ storage:
   - standard-1
   - standard-2
 
+----
+====
+.Konfiguration unterstützter Topologien
+[%collapsible]
+====
+Astra Trident erleichtert die Bereitstellung von Volumes für Workloads, basierend auf Regionen und Verfügbarkeitszonen. Der `supportedTopologies` Block in dieser Backend-Konfiguration dient zur Bereitstellung einer Liste von Regionen und Zonen pro Backend. Die hier angegebenen Region- und Zonenwerte müssen mit den Region- und Zonenwerten der Beschriftungen auf jedem Kubernetes-Cluster-Node übereinstimmen. Diese Regionen und Zonen stellen die Liste der zulässigen Werte dar, die in einer Lagerklasse bereitgestellt werden können. Bei Storage-Klassen, die einen Teilbereich der Regionen und Zonen enthalten, die in einem Back-End bereitgestellt werden, erstellt Astra Trident Volumes in der erwähnten Region und Zone. Weitere Informationen finden Sie unter link:../trident-use/csi-topology.html["Verwenden Sie die CSI-Topologie"].
+
+[listing]
+----
+---
+version: 1
+storageDriverName: azure-netapp-files
+subscriptionID: 9f87c765-4774-fake-ae98-a721add45451
+tenantID: 68e4f836-edc1-fake-bff9-b2d865ee56cf
+clientID: dd043f63-bf8e-fake-8076-8de91e5713aa
+clientSecret: SECRET
+location: eastus
+serviceLevel: Ultra
+capacityPools:
+- application-group-1/account-1/ultra-1
+- application-group-1/account-1/ultra-2
+supportedTopologies:
+- topology.kubernetes.io/region: eastus
+  topology.kubernetes.io/zone: eastus-1
+- topology.kubernetes.io/region: eastus
+  topology.kubernetes.io/zone: eastus-2
 ----
 ====
 

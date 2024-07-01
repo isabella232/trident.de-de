@@ -139,7 +139,7 @@ Astra Trident unterstützt das Non-Volatile Memory Express-Protokoll (NVMe) übe
 * Größe eines NVMe Volumes ändern
 * Importieren eines NVMe Volumes, das außerhalb von Astra Trident erstellt wurde, damit sein Lebenszyklus durch Astra Trident gemanagt werden kann
 * NVMe-natives Multipathing
-* Ordnungsgemäßes oder unzumutbar Herunterfahren der K8s-Nodes (24.02)
+* Ordnungsgemäßes oder unzumutbar Herunterfahren der K8s-Nodes (24.06)
 
 
 Astra Trident unterstützt nicht:

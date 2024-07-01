@@ -1,0 +1,123 @@
+---
+sidebar: sidebar 
+permalink: trident-use/vol-custom-name.html 
+keywords: volumes, volume name, custom volume name, on-demand volume snapshots, expand volumes, iscsci volumes, nfs volumes, expand, expansion, 
+summary: 'Astra Trident unterstützt das Zuweisen aussagekräftiger Namen und Labels zu den erstellten Volumes. Dadurch können Volumes einfacher identifiziert und überwacht werden und lassen sich einfach den entsprechenden Kubernetes-Ressourcen (PVCs) zuordnen.' 
+---
+= Passen Sie Volume-Namen und -Beschriftungen an
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mit Astra Trident können Sie erstellten Volumes aussagekräftige Namen und Labels zuweisen. So können Sie Volumes leichter identifizieren und ihren jeweiligen Kubernetes-Ressourcen (PVCs) zuweisen. Sie können auch Vorlagen auf Backend-Ebene definieren, um benutzerdefinierte Volume-Namen und benutzerdefinierte Labels zu erstellen. Alle Volumes, die Sie erstellen, importieren oder klonen, werden an die Vorlagen angepasst.
+
+
+
+== Bevor Sie beginnen
+
+Anpassbare Volumennamen und Beschriftungen unterstützen:
+
+. Volume-Erstellung, -Import und -Klonen
+. Im Fall des ontap-nas-Economy-Treibers entspricht nur der Name des Qtree-Volumes der Namensvorlage.
+. Im Fall des ontap-san-Economy-Treibers entspricht nur der LUN-Name der Namensvorlage.
+
+
+
+
+== Einschränkungen
+
+. Anpassbare Volume-Namen sind nur mit ONTAP On-Premises-Treibern kompatibel.
+. Anpassbare Volume-Namen gelten nicht für vorhandene Volumes.
+
+
+
+
+== Wichtige Verhaltensweisen anpassbarer Volumennamen
+
+. Wenn ein Fehler aufgrund einer ungültigen Syntax in einer Namensvorlage auftritt, schlägt die Back-End-Erstellung fehl. Wenn jedoch die Vorlagenapplikation fehlschlägt, wird das Volume gemäß der bestehenden Namenskonvention benannt.
+. Storage-Präfix ist nicht anwendbar, wenn ein Volume mit einer Namensvorlage aus der Back-End-Konfiguration benannt wird. Jeder gewünschte Präfixwert kann direkt zur Vorlage hinzugefügt werden.
+
+
+
+
+== Beispiele für die Backend-Konfiguration mit Namensvorlage und Beschriftungen
+
+Benutzerdefinierte Namensvorlagen können auf Root- und/oder Poolebene definiert werden.
+
+.Beispiel für die Stammebene
+[listing]
+----
+{
+"version": 1,
+"storageDriverName": "ontap-nas",
+"backendName": "ontap-nfs-backend",
+"managementLIF": "<ip address>",
+"svm": "svm0",
+"username": "<admin>",
+"password": "<password>",
+"defaults": {
+    "nameTemplate": "{{.volume.Name}}_{{.labels.cluster}}_{{.volume.Namespace}}_{{.volume.RequestName}}"
+},
+"labels": {"cluster": "ClusterA", "PVC": "{{.volume.Namespace}}_{{.volume.RequestName}}"}
+}
+
+----
+.Beispiel auf Poolebene
+[listing]
+----
+{
+  "version": 1,
+  "storageDriverName": "ontap-nas",
+  "backendName": "ontap-nfs-backend",
+  "managementLIF": "<ip address>",
+  "svm": "svm0",
+ "username": "<admin>",
+  "password": "<password>",
+  "useREST": true,
+  "storage": [
+  {
+      "labels":{"labelname":"label1", "name": "{{ .volume.Name }}"},
+      "defaults":
+      {
+          "nameTemplate": "pool01_{{ .volume.Name }}_{{ .labels.cluster }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
+      }
+   },
+  {
+      "labels":{"cluster":"label2", "name": "{{ .volume.Name }}"},
+      "defaults":
+      {
+          "nameTemplate": "pool02_{{ .volume.Name }}_{{ .labels.cluster }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
+      }
+}
+  ]
+}
+----
+
+
+== Beispiele für Namensvorlagen
+
+*Beispiel 1*:
+
+[listing]
+----
+"nameTemplate": "{{ .config.StoragePrefix }}_{{ .volume.Name }}_{{ .config.BackendName }}"
+----
+*Beispiel 2*:
+
+[listing]
+----
+"nameTemplate": "pool_{{ .config.StoragePrefix }}_{{ .volume.Name }}_{{ slice .volume.RequestName 1 5 }}""
+----
+
+
+== Zu berücksichtigende Aspekte
+
+. Bei Volumenimporten werden die Etiketten nur aktualisiert, wenn das vorhandene Volume über Etiketten in einem bestimmten Format verfügt. Zum Beispiel: `{"provisioning":{"Cluster":"ClusterA", "PVC": "pvcname"}}`.
+. Im Fall des Imports von verwalteten Volumes folgt der Name des Volumes der Namensvorlage, die in der Backend-Definition auf Root-Ebene definiert wurde.
+. Astra Trident unterstützt nicht die Verwendung eines Slice-Operators mit dem Storage-Präfix.
+. Wenn die Vorlagen nicht zu eindeutigen Volume-Namen führen, fügt Astra Trident einige zufällige Zeichen an, um eindeutige Volume-Namen zu erstellen.
+. Wenn der benutzerdefinierte Name für ein NAS-Economy-Volume 64 Zeichen lang ist, benennt Astra Trident die Volumes entsprechend der bestehenden Namenskonvention. Bei allen anderen ONTAP-Treibern schlägt die Erstellung des Volumes fehl, wenn der Datenträgername das Limit für den Namen überschreitet.
+

@@ -16,7 +16,7 @@ Sie können Astra Trident mithilfe von installieren `tridentctl`. Dieser Prozess
 
 
 
-== Kritische Informationen zu Astra Trident 24.02
+== Kritische Informationen zu Astra Trident 24.06
 
 *Sie müssen die folgenden wichtigen Informationen über Astra Trident lesen.*
 
@@ -75,8 +75,8 @@ Das Installationspaket von Astra Trident erstellt einen Trident Pod, konfigurier
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v24.02.0/trident-installer-24.02.0.tar.gz
-tar -xf trident-installer-24.02.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v24.06.0/trident-installer-24.06.0.tar.gz
+tar -xf trident-installer-24.06.0.tar.gz
 cd trident-installer
 ----
 
@@ -98,7 +98,7 @@ Installieren Sie Astra Trident im gewünschten Namespace, indem Sie den ausführ
 --
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:24.02 --trident-image <your-registry>/trident:24.02.0
+./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:24.06 --trident-image <your-registry>/trident:24.06.0
 ----
 --
 .Bilder in verschiedenen Registern
@@ -107,7 +107,7 @@ Sie müssen anhängen `sig-storage` Bis zum `imageRegistry` Um unterschiedliche 
 
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry>/sig-storage --autosupport-image <your-registry>/netapp/trident-autosupport:24.02 --trident-image <your-registry>/netapp/trident:24.02.0
+./tridentctl install -n trident --image-registry <your-registry>/sig-storage --autosupport-image <your-registry>/netapp/trident-autosupport:24.06 --trident-image <your-registry>/netapp/trident:24.06.0
 ----
 --
 ====
@@ -128,7 +128,7 @@ INFO Created Trident daemonset.
 INFO Waiting for Trident pod to start.
 INFO Trident pod started.                          namespace=trident pod=trident-controller-679648bd45-cv2mx
 INFO Waiting for Trident REST interface.
-INFO Trident REST interface is up.                 version=24.02.0
+INFO Trident REST interface is up.                 version=24.06.0
 INFO Trident installation succeeded.
 ....
 ----
@@ -168,7 +168,7 @@ Verwenden Sie können `tridentctl` Um die installierte Version von Astra Trident
 +----------------+----------------+
 | SERVER VERSION | CLIENT VERSION |
 +----------------+----------------+
-| 24.02.0        | 24.02.0        |
+| 24.06.0        | 24.06.0        |
 +----------------+----------------+
 ----
 

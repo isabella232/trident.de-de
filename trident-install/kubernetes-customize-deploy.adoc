@@ -70,7 +70,7 @@ Arbeitet mit Kubernetes Non-Graceful Node Shutdown (NGNS), um Clusteradministrat
 Automatisch | `false` 
 
 
-| `autosupportImage` | Das Container-Image für AutoSupport Telemetrie | `"netapp/trident-autosupport:24.02"` 
+| `autosupportImage` | Das Container-Image für AutoSupport Telemetrie | `"netapp/trident-autosupport:24.06"` 
 
 
 | `autosupportProxy` | Die Adresse/den Port eines Proxys zum Senden von AutoSupport
@@ -83,7 +83,7 @@ Telemetrie | `"http://proxy.example.com:8888"`
 | `logFormat` | Astra Trident Protokollformat zur Verwendung [Text, json] | `"text"` 
 
 
-| `tridentImage` | Astra Trident-Image zu installieren | `"netapp/trident:24.02"` 
+| `tridentImage` | Astra Trident-Image zu installieren | `"netapp/trident:24.06"` 
 
 
 | `imageRegistry` | Pfad zur internen Registrierung des Formats
