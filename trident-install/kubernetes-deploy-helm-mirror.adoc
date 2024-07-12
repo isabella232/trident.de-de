@@ -49,7 +49,7 @@ Zusätzlich zum link:../trident-get-started/kubernetes-deploy.html#before-you-de
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. Nutzung `helm install` Und geben Sie einen Namen für die Bereitstellung und den Speicherort der Image-Registrierung an. Ihr link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident und CSI-Images"] Kann in einer Registrierung oder in verschiedenen Registern gefunden werden, aber alle CSI-Images müssen sich in derselben Registrierung befinden. In den Beispielen: `100.2402.0` Ist die Version des Astra Trident, die Sie installieren.
+.  `helm install`Geben Sie einen Namen für die Bereitstellung und den Speicherort der Image-Registrierung an. Ihr link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident und CSI-Images"] kann sich in einer Registrierung oder in verschiedenen Registrierungen befinden, aber alle CSI-Bilder müssen sich in derselben Registrierung befinden. In den Beispielen `100.2406.0` ist die Version von Astra Trident, die Sie installieren.
 +
 [role="tabbed-block"]
 ====
@@ -98,7 +98,7 @@ Geben Sie eine YAML-Datei mit Überschreibungen an. Dies kann mehrfach angegeben
 Geben Sie Überschreibungen in der Befehlszeile an.
 
 |===
-Um beispielsweise den Standardwert von zu ändern `debug`, Ausführen Sie das folgende `--set` Befehl wo `100.2402.0` Ist die Version von Astra Trident, die Sie installieren:
+Um beispielsweise den Standardwert von zu ändern `debug`, führen Sie den folgenden Befehl aus `--set` , wobei `100.2406.0` sich die Version von Astra Trident befindet, die Sie installieren:
 
 [listing]
 ----
