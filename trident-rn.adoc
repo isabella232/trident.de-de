@@ -43,6 +43,7 @@ WARNING: Der `tridentctl` Binary for Linux, die in der ZIP-Datei des Installatio
 * Zusätzliche Fähigkeit für Astra Trident DemonSet, Zombie-Mounts und Restverfolgungsdateien beim Start zu reinigen (link:https://github.com/NetApp/trident/issues/883["Ausgabe #883"]).
 * PVC-Beschriftung für dynamischen Import von LUKS-Volumes ( ) hinzugefügt `trident.netapp.io/luksEncryption`link:https://github.com/NetApp/trident/issues/849["Ausgabe #849"].
 * ANF-Treiber wurde um Topologiebewusstsein erweitert.
+* Unterstützung für Windows Server 2022-Knoten hinzugefügt.
 
 
 
