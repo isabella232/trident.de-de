@@ -150,6 +150,7 @@ Der Astra Trident unterstützt zwar bestimmte Betriebssysteme offiziell nicht, d
 NOTE: Für NVMe/TCP ist RHEL 9 oder höher erforderlich.
 
 * Ubuntu 22.04 oder höher (AMD64 und ARM64)
+* Windows Server 2022
 
 
 Standardmäßig wird Astra Trident in einem Container ausgeführt und läuft daher auf jedem Linux-Mitarbeiter. Diese Mitarbeiter müssen jedoch in der Lage sein, die Volumes, die Astra Trident bietet, je nach den von Ihnen verwendeten Back-Ends mit dem standardmäßigen NFS-Client oder iSCSI-Initiator zu mounten.

@@ -4199,4 +4199,5 @@ Sie können QoS-Richtliniengruppen im Backend oder im Storage-Pool festlegen und
   <block id="2dd7e74e47b2fea3bc13eda279fe6caa" category="list-text">Wenn Sie <block ref="701383cb184d92daac13becc67e9c1be" category="inline-link-macro-rx"></block>, können Sie verwenden<block ref="aa057bb2523e090dc6e3052f2e88741e" prefix=" " category="inline-code"></block> , um ein Upgrade in einem Schritt. Wenn Sie den Helm Repo nicht hinzugefügt haben oder ihn nicht zum Upgrade verwenden können:</block>
   <block id="bd97885496639b0f4498d4131198ac36" category="list-text">Unterstützung für Windows Server 2022-Knoten hinzugefügt.</block>
   <block id="f0d0d71ad406bc532f207cda7d40e0bf" category="list-text">Kubernetes-Cluster mit einem Linux-Controller-Knoten und mindestens einem Windows-Worker-Node, auf dem Windows Server 2022 ausgeführt wird. Astra Trident unterstützt SMB Volumes, die nur auf Windows Nodes laufenden Pods gemountet werden.</block>
+  <block id="de547bcab0e20f54ec4d5e95ba44b0b1" category="list-text">Windows Server 2022</block>
 </blocks>
