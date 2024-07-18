@@ -213,7 +213,7 @@ Diese Attribute haben keine Auswirkung auf die Auswahl von Storage-Pools/Back-En
 | Attribut | Typ | Werte | Beschreibung | Wichtige Faktoren | Kubernetes-Version 
 
 
-| Fstype | Zeichenfolge | Ext4, ext3, xfs usw. | Der Filesystem-Typ für Block-Volumes | solidfire-san, ontap-nas, ontap-nas-Economy, ontap-nas-Flexgroup, ontap-san, ontap-san-Ökonomie | Alle 
+| Fstype | Zeichenfolge | Ext4, ext3, xfs | Der Filesystem-Typ für Block-Volumes | solidfire-san, ontap-nas, ontap-nas-Economy, ontap-nas-Flexgroup, ontap-san, ontap-san-Ökonomie | Alle 
 
 
 | VolumeErweiterung | boolesch | Richtig, falsch | Aktivieren oder deaktivieren Sie die Unterstützung für das Vergrößern der PVC-Größe | ontap-nas, ontap-nas-Ökonomie, ontap-nas-Flexgroup, ontap-san, ontap-san-Ökonomie, solidfire-san, gcp-cvs, Azure-netapp-Files | 1.11 und höher 
