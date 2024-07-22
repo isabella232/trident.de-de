@@ -23,7 +23,7 @@ Vor der Installation von Astra Trident sollten Sie diese allgemeinen Systemanfor
 .<strong> Informationen über Astra TripereIT </strong>
 [%collapsible%open]
 ====
-* Kubernetes 1.29 wird jetzt in Astra Trident unterstützt. Aktualisieren Sie Astra Trident vor dem Upgrade von Kubernetes.
+* Kubernetes 1.30 wird jetzt in Astra Trident unterstützt. Aktualisieren Sie Astra Trident vor dem Upgrade von Kubernetes.
 * Astra Trident setzt die Verwendung von Multipathing-Konfiguration in SAN-Umgebungen strikt um und empfiehlt den Nutzen von `find_multipaths: no` In Multipath.conf Datei.
 +
 Verwendung einer Konfiguration ohne Multipathing oder Verwendung von `find_multipaths: yes` Oder `find_multipaths: smart` Der Wert in der Multipath.conf-Datei führt zu Mount-Fehlern. Astra Trident hat die Verwendung von empfohlen `find_multipaths: no` Seit der Version 21.07.
@@ -38,15 +38,15 @@ Verwendung einer Konfiguration ohne Multipathing oder Verwendung von `find_multi
 Astra Trident unterstützt mehrere Container-Engines und Orchestrierungslösungen. Dazu gehören:
 
 * Anthos On-Premises (VMware) und Anthos auf Bare Metal 1.16
-* Kubernetes 1.24–1.29
-* OpenShift 4.10 - 4.15
+* Kubernetes 1.24–1.30
+* OpenShift 4.10 - 4.16
 
 
 Der Trident-Operator wird durch folgende Versionen unterstützt:
 
 * Anthos On-Premises (VMware) und Anthos auf Bare Metal 1.16
-* Kubernetes 1.24–1.29
-* OpenShift 4.10 - 4.15
+* Kubernetes 1.24–1.30
+* OpenShift 4.10 - 4.16
 
 
 Astra Trident kann auch mit einer Vielzahl anderer, vollständig gemanagter und selbstverwalteter Kubernetes-Angebote eingesetzt werden, wie z. B. Google Kubernetes Engine (GKE), Amazon Elastic Kubernetes Services (EKS), Azure Kubernetes Service (AKS), Mirantis Kubernetes Engine (MKE), Rancher und VMware Tanzu Portfolio.
@@ -83,56 +83,56 @@ Die nachfolgende Tabelle enthält einen Überblick über die Funktionen dieser V
 
 
 | Astra Trident  a| 
-1.24 - 1.29
+1.24 - 1.30
  a| 
 Nein
 
 
 
 | Volume Snapshots  a| 
-1.24 - 1.29
+1.24 - 1.30
  a| 
 Nein
 
 
 
 | PVC aus Volume Snapshots  a| 
-1.24 - 1.29
+1.24 - 1.30
  a| 
 Nein
 
 
 
 | ISCSI PV-Größe  a| 
-1.24 - 1.29
+1.24 - 1.30
  a| 
 Nein
 
 
 
 | Bidirektionales ONTAP-CHAP  a| 
-1.24 - 1.29
+1.24 - 1.30
  a| 
 Nein
 
 
 
 | Dynamische Exportrichtlinien  a| 
-1.24 - 1.29
+1.24 - 1.30
  a| 
 Nein
 
 
 
 | Trident Operator  a| 
-1.24 - 1.29
+1.24 - 1.30
  a| 
 Nein
 
 
 
 | CSI-Topologie  a| 
-1.24 - 1.29
+1.24 - 1.30
  a| 
 Nein
 
@@ -192,7 +192,7 @@ Bei luftvergaschten Installationen ist die folgende Liste eine Referenz für Con
 | Kubernetes-Versionen | Container-Image 
 
 
-| V1.24.0, v1.25.0, v1.26.0, v1.27.0, v1.28.0,  a| 
+| v1.24.0, v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0  a| 
 * docker.io/netapp/Trident:24.06.0
 * docker.io/netapp/Trident-AutoSupport:24.06
 * Registry.k8s.io/SIG-Storage/csi-provisioner:v4.0.1

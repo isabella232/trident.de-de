@@ -23,7 +23,7 @@ Damit Astra Trident in einer Vielzahl von Umgebungen und Organisationen installi
 .<strong> Informationen über Astra TripereIT </strong>
 [%collapsible%open]
 ====
-* Kubernetes 1.29 wird jetzt in Astra Trident unterstützt. Upgrade von Trident vor dem Upgrade von Kubernetes.
+* Kubernetes 1.30 wird jetzt in Astra Trident unterstützt. Upgrade von Trident vor dem Upgrade von Kubernetes.
 * Astra Trident setzt die Verwendung von Multipathing-Konfiguration in SAN-Umgebungen strikt um und empfiehlt den Nutzen von `find_multipaths: no` In Multipath.conf Datei.
 +
 Verwendung einer Konfiguration ohne Multipathing oder Verwendung von `find_multipaths: yes` Oder `find_multipaths: smart` Der Wert in der Multipath.conf-Datei führt zu Mount-Fehlern. Trident empfiehlt die Verwendung von `find_multipaths: no` Seit der Version 21.07.
