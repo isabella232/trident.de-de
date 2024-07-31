@@ -171,5 +171,5 @@ Markierungen:
 Weitere Informationen zum Namespace-übergreifenden Volume-Zugriff:
 
 * Besuchen Sie link:https://cloud.netapp.com/blog/astra-blg-sharing-volumes-between-namespaces-say-hello-to-cross-namespace-volume-access["Teilen von Volumes zwischen Namespaces: Sagen Sie hallo für Namespace-übergreifenden Volume-Zugriff"^].
-* Demo ansehen am link:http://netapp.tv/cloud/details/29594?playlist_id=81&mcid=63262890210074608700682715883688763007["NetAppTV"^].
+* Sehen Sie sich die Demo an link:https://media.netapp.com/page/9071d19d-1438-5ed3-a7aa-ea4d73c28b7f/solutions-products["NetAppTV"^].
 
