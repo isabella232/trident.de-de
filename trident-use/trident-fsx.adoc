@@ -14,13 +14,26 @@ summary: 'Durch den Einsatz von Astra Trident mit Amazon FSX for NetApp ONTAP st
 [role="lead"]
 https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["Amazon FSX für NetApp ONTAP"^] Ist ein vollständig gemanagter AWS Service, mit dem Kunden Filesysteme auf Basis des NetApp ONTAP Storage-Betriebssystems starten und ausführen können. Mit FSX für ONTAP können Sie bekannte NetApp Funktionen sowie die Performance und Administration nutzen und gleichzeitig die Einfachheit, Agilität, Sicherheit und Skalierbarkeit beim Speichern von Daten in AWS nutzen. FSX für ONTAP unterstützt ONTAP Dateisystemfunktionen und Administrations-APIs.
 
-
-
-== Überblick
+Sie können Ihr Filesystem Amazon FSX für NetApp ONTAP mit Astra Trident integrieren, um sicherzustellen, dass Kubernetes Cluster, die in Amazon Elastic Kubernetes Service (EKS) ausgeführt werden, persistente Block- und File-Volumes mit ONTAP bereitstellen können.
 
 Ein Dateisystem ist die primäre Ressource in Amazon FSX, analog zu einem ONTAP-Cluster vor Ort. Innerhalb jeder SVM können Sie ein oder mehrere Volumes erstellen, bei denen es sich um Daten-Container handelt, die die Dateien und Ordner im Filesystem speichern. Amazon FSX für NetApp ONTAP wird Data ONTAP als gemanagtes Dateisystem in der Cloud zur Verfügung stellen. Der neue Dateisystemtyp heißt *NetApp ONTAP*.
 
 Mit Astra Trident mit Amazon FSX für NetApp ONTAP können Sie sicherstellen, dass Kubernetes Cluster, die in Amazon Elastic Kubernetes Service (EKS) ausgeführt werden, persistente Block- und Datei-Volumes bereitstellen, die durch ONTAP gesichert sind.
+
+
+
+== Anforderungen
+
+Zusätzlich zu link:../trident-get-started/requirements.html["Anforderungen von Astra Trident"]Zur Integration von FSX für ONTAP mit Astra Trident benötigen Sie Folgendes:
+
+* Ein vorhandener Amazon EKS-Cluster oder selbst verwalteter Kubernetes-Cluster mit `kubectl` Installiert.
+* Ein vorhandenes Amazon FSX for NetApp ONTAP-Filesystem und eine Storage Virtual Machine (SVM), die über die Worker-Nodes Ihres Clusters erreichbar ist.
+* Worker-Nodes, die vorbereitet sind link:worker-node-prep.html["NFS oder iSCSI"].
++
+
+NOTE: Achten Sie darauf, dass Sie die für Amazon Linux und Ubuntu erforderlichen Schritte zur Knotenvorbereitung befolgen https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html["Amazon Machine Images"^] (Amis) je nach EKS AMI-Typ.
+
+
 
 
 
@@ -30,7 +43,7 @@ Mit Astra Trident mit Amazon FSX für NetApp ONTAP können Sie sicherstellen, da
 +
 ** SMB Volumes werden mit unterstützt `ontap-nas` Nur Treiber.
 ** SMB-Volumes werden mit dem Astra Trident EKS Add-on nicht unterstützt.
-** Astra Trident unterstützt SMB Volumes, die nur auf Windows Nodes laufenden Pods gemountet werden.
+** Astra Trident unterstützt SMB Volumes, die nur auf Windows Nodes laufenden Pods gemountet werden. Siehe <<Vorbereitung zur Bereitstellung von SMB Volumes>> Entsprechende Details.
 
 
 * Vor Astra Trident 24.02 konnten auf Amazon FSX-Dateisystemen erstellte Volumes mit aktivierten automatischen Backups nicht von Trident gelöscht werden. Um dieses Problem in Astra Trident 24.02 oder höher zu vermeiden, geben Sie den an `fsxFilesystemID`, AWS `apiRegion`, AWS `apikey`Und AWS `secretKey` In der Back-End-Konfigurationsdatei für AWS FSX für ONTAP.
@@ -42,103 +55,22 @@ NOTE: Wenn Sie eine IAM-Rolle für Astra Trident angeben, können Sie die Angabe
 
 
 
-== FSX für ONTAP-Treiber Details
-
-Sie können Astra Trident mithilfe der folgenden Treiber in Amazon FSX für NetApp ONTAP integrieren:
-
-* `ontap-san`: Jedes bereitgestellte PV ist eine LUN innerhalb seines eigenen Amazon FSX für NetApp ONTAP Volume.
-* `ontap-san-economy`: Jedes bereitgestellte PV ist eine LUN mit einer konfigurierbaren Anzahl an LUNs pro Amazon FSX für das NetApp ONTAP Volume.
-* `ontap-nas`: Jedes bereitgestellte PV ist ein vollständiger Amazon FSX für NetApp ONTAP Volume.
-* `ontap-nas-economy`: Jedes bereitgestellte PV ist ein qtree mit einer konfigurierbaren Anzahl von qtrees pro Amazon FSX für NetApp ONTAP Volume.
-* `ontap-nas-flexgroup`: Jedes bereitgestellte PV ist ein vollständiger Amazon FSX für NetApp ONTAP FlexGroup Volume.
-
-
-Informationen zum Treiber finden Sie unter link:../trident-use/ontap-nas.html["NAS-Treiber"] Und link:../trident-use/ontap-san.html["SAN-Treiber"].
-
-
-
 == Authentifizierung
 
 Astra Trident bietet zwei Authentifizierungsmodi.
 
-* Zertifikatsbasiert: Astra Trident kommuniziert mit der SVM auf Ihrem FSX Dateisystem mit einem Zertifikat, das auf Ihrer SVM installiert ist.
-* Anmeldeinformationsbasiert: Sie können den verwenden `fsxadmin` Benutzer für Ihr Dateisystem oder die `vsadmin` Benutzer für Ihre SVM konfiguriert.
+* Anmeldeinformationsbasiert (empfohlen): Speichert Anmeldeinformationen sicher in AWS Secrets Manager. Sie können den Benutzer für Ihr Dateisystem oder den für Ihre SVM konfigurierten Benutzer verwenden `fsxadmin` `vsadmin` .
 +
 
 WARNING: Astra Trident erwartet einen weiteren Betrieb `vsadmin` SVM-Benutzer oder als Benutzer mit einem anderen Namen, der dieselbe Rolle hat. Amazon FSX für NetApp ONTAP hat eine `fsxadmin` Benutzer, die nur einen eingeschränkten Ersatz für die ONTAP bieten `admin` Cluster-Benutzer. Wir empfehlen Ihnen sehr, es zu verwenden `vsadmin` Mit Astra Trident:
 
+* Zertifikatsbasiert: Astra Trident kommuniziert mit der SVM auf Ihrem FSX Dateisystem mit einem Zertifikat, das auf Ihrer SVM installiert ist.
 
-
-Sie können Back-Ends aktualisieren, um zwischen auf Anmeldeinformationen basierenden und zertifikatbasierten Methoden zu verschieben. Wenn Sie jedoch versuchen, *Anmeldeinformationen und Zertifikate* bereitzustellen, schlägt die Backend-Erstellung fehl. Um zu einer anderen Authentifizierungsmethode zu wechseln, müssen Sie die vorhandene Methode von der Backend-Konfiguration entfernen.
 
 Weitere Informationen zur Aktivierung der Authentifizierung finden Sie in der Authentifizierung für Ihren Treibertyp:
 
 * link:ontap-nas-prep.html["ONTAP NAS-Authentifizierung"]
 * link:ontap-san-prep.html["ONTAP SAN-Authentifizierung"]
-
-
-
-
-== Cloud-Identität für EKS
-
-Die Cloud-Identität ermöglicht Kubernetes-Pods den Zugriff auf AWS Ressourcen durch Authentifizierung als AWS IAM-Rolle anstatt durch Angabe explizite AWS-Anmeldedaten.
-
-Um die Vorteile der Cloud-Identität in AWS zu nutzen, müssen Sie über folgende Voraussetzungen verfügen:
-
-* Implementierung eines Kubernetes Clusters mit EKS
-* Astra Trident installiert, einschließlich `cloudProvider` Angeben `"AWS"` Und `cloudIdentity` Festlegen der AWS IAM-Rolle
-+
-[role="tabbed-block"]
-====
-.Betreiber von Trident
---
-Um Astra Trident mit dem Trident-Operator zu installieren, bearbeiten Sie `tridentorchestrator_cr.yaml` Einstellen `cloudProvider` Bis `"AWS"` Und gesetzt `cloudIdentity` Zur AWS IAM-Rolle.
-
-Beispiel:
-
-[listing]
-----
-apiVersion: trident.netapp.io/v1
-kind: TridentOrchestrator
-metadata:
-  name: trident
-spec:
-  debug: true
-  namespace: trident
-  imagePullPolicy: IfNotPresent
-  cloudProvider: "AWS"
-  cloudIdentity: "'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/astratrident-role'"
-----
---
-.Helm
---
-Legen Sie die Werte für *Cloud Provider* und *Cloud Identity* unter Verwendung der folgenden Umgebungsvariablen fest:
-
-`export CP="AWS"`
-`export CI="'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/astratrident-role'"`
-
-Im folgenden Beispiel werden Astra Trident und Sätze installiert `cloudProvider` Bis `AWS` Verwenden der Umgebungsvariable `$CP` Und legt die 'CloudIdentity' über die Umgebungsvariable fest `$CI`:
-
-[listing]
-----
-helm install trident trident-operator-100.2406.0.tgz --set cloudProvider=$CP --set cloudIdentity=$CI
-----
---
-.<code>tridentctl</code>
---
-Legen Sie die Werte für *Cloud Provider* und *Cloud Identity* unter Verwendung der folgenden Umgebungsvariablen fest:
-
-`export CP="AWS"`
-`export CI="'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/astratrident-role'"`
-
-Im folgenden Beispiel wird Astra Trident installiert und legt den fest `cloud-provider` Flag an `$CP`, und `cloud-identity` Bis `$CI`:
-
-[listing]
-----
-tridentctl install --cloud-provider=$CP --cloud-identity="$CI" -n trident
-----
---
-====
 
 
 
